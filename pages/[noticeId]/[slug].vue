@@ -1,13 +1,13 @@
 <template>
     <div dir="rtl" class="container-fluild p-4">
     <div v-if="cart">
-        <NuxtLayout :cart="cart" name="header"/>
+        
     </div>
     <title>
         {{ params.slug }}
     </title>
-    
-    {{useNotice.error.message}}
+
+
     <!-- <div class="row" id="scroll" >
         <div v-if="pending">
             fetching...
@@ -39,11 +39,11 @@ definePageMeta({
     middleware:'auth'
 })
 
+
 const route = useRoute()
 const params = route.params;
 const useNotice = useNoticeStore();
 const useCart = useCartStore();
-// const pending = ref(true);
 const cart = ref(null);
 
 watch(useCart,async (newdata) => {

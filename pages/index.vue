@@ -1,9 +1,6 @@
 <template>
 
 
-  <div dir="rtl" class="container-fluild p-4">
-
-    <NuxtLayout :cart="cart" name="header"/>
  
     <!-- for category-->
     <div class="row" ref="contentBox">
@@ -114,7 +111,7 @@
           </div>
         </div>
 
-        <div  class="row " :style="noticeShow ? `display:flex` : 'display:none;'">
+        <div  class="row" :style="noticeShow ? `display:flex` : 'display:none;'">
           <!-- Card 1-->
             <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
               <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
@@ -138,8 +135,6 @@
         </div>
       </div>
     </div>
-    
-  </div>
   </template>
 
 
