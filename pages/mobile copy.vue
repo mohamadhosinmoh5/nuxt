@@ -1,140 +1,139 @@
 <template>
- 
-    <!-- for category-->
-    <div class="row" ref="contentBox">
-      <div class="row mt-4">
-        <div class="col-12">
-          <div class="switchBox">
-            <p class="switchItem">نقشه</p>
-              <label class="switch switchItem">
-                <input v-model="showMap" class="checkBox"  type="checkbox">
-                <span class="slider"></span>
-              </label>
-            <p  class="switchItem">فیلترها</p>
-          </div>
-        </div>
-      </div>
 
-      <div v-if="showMap" class="col-sm-4 mt-2 mapBox">
-        <div ref="mapDiv" class="stickyStyle" >
-          <LMap v-if="allNotices"
-            id="map"
-            ref="mapRef"
-            :zoom="16"
-            :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
-            @zoomend="changeZoom"
-            @click="markersIconCallback"
-          >
-          <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
-            <LTileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-              layer-type="base"
-              name="OpenStreetMap"
-            />
-          
-            <l-circle-marker
-            :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
-            :radius="10"
-            color="red"
-          />
-            <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
-              <l-popup @ready="ready" >
-                <div class="title">
-                  {{ notice.title }}
-                </div>
-              </l-popup>
-            </l-marker>
-  
-          </LMap>
-        </div>
-      </div>
-
-      <div v-if="showCat" ref="menu" class="col-sm-3 menu " >
-        <div class="stickyStyle">
-          <div class="row mt-5 " ref="menuBox" >
-            
-           <div class="col-sm-12 ">
-              <div class="row category-box">
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-12">
-                      <h5 class="category-title" style="font-size: 20px;">دسته بندی ها</h5>
-                    </div>
-                    <div class="col-12">
-                      <div v-if="pending" class="spinner-border" role="status"></div>
-                    </div>
+    <div class="container-fluid">
+        <div class="nav  row ">
+            <div class="col-3">
+                <div class="navbutton">
+                    <button class="navbar-toggler " type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#navbarOffcanvasLg" aria-controls="navbarOffcanvasLg"
+                        aria-label="Toggle navigation">
+                        <img src="" alt="">
+                    </button>
                   </div>
-                </div>
-                <div class="col-6 text-end">
-                  <span class="backCat" @click="lastCategory">
-                    <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
-                  </span>
-                </div>
-              </div>
-              <ul class="categoryBox">
-                <li v-for="(item, index) in categories" :key="index">
-                  <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
-                <a @click="getCategory(item.id)" class="link">{{item.title}}</a>
-                </li>
-              </ul>
+                  <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarOffcanvasLg"
+                      aria-labelledby="navbarOffcanvasLgLabel">
+                      add Filter
+                  </div>
             </div>
-  
-  
-            <Filter :status="pending" @clicked="filterUptaded" />
-          </div>
-        </div>
-      </div>
-      <!-- start Card-->
-      <div ref="noticeBox" class="col-sm-9">
-        <div class="row category-box  mt-5 ">
-          <div class="col-9">
-            <div class="row sort-box ">
-              <h6 class="col-3">مرتب سازی بر اساس : </h6>
-              <ul class="col-9 textPink">
-                <li><a href="">جدیدترین ها</a></li>
-                <li><a href="">پر بازدید ترین ها</a></li>
-                <li><a href="">ارزانترین ها</a></li>
-                <li><a href="">گرانترین ها</a></li>
-              </ul>
+            <div class="col-6">
+                <div class="tab_box">
+                    <button class="tab_btn-color">آگهی</button>
+                    <button class="tab_btn">دفتر ها</button>
+                </div>
             </div>
-          </div>
-
-          <div class="col-3">
+            <div class="col-3">
+                <div class="Shop">
+                    <img src="assets/img/bag 1.svg"/>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <!-- <i class="bi bi-search"></i> -->
                 <div class="row">
-                  <div class="col-4"><img class="pointer" src="~/assets/img/sort1.svg" alt=""></div>
-                  <div class="col-4"><img class="pointer" src="~/assets/img/sort2.svg" alt=""></div>
-                  <div class="col-4"><img class="pointer" src="~/assets/img/sort3.svg" alt=""></div>
+                <!-- <img src="assets/img/search.svg" alt=""> -->
+                <img src="assets/img/search.svg" alt="">
+                    <div class="col">
+                        <input type="text" class="form-control" id="usr" placeholder="جست و جو">
+                    </div>
+                    <div class="col">
+                        <div class="categoryButton">
+                            <img src="assets/img/setting-4 1 (1).svg" />
+
+                        </div>
+                    </div>
                 </div>
-          </div>
-        </div>
-
-        <div  class="row" :style="noticeShow ? `display:flex` : 'display:none;'">
-          <!-- Card 1-->
-            <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
-              <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
-                <Notice :Notice="notice" />
-              </div>
             </div>
-         
-          <!-- Card 2-->
-          <!-- End card-->
-          <!--Loader-->
-          <!-- <div v-if="infinity.error" class="d-flex justify-content-center mt-4">
-            {{ infinity.error }}
-            <div class="spinner-border" role="status"></div>
-          </div>
-
-          <div v-if="error" class="d-flex justify-content-center mt-4">
-            {{ error }}
-            <div class="spinner-border" role="status"></div>
-          </div> -->
-          <!-- End Loader-->
+            <div class="filter mt-2">
+                <div class="row">
+                    <!--add filter-->
+                    <div class="col-3">
+                        <a href="#">فیلتر خانه</a>
+                    </div>  
+                    <div class="col-3">
+                        <a href="#">فیلتر خانه</a>
+                    </div>
+                    <div class="col-3">
+                        <a href="#">فیلتر خانه</a>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+
+    <!-- for notic -->
+
+    <div class="cards">
+        <div class="notic" id="card1">
+            <div class="row">
+                <div class="col-5">
+                    <img src="assets/img/building.jpg" class="notif mt-1 ms-1"
+                        style="width: 155px; height: 135px; border-radius: 10px;" />
+                </div>
+                <div class="col-7 mt-2">
+                    <a href="#" class="Title">آپارتمان 155متریو گلبرگواملاک اسمان</a>
+                    <div class="Subtitle">
+                        ودیعه : 700,000
+                    </div>
+                    <div class="Subtitle mt-1">
+                        اجاره : 2,000,000
+                        <span class="line"></span>
+                        <div class="row mt-1">
+                            <div class="col-7">
+                                <div class="price">155متر</div>
+                            </div>
+                            <div class="col-5">
+                                <div class="Subtitle">دقایقی پیش</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- <div class="notic" id="card1"></div> -->
     </div>
 
-  </template>
+    <!-- this is for bottomNavigationBar -->
+    <div class="navbar">
+
+
+        <div class="list-item">
+            <button type="button" class="prson">
+                <img src="assets/img/home-1 2.svg" />
+                <a href="#" class="homeIcon">خانه</a>
+            </button>
+        </div>
+        <div class="list-item">
+            <button type="button" class="prson">
+                <img src="assets/img/note-21 1.svg" />
+                <a href="#">خدمات</a>
+            </button>
+        </div>
+        <div class="list-item">
+            <button type="button" class="circle">
+                <img src="assets/img/add 2.svg" />
+            </button>
+        </div>
+        <div class="list-item">
+            <button type="button" class="prson">
+                <img src="assets/img/notification-bing 2.svg" />
+                <a href="#">اعلانات</a>
+            </button>
+        </div>
+        <div class="list-item">
+            <button type="button" class="prson">
+                <img src="assets/img/profile-circle 3.svg" />
+                <a href="#">پروفایل</a>
+            </button>
+        </div>
+
+
+
+    </div>
+
+  </div>
+    <!-- <div class="notic" id="card1"></div> -->
+
+</template>
 
 
 
@@ -142,7 +141,6 @@
   
 <!-- script -->
 <script >
-
 import { useAuthStore } from '../store/auth';
 import { useMapStore } from '../store/map';
 import { useNoticeStore } from '../store/notice';
@@ -292,9 +290,6 @@ export default {
 
  },
  created(){
-  definePageMeta({
-    middleware:'mobile'
-    })
 
   // $bus.$emit.$on('filterUptaded', ($event) => console.log($event))
  }
@@ -333,7 +328,6 @@ export default {
     const auth =  useAuthStore();
     const useMap = useMapStore();
     // **only return the whole store** instead of destructuring
-
 
     return { notices,offices,auth,useMap}
   },

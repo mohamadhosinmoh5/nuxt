@@ -30,6 +30,7 @@
     "ol-ext": "^4.0.13",
     "pinia": "^2.1.7",
     "vue-alertify": "^1.1.0",
+    "vue-mobile-detection": "^2.0.1",
     "vue3-openlayers": "^4.0.1"
   }
 }
