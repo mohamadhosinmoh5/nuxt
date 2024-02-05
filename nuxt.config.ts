@@ -1,0 +1,43 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+
+export default defineNuxtConfig({
+   modules: [
+      '@pinia/nuxt',
+      'nuxt3-leaflet'
+    ],
+   css:[
+        '@/assets/css/main.css',
+        '@/assets/css/bootstrap.min.css',
+        '@/assets/css/alertify.rtl.min.css',
+        '@/assets/css/map.css',
+        '@/assets/css/style.css',
+        '@/assets/css/icon-bootstrap.css',
+        '@/assets/css/font-awasom.css',
+   ],
+   runtimeConfig: {
+      public: {
+         BaseUrl: process.env.BASE_URL,
+         Limit: process.env.LIMIT,
+      }
+   },
+   devtools: { enabled: false },
+   app:{
+      head: {
+         meta: [
+            { 'http-equiv': 'pragma', content: 'no-cache' },
+            { 'http-equiv': 'cache-control', content: 'no-cache' },
+            { 'http-equiv': 'expires', content: '0' },
+            { content: 'telephone=no', name: 'format-detection' }
+         ],
+         script:[
+            {type:"text/javascript",body:true ,src: '/js/jquery.js'},
+            {type:"text/javascript",body:true ,src: '/js/map.js'},
+            {type:"text/javascript",body:true ,src: '/js/index.js'},
+            {type:"text/javascript",body:true ,src: '/js/bootstrap.min.js'},
+            {type:"text/javascript",body:true ,src: '/js/font-awasom.js'},
+          ]
+      }
+   },
+   // ssr:true
+    
+})

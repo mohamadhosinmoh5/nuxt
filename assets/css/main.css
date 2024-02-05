@@ -1,0 +1,11 @@
+@import url('https://v1.fontapi.ir/css/Vazir');
+
+body{
+    font-family: Vazir, sans-serif;
+    background-color: #f9f8f6;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+}
