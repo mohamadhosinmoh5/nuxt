@@ -1,13 +1,13 @@
 <template>
     <div dir="rtl" class="container-fluild p-4">
     <div v-if="cart">
-        <NuxtLayout :cart="cart" name="header"/>
+       
     </div>
     <title>
         {{ params.slug }}
     </title>
     
-    {{useNotice.error.message}}
+    {{useNotice.notice.title}}
     <!-- <div class="row" id="scroll" >
         <div v-if="pending">
             fetching...

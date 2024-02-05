@@ -1,9 +1,9 @@
 <template>
 
 
-  <div dir="rtl" class="container-fluild p-4">
 
-    <NuxtLayout :cart="cart" name="header"/>
+
+
  
     <!-- for category-->
     <div class="row" ref="contentBox">
@@ -139,7 +139,7 @@
       </div>
     </div>
     
-  </div>
+ 
   </template>
 
 
