@@ -35,6 +35,8 @@ export default defineNuxtConfig({
             {type:"text/javascript",body:true ,src: '/js/index.js'},
             {type:"text/javascript",body:true ,src: '/js/bootstrap.min.js'},
             {type:"text/javascript",body:true ,src: '/js/font-awasom.js'},
+            {type:"text/javascript",body:true ,src: '/js/sidemenue.js'},
+
           ]
       }
    },
