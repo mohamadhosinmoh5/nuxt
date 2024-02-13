@@ -20,15 +20,17 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="smalimage">
-                                <img  class="bannerImage" :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[1].image}` " alt="">
-                                <img  class="bannerImage" :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[2].image}` " alt="">
-                                <img  class="bannerImage" :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[3].image}` " alt="">
-                                
+                                <img @click="setBaseImage(image)" v-for="{ image, index } in useNotice.notice.gallery"
+                                    :key="index" class="bannerImage" :src="`${useRuntimeConfig().public.BaseUrl}/${image}`"
+                                    alt="">
+
                             </div>
                         </div>
                         <div class="col-sm-9">
                             <div class="col-md">
-                                <img id="mainimage"  :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[0].image}` " class="mainimages mt-5" alt="">
+                                <img ref="mainImage" id="mainimage"
+                                    :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[0].image}`"
+                                    class="mainimages mt-5" alt="">
                                 <!-- {{ useNotice.notice.gallery[0].image }} -->
                             </div>
                         </div>
@@ -135,7 +137,17 @@
                                         useNotice.notice.section_data_collection[2].items[1].data[0] }}</a>
                                 </div>
                                 <div class="col-2">
-                                    <button type="button" class="btn btn-success">تماس</button>
+                                    <button type="button" class="btn btn-success btnmodal">تماس</button>
+                                    <div id="myModal" class="modal">
+
+                                        <!-- Modal content -->
+                                        <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <p href="#" class="Title">شماره تماس : {{ useNotice.notice.mobile }}</p>
+                                        </div>
+
+                                    </div>
+
                                 </div>
 
                             </div>
@@ -151,7 +163,27 @@
 
                         </div>
                         <div class="col-6 map_box">
-                            <img class="boxMap" src="assets/img/SinglePage_Image/map.svg" alt="">
+                           <div class="col  mappingg">
+                            <LMap v-if="useNotice.notice" id="map" ref="mapRef" :zoom="16"
+                                :center="[useNotice.notice.address.lat, useNotice.notice.address.lng]"
+                                >
+                                <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                                    layer-type="base" name="OpenStreetMap" />
+
+                                <l-circle-marker :lat-lng="[useNotice.notice.address.lat, useNotice.notice.address.lng]"
+                                    :radius="10" color="red" />
+                                <l-marker
+                                    :lat-lng="[useNotice.notice.address.lat, useNotice.notice.address.lng]">
+                                    <l-popup @ready="ready">
+                                        <div class="title">
+                                            {{ useNotice.notice.title }}
+                                        </div>
+                                    </l-popup>
+                                </l-marker>
+
+                            </LMap>
+                           </div>
                         </div>
 
                     </div>
@@ -197,6 +229,7 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useNoticeStore } from '../store/notice';
+import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'
@@ -206,7 +239,7 @@ const route = useRoute()
 const params = route.params;
 const useNotice = useNoticeStore();
 const useCart = useCartStore();
-// const pending = ref(true);
+const mainImage = ref(null);
 const cart = ref(null);
 
 watch(useCart, async (newdata) => {
@@ -223,6 +256,11 @@ setTimeout(async () => {
     cart.value = await useCart.getCart();
 
 });
+
+
+const setBaseImage = (urlImage) => {
+    mainImage.value.src = `${useRuntimeConfig().public.BaseUrl}/${urlImage}`;
+}
 
 
 

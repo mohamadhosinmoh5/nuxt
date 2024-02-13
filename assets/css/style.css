@@ -1211,7 +1211,6 @@ input:checked+.slider:before {
 .image {
     margin-top: 70px;
     height: 440px;
-
     width: 450px;
     border-radius: 10px;
 }
@@ -1245,7 +1244,6 @@ input:checked+.slider:before {
 
 
 
-
 .Tozihat a {
     text-decoration: none;
     color: var(--cf-green-color);
@@ -1271,13 +1269,15 @@ input:checked+.slider:before {
     font-family: 'Vazir';
 
 }
-.Price{
+
+.Price {
     text-decoration: none;
     color: var(--cf-dark-color);
     font-family: 'Vazir';
     font-size: 13px;
 }
-.Price:hover{
+
+.Price:hover {
     color: var(--cf-dark-color);
 }
 
@@ -1320,9 +1320,7 @@ input:checked+.slider:before {
     color: var(--cf-light-color);
 }
 
-.btn:hover {
-    color: var(--cf-light-color)
-}
+
 
 
 
@@ -1359,7 +1357,7 @@ input:checked+.slider:before {
     margin-top: 6%;
     /* background-color: var(--cf-light-color); */
 
- 
+
 }
 
 .reng_box {
@@ -1406,10 +1404,12 @@ input:checked+.slider:before {
     color: var(--cf-dark-color);
     font-size: 14px;
 }
-.texts:hover{
+
+.texts:hover {
     color: var(--cf-dark-color);
 }
-.box_tozihat{
+
+.box_tozihat {
     position: relative;
     height: 177px;
     border-radius: 10px;
@@ -1419,11 +1419,21 @@ input:checked+.slider:before {
     border-width: 0.5px;
     border-color: var(--cf-grey-icon-color);
 }
+
 @media screen and (max-width: 992px) {
     .box_tozihat {
         left: 0;
         top: 0;
+        right: 8%;
     }
+}
+
+.mappingg{
+    left: 20px;
+    height: 300px;
+    width: 540px;
+    position: relative;
+    top: 20px;
 }
 /* .range .sliderValue span:after {
     position: absolute;
@@ -1439,6 +1449,56 @@ input:checked+.slider:before {
     border-bottom-left-radius: 50%;
 
 } */
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 220px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    /* width: 50% !important; */
+    /* Full width */
+    height: 80%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+
+
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: var(--cf-light-color);
+    opacity: 1;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    /* transform: translateY(50px); */
+    padding: 20px;
+    right: 25%;
+    position: fixed;
+    border: 0.5px solid var(--cf-grey-icon-color);
+    /* border: none; */
+    width: 50% !important;
+}
+
+.modal-content p {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
 
 
 .range .field input {
@@ -1510,7 +1570,7 @@ input:checked+.slider:before {
     position: relative;
     right: 4%;
     top: 10px;
-   
+
     height: 74px;
     border-radius: 10px;
     border-radius: 10px;
@@ -1525,14 +1585,7 @@ input:checked+.slider:before {
     right: 7%;
 }
 
-.boxMap {
-    position: relative;
-    top: 20px;
-    left: 10px;
-    width: 547px;
-    height: 276px;
-    border-radius: 10px;
-}
+
 
 .box_moshakhasat {
     width: 693px;
@@ -1590,25 +1643,98 @@ input:checked+.slider:before {
     border: 1px solid var(--cf-grey-icon-color);
 }
 
-@media screen and (max-width: 992px) {
-    .boxMap {
-        position: relative;
-        left: 20px;
-        width: 400px;
-        height: 170px;
-    }
-}
-.btn{
+
+.btn {
     float: left;
 }
-.btn:hover{
+
+.btn:hover {
     color: var(--cf-light-color);
     background-color: var(--cf-green-color);
 }
-.mainimages{
+
+.mainimages {
     width: 90%;
+    height: 500px;
     border-radius: 10px;
 
+}
+
+.LogInModal {
+    /* display: none; */
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 220px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    /* width: 50% !important; */
+    /* Full width */
+    height: 80%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+
+
+}
+
+/* Modal Content */
+.Login-content {
+    background-color: var(--cf-light-color);
+    opacity: 1;
+    border-radius: 10px;
+    height: 55%;
+    padding: 20px;
+    right: 30%;
+    position: fixed;
+    border: 0.5px solid var(--cf-grey-icon-color);
+    /* border: none; */
+    width: 40% !important;
+}
+
+.maydetailes {
+    background-color: white;
+}
+
+.lines {
+    position: relative;
+    top: 10px;
+    border: 0.5px solid var(--cf-grey-icon-color);
+}
+
+.phonenm {
+    text-decoration: none;
+    color: var(--cf-dark-color);
+}
+
+.phonenm:hover {
+    color: var(--cf-dark-color);
+}
+
+.FormNumber input{
+    direction: rtl;
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 0.5px solid var(--cf-grey-icon-color);
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.FormPass input{
+    direction: rtl;
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 0.5px solid var(--cf-grey-icon-color);
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 /* .Tozihat{
     width: 693px;
