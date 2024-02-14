@@ -39,7 +39,7 @@
                     <div class="row">
                         <div class="col-sm-12">
 
-                            <single-section v-for="section in useNotice.notice.section_data_collection"
+                            <single-section v-if=" useNotice.notice.section_data_collection.length >= 1 " v-for="section in useNotice.notice.section_data_collection"
                                 :section="section" />
                             <div class="row">
                                 <div class="col row Tozihat mt-2">
@@ -67,8 +67,8 @@
                                         <div class="sliderValue">
 
                                         </div>
-                                        <div class="col-10  field">
-                                            <input disabled type="range" min="0" max="100"
+                                        <div v-if = "useNotice.notice.price_expert_rating != null" class="col-10  field">
+                                            <input  disabled type="range" min="0" max="100"
                                                 value=" {{ useNotice.notice.price_expert_rating }}">
                                             <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">
 
@@ -106,7 +106,7 @@
                             </div>
 
                             <div class="boxdetailes row">
-                                <div class="col-3">
+                                <div v-if="useNotice.notice.address != null" class="col-3">
                                     <a href="#" class="subtitle">محله : </a>
                                     <a href="#" class="texts">{{
                                         useNotice.notice.address.address.postal_address }}</a>
@@ -115,7 +115,7 @@
                                     <a href="#" class="subtitle">
                                         کد آگهی :
                                     </a>
-                                    <a href="#" class="texts"> {{ useNotice.notice.address.notice_id }}</a>
+                                    <a href="#" class="texts"> {{ useNotice.notice.id }}</a>
                                 </div>
                                 <div class="col-3"><img class="detailicons" src="assets/img/SinglePage_Image/save.svg"
                                         alt=""></div>
@@ -123,7 +123,7 @@
                                         alt=""></div>
                             </div>
                             <div class="lineee"></div>
-                            <div class="boxdetailes row mt-2">
+                            <div v-if=" useNotice.notice.section_data_collection.length >= 1 " class="boxdetailes row mt-2">
                                 <div class="col-5">
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[0].field.title }}:</a>
@@ -163,7 +163,7 @@
 
                         </div>
                         <div class="col-6 map_box">
-                           <div class="col  mappingg">
+                           <div v-if="useNotice.notice.address != null" class="col  mappingg">
                             <LMap v-if="useNotice.notice" id="map" ref="mapRef" :zoom="16"
                                 :center="[useNotice.notice.address.lat, useNotice.notice.address.lng]"
                                 >

@@ -13,6 +13,7 @@ export default defineNuxtConfig({
         '@/assets/css/style.css',
         '@/assets/css/icon-bootstrap.css',
         '@/assets/css/font-awasom.css',
+        '@/assets/css/single_page.css',
    ],
    runtimeConfig: {
       public: {
