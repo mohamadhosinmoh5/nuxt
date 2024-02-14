@@ -96,6 +96,9 @@ export default {
         },
         lastCategory(){
           if(this.notices.getclickCat <= 1){
+          if(this.notices.getclickCat == 0){
+            return
+          }
             this.categories = this.notices.lastCategory[1];
             this.allNotices = this.defaultNotices;
             this.notices.categories = null;
@@ -212,14 +215,19 @@ export default {
     <NuxtLayout name="header"></NuxtLayout>
       <div class="row" ref="contentBox">
         <div class="row mt-4">
-          <div class="col-12">
-            <div class="switchBox">
+          <div class="col-3">
+            <!-- <div class="switchBox">
               <p class="switchItem">نقشه</p>
                 <label class="switch switchItem">
                   <input v-model="showMap" class="checkBox"  type="checkbox">
                   <span class="slider"></span>
                 </label>
               <p  class="switchItem">فیلترها</p>
+            </div> -->
+            <div class="row tab_box">
+              <div class="activeItem"></div>
+              <a @click="showMap=false" class="col-6 tabItem"> فیلتر ها  </a>
+              <a @click="showMap=true" class="col-6 tabItem"> نقشه</a>
             </div>
           </div>
         </div>
@@ -358,7 +366,7 @@ export default {
                   <div class="col-8">
                     <div class="row">
                       <div class="col-12">
-                        <h4 class="descktop-office-title">{{office.title}}</h4>
+                        <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt=""> &nbsp; {{office.title}} </h4>
                       </div>
 
                       <div class="col-12 mt-3">
@@ -367,11 +375,7 @@ export default {
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-10">
-                      <!-- <img v-if="office.image_banner" width="50px" :src="`${useRuntimeConfig().public.BaseUrl}/${office?.image_banner  }`" alt=""> -->
-                      <img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt="">
-                    </div>
-                    <div class="col-2" dir="ltr">
+                    <div class="col-12" dir="ltr">
                       <a :href="`${office?.id}/${filterUrl(office?.title)}`">
                           <img src="~/assets/img/arrow-left.svg" alt="">
                       </a>

@@ -1,17 +1,13 @@
 
 <template>
     <div dir="rtl" class="container-fluild p-4">
-        <div v-if="cart">
-        </div>
+        <NuxtLayout name="header"></NuxtLayout>
         <title>
             {{ params.slug }}
         </title>
         <!-- addin html code -->
         <div v-if="!useNotice.notice" class="spinner-border" role="status"></div>
         <div v-if="useNotice.notice" class="row">
-
-
-            <!-- {{useNotice.notice}} -->
 
             <div class="row">
                 <div class="col-sm-7">
