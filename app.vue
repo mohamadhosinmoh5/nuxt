@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <div dir="rtl" class="container-fluild p-4">
-    <NuxtLayout name="header"/>
+  <div dir="rtl" class="container-fluild">
+    
     <NuxtPage />
-    </div>
-  </div>
+
+</div>
 </template>
 
 

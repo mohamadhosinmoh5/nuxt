@@ -6,8 +6,9 @@ export default function ({window,url=null,allData=null}){
     const scrollCount = ref(0);
     const page = ref(1);
     let limit = ref(15);
-    const fetchingData = ref(null);
+    const fetchingData = ref(false);
     // const infinity = ref(box);
+    // const pending = ref(null);
     const error = ref(null);
     const scrollableHeight = ref(0);
 
@@ -28,8 +29,10 @@ export default function ({window,url=null,allData=null}){
         if(scrollableHeight.value < 40 && fetchingData.value != true){
             scrollCount.value++;
             fetchingData.value = true;
-           await getUserOnScroll();
+           await getUserOnScroll().then(()=>{
+            fetchingData.value = false;
 
+           });
         }
     }
 
@@ -47,9 +50,9 @@ export default function ({window,url=null,allData=null}){
         // try {
         const store = useNoticeStore();
         let query = store.query;
-        this.page = this.page + 1;
-        const {data:newUser,pending:pending} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/${url}${query}&page=${store.pages}`)
-
+        page.value = page.value + 1;
+        const {data:newUser,pending:pending} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/${url}${query}&page=${page.value}`)
+     
         let alldatasNewUser = JSON.parse(JSON.stringify(newUser.value.data));
         console.log(alldatasNewUser,allDatas.value);
         // useNoticeStore().setData(alldatasNewUser);
@@ -58,10 +61,7 @@ export default function ({window,url=null,allData=null}){
         }
         allDatas.value.push(...alldatasNewUser);
         
-        setTimeout(() => {
-            fetchingData.value = false;
-        }, 1000);
-   
+        return allDatas.value;
         // } catch (e) {
         //     error.value =  'خطا در واکشی داده';
         // }

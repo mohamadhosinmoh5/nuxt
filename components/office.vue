@@ -1,8 +1,7 @@
 <template>
- 
-        <!-- <li><a href="">{{office.title}}</a></li> -->
-     
-            <li>
+    
+
+            <!-- <li>
                 {{office.title}}
             </li>
             <li>
@@ -11,17 +10,9 @@
             <li>
                 {{office.status}}
             </li>
-
-            <!-- <li>
-                <a :href="`${office?.id}/${office?.title}`">
-                    <div v-for="section in office?.section_data">
-                            <sections :Section="section" />
-                    </div>
-                </a>
-            </li> -->
             <li>
                 {{office.matter?.description}}
-            </li>
+            </li> -->
         
 </template>
 

@@ -1,153 +1,7 @@
-<template>
-
-
-
-
-
- 
-    <!-- for category-->
-    <div class="row" ref="contentBox">
-      <div class="row mt-4">
-        <div class="col-12">
-          <div class="switchBox">
-            <p class="switchItem">نقشه</p>
-              <label class="switch switchItem">
-                <input v-model="showMap" class="checkBox"  type="checkbox">
-                <span class="slider"></span>
-              </label>
-            <p  class="switchItem">فیلترها</p>
-          </div>
-        </div>
-      </div>
-
-      <div v-if="showMap" class="col-sm-4 mt-2 mapBox">
-        <div ref="mapDiv" class="stickyStyle" >
-          <LMap v-if="allNotices"
-            id="map"
-            ref="mapRef"
-            :zoom="16"
-            :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
-            @zoomend="changeZoom"
-            @click="markersIconCallback"
-          >
-          <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
-            <LTileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-              layer-type="base"
-              name="OpenStreetMap"
-            />
-          
-            <l-circle-marker
-            :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
-            :radius="10"
-            color="red"
-          />
-            <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
-              <l-popup @ready="ready" >
-                <div class="title">
-                  {{ notice.title }}
-                </div>
-              </l-popup>
-            </l-marker>
-  
-          </LMap>
-        </div>
-      </div>
-
-      <div v-if="showCat" ref="menu" class="col-sm-3 menu " >
-        <div class="stickyStyle">
-          <div class="row mt-5 " ref="menuBox" >
-            
-           <div class="col-sm-12 ">
-              <div class="row category-box">
-                <div class="col-6">
-                  <div class="row">
-                    <div class="col-12">
-                      <h5 class="category-title" style="font-size: 20px;">دسته بندی ها</h5>
-                    </div>
-                    <div class="col-12">
-                      <div v-if="pending" class="spinner-border" role="status"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-6 text-end">
-                  <span class="backCat" @click="lastCategory">
-                    <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
-                  </span>
-                </div>
-              </div>
-              <ul class="categoryBox">
-                <li v-for="(item, index) in categories" :key="index">
-                  <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
-                <a @click="getCategory(item.id)" class="link">{{item.title}}</a>
-                </li>
-              </ul>
-            </div>
-  
-  
-            <Filter :status="pending" @clicked="filterUptaded" />
-          </div>
-        </div>
-      </div>
-      <!-- start Card-->
-      <div ref="noticeBox" class="col-sm-9">
-        <div class="row category-box  mt-5 ">
-          <div class="col-9">
-            <div class="row sort-box ">
-              <h6 class="col-3">مرتب سازی بر اساس : </h6>
-              <ul class="col-9 textPink">
-                <li><a href="">جدیدترین ها</a></li>
-                <li><a href="">پر بازدید ترین ها</a></li>
-                <li><a href="">ارزانترین ها</a></li>
-                <li><a href="">گرانترین ها</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="col-3">
-                <div class="row">
-                  <div class="col-4"><img class="pointer" src="~/assets/img/sort1.svg" alt=""></div>
-                  <div class="col-4"><img class="pointer" src="~/assets/img/sort2.svg" alt=""></div>
-                  <div class="col-4"><img class="pointer" src="~/assets/img/sort3.svg" alt=""></div>
-                </div>
-          </div>
-        </div>
-
-        <div  class="row " :style="noticeShow ? `display:flex` : 'display:none;'">
-          <!-- Card 1-->
-            <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
-              <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
-                <Notice :Notice="notice" />
-              </div>
-            </div>
-         
-          <!-- Card 2-->
-          <!-- End card-->
-          <!--Loader-->
-          <!-- <div v-if="infinity.error" class="d-flex justify-content-center mt-4">
-            {{ infinity.error }}
-            <div class="spinner-border" role="status"></div>
-          </div>
-
-          <div v-if="error" class="d-flex justify-content-center mt-4">
-            {{ error }}
-            <div class="spinner-border" role="status"></div>
-          </div> -->
-          <!-- End Loader-->
-        </div>
-      </div>
-    </div>
-    
- 
-  </template>
-
-
-
-
   
 <!-- script -->
 <script >
+
 import { useAuthStore } from '../store/auth';
 import { useMapStore } from '../store/map';
 import { useNoticeStore } from '../store/notice';
@@ -199,13 +53,18 @@ export default {
       }
     },
     showOffice(){
-        setTimeout(() => {
-          this.offices.fetchData().then((r)=> {
-            this.allOffices =  r.allOffices;
-          });
-        }, 0);
-          this.noticeShow = false;
-          this.officeShow = true;
+      setTimeout(() => {
+         
+         this.noticeShow = false;
+         this.officeShow = true;
+         if(this.allOffices == null){
+           this.pending = true;
+           this.offices.fetchData().then((r)=> {
+             this.allOffices =  r.allOffices;
+             this.pending = false;
+           });
+         }
+       }, 0);
       },
       showNotice(){
           this.noticeShow = true;
@@ -315,9 +174,12 @@ export default {
 
         }, 0);
 
+
         window.addEventListener('scroll',()=>{
           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-          if(scrollTop > 200){
+          let width = window.innerWidth;
+          console.log(width);
+          if(scrollTop > 200  && width > 527){
             this.$refs.menuBox.classList.remove('relativeCat');
             this.$refs.menuBox.classList.add('fixedCat');
           }
@@ -325,20 +187,216 @@ export default {
           if(scrollTop < 200){
             this.$refs.menuBox.classList.remove('fixedCat');
             this.$refs.menuBox.classList.add('relativeCat');
-
           }
         })
   },
   setup() {
+    definePageMeta({
+        middleware:'mobile'
+    })
     const notices = useNoticeStore();
     const offices = useOfficeStore();
     const auth =  useAuthStore();
     const useMap = useMapStore();
     // **only return the whole store** instead of destructuring
 
+
     return { notices,offices,auth,useMap}
   },
 }
 
-
 </script>
+
+<template>
+  <div class="p-4"  v-if="!isMobile()" >
+    <NuxtLayout name="header"></NuxtLayout>
+      <div class="row" ref="contentBox">
+        <div class="row mt-4">
+          <div class="col-12">
+            <div class="switchBox">
+              <p class="switchItem">نقشه</p>
+                <label class="switch switchItem">
+                  <input v-model="showMap" class="checkBox"  type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              <p  class="switchItem">فیلترها</p>
+            </div>
+          </div>
+        </div>
+  
+        <div v-if="showMap" class="col-sm-4 mt-2 mapBox">
+          <div ref="mapDiv" class="stickyStyle" >
+            <LMap v-if="allNotices"
+              id="map"
+              ref="mapRef"
+              :zoom="16"
+              :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
+              @zoomend="changeZoom"
+              @click="markersIconCallback"
+            >
+            <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
+              <LTileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                layer-type="base"
+                name="OpenStreetMap"
+              />
+            
+              <l-circle-marker
+              :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
+              :radius="10"
+              color="red"
+            />
+              <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
+                <l-popup @ready="ready" >
+                  <div class="title">
+                    {{ notice.title }}
+                  </div>
+                </l-popup>
+              </l-marker>
+    
+            </LMap>
+          </div>
+        </div>
+  
+        <div v-if="showCat" ref="menu" class="col-sm-3 menu" >
+          <div class="stickyStyle">
+            <div class="row mt-5 " ref="menuBox" >
+              
+             <div class="col-sm-12 ">
+                <div class="row category-box">
+                  <div class="col-6">
+                    <div class="row">
+                      <div class="col-12">
+                        <h5 class="category-title" style="font-size: 20px;">دسته بندی ها</h5>
+                      </div>
+                      <div class="col-12">
+                        <div v-if="pending" class="spinner-border" role="status"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 text-end">
+                    <span class="backCat" @click="lastCategory">
+                      <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
+                    </span>
+                  </div>
+                </div>
+                <ul class="categoryBox">
+                  <li v-for="(item, index) in categories" :key="index">
+                    <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
+                  <a @click="getCategory(item.id)" class="link">{{item.title}}</a>
+                  </li>
+                </ul>
+              </div>
+    
+              <Filter :status="pending" @clicked="filterUptaded" />
+            </div>
+          </div>
+        </div>
+        <!-- start Card-->
+        <div ref="noticeBox" class="col-sm-9">
+          <div class="row category-box  mt-5 ">
+            <div class="col-9">
+              <div class="row sort-box ">
+                <h6 class="col-1">نمایش:</h6>
+                <ul class="col-11 textPink">
+                  <li @click="showOffice"><a href="#">دفتر ها</a></li>
+                  <li @click="showNotice"><a href="#">آگهی ها</a></li>
+                </ul>
+              </div>
+            </div>
+  
+            <div class="col-3">
+                  <div class="row">
+                    <div class="col-4"><img class="pointer" src="~/assets/img/sort1.svg" alt=""></div>
+                    <div class="col-4"><img class="pointer" src="~/assets/img/sort2.svg" alt=""></div>
+                    <div class="col-4"><img class="pointer" src="~/assets/img/sort3.svg" alt=""></div>
+                  </div>
+            </div>
+          </div>
+  
+          <div  class="row" :style="noticeShow ? `display:flex` : 'display:none;'">
+            <!-- Card 1-->
+          <div v-if="infinity != null  && infinity.fetchingData"  class="spinner-border-background">
+            <br>
+            <br>
+            در حال بارگیری <br>
+            <div class="spinner-border mt-5" role="status"></div>
+          </div>
+      
+      <div class="col-sm-12 text-center">
+        <div v-if="pending" class="spinner-border" role="status"></div>
+      </div>
+              <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
+                <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
+                  <Notice :Notice="notice" />
+                </div>
+              </div>
+           
+            <!-- Card 2-->
+            <!-- End card-->
+            <!--Loader-->
+            <!-- <div v-if="infinity.error" class="d-flex justify-content-center mt-4">
+              {{ infinity.error }}
+              <div class="spinner-border" role="status"></div>
+            </div>
+  
+            <div v-if="error" class="d-flex justify-content-center mt-4">
+              {{ error }}
+              <div class="spinner-border" role="status"></div>
+            </div> -->
+            <!-- End Loader-->
+          </div>
+
+          <div v-if="officeShow" class="row content">
+            <div v-for="(office, index) in allOffices" :key="index" class="col-sm-12 col-md-6 col-xl-4 descktop-office">
+              <div class="row">
+                <div class="col-4 descktop-img-box">
+                    <div v-if="office?.image_banner" class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
+                    <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
+                  </div>
+                  <div class="col-8">
+                    <div class="row">
+                      <div class="col-12">
+                        <h4 class="descktop-office-title">{{office.title}}</h4>
+                      </div>
+
+                      <div class="col-12 mt-3">
+                        <h4 class="descktop-office-matter">{{office.matter.title}}</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-10">
+                      <!-- <img v-if="office.image_banner" width="50px" :src="`${useRuntimeConfig().public.BaseUrl}/${office?.image_banner  }`" alt=""> -->
+                      <img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt="">
+                    </div>
+                    <div class="col-2" dir="ltr">
+                      <a :href="`${office?.id}/${filterUrl(office?.title)}`">
+                          <img src="~/assets/img/arrow-left.svg" alt="">
+                      </a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div v-if="infinity != null  && infinity.fetchingData"  class="spinner-border-background">
+              <br>
+              <br>
+              در حال بارگیری <br>
+              <div class="spinner-border mt-5" role="status"></div>
+            </div>
+            
+            <div class="col-sm-12 text-center">
+              <div v-if="pending" class="spinner-border" role="status"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  </template>
+
+
+
+
+

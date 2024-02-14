@@ -113,10 +113,10 @@
 
                 <div class="row">
                   <div class="col-sm-6 mt-3">
-                    <div class="data-box">{{ minMetr }} متر</div>
+                    <div class="data-box">{{ minSection }} واحد</div>
                   </div>
                   <div class="col-sm-6 mt-3">
-                    <div class="data-box">{{maxMetr }} متر</div>
+                    <div class="data-box">{{maxSection }} واجد</div>
                   </div>
                 </div>
               </div>
@@ -170,7 +170,7 @@
           </div>
     <!-- end sectionFilter -->
     <div class="row">
-      <div class="col-10">
+      <div class="col-12 mb-4 ">
         <button class="btn-default w-100" @click="filterUptaded(query,true)">اعمال فیلتر</button>
       </div>
       <div v-if="prop.status" class="col-2">

@@ -6,8 +6,7 @@ export const useNoticeStore = defineStore('notice', {
     state: () => ({
       allNotices: null,
       notice: null,
-      query:`?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false`
-      ,
+      query:`?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false`,
       pages:1,
       clickCat:0,
       sectionKey:[],
@@ -19,7 +18,8 @@ export const useNoticeStore = defineStore('notice', {
       params:null
       }),
     getters:{
-      getclickCat:(state)=>{return state.clickCat;}
+      getclickCat:(state)=>{return state.clickCat;},
+      getNotices:(state)=>{return state.allNotices;}
     },
     actions: {
       setQuery(key=null,value,section=false){
@@ -79,10 +79,8 @@ export const useNoticeStore = defineStore('notice', {
         }
       },
       async fetchData(){
-        
-        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/notices${this.query}`,{
-            query:{page:1,limit:15}
-          });
+        console.log(this.query);
+        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/notices${this.query}`);
         
         this.pending = pendings;
         if(errors.value){
@@ -151,6 +149,7 @@ export const useNoticeStore = defineStore('notice', {
       },
       removeClickCat(){
         this.clickCat = this.clickCat - 1;
-      }
+      },
+
     },
   })

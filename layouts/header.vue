@@ -31,9 +31,30 @@
         <div class="col-sm-12">
           <div class="form-group" style="position:relative;">
             <img class="search-icon" src="~/assets/img/search.svg" alt="">
-            <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-              placeholder="جست و جو در همه آگهی ها" value="جست و جو در همه آگهی ها" style="color: #666777;font-size: 14px;text-align: right;
+            <input v-model="textSearch" type="text" class="form-control"
+              placeholder="جست و جو در همه آگهی ها"
+              style="color: #666777;font-size: 14px;text-align: right;
               padding: 6px 35px;">
+              <div v-if="searchPending" class="searchLoader">
+                <div class="spinner-border" role="status"></div>
+              </div>
+              <div ref="searchBox" class="searchResult">
+              <div class="row">
+                <div @click="closeSearch" class="closeFilter">
+                  <img width="20" src="assets/img/cross-icon.svg" >
+                </div>
+                <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
+                  <div class="row">
+                    <div class="col-8 text-start">
+                     <a class="link" :href="`${item?.id}/${filterUrl(item?.title)}`">{{item.title}}</a>
+                    </div>
+                    <div class="col-4 text-center search-cat">
+                      {{item.category.title}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
           </div>
         </div>
       </div>
@@ -113,23 +134,57 @@
 
 <script setup>
 // import {cartBox} from '../components/cart.vue';
-// import { useNoticeStore } from '../store/notice';
-const cart = ref(null);
-const isShowNumber = ref(true);
+import { useSearchStore } from '../store/search';
+  const cart = ref(null);
+  const textSearch = ref(null);
+  const searchTimeOut = ref(null);
+  const searchResult = ref(null);
+  const useSearch = useSearchStore();
+  const searchBox =ref(null)
+  const searchPending = ref(false)
+  const isShowNumber = ref(true);
 const isShowVerifyCode = ref(false);
 const isShowModal = ref(false);
-if (useCookie('token').value) {
-  const layoutCustomProps = useAttrs()
-  definePageMeta({
-    middleware: 'auth'
-  })
 
   setTimeout(async () => {
     cart.value = layoutCustomProps.cart;
   }, 0);
-}
 
-const showNumber = () =>{
+
+    const closeSearch =  ()=> {
+      searchBox.value.style.display = 'none';
+    }
+
+    const showSearch = () => {
+      searchBox.value.style.display = 'block';
+    }
+
+
+    watch(textSearch,(val)=>{
+
+
+        if(searchTimeOut.value) {
+          clearTimeout(searchTimeOut.value);
+        }
+    
+        searchTimeOut.value = setTimeout(() => {
+          if(val != null){
+            searchPending.value = true;
+            useSearch.search(val).then((r)=>{
+                if(r.data.length != 0 ){
+                  showSearch()
+                  searchResult.value = r.data;
+                }else{
+                  closeSearch()
+                }
+                searchPending.value = false;
+              })
+          }
+        }, 500);
+      
+    })
+    
+    const showNumber = () =>{
   isShowNumber.value = false;
   isShowVerifyCode.value = true;
 
@@ -139,4 +194,5 @@ const showVerifyCode = () =>{
   isShowVerifyCode.value = false;
 
 }
+
 </script>
