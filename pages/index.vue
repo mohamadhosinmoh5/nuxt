@@ -268,9 +268,8 @@ export default {
         </div>
   
         <div v-if="showCat" ref="menu" class="col-sm-3 menu" >
-          <div class="stickyStyle">
+          <div class="">
             <div class="row mt-5 " ref="menuBox" >
-              
              <div class="col-sm-12 ">
                 <div class="row category-box">
                   <div class="col-6">
@@ -303,7 +302,7 @@ export default {
         </div>
         <!-- start Card-->
         <div ref="noticeBox" class="col-sm-9">
-          <div class="row category-box  mt-5 ">
+          <div class="row category-box-sort  mt-5 ">
             <div class="col-9">
               <div class="row sort-box ">
                 <h6 class="col-1">نمایش:</h6>
@@ -332,9 +331,9 @@ export default {
             <div class="spinner-border mt-5" role="status"></div>
           </div>
       
-      <div class="col-sm-12 text-center">
-        <div v-if="pending" class="spinner-border" role="status"></div>
-      </div>
+        <div class="col-sm-12 text-center">
+          <div v-if="pending" class="spinner-border" role="status"></div>
+        </div>
               <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
                 <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
                   <Notice :Notice="notice" />
@@ -376,7 +375,7 @@ export default {
                   </div>
                   <div class="row">
                     <div class="col-12" dir="ltr">
-                      <a :href="`${office?.id}/${filterUrl(office?.title)}`">
+                      <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}`">
                           <img src="~/assets/img/arrow-left.svg" alt="">
                       </a>
                     </div>

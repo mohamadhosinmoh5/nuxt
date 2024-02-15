@@ -31,7 +31,7 @@
                                 </div>
     
                                 <div class="col-2">
-                                    <a :href="`${notice?.id}/${filterUrl(notice?.title)}`">
+                                    <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                         <img src="~/assets/img/arrow-left.svg" alt="">
                                     </a>
                                 </div>
@@ -50,7 +50,7 @@
                                 </div>
     
                                 <div class="col-2">
-                                    <a :href="`${notice?.id}/${filterUrl(notice?.title)}`">
+                                    <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                         <img src="~/assets/img/arrow-left.svg" alt="">
                                     </a>
                                 </div>

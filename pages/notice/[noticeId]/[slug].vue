@@ -63,7 +63,7 @@
                                         <div class="sliderValue">
 
                                         </div>
-                                        <div v-if = "useNotice.notice.price_expert_rating != null" class="col-10  field">
+                                        <div v-if="useNotice.notice.price_expert_rating != null" class="col-10  field">
                                             <input  disabled type="range" min="0" max="100"
                                                 value=" {{ useNotice.notice.price_expert_rating }}">
                                             <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">

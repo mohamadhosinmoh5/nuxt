@@ -121,7 +121,7 @@
     </div>
 
     <!-- menu -->
-    <div class="col-sm-12 navMenu">
+    <div ref="navMenu" class="col-sm-12 navMenu">
       <ul>
         <li><a class="nav-item nav-link" href="">فروشی متری</a></li>
         <li><a class="nav-item nav-link" href="">خانه</a></li>
@@ -145,6 +145,7 @@ import { useSearchStore } from '../store/search';
   const isShowNumber = ref(true);
 const isShowVerifyCode = ref(false);
 const isShowModal = ref(false);
+const navMenu = ref(null)
 
   setTimeout(async () => {
     cart.value = layoutCustomProps.cart;
@@ -183,16 +184,20 @@ const isShowModal = ref(false);
         }, 500);
       
     })
+
+    onMounted(() => {
+      window.addEventListener('scroll',()=>{
+        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document
+        if(scrollTop > 40){
+          navMenu.value.style.height = '0px';
+          navMenu.value.style.overflow = 'hidden';
+        }else{
+          navMenu.value.style.height = '40px';
+
+        }
+      })
+    })
     
-    const showNumber = () =>{
-  isShowNumber.value = false;
-  isShowVerifyCode.value = true;
 
-}
-const showVerifyCode = () =>{
-  isShowNumber.value = true;
-  isShowVerifyCode.value = false;
-
-}
 
 </script>
