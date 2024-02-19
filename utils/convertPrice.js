@@ -1,6 +1,7 @@
 
 
-export default function(str){
+export default function(str = null){
+	str = str.toString()
 	var objRegex = new RegExp( '(-?[0-9]+)([0-9]{3})' );
  
 	while( objRegex.test( str ) ) {

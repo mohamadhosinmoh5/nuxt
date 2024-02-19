@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('Auth', {
-    state: () => ({ user: null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
+    state: () => ({ user: null,pricing:null ,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
     getters: {
       
     },
@@ -96,6 +96,58 @@ export const useAuthStore = defineStore('Auth', {
             }
       
       },
+      async getPricing(){
+        // https://panel.homeenger.com/api/matters/1/pricings?page=1
+        const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/matters/1/pricings?page=1`, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+
+        if(data.value){
+          return this.pricing = data.value;
+        }
+      },
+      async getSubScribe(){
+        // https://panel.homeenger.com/api/matters/1/pricings?page=1
+        const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/subscribes?page=1`, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+
+        if(data.value){
+          return this.subScribe = data.value;
+        }
+      },
+      async getCarts(){
+        // https://panel.homeenger.com/api/matters/1/pricings?page=1
+        const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/carts?page=1`, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+
+        if(data.value){
+          return this.carts = data.value;
+        }
+      }
+      ,
       setDefaultOffice(id){
         this.getdefaultOffice = id;
       },

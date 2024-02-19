@@ -8,7 +8,7 @@
             </div>
         </div>
         
-            <div class="box_moshakhasat row mt-3">
+            <div class="box_moshakhasat col-12 row mt-3">
                 <div v-for="sectionData in section.section.items" class="col-4">
                    
                     <div class="row">

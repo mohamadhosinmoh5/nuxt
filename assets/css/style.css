@@ -1344,4 +1344,10 @@ input:checked+.slider:before {
 
 
 
-
+.addProduct #btn1{
+    width: 30%;
+    justify-content: end;
+    height: auto;
+    font-family: 'Vazir';
+    font-size: 15px;
+}
