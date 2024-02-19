@@ -46,7 +46,7 @@
                         <div class="col-sm-12 text-section mt-4">
                             <div class="row">
                                 <div class="col-10">
-                                    قیمت : {{ (notice.pricing.discount_percent > 0) ? notice?.pricing.price - (notice?.pricing.price * notice.pricing.discount_percent / 100) :  notice?.pricing.price}} تومان
+                                    قیمت : {{ (notice.pricing.discount_percent > 0) ? convertPrice(notice?.pricing.price - (notice?.pricing.price * notice.pricing.discount_percent / 100)) :  convertPrice(notice?.pricing.price)}} تومان
                                 </div>
     
                                 <div class="col-2">

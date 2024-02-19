@@ -61,52 +61,21 @@
     </div>
     <div class="col-sm-4 mt-2" dir="ltr">
       <div class="row text-start">
-        <div @click="isShowModal = true" class="col-2 profLink">
+        <div v-if="token" class="col-2 profLink">
+          <a href="/profile">
+            <img src="~/assets/img/profile.svg" alt="">
+          </a>
+        </div>
+        <div v-if="!token" @click="isShowModal = true" class="col-2 profLink">
           <a href="#LogInModal">
             <img src="~/assets/img/profile.svg" alt="">
           </a>
         </div>
-        <div v-if="isShowModal" id="LogInModal" class="LogInModal">
-          <div class="Login-content">
-            <div class="maydetailes col-sm-12">
-              <div class="row">
-                <div class="col">
-                  <span class="Close">
-                 
-                     <a @click="isShowModal = false" href="#"><img src="assets/img/SinglePage_Image/back.png" style="width: 25px; float: right;" alt=""></a>
-                  </span>
-                  <a href="#" class="Title">ورود به حساب کاربری</a>
-                </div>
 
-              </div>
-              <div class="lines"></div>
-              <div class="col mt-3">
-                <a href="#" class="phonenm">شماره مبایل خودرا وارد کنید</a>
-              </div>
-              <div class="col mt-2">
-                <a href="#" class="subtitle">برای استفاده از امکانات هومنگر لطفا شماره مبایل خود را وارد کنید, کد تاید به
-                  این شماره ارسال خواهد شد</a>
-              </div>
-              <div v-if="isShowNumber" class="FormNumber col">
-                <input type="text" placeholder="شماره همراه">
-              </div>
-              <div v-if="isShowVerifyCode" class="FormPass col">
-                <input type="text" placeholder=" کد تایید">
-              </div>
-              <div class="col mt-2">
-                <a href="#" class="subtitle">شرایط و قوانین استفاده و سیاست نامه حریم خصوصی هومنگر را می پزیرم</a>
-              </div>
-              <div class="col">
-                <div class="row mt-2">
-                  <button v-if="isShowNumber" @click="showNumber" type="button" class="btn btn-success">بعدی</button>
-                  <button v-if="isShowVerifyCode" @click="showVerifyCode" type="button" class="btn btn-success">ورود</button>
-
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div v-if="!token && isShowModal" id="LogInModal" class="LogInModal">
+         <Loginpage @clicked="modalStatus(status)" />
         </div>
+        
         <div class="col-2">
           <a href="">
             <img src="~/assets/img/basket.svg" alt="">
@@ -144,10 +113,15 @@ import { useSearchStore } from '../store/search';
   const useCart = useCartStore();
   const searchBox =ref(null)
   const searchPending = ref(false)
-  const isShowNumber = ref(true);
-const isShowVerifyCode = ref(false);
 const isShowModal = ref(false);
 const navMenu = ref(null)
+
+const token = useCookie('token');
+
+
+const modalStatus = (status)=>{
+  isShowModal.value = status;
+}
 
   setTimeout(async () => {
     useCart.getCart().then((r)=>{
@@ -208,6 +182,5 @@ const navMenu = ref(null)
       })
     })
     
-
 
 </script>
