@@ -15,13 +15,18 @@
                 @on-init="onInit"
               >
             </NeshanMap> -->
-              <div class="row">
-                <div class="col-sm-3">
+            <div v-if="pending" class="border-fixed">
+              <div class="spinner-border " role="status"></div>
+            </div>
+
+              <div v-if="cart?.items.length >= 1" class="row">
+                <div class="col-sm-3 box-address">
                       <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="mb-0">Card details</h5>
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                          class="img-fluid rounded-3" style="width: 45px;" alt="Avatar">
+                        <h5 class="mb-0"> انتخاب آدرس ارسال</h5>
+                        <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                          class="img-fluid rounded-3" style="width: 45px;" alt="Avatar"> -->
                       </div>
+                      <hr>
                       <div v-if="adress?.items.length >= 1" v-for="(item, index) in adress?.items" :key="index" class="adress">
                           <div @click="useCart.setDefaultAddress(item.id)" :class="useCart.activeAdress == item.id  ? 'borderSuccess mt-2' : 'mt-2' ">
                             <div class="card-body text-dark">
@@ -94,15 +99,15 @@
 
                 <div class="col-sm-9">
                         <div class="row" dir="ltr">
-                                  <h5 class="mb-3"><a href="#!" class="text-body"><i
-                                        class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a>
+                                    <h5 class="mb-3"><a href="/" class="text-body"><i
+                                          class="fas fa-long-arrow-alt-left me-2"></i>صفحه اصلی </a>
                                     </h5>
                                   <hr>
                   
                                   <div class="d-flex justify-content-between align-items-center mb-4">
                                     <div>
                                       <p class="mb-1">سبد خرید</p>
-                                      <p class="mb-0">شما تعداد {{cart?.items.length}} محصول در سبد خرید خود دارید</p>
+                                      <p class="mb-0">شما تعداد {{(cart?.items.length < 1) ? 0 : cart?.items.length}} محصول در سبد خرید خود دارید</p>
                                     </div>
                                   </div>
                                   <div v-for="(item, index) in cart?.items" :key="index" class="cart-item">
@@ -139,13 +144,11 @@
                                 </div>
                 </div>
               </div>
-           
-              <div v-if="useCart.error" class="error">
+              
+              <div v-if="useCart.error" class="error alert alert-danger text-center">
                 {{ useCart.error.message }}
               </div>
-            
-
-
+      
           </div>
 </template>
 
@@ -173,6 +176,7 @@ const useCart = useCartStore();
 const useAuth = useAuthStore();
 const useMap = useMapStore();
 const adress = ref(null);
+const pending = ref(true);
 const addressModal = ref();
 const diplayPopUp = ref(false);
 const addressData = ref({});
@@ -220,6 +224,7 @@ const addAdress = async () => {
 }
 
 const pay = (obj) => {
+  pending.value = true;
   console.log(obj);
   if(obj.method == 1){
     useCart.payDirect(obj.method,obj.id).then((r)=>{
@@ -229,17 +234,21 @@ const pay = (obj) => {
   }else{
     useCart.payCash(obj.method,obj.id).then((r)=>{
       console.log(r);
+      pending.value = false;
     })
   }
 }
 
 setTimeout(async () => {
+  pending.value = true;
    await useCart.getCart().then((r)=>{
     cart.value = r
+    pending.value = false;
    });
-    
+   pending.value = true;
     await useCart.getAdress().then((r)=>{
       adress.value = r
+      pending.value = false;
     });
 
 }, 0);

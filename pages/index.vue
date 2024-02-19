@@ -355,7 +355,7 @@ export default {
             </div> -->
             <!-- End Loader-->
           </div>
-
+    
           <div v-if="officeShow" class="row content">
             <div v-for="(office, index) in allOffices" :key="index" class="col-sm-12 col-md-6 col-xl-4 descktop-office">
               <div class="row">
@@ -383,6 +383,7 @@ export default {
                   </div>
               </div>
             </div>
+       
             <div v-if="infinity != null  && infinity.fetchingData"  class="spinner-border-background">
               <br>
               <br>

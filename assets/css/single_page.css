@@ -133,7 +133,7 @@
     text-align: center;
     justify-content: center;
     position: relative;
-    margin-right: 50%;
+    /* margin-right: 50%; */
     margin-top: 15%;
 }
 
@@ -195,7 +195,7 @@
 
 .box_tozihat {
     position: relative;
-    height: 177px;
+    height: auto;
     border-radius: 10px;
     left: 12%;
     border-style: solid;
@@ -211,7 +211,7 @@
     }
 }
 
-.mappingg{
+.mappingg {
     left: 20px;
     height: 300px;
     width: 540px;

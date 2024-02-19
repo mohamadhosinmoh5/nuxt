@@ -64,7 +64,16 @@ body {
     border-radius: 10px;
 }
 
+.border-fixed {
+    margin: 0 auto;
+    position: fixed;
+    right: 50%;
+    top: 40vh;
+}
+
 .addNotice {
+    width: 100px;
+    text-align: center;
     text-decoration: none;
     color: rgb(255 255 255);
     cursor: pointer;
@@ -224,12 +233,12 @@ body {
 
 }
 .spinner-border-background{
-  position: fixed;
-    top: 0;
-  background: #535353a2;
-  width: 100%;
-  height: 100vh;
-  text-align: center;
+    position: fixed;
+    top: 86px;
+    background: #535353a2;
+    height: 100vh;
+    text-align: center;
+    width: 70%;
 }
 .descktop-office-title{
   font-size: 16px;
@@ -1542,8 +1551,16 @@ input:checked+.slider:before {
   
   .adress{
     cursor: pointer;
-
   }
+
+  .error{
+    margin-top: 20px;
+  }
+.box-address{
+    background: #f3f3f3;
+    margin-top: 10px;
+    padding: 10px;
+}
 
   .adress:hover{
     /* border: #30ced7 2px solid; */

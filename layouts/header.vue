@@ -134,12 +134,14 @@
 
 <script setup>
 // import {cartBox} from '../components/cart.vue';
+import { useCartStore } from '../store/cart';
 import { useSearchStore } from '../store/search';
   const cart = ref(null);
   const textSearch = ref(null);
   const searchTimeOut = ref(null);
   const searchResult = ref(null);
   const useSearch = useSearchStore();
+  const useCart = useCartStore();
   const searchBox =ref(null)
   const searchPending = ref(false)
   const isShowNumber = ref(true);
@@ -148,7 +150,15 @@ const isShowModal = ref(false);
 const navMenu = ref(null)
 
   setTimeout(async () => {
-    cart.value = layoutCustomProps.cart;
+    useCart.getCart().then((r)=>{
+      console.log(r);
+      if(r == 'undefined'){
+        cart.value = null;
+      }else{
+        cart.value = r;
+      }
+    })
+    // cart.value = layoutCustomProps.cart;
   }, 0);
 
 
