@@ -19,6 +19,7 @@
   "dependencies": {
     "@neshan-maps-platform/ol": "^1.0.5",
     "@neshan-maps-platform/vue3-openlayers": "^2.0.1",
+    "@nuxtjs/proxy": "^2.1.0",
     "@pinia/nuxt": "^0.5.1",
     "@vueuse/nuxt": "^10.7.0",
     "alertifyjs": "^1.13.1",

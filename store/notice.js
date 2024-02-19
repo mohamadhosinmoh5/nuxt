@@ -5,6 +5,7 @@ import { useAuthStore } from './auth';
 export const useNoticeStore = defineStore('notice', {
     state: () => ({
       allNotices: null,
+      similarNotice: null,
       notice: null,
       query:`?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false`,
       pages:1,
@@ -94,6 +95,34 @@ export const useNoticeStore = defineStore('notice', {
         return {
           allNotices:this.allNotices,
           sections:this.sections,
+          error:this.error,
+          pending:this.pending,
+        }
+      
+      },
+      async getSimilar(noticeId,category_id){
+        const query = `
+        ?per_page=10&page=1&cities=گرگان&fetch_all=false
+        `;
+        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/notices/${query}&similar_notice_id=${noticeId}&category_id=${category_id}`,
+        {
+          method:'get',
+          headers:{
+          "Authorization":"Bearer "+auth.token
+          }
+        });
+        
+        this.pending = pendings;
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+        
+        if(notices.value){
+          this.similarNotice = JSON.parse(JSON.stringify(notices.value.data));
+        }
+        
+        return {
+          allNotices:this.similarNotice,
           error:this.error,
           pending:this.pending,
         }

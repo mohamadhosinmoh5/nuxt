@@ -6,9 +6,12 @@
             {{ params.slug }}
         </title>
         <!-- addin html code -->
-        <div v-if="!useNotice.notice" class="spinner-border" role="status"></div>
+        <div v-if="useNotice.pending" class="spinner-border mt-4" role="status"></div>
+       
+        <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
+            {{ useNotice.error.message }}
+        </div>
         <div v-if="useNotice.notice" class="row">
-
             <div class="row">
                 <div class="col-sm-7">
                     <!-- AX -->
@@ -196,26 +199,7 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="row" id="scroll" >
-        <div v-if="pending">
-            fetching...
-        </div>
-       
-         <div class="col-sm-12">
-            <single-notice  :notice="useNotice?.notice" />
-        </div> -->
-            <!--- <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-            <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">add product</button>
-            <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">remove product</button>
-            
-            <div v-if="useCart.error">
-                {{ useCart.error.message }}
-            </div>
-            <div v-if="useCart.message">
-                {{ useCart.message }}
-            </div>
-        </div>
-    </div> -->
+           
 
 
         </div>
@@ -225,7 +209,6 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useNoticeStore } from '../store/notice';
-import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'
@@ -246,9 +229,11 @@ watch(useCart, async (newdata) => {
 })
 
 setTimeout(async () => {
-    await useNotice.getNotice(params.noticeId).then(() => {
-        // pending.value = false;
+    await useNotice.getNotice(params.noticeId).then((r) => {
+        console.log(r);
     });
+
+    useNotice.getSimilar(params.noticeId);
 
     cart.value = await useCart.getCart();
 

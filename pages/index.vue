@@ -295,8 +295,9 @@ export default {
                   </li>
                 </ul>
               </div>
-    
-              <Filter :status="pending" @clicked="filterUptaded" />
+              <div v-if="!officeShow" class="">
+                <Filter :status="pending" @clicked="filterUptaded" />
+              </div>
             </div>
           </div>
         </div>

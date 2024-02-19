@@ -1,6 +1,8 @@
 
 import { defineStore } from 'pinia';
+
 import { useAuthStore } from './auth';
+// import function from './../utils/filterUrl';
 
   export const useCartStore = defineStore('cart',() => {
 
@@ -21,7 +23,7 @@ import { useAuthStore } from './auth';
     (useCookie('token')) ?  token.value = useCookie('token') : error.value = {message:'ابتدا وارد شوید تا سبد خرید دسترسی داشته باشید '};
 
     async function getCart(){
-
+          
           const { data:carts, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${auth.getdefaultOffice}/carts/draft/show`, {
             method:'get',
             headers:{
@@ -42,9 +44,7 @@ import { useAuthStore } from './auth';
               if(carts.value.items[0].post_price_status =="answered" && carts.value.items[0].post_price != null){
                 status.requestPrice = true;
               }else{
-                // window.document.write(`<script>
-                //   alertify.warning('درخواست قیمت گذاری ارسال شد بعد از تایید مجدد فرایند تسویه حساب را انجام دهید');
-                // </script>`);
+                error.value = 'لطفا ابتدا درخواست قیمت گذاری دهید'
                 status.requestPrice = false;
               }
             }
@@ -58,7 +58,7 @@ import { useAuthStore } from './auth';
     }
 
     async function requestPrice(id){
-
+  
       const { data:request, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/items/${id}/request-post-pricing`, {
         method:'get',
         headers:{
@@ -112,7 +112,7 @@ import { useAuthStore } from './auth';
     async function setDefaultAddress(queryData){
       const { data:address2, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/${cart.value.id}/update-address`, {
         method:'put',
-        body:queryData,
+        body:{post_address_id:queryData},
         headers:{
           "Authorization":"Bearer "+token.value
         }
@@ -212,6 +212,62 @@ import { useAuthStore } from './auth';
         }
     }
 
+    async function verifyPay(trackId,orderId){
+      const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/payments/${trackId}/verify?success=1&trackId=${trackId}&orderId=${orderId}`, {
+        method:'get',
+        headers:{
+          "Authorization":"Bearer "+token.value
+        }
+      });
+
+      if(pendings){
+        pending.value = pendings;
+      }
+
+      if(errors.value)
+      {
+        this.error = errors.value.data;
+      }
+
+      if(data.value)
+      {
+        pending.value = false;
+        return cart.value = data.value;
+      }
+    }
+
+    async function payDirect(method=1,cartId){
+      console.log(token.value);
+      const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/${cartId}/pay`, {
+        method:'post',
+        query:{
+          pay_method:(method==1) ? 'direct' : 'cash'
+        },
+        headers:{
+          'accept': 'application/json',
+          'Access-Control-Allow-Origin': "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Credentials': 'true',
+          "Authorization":"Bearer "+token.value
+        },
+        // mode: 'no-cors'
+      });
+
+      if(pendings){
+        pending.value = pendings;
+      }
+
+      if(errors.value)
+      {
+        this.error = errors.value.data;
+      }
+
+      if(data.value)
+      {
+        pending.value = false;
+        return cart.value = data.value;
+      }
+    }
 
     return {
       cart,
@@ -228,6 +284,8 @@ import { useAuthStore } from './auth';
       setAdress,
       setDefaultAddress,
       requestPrice,
+      payDirect,
+      verifyPay,
       updateCart,
     };
   })

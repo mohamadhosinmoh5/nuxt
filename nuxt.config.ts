@@ -3,8 +3,12 @@
 export default defineNuxtConfig({
    modules: [
       '@pinia/nuxt',
-      'nuxt3-leaflet'
+      'nuxt3-leaflet',
+      // '@nuxtjs/proxy'
     ],
+   //  proxy: {
+   //    '/api/': { target: 'https://api.homeenger.com/', pathRewrite: {'^/api/': ''}, changeOrigin: true }
+   //  },
    css:[
         '@/assets/css/main.css',
         '@/assets/css/bootstrap.min.css',
@@ -41,6 +45,6 @@ export default defineNuxtConfig({
           ]
       }
    },
-   // ssr:true
+   ssr:true
     
 })

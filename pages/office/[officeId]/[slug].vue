@@ -5,7 +5,9 @@
         <title>
             {{ params.slug }}
         </title>
-        
+        <div v-if="useOffice.error" class="alert alert-danger text-center mt-4">
+            {{ useOffice.error.message }}
+        </div>
         <div class="row mt-4">
             <div class="col-sm-3 ">
                 <div class="box-office-img">
@@ -39,7 +41,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
-                    <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
+                    <div href="#">
                         <Notice :Notice="notice" />
                     </div>
                 </div>
