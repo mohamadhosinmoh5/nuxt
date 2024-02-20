@@ -21,13 +21,13 @@
                         <div class="col-3">
                             <div class="scrollBar">
                                 <div class="smalimage">
+                              
+                              <img @click="setBaseImage(image)" v-for="{ image, index } in useNotice.notice.gallery"
+                                  :key="index" class="bannerImage" :src="`${useRuntimeConfig().public.BaseUrl}/${image}`"
+                                  alt="">
+                            
 
-                                    <img @click="setBaseImage(image)" v-for="{ image, index } in useNotice.notice.gallery"
-                                        :key="index" class="bannerImage"
-                                        :src="`${useRuntimeConfig().public.BaseUrl}/${image}`" alt="">
-
-
-                                </div>
+                          </div>
                             </div>
                         </div>
                         <div class="col-9">
@@ -142,15 +142,12 @@
                                 class="boxdetailes col-xs-12 row mt-2">
 
                                 <div class="col-5">
-
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
                                         useNotice.notice.section_data_collection[2].items[0].data[0] }}</a>
-
                                 </div>
                                 <div class="col-5">
-
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{

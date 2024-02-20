@@ -138,6 +138,7 @@
     font-size: small;
     color: var(--cf-title-color);
     font-family: 'Vazir';
+
 }
 
 .daftar_text:hover {
@@ -217,6 +218,8 @@
     width: 100%;
     position: relative;
     height: auto;
+    min-height: 150px;
+    max-height: 700px;
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;
@@ -557,9 +560,16 @@
 /* Strat profile page */
 
 .liness {
+    margin-top: 27px;
     border-left: 0.5px solid var(--cf-navicon-color);
-    height: 800px;
-    padding: 0px !important;
+    height: 1000px;
+}
+
+@media screen and (max-width: 992px) {
+    .liness {
+        border-left: none;
+        height: 50%;
+    }
 }
 
 .title {
@@ -573,12 +583,13 @@
     color: var(--cf-dark-color);
 }
 
-.TitleText a {
+
+.TitleText a{
+    position: relative;
+    right: 25px;
     text-decoration: none;
     color: var(--cf-green-color);
-    font-size: 17px;
 }
-
 .sub {
     text-decoration: none;
     color: var(--cf-subtitle-color);
@@ -591,6 +602,8 @@
 }
 
 .border {
+    position: relative;
+    top: 72px;
     width: 100%;
     padding-left: 0px;
     padding-right: 0px;
@@ -598,7 +611,7 @@
 }
 
 .mediumtxt {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--cf-title-color);
     text-decoration: none;
     font-family: 'Vazir';
@@ -644,4 +657,111 @@
     display: none;
 }
 
+.box-info {
+    padding: 40px;
+    /* height: 80px; */
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: var(--cf-grey-icon-color);
+    background-color: var(--cf-light-grey);
+}
+
+.info-box {
+    position: relative;
+    padding: 20px;
+    justify-content: space-evenly;
+    top: 1%;
+}
+
+.daftar-detailes {
+    position: relative;
+    text-align: center;
+    top: 2%;
+}
+.hover:hover{
+    background-color: var(--cf-grey-icon-color);
+    width: 80%;
+    border-radius: 5px;
+    height: 30px;
+    margin: 5px;
+
+  
+}
+.hover a:hover{
+    color: var(--cf-dark-color);
+}
+.hover a{
+    position: relative;
+    left: 30px;
+}
+.myhomenger{
+    font-family: 'Vazir';
+    font-size: 20px;
+}
 /* End profile page */
+
+
+/* notifeAlert */
+.notifcard {
+    background: rgba(79, 224, 74, 0.7);
+    -webkit-backdrop-filter: blur(45px);
+    backdrop-filter: blur(45px);
+    border: 1px solid rgba(79, 224, 74, 0.35);
+    padding: 20px 35px 20px 25px;
+    margin-top: 20px;
+    width: 250px;
+    height: 60px;
+    border-radius: 10px;
+    border-left: 8px solid green;
+    bottom: 20px;
+    left: 0;
+    position: fixed;
+    overflow: hidden;
+    transform: translateX(calc(20% + 10px));
+    transition: all 0.5s ease-in-out 0.2s;
+}
+
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: #ddd;
+}
+
+.progress::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: green;
+}
+
+.progress.active::before {
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    0% {
+        left: -320px;
+    }
+
+    50% {
+        left: 0px;
+    }
+
+    100% {
+        left: -320px;
+    }
+
+}
+
+.animate {
+    animation: progress alternate 3s;
+}
+
+/* end notife Alert */
