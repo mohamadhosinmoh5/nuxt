@@ -77,7 +77,9 @@
         </div>
         
         <div class="col-2">
-          <a href="">
+          {{ cart }}
+          <a href="/cart">
+            
             <img src="~/assets/img/basket.svg" alt="">
           </a>
         </div>
@@ -103,16 +105,19 @@
 
 <script setup>
 // import {cartBox} from '../components/cart.vue';
+// import auth from '~/middleware/auth';
+import { useAuthStore } from '../store/auth';
 import { useCartStore } from '../store/cart';
 import { useSearchStore } from '../store/search';
-  const cart = ref(null);
-  const textSearch = ref(null);
-  const searchTimeOut = ref(null);
-  const searchResult = ref(null);
-  const useSearch = useSearchStore();
-  const useCart = useCartStore();
-  const searchBox =ref(null)
-  const searchPending = ref(false)
+const cart = ref(null);
+const textSearch = ref(null);
+const searchTimeOut = ref(null);
+const searchResult = ref(null);
+const useSearch = useSearchStore();
+const useCart = useCartStore();
+const useAuth = useAuthStore();
+const searchBox =ref(null)
+const searchPending = ref(false)
 const isShowModal = ref(false);
 const navMenu = ref(null)
 
@@ -124,14 +129,18 @@ const modalStatus = (status)=>{
 }
 
   setTimeout(async () => {
-    useCart.getCart().then((r)=>{
-      console.log(r);
-      if(r == 'undefined'){
-        cart.value = null;
-      }else{
-        cart.value = r;
-      }
-    })
+    if(token.value != null){
+      useAuth.token = token.value;
+      await useAuth.getMe()
+      useCart.getCart().then((r)=>{
+          console.log(r);
+          // if(r == 'null'){
+          //   cart.value = [];
+          // }else{
+          //   cart.value = r;
+          // }
+        })
+    }
     // cart.value = layoutCustomProps.cart;
   }, 0);
 
@@ -146,7 +155,6 @@ const modalStatus = (status)=>{
 
 
     watch(textSearch,(val)=>{
-
 
         if(searchTimeOut.value) {
           clearTimeout(searchTimeOut.value);
@@ -172,11 +180,14 @@ const modalStatus = (status)=>{
     onMounted(() => {
       window.addEventListener('scroll',()=>{
         let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document
-        if(scrollTop > 40){
+        if(scrollTop > 50){
           navMenu.value.style.height = '0px';
           navMenu.value.style.overflow = 'hidden';
+          navMenu.value.style.opacity = '0';
+
         }else{
           navMenu.value.style.height = '40px';
+          navMenu.value.style.opacity = '1';
 
         }
       })

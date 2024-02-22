@@ -17,6 +17,7 @@
     border-radius: 10px;
     margin-top: 12px;
     display: block;
+    cursor: pointer;
     margin-right: 35%;
 }
 
@@ -110,7 +111,6 @@
     font-size: small;
     color: var(--cf-title-color);
     font-family: 'Vazir';
-
 }
 
 .mediumtitle:hover {
@@ -120,9 +120,10 @@
 
 
 .btn {
-    width: 90px;
-    margin-right: 40px;
-    margin-bottom: 30px;
+    /* width: 90px; */
+    /* margin-right: 40px; */
+    /* margin-bottom: 30px; */
+    margin-top: 20px;
     border-radius: 10px;
     background-color: var(--cf-green-color);
     color: var(--cf-light-color);
@@ -255,22 +256,14 @@
 } */
 
 .modal {
-    display: none;
-    /* Hidden by default */
+    display: block;
     position: fixed;
-    /* Stay in place */
-    z-index: 1;
-    /* Sit on top */
-    padding-top: 220px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    /* width: 50% !important; */
-    /* Full width */
+    z-index: 1111111;
+    width: 100%;
+    left: 50%;
+    top: 40%;
     height: 80%;
-    /* Full height */
     overflow: auto;
-    /* Enable scroll if needed */
 
 
 }
@@ -281,13 +274,11 @@
     opacity: 1;
     border-top-right-radius: 15px;
     border-bottom-left-radius: 15px;
-    /* transform: translateY(50px); */
     padding: 20px;
-    display: none;
     right: 25%;
+    top: 0;
     position: fixed;
-    border: 0.5px solid var(--cf-grey-icon-color);
-    /* border: none; */
+    border: 1px solid #dadada;
     width: 50% !important;
 }
 
@@ -299,8 +290,11 @@
 
 /* The Close Button */
 .close {
+    cursor: pointer;
     color: #aaaaaa;
-    float: right;
+    background: white;
+    border: none;
+    /* float: right; */
     font-size: 28px;
     font-weight: bold;
 }
@@ -345,7 +339,7 @@
 
 .box-title {
     width: 547px;
-    height: 216px;
+    height: auto;
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;

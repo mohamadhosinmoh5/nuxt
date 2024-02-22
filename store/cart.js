@@ -23,7 +23,6 @@ import { useAuthStore } from './auth';
     (useCookie('token')) ?  token.value = useCookie('token') : error.value = {message:'ابتدا وارد شوید تا سبد خرید دسترسی داشته باشید '};
 
     async function getCart(){
-          
           const { data:carts, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${auth.getdefaultOffice}/carts/draft/show`, {
             method:'get',
             headers:{
@@ -54,7 +53,6 @@ import { useAuthStore } from './auth';
             pending.value =false;
             return cart.value = carts.value;
           }
-
     }
 
     async function requestPrice(id){
@@ -71,6 +69,7 @@ import { useAuthStore } from './auth';
       }
 
       if(errors.value){
+        pending.value = false;
         error.value = errors.value.data;
       }
 
@@ -97,6 +96,7 @@ import { useAuthStore } from './auth';
       }
 
       if(errors.value){
+        pending.value = false;
         error.value = errors.value.data;
       }
 
@@ -163,14 +163,15 @@ import { useAuthStore } from './auth';
       pending.value = true;
       count.value++;
       console.log(count.value);
-      await this.updateCart(count.value,noticeId,false,null)
+      await updateCart(count.value,noticeId,false,null)
     }
 
     async function removeCart(noticeId){
       if(count.value > 0){
         pending.value = true;
         count.value--;
-        await this.updateCart(count.value,noticeId,true,null)
+        console.log(count.value);
+        await updateCart(count.value,noticeId,true,null)
       }else{
         massage.value ='سبد خالی است '
       }
@@ -236,12 +237,12 @@ import { useAuthStore } from './auth';
       }
     }
 
-    async function payDirect(method=1,cartId){
-      console.log(token.value);
+    async function pay(cartId){
+
       const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/${cartId}/pay`, {
         method:'post',
         query:{
-          pay_method:(method==1) ? 'direct' : 'cash'
+          pay_method: status.portal
         },
         headers:{
           'accept': 'application/json',
@@ -259,6 +260,7 @@ import { useAuthStore } from './auth';
 
       if(errors.value)
       {
+        pending.value = false;
         this.error = errors.value.data;
       }
 
@@ -269,6 +271,15 @@ import { useAuthStore } from './auth';
       }
     }
 
+    function deleteCart(id){
+      count.value = 1;
+      removeCart(id)
+    }
+
+    function changePay(name){
+      status.portal = name;
+    }
+
     return {
       cart,
       totalProduct,
@@ -277,6 +288,7 @@ import { useAuthStore } from './auth';
       error,
       activeAdress,
       pending,
+      status,
       getCart,
       addToCart,
       removeCart,
@@ -284,7 +296,9 @@ import { useAuthStore } from './auth';
       setAdress,
       setDefaultAddress,
       requestPrice,
-      payDirect,
+      deleteCart,
+      changePay,
+      pay,
       verifyPay,
       updateCart,
     };

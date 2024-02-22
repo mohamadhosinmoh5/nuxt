@@ -1,4 +1,7 @@
-@import url('https://v1.fontapi.ir/css/Vazir');
+@font-face {
+    font-family: anjoman;
+    src: url(../font/AnjomanMax-Bold.ttf);
+  }
 
 :root {
     --cf-dark-color: #1b1b1b;
@@ -14,15 +17,13 @@
   transition: all ease-in-out 0.3s;
  }
 body {
-    font-family: Vazir, sans-serif !important;
+    font-family: anjoman, sans-serif !important;
     font-weight: bold;
-
 }
 
 ::-webkit-scrollbar {
     display: none;
 }
-
 
 .nav {
     background-color: #ffffff;
@@ -35,19 +36,15 @@ body {
     top: 0;
 }
 
-
-
-
 .nav-link {
     color: #666777;
     font-weight: 500;
 }
 
-
 .location {
 
     text-decoration: none;
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
     font-size: 15px;
     width: 59%;
     color: #7a7a7a;
@@ -90,8 +87,14 @@ body {
 }
 
 
-.disabled {}
+.disabled {
+    opacity: 0.3;
+    cursor: help;
+}
 
+.form-text{
+
+}
 .navMenu {
     margin-top: 10px;
     padding: 5px 0 0 0;
@@ -126,7 +129,7 @@ body {
 
 #navBTN {
     text-decoration: none;
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
     font-weight: bold;
     color: var(--cf-dark-color);
 }
@@ -160,7 +163,7 @@ body {
 
 
 #info1 {
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
     font-size: 15px;
 
 }
@@ -170,7 +173,7 @@ body {
 }
 
 #info2 {
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
     font-size: 15px;
 }
 
@@ -179,7 +182,7 @@ body {
 }
 
 #info3 {
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
     font-size: 15px;
     margin-left: 20px;
     width: 100%;
@@ -423,7 +426,7 @@ body {
     text-decoration: none;
     color: var(--cf-light-grey);
     margin: 25px;
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
 
 }
 
@@ -435,7 +438,7 @@ body {
     text-decoration: none;
     margin: 10px;
     color: var(--cf-light-grey);
-    font-family: Vazirmatn, sans-serif;
+    font-family: anjoman, sans-serif;
 }
 
 .title a:hover {
@@ -488,7 +491,7 @@ body {
 }
 
 .input-group {
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     color: var(--cf-light-grey);
     font-size: 18;
 }
@@ -504,21 +507,21 @@ body {
 .mainPage a {
     font-size: 25px;
     text-decoration: none;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     color: var(--cf-dark-color);
 }
 
 .mainPage h {
     font-size: 15px;
     text-decoration: none;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     color: var(--cf-light-grey);
 }
 
 
 #seconfButton {
     color: var(--cf-light-grey);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     font-size: 15px;
 }
 
@@ -531,14 +534,14 @@ body {
     height: 40px;
     border-radius: 5px;
     text-align: center;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     /* background-color: #7a7a7a; */
 }
 
 #thirdbtn {
     /* width: 150%; */
     color: var(--cf-dark-color);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     width: 100%;
 }
 
@@ -551,13 +554,13 @@ body {
 #info8 {
     /* width: 150%; */
     color: var(--cf-light-color);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     width: 100%;
 }
 
 .btnStyle {
     color: black;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     font-size: 17px;
 }
 
@@ -580,20 +583,20 @@ body {
 
 .card-body {
     color: var(--cf-light-grey);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
 }
 
 .under {
     text-decoration: none;
     color: var(--cf-light-grey);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     font-size: 15px;
 }
 
 #txt {
     color: var(--cf-light-grey);
     font-size: 15px;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     text-decoration: none;
 }
 
@@ -610,7 +613,7 @@ body {
 .endText {
     color: var(--cf-light-grey);
     font-size: 10px;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     text-decoration: none;
 }
 
@@ -621,7 +624,7 @@ body {
 .homenger {
     color: var(--cf-light-grey);
     font-size: 14;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     text-decoration: none;
 }
 
@@ -1074,6 +1077,28 @@ input.checkBox {
     right: 15px
 }
 
+.spinner-btn{
+    height: 20px ;
+    width: 20px ;
+    margin-top: 0 px !important;
+}
+.pay-cart{
+    text-align: center;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.addresses{
+    overflow: scroll;
+    max-height: 350px;
+}
+.pay-cart.active {
+    background: rgb(4, 148, 4);
+    color: white;
+}
+
 #nprogress .spinner-icon {
     width: 18px;
     height: 18px;
@@ -1282,6 +1307,13 @@ input.checkBox {
   height: auto !important;
 }
 
+.btn-cus{
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    background: #197c82;
+}
+
 .filter-icon{
   position: absolute;
   left: 5px;
@@ -1452,7 +1484,7 @@ input:checked+.slider:before {
   .filter a{
     text-decoration: none;
     color: var(--cf-subtitle-color);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
   }
   
   /* for filter */
@@ -1475,7 +1507,7 @@ input:checked+.slider:before {
   .navbar-togglerr a{
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
   }
   
   .form-control::before {
@@ -1528,7 +1560,7 @@ input:checked+.slider:before {
     text-decoration: none;
     font-size: medium;
     color: var(--cf-title-color);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
   }
   
   .Title:hover {
@@ -1537,7 +1569,7 @@ input:checked+.slider:before {
   
   .Subtitle {
     color: var(--cf-subtitle-color);
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
     font-size: 14px;
     font-weight: 400;
   }
@@ -1551,6 +1583,11 @@ input:checked+.slider:before {
   
   .adress{
     cursor: pointer;
+  }
+
+  .modal-body{
+    height: 60vh;
+    overflow: scroll;
   }
 
   .error{
@@ -1567,9 +1604,8 @@ input:checked+.slider:before {
     box-shadow: 0px 0px 1px 1px #DADADA;
   }
 .borderSuccess{
-    border: #30ced7 2px solid;
-    color: #30ced7;
-    line-height: 1.5;
+    border: #1ca1a8 2px solid;
+    color: #2bbdc5;
     box-shadow: 0px 0px 1px 1px;
 }
   .line{
@@ -1650,13 +1686,13 @@ input:checked+.slider:before {
   .list-item a{
     color: var(--cf-navicon-color);
     text-decoration: none;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
   }
   
   .list-item .homeIcon{
     color: var(--cf-green-color);
     text-decoration: none;
-    font-family: 'Vazirmatn';
+    font-family: 'anjoman';
   }
   
   .navigationbtn{
@@ -1718,6 +1754,12 @@ input:checked+.slider:before {
     border: 1px solid #DADADA;
     border-radius: 15px;
     padding: 10px;
+}
+
+.image-cart {
+    border: 1px solid #dadada;
+    padding: 15px;
+    margin: 0 20px;
 }
 
 
