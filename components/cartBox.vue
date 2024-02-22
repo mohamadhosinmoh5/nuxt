@@ -44,7 +44,7 @@
                             </button>
                           </div>
                           <div class="col-7">
-                            <button @click="useCart.requestPrice(cart?.items[0].id)" class="btn btn-danger">
+                            <button @click="requestPrice(cart?.items[0].id)" class="btn btn-danger">
                               <div v-if="useCart.pending == true" class="spinner-border spinner-btn" role="status"></div>
                                 درخواست قیمت گذاری
                             </button>
@@ -94,17 +94,17 @@
   
                       <div class="d-flex justify-content-between">
                         <p class="mb-2">مجموع قیمت با تخفیف</p>
-                        <p class="mb-2 text-success">تومان {{ convertPrice(totalPrice(cart?.items).discountPrice) }}</p>
+                        <p class="mb-2 text-success">تومان {{ totaldisPrice }}</p>
                       </div>
   
                       <div class="d-flex justify-content-between">
                         <p class="mb-2">مجموع قیمت اصلی</p>
-                        <p class="mb-2 text-info">تومان {{convertPrice(totalPrice(cart?.items).allPrice)}}</p>
+                        <p class="mb-2 text-info">تومان {{totalPriceNotice}}</p>
                       </div>
   
                       <div class="d-flex justify-content-between mb-4">
                         <p class="mb-2">میزان سود شما</p>
-                        <p class="mb-2 text-danger">تومان {{convertPrice(totalPrice(cart?.items).profit)}}</p>
+                        <p class="mb-2 text-danger">تومان {{profit}}</p>
                       </div>
                       <div class="row mb-5 mt-5">
                         <div @click="useCart.changePay('wallet'),wallet=true"  :class="wallet ? `col-5 pay-cart active` :`col-5 pay-cart`">کیف پول نقدی</div>
@@ -117,7 +117,6 @@
                           <span @click="pay(cart.id)">پرداخت <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
                         </div>
                       </button>
-  
                 </div>
 
                 <div class="col-sm-8">
@@ -151,7 +150,7 @@
                                             <div class="d-flex flex-row align-items-center">
                                               <div class="row">
                                                 <div class="col-4">
-                                                  <button @click="useCart.addToCart(item.notice.id),addCart = true,item.count++" class="btn-cus btn-success">
+                                                  <button @click="useCart.addToCart(item.notice.id,item.count),addCart = true,item.count++" class="btn-cus btn-success">
                                                     <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn" role="status"></div>
                                                     <div v-else>+</div>
                                                   </button>
@@ -164,14 +163,15 @@
                                                   </h5>
                                                 </div>
                                                 <div class="col-4">
-                                                  <button @click="useCart.removeCart(item.notice.id),addCart = false,item.count--" class="btn-cus btn-success">
+                                                  <button @click="useCart.removeCart(item.notice.id,item.count),addCart = false,item.count--" class="btn-cus btn-success">
                                                     <div v-if="useCart.pending==true && !addCart" class="spinner-border spinner-btn" role="status"></div>
                                                     <div v-else>-</div>
                                                   </button>
                                                 </div>
                                               </div>
                                               <div style="width: 80px;">
-                                                {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing.price - (item?.notice.pricing.price * item.notice.pricing.discount_percent / 100)) :  convertPrice(item?.notice.pricing.price) }}  تومان
+                                               {{ convertPrice(item.notice.pricing.price)}}
+                                                <!-- {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان -->
                                               </div>
                                               <a @click="useCart.deleteCart(item.notice.id),item.count=0" href="#" style="color: #cecece;margin-right:20px"><i class="fas fa-trash-alt"></i></a>
                                             </div>
@@ -191,8 +191,9 @@
                 <div class="spinner-border " role="status"></div>
               </div>
 
-              <div v-if="useCart?.message" class="notif ">
-                  {{ useCart?.message }}
+              <div v-if="message" class="notif ">
+                <span @click="message = null" class="closeNotife">x</span>
+                  {{message }}
               </div>
               <div v-if="useCart.error?.message" class="notif error text-center">
                 <span @click="useCart.error.message = null" class="closeNotife">x</span>
@@ -242,6 +243,25 @@ const count = ref(null)
 const addCart = ref(null)
 const addressBoxModel = ref(false)
 const wallet = ref(false)
+const totaldisPrice = ref(0)
+const totalPriceNotice = ref(0)
+const profit = ref(0)
+const message = ref('')
+
+const requestPrice = (item) => {
+  pending.value = true
+  useCart.requestPrice(item).then(()=>{
+    message.value = 'درخواست قیمت گذاری شما ارسال شد پس از دریافت اس ام اس تایید مجدد جهت پرداخت اقدام کنید'  
+    pending.value = false
+  })
+}
+
+watch(useCart,(cart) =>{
+  console.log(cart.cart.items);
+   totaldisPrice.value = convertPrice(totalPrice(cart.cart.items).discountPrice);
+   totalPriceNotice.value = convertPrice(totalPrice(cart.cart.items).allPrice);
+   profit.value = convertPrice(totalPrice(cart.cart.items).profit);
+})
 
 addressData.value.address = {
     address: "ایران، گلستان، گرگان، شهر گرگان، گرگان، محله گلشهر، بلوار گلشهر",

@@ -39,7 +39,7 @@ import { useAuthStore } from './auth';
           }
   
           if(carts.value){
-            if(carts.value.items[0].post_price_tow_stage){
+            if(carts?.value?.items[0]?.post_price_tow_stage){
               if(carts.value.items[0].post_price_status =="answered" && carts.value.items[0].post_price != null){
                 status.requestPrice = true;
               }else{
@@ -48,7 +48,7 @@ import { useAuthStore } from './auth';
               }
             }
           
-            count.value = carts.value?.items.length;
+            count.value = carts.value?.items[0].count;
             activeAdress.value = carts.value?.post_address_id;
             pending.value =false;
             return cart.value = carts.value;
@@ -157,17 +157,17 @@ import { useAuthStore } from './auth';
 
     }
 
-    async function addToCart(noticeId){
+    async function addToCart(noticeId,number){
       pending.value = true;
-      count.value++;
+      count.value = number + 1;
       console.log(count.value);
       await updateCart(count.value,noticeId,false,null)
     }
 
-    async function removeCart(noticeId){
+    async function removeCart(noticeId,number){
       if(count.value > 0){
         pending.value = true;
-        count.value--;
+        count.value = number - 1;
         console.log(count.value);
         await updateCart(count.value,noticeId,true,null)
       }else{
@@ -269,9 +269,8 @@ import { useAuthStore } from './auth';
       }
     }
 
-    function deleteCart(id){
-      count.value = 1;
-      removeCart(id)
+    async function deleteCart(id){
+      await updateCart(0,id,true,null)
     }
 
     function changePay(name){
