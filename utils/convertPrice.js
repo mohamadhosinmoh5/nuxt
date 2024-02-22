@@ -3,7 +3,7 @@
 export default function(str = null){
 	console.log(str);
 	str = str.toString()
-	var objRegex = new RegExp( '(-?[0-9]+)([0-9]{3})' );
+	var objRegex = new RegExp( '(-?[۰-۹]+)([۰-۹]{3})' );
  
 	while( objRegex.test( str ) ) {
 		str = str.replace( objRegex, '$1,$2' );

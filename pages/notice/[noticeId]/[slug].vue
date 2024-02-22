@@ -124,35 +124,37 @@
                                     </a>
                                     <a href="#" class="texts"> {{ useNotice.notice.id }}</a>
                                 </div>
+                               
                                 <div class="col-2"><img class="detailicons" src="assets/img/SinglePage_Image/save.svg"
                                         alt="">
                                 </div>
                                 <div class="col-2"><img class="detailicon" src="assets/img/SinglePage_Image/share.svg"
                                         alt="">
                                 </div>
+                                <div v-if="useNotice.notice.pricing.price" class="col-12 mt-3">قیمت : {{ useNotice.notice.pricing.price }}</div>
                             </div>
                             <div class="lineee"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
                                 class="boxdetailes col-xs-12 row mt-2">
-                                <div class="col-6">
+                                <div v-if="useNotice.notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
                                         convertPrice(useNotice.notice.section_data_collection[2].items[0].data[0]) }} تومان </a>
                                 </div>
-                                <div class="col-6">
 
-                                    <a href="#" class="subtitle">{{
+
+                                <div v-if="useNotice.notice.section_data_collection[2]" class="col-6">
+                                    <a  href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[1].field.title }}:</a>
-                                    <a href="#" class="Price ms-1">{{
+                                    <a href="#" class="Price ms-1">
+                                        {{
                                         convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }}</a>
                                 </div>
                                 <div class="col-8 mt-4"></div>
                                 <div class="col-4 mt-4">
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-                                       <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">افزودن به سبد خرید</button>
-                                       <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">
-                                           حذف از سبد خرید</button>
+                                
                                        <div v-if="useCart.error">
                                            {{ useCart.error.message }}
                                        </div>

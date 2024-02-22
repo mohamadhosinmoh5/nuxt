@@ -14,20 +14,20 @@
                     </div>
                 </div>
                 
-                <div class="col-sm-12" v-if="notice?.section_data.length > 1">
+                <div class="col-sm-12" v-if="notice?.section_data.length >= 1">
                     <div class="row">
                         <div class="col-6 text-section">
-                            {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} متر
+                            {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0]?.data[0] }} متر
                         </div>
 
-                        <div class="col-6 text-section">
-                            {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
+                        <div v-if="notice?.section_data[1]" class="col-6 text-section">
+                            {{ notice?.section_data[1]?.field?.title }} : {{ notice?.section_data[1]?.data[0] }}
                         </div>
 
                         <div class="col-sm-12 text-section mt-4">
                             <div class="row">
-                                <div class="col-10">
-                                    {{ notice?.section_data[2].field.title }} : {{ notice?.section_data[2].data[0] }} تومان
+                                <div v-if="notice?.section_data[2]" class="col-10">
+                                    {{ notice?.section_data[2]?.field?.title }} : {{ notice?.section_data[2]?.data[0] }} تومان
                                 </div>
     
                                 <div class="col-2">

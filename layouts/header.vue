@@ -77,11 +77,13 @@
         </div>
         
         <div class="col-2">
-          {{ cart }}
-          <a href="/cart">
-            
-            <img src="~/assets/img/basket.svg" alt="">
-          </a>
+            <a v-if="useCart.cart?.items[0].count" href="/cart">
+              <div class="count-cart">
+                  {{useCart.cart?.items[0].count}}
+                </div>
+                <img src="~/assets/img/basket.svg" alt="">
+            </a>
+            <a v-else disabled><img src="~/assets/img/basket.svg" alt=""></a>
         </div>
         <div class="col-4 mt-2">
           <a class="addNotice disabled">
@@ -132,14 +134,8 @@ const modalStatus = (status)=>{
     if(token.value != null){
       useAuth.token = token.value;
       await useAuth.getMe()
-      useCart.getCart().then((r)=>{
-          console.log(r);
-          // if(r == 'null'){
-          //   cart.value = [];
-          // }else{
-          //   cart.value = r;
-          // }
-        })
+      await useCart.getCart()
+
     }
     // cart.value = layoutCustomProps.cart;
   }, 0);
