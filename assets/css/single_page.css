@@ -120,7 +120,6 @@
 
 
 .btn {
-    width: 90px;
     margin-right: 40px;
     margin-bottom: 30px;
     border-radius: 10px;
@@ -562,7 +561,20 @@
 .liness {
     margin-top: 27px;
     border-left: 0.5px solid var(--cf-navicon-color);
-    height: 1000px;
+    height: 100vh;
+    transition: all ease-in-out 0 5s;
+}
+
+.dropdown-box {
+    position: relative;
+    right: -100%;
+    transition: all ease-in-out 0.5s;
+}
+
+.open-box {
+    position: relative;
+    right: 0;
+    transition: all ease-in-out 0.5s;
 }
 
 @media screen and (max-width: 992px) {
@@ -584,12 +596,13 @@
 }
 
 
-.TitleText a{
+.TitleText a {
     position: relative;
     right: 25px;
     text-decoration: none;
     color: var(--cf-green-color);
 }
+
 .sub {
     text-decoration: none;
     color: var(--cf-subtitle-color);
@@ -679,31 +692,75 @@
     text-align: center;
     top: 2%;
 }
-.hover:hover{
+
+.hover:hover {
     background-color: var(--cf-grey-icon-color);
     width: 80%;
     border-radius: 5px;
     height: 30px;
     margin: 5px;
 
-  
+
 }
-.hover a:hover{
+
+.hover a:hover {
     color: var(--cf-dark-color);
 }
-.hover a{
+
+.hover a {
     position: relative;
     left: 30px;
 }
-.myhomenger{
+
+.myhomenger {
     font-family: 'Vazir';
     font-size: 20px;
 }
+
+.close {
+    position: relative;
+    left: 20%;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 992px) {
+    .close {
+        position: relative;
+        left: 0%;
+        border: none;
+        border-radius: 10px;
+        background-color: transparent;
+    }
+}
+
+.openmenue {
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 992px) {
+    .openmenue {
+        position: relative;
+        right: 50%;
+        border: none;
+        border-radius: 10px;
+        background-color: transparent;
+    }
+}
+
+.clickBTN {
+    margin-right: 150%;
+    /* float: left; */
+}
+
 /* End profile page */
 
 
 /* notifeAlert */
-.notifcard {
+.notif {
     background: rgba(79, 224, 74, 0.7);
     -webkit-backdrop-filter: blur(45px);
     backdrop-filter: blur(45px);
@@ -720,30 +777,11 @@
     overflow: hidden;
     transform: translateX(calc(20% + 10px));
     transition: all 0.5s ease-in-out 0.2s;
+    animation: progress none 5s;
+
 }
 
-.progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    width: 100%;
-    background: #ddd;
-}
 
-.progress::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    background-color: green;
-}
-
-.progress.active::before {
-    animation: progress 5s linear forwards;
-}
 
 @keyframes progress {
     0% {
@@ -754,8 +792,12 @@
         left: 0px;
     }
 
-    100% {
+    99% {
         left: -320px;
+    }
+
+    100% {
+        display: none;
     }
 
 }
@@ -765,3 +807,97 @@
 }
 
 /* end notife Alert */
+
+
+
+/* start cashWallet */
+.box-information {
+    position: relative;
+    width: 50% !important;
+    left: 25%;
+    right: 25%;
+    margin-top: 5%;
+}
+
+.card-money {
+    position: relative;
+    /* height: 130%; */
+    left: 30%;
+    /* background-color: var(--cf-light-grey); */
+    border: 1px solid var(--cf-navicon-color);
+    border-radius: 10px;
+}
+
+.box-number {
+    width: 50%;
+    background-color: var(--cf-navicon-color);
+}
+
+.tabbar-detailes a {
+    text-decoration: none;
+    color: var(--cf-dark-color);
+    font-family: 'Vazir';
+    position: relative;
+    top: 20px;
+    justify-content: center;
+    font-size: 15px;
+    left: 80%;
+    text-align: center;
+}
+
+.tab-Detaile a{
+    position: relative;
+    text-decoration: none;
+    color: var(--cf-dark-color);
+    top: 50px;
+    left: 25%;
+}
+.btntext{
+    color: var(--cf-light-color);
+    font-family: 'Vazir';
+    text-decoration: none;
+}
+.btntext:hover{
+    color: var(--cf-light-color);
+}
+
+/* end cashwallet */
+
+/* my Order */
+.myOrder{
+    position: relative;
+    top: 50px;
+    right: 25%;
+}
+.underline{
+    position: relative;
+    top: 33px;
+    left: 24%;
+    border: 1px solid var(--cf-green-color);
+}
+.forms input{
+    direction: rtl;
+    position: relative;
+    top: 100px;
+    left: 52%;
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 0.5px solid var(--cf-grey-icon-color);
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+.shaba{
+    position: relative;
+    left: 20%;
+}
+/* end Order */
+
+/* myLicence */
+.myLicence{
+    position: relative;
+    top: 30px;
+    right: 50%;
+}
+/* End myLicence */
