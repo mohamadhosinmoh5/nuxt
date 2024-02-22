@@ -56,7 +56,6 @@ import { useAuthStore } from './auth';
     }
 
     async function requestPrice(id){
-  
       const { data:request, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/items/${id}/request-post-pricing`, {
         method:'get',
         headers:{
@@ -82,7 +81,6 @@ import { useAuthStore } from './auth';
     }
 
     async function setAdress(queryData){
-
       const { data:address2, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${auth.getdefaultOffice}/post-address`, {
         method:'post',
         body:queryData,
@@ -289,6 +287,7 @@ import { useAuthStore } from './auth';
       activeAdress,
       pending,
       status,
+      massage,
       getCart,
       addToCart,
       removeCart,

@@ -1272,7 +1272,28 @@ input.checkBox {
   margin-right: 0 !important;
 }
 .error{
+    background-color: rgb(238, 13, 13) !important;
+    border-left: 8px solid rgb(185, 14, 14) !important;
+    color: white;
+}
 
+.light{
+    background-color: rgb(221, 221, 221) !important;
+    border-left: 8px solid rgb(61, 61, 61) !important;
+    color: rgb(0, 0, 0);
+}
+
+
+.warning{
+    background-color: rgba(223, 219, 15, 0.993) !important;
+    border-left: 8px solid rgb(196, 193, 15) !important;
+    color: rgb(48, 48, 48);
+}
+
+.closeNotife{
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
 }
 
 .stickyStyle {

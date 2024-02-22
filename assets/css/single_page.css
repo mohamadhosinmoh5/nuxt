@@ -762,8 +762,8 @@
     border: 1px solid rgba(79, 224, 74, 0.35);
     padding: 20px 35px 20px 25px;
     margin-top: 20px;
-    width: 250px;
-    height: 60px;
+    max-width: 450px;
+    max-height: 140px;
     border-radius: 10px;
     border-left: 8px solid green;
     bottom: 20px;
@@ -772,27 +772,17 @@
     overflow: hidden;
     transform: translateX(calc(20% + 10px));
     transition: all 0.5s ease-in-out 0.2s;
-    animation: progress none 5s;
+    animation: progress none 1s;
 
 }
-
-
 
 @keyframes progress {
     0% {
         left: -320px;
     }
 
-    50% {
-        left: 0px;
-    }
-
-    99% {
-        left: -320px;
-    }
-
     100% {
-        display: none;
+        left: 0px;
     }
 
 }

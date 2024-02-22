@@ -1,14 +1,15 @@
 export default function(items= null){
     
-
     // console.log(items);
     var discountPrice = 0;
     var allPrice = 0;
     var allPrice = 0;
     if(items !== null){
         items.forEach(el => {
-            const elDisprice = el.total_discounted_price * el.count;
-            const eltotalPrice = el.total_price * el.count;
+            const elDisprice = el.total_discounted_price;
+            console.log(el.notice);
+            const eltotalPrice = (el.notice.pricing.discount_percent > 0) ? el.notice?.pricing.price - (el?.notice.pricing.price * el.notice.pricing.discount_percent / 100) * el.count :  el?.notice.pricing.price * el.count;
+            // const eltotalPrice = el.total_price;
             discountPrice =+ elDisprice;
             allPrice =+ eltotalPrice;
         });

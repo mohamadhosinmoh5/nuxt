@@ -171,7 +171,7 @@
                                                 </div>
                                               </div>
                                               <div style="width: 80px;">
-                                                {{ convertPrice(item.total_discounted_price) }}  تومان
+                                                {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing.price - (item?.notice.pricing.price * item.notice.pricing.discount_percent / 100)) :  convertPrice(item?.notice.pricing.price) }}  تومان
                                               </div>
                                               <a @click="useCart.deleteCart(item.notice.id),item.count=0" href="#" style="color: #cecece;margin-right:20px"><i class="fas fa-trash-alt"></i></a>
                                             </div>
@@ -191,8 +191,14 @@
                 <div class="spinner-border " role="status"></div>
               </div>
 
-              <div v-if="useCart.error?.message" class="error alert alert-danger text-center">
-                {{ useCart.error.message }}
+              <div v-if="useCart?.message" class="notif ">
+                  {{ useCart?.message }}
+              </div>
+              <div v-if="useCart.error?.message" class="notif error text-center">
+                <span @click="useCart.error.message = null" class="closeNotife">x</span>
+                <p>
+                  {{ useCart.error.message }}
+                </p>
               </div>
       
           </div>
@@ -278,6 +284,7 @@ const pay = (id) => {
   pending.value = true;
   if(useCart.status.portal == 'cash'){
     useCart.pay(id).then((r)=>{
+      pending.value = false;
       window.location.href = r.action;
     })
   }else{
@@ -298,7 +305,7 @@ setTimeout(async () => {
       adress.value = r
       pending.value = false;
     });
-
+    pending.value = false;
 }, 0);
 
 </script>
