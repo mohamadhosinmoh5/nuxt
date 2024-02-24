@@ -182,9 +182,9 @@
                                            {{ useCart.message }}
                                        </div>
                                    </div>
-                                    <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
+                                    <!-- <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
                                         <button @click="showPhone = true" type="button" class="btn btn-success btnmodal">تماس</button>
-                                    </div>
+                                    </div> -->
 
                                     <div v-if="showPhone" id="myModal" class="modal">
                                         <div class="modal-content">
