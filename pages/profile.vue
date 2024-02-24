@@ -1,7 +1,7 @@
 <template>
     <!-- {{user}} -->
-    <!-- {{ pricing }} -->
-    <!-- {{ subScribe.title }} -->
+    <!-- {{ pricing.items[0].title }} -->
+    <!-- {{ subScribe }} -->
     <!-- {{ carts }} -->
 
     <div class="container-fluid">
@@ -77,7 +77,7 @@
                    
                 </div>
                 <div class="col-sm-1">
-                    <button v-if="closeBox" type="button" class="close mt-5" @click="closeBox = false">
+                    <button v-if="closeBox" type="button" id="closeicon" class="close mt-5" @click="closeBox = false">
                         <i class="fa-solid fa-arrow-left"></i>
                     </button>
                     <button v-if="!closeBox" type="button" class="close mt-5" @click="closeBox = true">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-sm-9">
 
-                    <dashboard v-if="showDashboard" />
+                    <dashboard :user = "user" v-if="showDashboard" />
                     <cash-wallet v-if="showWallet" />
                     <buylicence v-if="BuyLicence" />
                     <myproduct v-if="MyProduct" />
@@ -189,9 +189,7 @@ const changeMenu = (name) => {
 
 setTimeout(() => {
 
-    useUser.getPricing().then((r) => {
-        pricing.value = r;
-    })
+  
 
     useUser.getSubScribe().then((r) => {
         subScribe.value = r;
