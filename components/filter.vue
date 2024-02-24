@@ -8,7 +8,7 @@
           <div class="col-sm-12">
             <div class="row">
               <div class="col-sm-12">
-                <p>قیمت</p>
+                <p class="filter-Title">قیمت</p>
               </div>
               <div class="row">
                 <div class="col-6">
@@ -24,7 +24,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 mt-4">
+              <div class="col-sm-12 mt-2">
                 <section class="range-slider">
                   <div class="range-input">
                     <input type="range" class="min" min="0" max="100000000000" v-model="minPrice" @input="sectionQuery({field_id:18,type:'numeric',inputName:'Price'})" step="200000000">
@@ -48,23 +48,29 @@
           <div class="col-sm-12 mt-4">
             <div class="row">
               <div class="col-sm-12">
-                <p>متراژ</p>
+                <p class="filter-Title">متراژ</p>
               </div>
               <div class="row">
                 <div class="col-6">
 
                   <div class="form-group">
                     <input id="my-input" class="form-control" type="text" @input="sectionQuery({field_id:3,type:'numeric',inputName:'Metr'})" v-model="minMetr" >
+                    <span class="labalMetr">
+                      متر
+                    </span>
                   </div>
                 </div>
                 
                 <div class="col-6">
                   <div class="form-group">
                     <input id="my-input" class="form-control" type="text" @input="sectionQuery({field_id:3,type:'numeric',inputName:'Metr'})" v-model="maxMetr" >
+                    <span class="labalMetr">
+                      متر
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 mt-4">
+              <div class="col-sm-12 mt-2">
                 <section class="range-slider">
                   <div class="range-input">
                     <input type="range" class="min" min="0" max="500" v-model="minMetr" @input="sectionQuery({field_id:3,type:'numeric',inputName:'Metr'})" step="10">
@@ -72,14 +78,6 @@
                   </div>
                 </section>
 
-                <div class="row">
-                  <div class="col-sm-6 mt-3">
-                    <div class="data-box">{{ minMetr }} متر</div>
-                  </div>
-                  <div class="col-sm-6 mt-3">
-                    <div class="data-box">{{maxMetr }} متر</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -87,45 +85,42 @@
           <div class="col-sm-12 mt-4">
             <div class="row">
               <div class="col-sm-12">
-                <p>تعداد واحد ساختمان</p>
+                <p class="filter-Title">تعداد واحد ساختمان</p>
               </div>
               <div class="row">
                 <div class="col-6">
 
                   <div class="form-group">
                     <input id="my-input" class="form-control" type="text" @input="sectionQuery({field_id:8,type:'numeric',inputName:'Metr'})" v-model="minSection" >
+                    <span class="labalMetr">
+                      واحد
+                    </span>
                   </div>
                 </div>
                 
                 <div class="col-6">
                   <div class="form-group">
                     <input id="my-input" class="form-control" type="text" @input="sectionQuery({field_id:8,type:'numeric',inputName:'Metr'})" v-model="maxSection" >
+                    <span class="labalMetr">
+                      واحد
+                    </span>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-12 mt-4">
+              <div class="col-sm-12 mt-2">
                 <section class="range-slider">
                   <div class="range-input">
                     <input type="range" class="min" min="0" max="100" v-model="minSection" @input="sectionQuery({field_id:8,type:'numeric',inputName:'Metr'})" step="10">
                     <input type="range" class="max" min="0" max="100" v-model="maxSection" @input="sectionQuery({field_id:8,type:'numeric',inputName:'Metr'})" step="10">
                   </div>
                 </section>
-
-                <div class="row">
-                  <div class="col-sm-6 mt-3">
-                    <div class="data-box">{{ minSection }} واحد</div>
-                  </div>
-                  <div class="col-sm-6 mt-3">
-                    <div class="data-box">{{maxSection }} واجد</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
 
           <div class="col-sm-12 mt-4">
             <div class="form-group">
-              <label for="my-select">عمر ساختمان</label>
+              <label class="filter-Title" for="my-select">عمر ساختمان</label>
               <select v-model="ageText" @change="sectionQuery({field_id:5,category:'select',value:ageText})" id="my-select" class="custom-select mt-3" name="">
                 <option value="کمتر از 5 سال">کمتر از 5 سال</option>
                 <option value="نوساز">نوساز</option>
@@ -138,7 +133,7 @@
 
           <div class="col-sm-12 mt-4">
             <div class="form-group">
-              <label for="my-select"> موقعیت طبقه</label>
+              <label class="filter-Title" for="my-select"> موقعیت طبقه</label>
               <select v-model="position" @change="sectionQuery({field_id:7,category:'select',value:position})" id="my-select" class="custom-select mt-3" name="">
                 <option value="اول"> اول</option>
                 <option value="دوم"> دوم</option>
@@ -157,14 +152,14 @@
 
           <div class="col-sm-12 mt-4">
             <div class="custom-control custom-switch " dir="rtl">
-              <label for="my-input" class="custom-control-label ml-4">آسانسور</label>
+              <label  for="my-input" class="custom-control-label ml-4 filter-Title">آسانسور</label>
               <input id="my-input" v-model="elevator" class="custom-control-input mr=3" @change="sectionQuery({field_id:13,category:'switch',value:elevator})" type="checkbox" name="">
             </div>
           </div>
 
           <div class="col-sm-12 mt-4">
             <div class="custom-control custom-switch " dir="rtl">
-              <label for="my-input" class="custom-control-label ml-4">پارکینگ</label>
+              <label  for="my-input" class="custom-control-label ml-4 filter-Title">پارکینگ</label>
               <input id="my-input" v-model="parking" class="custom-control-input mr=3" @change="sectionQuery({field_id:14,category:'switch',value:parking})" type="checkbox" name="">
             </div>
           </div>

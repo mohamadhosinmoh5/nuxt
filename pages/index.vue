@@ -272,17 +272,17 @@ export default {
             <div class="row mt-5 " ref="menuBox" >
              <div class="col-sm-12 ">
                 <div class="row category-box">
-                  <div class="col-6">
+                  <div class="col-7">
                     <div class="row">
-                      <div class="col-12">
-                        <h5 class="category-title" style="font-size: 20px;">دسته بندی ها</h5>
+                      <div class="col-12 margin-fix">
+                        <h5 class="category-title">دسته بندی ها</h5>
                       </div>
                       <div class="col-12">
                         <div v-if="pending" class="spinner-border" role="status"></div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-6 text-end">
+                  <div class="col-5 text-end">
                     <span class="backCat" @click="lastCategory">
                       <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
                     </span>
@@ -303,7 +303,7 @@ export default {
         </div>
         <!-- start Card-->
         <div ref="noticeBox" class="col-sm-9">
-          <div class="row category-box-sort  mt-5 ">
+          <div class="row category-box-sort">
             <div class="col-9">
               <div class="row sort-box ">
                 <h6 class="col-1">نمایش:</h6>
@@ -376,7 +376,7 @@ export default {
                   </div>
                   <div class="row">
                     <div class="col-12" dir="ltr">
-                      <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}`">
+                      <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
                           <img src="~/assets/img/arrow-left.svg" alt="">
                       </a>
                     </div>

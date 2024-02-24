@@ -9,7 +9,7 @@
         <div class="col-8">
           <div class="row tab_box">
             <div class="activeItem"></div>
-            <a @click="showNotice" class="col-6 tabItem">آگهی</a>
+            <a @click="showNotice" class="col-6 tabItem active">آگهی</a>
             <a @click="showOffice" class="col-6 tabItem">دفتر ها</a>
           </div>
         </div>
@@ -181,7 +181,7 @@
                 </div>
     
     
-                <div class="col-12">
+                <div class="col-12 margin-fix">
                   <div class="row">
                     <div class="col-10 mobile-section">
                         {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان

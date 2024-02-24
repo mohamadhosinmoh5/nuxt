@@ -3,6 +3,18 @@
     src: url(../font/AnjomanMax-Bold.ttf);
   }
 
+  @font-face {
+    font-family: anjomanLight;
+    src: url(../font/AnjomanMax-Light.ttf);
+  }
+
+
+  @font-face {
+    font-family: anjomanReqular;
+    src: url(../font/AnjomanMax-Regular.ttf);
+  }
+
+
 :root {
     --cf-dark-color: #1b1b1b;
     --cf-light-color: #dedede;
@@ -19,6 +31,9 @@
 body {
     font-family: anjoman, sans-serif !important;
     font-weight: bold;
+    -moz-font-feature-settings: "ss05";
+    -webkit-font-feature-settings: "ss05";
+    font-feature-settings: "ss05";
 }
 
 ::-webkit-scrollbar {
@@ -155,10 +170,12 @@ body {
 }
 
 .sort-box ul li a {
+    position: relative;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 10px;
     color: #7a7a7a;
     font-size: 12px;
+    top: -3px;
 }
 
 
@@ -189,7 +206,8 @@ body {
 }
 
 .titleNotice h4 {
-    font-size: 22px;
+    font-size: 20px;
+    color: #25282b !important;;
 }
 
 .box-notice {
@@ -212,6 +230,11 @@ body {
     font-size: 14px;
     color: #5a5a5a;
     font-weight: 500;
+    padding: 0;
+}
+
+.text-section div {
+    padding: 0;
 }
 
 .content{
@@ -229,7 +252,7 @@ body {
 .img-box .img {
     width: 100%;
     height: 300px;
-    border-radius: 15px;
+    border-radius: 8px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -322,9 +345,11 @@ body {
 .mobile-section{
   font-size: 13px;
   font-weight: 500;
+  padding: 0 !important;
 }
 .backCat{
     cursor: pointer;
+    font-size: 14px;
 }
 
 .backCat:hover {
@@ -350,9 +375,9 @@ body {
 }
 
 .categoryBox li a {
-    font-family: Vazir !important;
+    font-family: anjomanLight !important;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 1rem!important;
 }
 
 .categoryBox li a:hover {
@@ -360,28 +385,49 @@ body {
 
 }
 .category-box{
-    box-shadow: -3px 9px 15px 1px rgb(237 237 237 / 65%);
+    box-shadow: 0px 1px 2px 0.5px #10182806;
     border: 1px solid #fbfbfb;
     border-radius: 15px;
+    font-size: 16px;
     padding: 7px 10px;
     background: white;
+    color: #52575c !important;
+
+}
+
+
+.filter-Title {
+    font-family: anjomanLight !important;
+    color: #52575c !important;
+    font-size: 1 rem !important;
 }
 
 .category-box-sort{
-    box-shadow: -3px 9px 15px 1px rgb(237 237 237 / 65%);
+    box-shadow: 0px 1px 2px 0.5px #10182806;
     border: 1px solid #fbfbfb;
     border-radius: 15px;
     padding: 7px 10px;
     background: white;
    
 }
+
+.margin-fix{
+    margin-right: 0 !important;
+    padding-right:0 !important;
+}
 .category-title {
-    color: #212529;
+    font-size: 16px;
+    color: #52575c;
 }
 
 .menu {
+    box-shadow: 0px 0px 1.7px 0.5px #ebebeb;
+    border-radius: 15px;
     overflow: hidden;
     transition: all 300ms ease 0s;
+    /* border-left: 1px solid #DADADA; */
+    margin: 10px 0;
+    padding: 10px;
     /* border-left: 1px solid #DADADA; */
 }
 
@@ -651,6 +697,9 @@ select {
     padding: 5px;
     border: 1px solid #dadada;
     border-radius: 10px;
+    font-size: 16px;
+    color: #52575c !important;
+    font-family: anjomanReqular;
 }
 
 input.checkBox {
@@ -1164,11 +1213,20 @@ input.checkBox {
     position: relative;
 }
 
+.labalMetr{
+    position: relative;
+    z-index: 11;
+    top: -32px;
+    left: -60px;
+    font-family: anjomanLight;
+    color: #5a5a5a;
+}
+
 .range-input input {
     position: absolute;
     width: 100%;
     height: 5px;
-    top: -7px;
+    top: -1px;
     background: none;
     pointer-events: none;
     -webkit-appearance: none;
@@ -1201,6 +1259,10 @@ input.checkBox {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+label {
+    margin-left: 10px;
 }
 
 .range-price label {

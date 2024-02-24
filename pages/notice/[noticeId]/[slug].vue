@@ -135,7 +135,7 @@
                                     </div>
 
                                 </div>
-                                <div v-if="useNotice.notice.pricing.price" class="col-12 mt-3">قیمت : {{ useNotice.notice.pricing.price }}</div>
+                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">قیمت : {{ useNotice.notice.pricing.price }}</div>
                             </div>
                             <div class="lineee mt-3"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
