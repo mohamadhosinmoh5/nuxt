@@ -1,15 +1,18 @@
-export default function(items){
+export default function(items= null){
     
     // console.log(items);
     var discountPrice = 0;
     var allPrice = 0;
-    var allPrice = 0;
-    items.forEach(el => {
-        const elDisprice = el.total_discounted_price * el.count;
-        const eltotalPrice = el.total_price * el.count;
-        discountPrice =+ elDisprice;
-        allPrice =+ eltotalPrice;
-    });
+    if(items !== null){
+        items.forEach(el => {
+            const elDisprice = el.total_discounted_price;
+            const eltotalPrice = el.total_price ;
+            // (el.notice.pricing.discount_percent > 0) ? el.notice?.pricing.price - (el?.notice.pricing.price * el.notice.pricing.discount_percent / 100) * el.count :  el?.notice.pricing.price * el.count;
+            // const eltotalPrice = el.total_price;
+            discountPrice = discountPrice + elDisprice;
+            allPrice = allPrice + eltotalPrice;
+        });
+    }
     
     return {
         discountPrice:separate(discountPrice),
@@ -19,7 +22,7 @@ export default function(items){
 }
 
 
-function separate(Number) 
+function separate(Number)
     {
     Number+= '';
     Number= Number.replace(',', '');

@@ -3,21 +3,58 @@ import { defineStore } from 'pinia';
 import { useAuthStore } from './auth';
 
 export const useOfficeStore = defineStore('office', {
-    state: () => ({ allOffices: null,office: null,query:{}, sections: null,pending: null ,error: null , params:null}),
-
+    state: () => ({ 
+      allOffices: null,
+      office: null,
+      query:'?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false', 
+      sections: null,
+      clickCat:0,
+      sectionKey:[],
+      categories:null,
+      lastCategory:[],
+      pending: null ,
+      error: null , 
+      params:null
+    }),
+    getters:{
+      getclickCat:(state)=>{return state.clickCat;},
+      getNotices:(state)=>{return state.allNotices;}
+    },
     actions: {
       async setQuery(key,value){
-        this.allOffices = null;
-          this.query[key] = value;
-          await this.fetchQuery();
+        if(section){
+          if(existArrToArr(value, this.sectionKey,'field_id')){
+            this.query = `?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false`;
+          }
 
-          return this.allOffices;
+          for (const key in value) {
+            if (value.hasOwnProperty.call(value, key)) {
+              const element = value[key];
+      
+              this.query = this.query + `
+              &section_query[${element['field_id']}][type] = ${element['type']}
+              &section_query[${element['field_id']}][category] = ${element['category']}
+              &section_query[${element['field_id']}][field_id] = ${element['field_id']}
+              &section_query[${element['field_id']}][max] = ${(element['max'] != null) ? element['max'] : ''}
+              &section_query[${element['field_id']}][min] = ${(element['min'] != null) ? element['min'] : ''}
+              &section_query[${element['field_id']}][value] = ${(element['value'] != null) ? element['value'] : ''}
+              `;
+              this.sectionKey.push(element['field_id']);
+            }
+          }
+        }else{
+          if(key =='category_id'){
+            this.query = `?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false&${key}=${value}`;
+          }else{
+            this.query = this.query + `&${key}=${value}`;
+          }
+        }
+      this.pages = 1;
+      return;
 
       },
       async fetchQuery(){
-        const {data:offices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/offices`,{
-          query:this.query
-        });
+        const {data:offices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/offices/${this.query}`);
         
         this.pending = pendings;
         if(errors.value){
@@ -38,9 +75,7 @@ export const useOfficeStore = defineStore('office', {
       },
       async fetchData(){
         
-        const {data:offices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/offices`,{
-            query:{page:1,limit:15}
-          });
+        const {data:offices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/offices/${this.query}`);
         
         this.pending = pendings;
         if(errors.value){
@@ -59,13 +94,10 @@ export const useOfficeStore = defineStore('office', {
         }
       
       },
-      async getoffice(officeId){
+      async getOffice(officeId){
         const auth = useAuthStore();
-        const {data:office,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${officeId}?office_id=${auth.user.offices[0].id}`,{
+        const {data:office,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${officeId}`,{
             method:'get',
-            headers:{
-            "Authorization":"Bearer "+auth.token
-            },
         })
 
         this.pending = pendings;

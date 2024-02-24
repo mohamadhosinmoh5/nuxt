@@ -31,7 +31,6 @@ export default function ({window,url=null,allData=null}){
             fetchingData.value = true;
            await getUserOnScroll().then(()=>{
             fetchingData.value = false;
-
            });
         }
     }
@@ -57,7 +56,10 @@ export default function ({window,url=null,allData=null}){
         console.log(alldatasNewUser,allDatas.value);
         // useNoticeStore().setData(alldatasNewUser);
         if(alldatasNewUser.length < 1){
-            this.error = 'دیتایی دیگر وجود ندارد :('
+            console.log(1);
+            error.value = 'دیتایی دیگر وجود ندارد :('
+            fetchingData.value = false;
+            return
         }
         allDatas.value.push(...alldatasNewUser);
         

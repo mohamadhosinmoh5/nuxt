@@ -38,7 +38,7 @@
                   <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
                     <div class="row">
                       <div class="col-8 text-start">
-                       <a class="link" :href="`${item?.id}/${filterUrl(item?.title)}`">{{item.title}}</a>
+                       <a class="link" :href="`/notice/${item?.id}/${filterUrl(item?.title)}`">{{item.title}}</a>
                       </div>
                       <div class="col-4 text-center search-cat">
                         {{item.category.title}}
@@ -188,7 +188,7 @@
                     </div>
 
                     <div class="col-2 mobile-section">
-                        <a :href="`${notice?.id}/${filterUrl(notice?.title)}`">
+                        <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
                             <img src="~/assets/img/arrow-left.svg" alt="">
                         </a>
                     </div>
@@ -209,9 +209,9 @@
                             </div>
 
                             <div class="col-2">
-                                <a :href="`${notice?.id}/${filterUrl(notice?.title)}`">
-                                    <img src="~/assets/img/arrow-left.svg" alt="">
-                                </a>
+                              <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                <img src="~/assets/img/arrow-left.svg" alt="">
+                            </a>
                             </div>
                         </div>
                     </div>

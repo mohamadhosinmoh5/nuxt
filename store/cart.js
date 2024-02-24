@@ -1,6 +1,8 @@
 
 import { defineStore } from 'pinia';
+
 import { useAuthStore } from './auth';
+// import function from './../utils/filterUrl';
 
   export const useCartStore = defineStore('cart',() => {
 
@@ -21,7 +23,6 @@ import { useAuthStore } from './auth';
     (useCookie('token')) ?  token.value = useCookie('token') : error.value = {message:'ابتدا وارد شوید تا سبد خرید دسترسی داشته باشید '};
 
     async function getCart(){
-
           const { data:carts, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${auth.getdefaultOffice}/carts/draft/show`, {
             method:'get',
             headers:{
@@ -38,27 +39,23 @@ import { useAuthStore } from './auth';
           }
   
           if(carts.value){
-            if(carts.value.items[0].post_price_tow_stage){
+            if(carts?.value?.items[0]?.post_price_tow_stage){
               if(carts.value.items[0].post_price_status =="answered" && carts.value.items[0].post_price != null){
                 status.requestPrice = true;
               }else{
-                // window.document.write(`<script>
-                //   alertify.warning('درخواست قیمت گذاری ارسال شد بعد از تایید مجدد فرایند تسویه حساب را انجام دهید');
-                // </script>`);
+                error.value = 'لطفا ابتدا درخواست قیمت گذاری دهید'
                 status.requestPrice = false;
               }
             }
           
-            count.value = carts.value?.items.length;
+            count.value = carts.value?.items[0].count;
             activeAdress.value = carts.value?.post_address_id;
             pending.value =false;
             return cart.value = carts.value;
           }
-
     }
 
     async function requestPrice(id){
-
       const { data:request, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/items/${id}/request-post-pricing`, {
         method:'get',
         headers:{
@@ -71,6 +68,7 @@ import { useAuthStore } from './auth';
       }
 
       if(errors.value){
+        pending.value = false;
         error.value = errors.value.data;
       }
 
@@ -83,7 +81,6 @@ import { useAuthStore } from './auth';
     }
 
     async function setAdress(queryData){
-
       const { data:address2, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${auth.getdefaultOffice}/post-address`, {
         method:'post',
         body:queryData,
@@ -97,6 +94,7 @@ import { useAuthStore } from './auth';
       }
 
       if(errors.value){
+        pending.value = false;
         error.value = errors.value.data;
       }
 
@@ -112,7 +110,7 @@ import { useAuthStore } from './auth';
     async function setDefaultAddress(queryData){
       const { data:address2, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/${cart.value.id}/update-address`, {
         method:'put',
-        body:queryData,
+        body:{post_address_id:queryData},
         headers:{
           "Authorization":"Bearer "+token.value
         }
@@ -159,18 +157,19 @@ import { useAuthStore } from './auth';
 
     }
 
-    async function addToCart(noticeId){
+    async function addToCart(noticeId,number){
       pending.value = true;
-      count.value++;
+      count.value = number + 1;
       console.log(count.value);
-      await this.updateCart(count.value,noticeId,false,null)
+      await updateCart(count.value,noticeId,false,null)
     }
 
-    async function removeCart(noticeId){
+    async function removeCart(noticeId,number){
       if(count.value > 0){
         pending.value = true;
-        count.value--;
-        await this.updateCart(count.value,noticeId,true,null)
+        count.value = number - 1;
+        console.log(count.value);
+        await updateCart(count.value,noticeId,true,null)
       }else{
         massage.value ='سبد خالی است '
       }
@@ -212,6 +211,71 @@ import { useAuthStore } from './auth';
         }
     }
 
+    async function verifyPay(trackId,orderId){
+      const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/payments/${trackId}/verify?success=1&trackId=${trackId}&orderId=${orderId}`, {
+        method:'get',
+        headers:{
+          "Authorization":"Bearer "+token.value
+        }
+      });
+
+      if(pendings){
+        pending.value = pendings;
+      }
+
+      if(errors.value)
+      {
+        this.error = errors.value.data;
+      }
+
+      if(data.value)
+      {
+        pending.value = false;
+        return cart.value = data.value;
+      }
+    }
+
+    async function pay(cartId){
+
+      const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/${cartId}/pay`, {
+        method:'post',
+        query:{
+          pay_method: status.portal
+        },
+        headers:{
+          'accept': 'application/json',
+          'Access-Control-Allow-Origin': "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Credentials': 'true',
+          "Authorization":"Bearer "+token.value
+        },
+        // mode: 'no-cors'
+      });
+
+      if(pendings){
+        pending.value = pendings;
+      }
+
+      if(errors.value)
+      {
+        pending.value = false;
+        this.error = errors.value.data;
+      }
+
+      if(data.value)
+      {
+        pending.value = false;
+        return cart.value = data.value;
+      }
+    }
+
+    async function deleteCart(id){
+      await updateCart(0,id,true,null)
+    }
+
+    function changePay(name){
+      status.portal = name;
+    }
 
     return {
       cart,
@@ -221,6 +285,8 @@ import { useAuthStore } from './auth';
       error,
       activeAdress,
       pending,
+      status,
+      massage,
       getCart,
       addToCart,
       removeCart,
@@ -228,6 +294,10 @@ import { useAuthStore } from './auth';
       setAdress,
       setDefaultAddress,
       requestPrice,
+      deleteCart,
+      changePay,
+      pay,
+      verifyPay,
       updateCart,
     };
   })

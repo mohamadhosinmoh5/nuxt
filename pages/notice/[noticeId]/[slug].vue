@@ -1,18 +1,17 @@
 
 <template>
     <div dir="rtl" class="container-fluild p-4">
-        <div v-if="cart">
-        </div>
+        <NuxtLayout name="header"></NuxtLayout>
         <title>
             {{ params.slug }}
         </title>
         <!-- addin html code -->
-        <div v-if="!useNotice.notice" class="spinner-border" role="status"></div>
+        <div v-if="useNotice.pending" class="spinner-border mt-4" role="status"></div>
+       
+        <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
+            {{ useNotice.error.message }}
+        </div>
         <div v-if="useNotice.notice" class="row">
-
-
-            <!-- {{useNotice.notice}} -->
-
             <div class="row">
                 <div class="col-sm-7 col-md-7">
                     <!-- AX -->
@@ -21,13 +20,10 @@
                         <div class="col-3">
                             <div class="scrollBar">
                                 <div class="smalimage">
-                              
-                              <img @click="setBaseImage(image)" v-for="{ image, index } in useNotice.notice.gallery"
-                                  :key="index" class="bannerImage" :src="`${useRuntimeConfig().public.BaseUrl}/${image}`"
-                                  alt="">
-                            
-
-                          </div>
+                                    <img @click="setBaseImage(image)" v-for="{ image, index } in useNotice.notice.gallery"
+                                        :key="index" class="bannerImage"
+                                        :src="`${useRuntimeConfig().public.BaseUrl}/${image}`" alt="">
+                                </div>
                             </div>
                         </div>
                         <div class="col-9">
@@ -35,7 +31,6 @@
                                 <img ref="mainImage" id="mainimage"
                                     :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[0].image}`"
                                     class="mainimages mt-5" alt="">
-                                <!-- {{ useNotice.notice.gallery[0].image }} -->
                             </div>
                         </div>
                     </div>
@@ -129,7 +124,6 @@
                                     </a>
                                     <a href="#" class="texts"> {{ useNotice.notice.id }}</a>
                                 </div>
-
                                 <div class="col-2"><img class="detailicons" src="assets/img/SinglePage_Image/save.svg"
                                         alt="">
                                 </div>
@@ -140,44 +134,68 @@
                             <div class="lineee"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
                                 class="boxdetailes col-xs-12 row mt-2">
-
-                                <div class="col-5">
+                                <div class="col-6">
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                                        useNotice.notice.section_data_collection[2].items[0].data[0] }}</a>
+                                        convertPrice(useNotice.notice.section_data_collection[2].items[0].data[0]) }} تومان </a>
                                 </div>
-                                <div class="col-5">
+                                <div class="col-6">
+
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                                        useNotice.notice.section_data_collection[2].items[1].data[0] }}</a>
+                                        convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }}</a>
                                 </div>
-                                <div class="col-2">
-                                    <button type="button" class="btn btn-success btnmodal">تماس</button>
-                                    <div id="myModal" class="modal">
-
-                                        <!-- Modal content -->
+                                <div class="col-8 mt-4"></div>
+                                <div class="col-4 mt-4">
+                                    <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
+                                       <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">افزودن به سبد خرید</button>
+                                       <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">
+                                           حذف از سبد خرید</button>
+                                       <div v-if="useCart.error">
+                                           {{ useCart.error.message }}
+                                       </div>
+                                       <div v-if="useCart.message">
+                                           {{ useCart.message }}
+                                       </div>
+                                   </div>
+                                    <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
+                                        <button @click="showPhone = true" type="button" class="btn btn-success btnmodal">تماس</button>
+                                    </div>
+                                
+                                    <div v-if="showPhone" id="myModal" class="modal">
                                         <div class="modal-content">
-                                            <span class="close">&times;</span>
+                                            <span @click="showPhone = false" class="close">&times;</span>
                                             <p href="#" class="Title">شماره تماس : {{ useNotice.notice.mobile }}</p>
                                         </div>
-
                                     </div>
 
                                 </div>
 
                             </div>
+                      
                             <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-                                <button id="btn1" class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">
-                                    افزودن به سبد خرید</button>
-                                <button id="btn1" class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">
-                                    حذف از سبد خرید</button>
-
-                                <div v-if="useCart.error">
+                                <div class="row">
+                                    <div class="col-4 text-start">
+                                        <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">
+                                        +</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="number" class="form-text" v-model="count">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">
+                                        - </button>
+                                    </div>
+                                </div>
+                                 
+                                <div v-if="useCart.error" class="alert alert-error">
                                     {{ useCart.error.message }}
                                 </div>
-                                <div v-if="useCart.message">
+                                <div v-if="useCart.message" class="alert alert-success">
                                     {{ useCart.message }}
                                 </div>
                             </div>
@@ -244,18 +262,7 @@
 
                 </div>
 
-                <!-- <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-                    <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">add product</button>
-                    <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">remove
-                        product</button>
-
-                    <div v-if="useCart.error">
-                        {{ useCart.error.message }}
-                    </div>
-                    <div v-if="useCart.message">
-                        {{ useCart.message }}
-                    </div>
-                </div> -->
+               
             </div>
 
 
@@ -266,7 +273,6 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useNoticeStore } from '../store/notice';
-import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'
@@ -279,18 +285,23 @@ const useNotice = useNoticeStore();
 const useCart = useCartStore();
 const mainImage = ref(null);
 const cart = ref(null);
-
+const pending = ref(null);
+const showPhone = ref(false)
+const count = ref(useCart.count);
 watch(useCart, async (newdata) => {
-    console.log(cart.value?.items);
-    if (cart.value?.items.length >= 1)
+    if (cart.value?.items.length >= 1){
         cart.value.items = newdata.cart.items;
-    // pending.value = false;
+        console.log(newdata.cart.items[0].count);
+        count.value = newdata.cart.items[0].count;
+    }
 })
 
 setTimeout(async () => {
-    await useNotice.getNotice(params.noticeId).then(() => {
-        // pending.value = false;
+    await useNotice.getNotice(params.noticeId).then((r) => {
+        pending.value = false;
     });
+
+    useNotice.getSimilar(params.noticeId);
 
     cart.value = await useCart.getCart();
 

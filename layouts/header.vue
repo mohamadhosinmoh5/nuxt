@@ -77,7 +77,9 @@
         </div>
         
         <div class="col-2">
-          <a href="">
+          {{ cart }}
+          <a href="/cart">
+            
             <img src="~/assets/img/basket.svg" alt="">
           </a>
         </div>
@@ -90,7 +92,7 @@
     </div>
 
     <!-- menu -->
-    <div class="col-sm-12 navMenu">
+    <div ref="navMenu" class="col-sm-12 navMenu">
       <ul>
         <li><a class="nav-item nav-link" href="">فروشی متری</a></li>
         <li><a class="nav-item nav-link" href="">خانه</a></li>
@@ -103,15 +105,21 @@
 
 <script setup>
 // import {cartBox} from '../components/cart.vue';
+// import auth from '~/middleware/auth';
+import { useAuthStore } from '../store/auth';
+import { useCartStore } from '../store/cart';
 import { useSearchStore } from '../store/search';
-  const cart = ref(null);
-  const textSearch = ref(null);
-  const searchTimeOut = ref(null);
-  const searchResult = ref(null);
-  const useSearch = useSearchStore();
-  const searchBox =ref(null)
-  const searchPending = ref(false)
+const cart = ref(null);
+const textSearch = ref(null);
+const searchTimeOut = ref(null);
+const searchResult = ref(null);
+const useSearch = useSearchStore();
+const useCart = useCartStore();
+const useAuth = useAuthStore();
+const searchBox =ref(null)
+const searchPending = ref(false)
 const isShowModal = ref(false);
+const navMenu = ref(null)
 
 const token = useCookie('token');
 
@@ -121,7 +129,19 @@ const modalStatus = (status)=>{
 }
 
   setTimeout(async () => {
-    cart.value = layoutCustomProps.cart;
+    if(token.value != null){
+      useAuth.token = token.value;
+      await useAuth.getMe()
+      useCart.getCart().then((r)=>{
+          console.log(r);
+          // if(r == 'null'){
+          //   cart.value = [];
+          // }else{
+          //   cart.value = r;
+          // }
+        })
+    }
+    // cart.value = layoutCustomProps.cart;
   }, 0);
 
 
@@ -135,7 +155,6 @@ const modalStatus = (status)=>{
 
 
     watch(textSearch,(val)=>{
-
 
         if(searchTimeOut.value) {
           clearTimeout(searchTimeOut.value);
@@ -157,7 +176,22 @@ const modalStatus = (status)=>{
         }, 500);
       
     })
-    
+
+    onMounted(() => {
+      window.addEventListener('scroll',()=>{
+        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document
+        if(scrollTop > 50){
+          navMenu.value.style.height = '0px';
+          navMenu.value.style.overflow = 'hidden';
+          navMenu.value.style.opacity = '0';
+
+        }else{
+          navMenu.value.style.height = '40px';
+          navMenu.value.style.opacity = '1';
+
+        }
+      })
+    })
     
 
 </script>

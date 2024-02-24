@@ -60,6 +60,7 @@ export const useAuthStore = defineStore('Auth', {
 
             if(data.value){
               if(this.getdefaultOffice == 0){
+                console.log(data.value.offices[0]);
                 this.setDefaultOffice(data.value.offices[0].id);
               }
               return this.user = data.value;
@@ -74,7 +75,6 @@ export const useAuthStore = defineStore('Auth', {
           localStorage.setItem('token', null);
         },
         async getUser(){
-
           const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/notices`,{
               params:{page:1,limit:15}
             });
