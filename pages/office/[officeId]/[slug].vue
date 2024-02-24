@@ -68,9 +68,10 @@ const useOffice = useOfficeStore();
 const mainImage = ref(null);
 const cart = ref(null);
 const office = ref(null);
+const allNotices = ref(null);
 
 watch(useCart, async (newdata) => {
-    if (cart.value.items != null)
+    if (cart?.value?.items != null)
         cart.value.items = newdata.cart.items;
     // pending.value = false;
 })
@@ -80,6 +81,11 @@ setTimeout(async () => {
     useOffice.getOffice(params.officeId).then((r)=>{
         console.log(r);
         office.value = r;
+    })
+
+    useOffice.getNoticeOffice(params.officeId).then((r)=>{
+        console.log(r);
+        allNotices.value = r;
     })
 
     cart.value = await useCart.getCart();

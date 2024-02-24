@@ -3,25 +3,46 @@ import { defineStore } from 'pinia';
 import { useAuthStore } from './auth';
 
 export const useOfficeStore = defineStore('office', {
-    state: () => ({ 
+    state: () => ({
       allOffices: null,
       office: null,
-      query:'?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false', 
+      query:'?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false',
       sections: null,
       clickCat:0,
       sectionKey:[],
       categories:null,
       lastCategory:[],
       pending: null ,
-      error: null , 
-      params:null
+      error: null ,
+      params:null,
+      allNotices:null
     }),
     getters:{
       getclickCat:(state)=>{return state.clickCat;},
       getNotices:(state)=>{return state.allNotices;}
     },
     actions: {
-      async setQuery(key,value){
+      async getNoticeOffice(officeId){
+      
+        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${officeId}/page/notices?per_page=25&page=1`);
+        
+        this.pending = pendings;
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+        
+        if(notices.value){
+          console.log(notices.value);
+          this.allNotices = JSON.parse(JSON.stringify(notices.value.data));
+        }
+
+        return {
+          allNotices:this.allNotices,
+          error:this.error,
+          pending:this.pending,
+        }
+
+      },async setQuery(key,value){
         if(section){
           if(existArrToArr(value, this.sectionKey,'field_id')){
             this.query = `?per_page=15&use_gps=false&sold_with_loan=false&fetch_all=false`;

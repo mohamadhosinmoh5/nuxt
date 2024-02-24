@@ -27,7 +27,7 @@
                         <div class="col-sm-12 text-section mt-4">
                             <div class="row">
                                 <div v-if="notice?.section_data[2]" class="col-10">
-                                    {{ notice?.section_data[2]?.field?.title }} : {{ notice?.section_data[2]?.data[0] }} تومان
+                                    {{ notice?.section_data[2]?.field?.title }} : {{ convertPrice(notice?.section_data[2]?.data[0]) }} تومان
                                 </div>
     
                                 <div class="col-2">
