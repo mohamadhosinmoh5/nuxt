@@ -63,17 +63,43 @@
                 </div>
 
                 <div v-if="setting" class="col-sm-12 tab-Detaile">
-                    <div class="col-sm-12 row setting-box">
-                        <div class="col shaba">
-                            <a href="#" class="mediumtxt">*شبا</a>
-                        </div>
-                        <div class="col-10 forms">
-                           <input type="text" placeholder="شماره شبا">
-                           
-                        </div>
-                        
+                    <div class="col shaba">
+                        <a href="#" class="mediumtxt">*شبا</a>
                     </div>
-                    <a href="#" class="mediumtxt"><a href="شماره شیا"></a></a>
+                    <div class="col-10 forms">
+                        <input type="text" placeholder="شماره شبا">
+                    </div>
+                    <div class="text-shaba mt-5">
+                        <a href="#">شماره شبا شما که بانک به شما داده است برای مثال : IR234525690123456789011234</a>
+                    </div>
+                    <div class="mediumtxt mt-2">
+                        <a href="#">نحوه تسفیه حساب</a>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                        <label class="form-check-label" for="flexCheckIndeterminate">
+                            هفتگی
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                        <label class="form-check-label" for="flexCheckIndeterminate">
+                            ماهانه
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                        <label class="form-check-label" for="flexCheckIndeterminate">
+                            دستی
+                        </label>
+                    </div>
+                    <button type="button" class="col-2 btn btn-success">ثبت</button>
+                    <div class="col warn">
+                        <a href="#" class="mediumtxt">توجه</a>
+                    </div>
+                    <div class="col multyline">
+                        <a href="#">ادامه توضیحات</a>
+                    </div>
                 </div>
             </div>
 
@@ -94,27 +120,27 @@ const chnageTabMenu = (name) => {
     wallet.value = false;
     verify.value = false;
     setting.value = false;
-switch (name) {
-    case 'wallet':
-        underline.value.style.left = "25%";
-        wallet.value = true;
-        break;
-    case 'verify':
-        underline.value.style.left = "-10%";
-        verify.value = true;
-        break;
-    case 'setting':
-        underline.value.style.left = "-40%";
-        setting.value = true;
-        break;
+    switch (name) {
+        case 'wallet':
+            underline.value.style.left = "25%";
+            wallet.value = true;
+            break;
+        case 'verify':
+            underline.value.style.left = "-10%";
+            verify.value = true;
+            break;
+        case 'setting':
+            underline.value.style.left = "-40%";
+            setting.value = true;
+            break;
 
-    default:
-        break;
+        default:
+            break;
+    }
+
 }
 
-}
-
-onMounted(()=>{
+onMounted(() => {
     setTimeout(() => {
         underline.value.style.left = "25%";
         underline.value.style.left = "-10%";

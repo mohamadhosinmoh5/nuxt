@@ -7,7 +7,7 @@
         </title>
         <!-- addin html code -->
         <div v-if="useNotice.pending" class="spinner-border mt-4" role="status"></div>
-       
+
         <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
             {{ useNotice.error.message }}
         </div>
@@ -16,7 +16,7 @@
                 <div class="col-sm-7 col-md-7">
                     <!-- AX -->
 
-                    <div class="row">
+                    <div class="row myimages">
                         <div class="col-3">
                             <div class="scrollBar">
                                 <div class="smalimage">
@@ -29,7 +29,7 @@
                         <div class="col-9">
                             <div class="col-md">
                                 <img ref="mainImage" id="mainimage"
-                                    :src="`${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[0].image}`"
+                                    :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[0].image});`"
                                     class="mainimages mt-5" alt="">
                             </div>
                         </div>
@@ -40,28 +40,30 @@
 
                             <single-section v-if="useNotice.notice.section_data_collection.length >= 1"
                                 v-for="section in useNotice.notice.section_data_collection" :section="section" />
-                            <div class="row mt-2">
-                                <div class="col-3 row Tozihat">
+                            <div class="row col-sm-12 mt-3">
+                                <div class="row Tozihat ">
                                     <div class="col-sm col-md">
-                                        <img src="assets/img/SinglePage_Image/money.svg" alt="" style="width: 30px;">
+                                        <img class="ms-3" src="assets/img/SinglePage_Image/money.svg" alt=""
+                                            style="width: 30px;">
                                         <a href="#"> توضیحات</a>
                                     </div>
                                 </div>
-                                <div class="col-10 box_tozihat">
+                                <div class="col-11 ms-4 mt-3 box_tozihat">
                                     <a href="#" class="tile">
                                         {{ useNotice.notice.description }}
                                     </a>
                                 </div>
                             </div>
 
-                            <div class="col row Tozihat mt-5">
+                            <div class=" col row Tozihat mt-3">
                                 <div class="col">
-                                    <img src="assets/img/SinglePage_Image/money.svg" alt="" style="width: 30px;">
+                                    <img class="ms-3" src="assets/img/SinglePage_Image/money.svg" alt=""
+                                        style="width: 30px;">
                                     <a href="#"> کارشناسی قیت</a>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-10  reng_box">
+                                <div class="col-11 ms-4 mt-2 reng_box">
                                     <div class="range ">
                                         <div class="sliderValue">
 
@@ -71,13 +73,13 @@
                                                 value=" {{ useNotice.notice.price_expert_rating }}">
                                             <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">
                                         </div>
-                                        <!-- <div v-else>
+                                        <div v-else>
                                             قیمت : {{ (useNotice.notice.pricing.discount_percent > 0) ?
                                                 convertPrice(useNotice.notice?.pricing.price - (useNotice.notice?.pricing.price
                                                     *
                                                     useNotice.notice.pricing.discount_percent / 100)) :
                                                 convertPrice(useNotice.notice?.pricing.price) }} تومان
-                                        </div> -->
+                                        </div>
                                     </div>
 
 
@@ -89,13 +91,15 @@
 
                                 </div>
                             </div>
-                            <div class="row mt-5">
-                                <div class="col-md-10 box_warning">
-                                    <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
-                                    <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی</a>
-                                    <img src="assets/img/SinglePage_Image/row.svg" style="float: left;" alt="">
-                                    <a href="#" class="daftar_textt ms-1"> گزارش </a>
+                            <div class="row">
+                                <div class="Warn mt-3 ms-3 col-11">
+                                    <div class="col-md box_warning">
+                                        <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
+                                        <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی</a>
+                                        <img src="assets/img/SinglePage_Image/row.svg" style="float: left;" alt="">
+                                        <a href="#" class="daftar_textt ms-1"> گزارش </a>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +109,7 @@
                 </div>
                 <div class="col-sm-5">
                     <div class="col row mt-5">
-                        <div class="row box-title">
+                        <div class="row col-11 box-title">
                             <div class="col-12">
                                 <a href="#" class="Title">
                                     {{ useNotice.notice.title }}
@@ -124,23 +128,24 @@
                                     </a>
                                     <a href="#" class="texts"> {{ useNotice.notice.id }}</a>
                                 </div>
-                               
-                                <div class="col-2"><img class="detailicons" src="assets/img/SinglePage_Image/save.svg"
-                                        alt="">
-                                </div>
-                                <div class="col-2"><img class="detailicon" src="assets/img/SinglePage_Image/share.svg"
-                                        alt="">
+                                <div class="col-sm-4 detailicons">
+                                    <div class="col">
+                                        <img class="" src="assets/img/SinglePage_Image/save.svg" alt="">
+                                        <img class="ms-3" src="assets/img/SinglePage_Image/share.svg" alt="">
+                                    </div>
+
                                 </div>
                                 <div v-if="useNotice.notice.pricing.price" class="col-12 mt-3">قیمت : {{ useNotice.notice.pricing.price }}</div>
                             </div>
-                            <div class="lineee"></div>
+                            <div class="lineee mt-3"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
-                                class="boxdetailes col-xs-12 row mt-2">
-                                <div v-if="useNotice.notice.section_data_collection[2]" class="col-6">
+                                class="boxdetailes col-xs-12 row mt-3">
+                                <div class="col-6">
                                     <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                                        convertPrice(useNotice.notice.section_data_collection[2].items[0].data[0]) }} تومان </a>
+                                        convertPrice(useNotice.notice.section_data_collection[2].items[0].data[0]) }} تومان
+                                    </a>
                                 </div>
 
 
@@ -150,7 +155,22 @@
                                     <a href="#" class="Price ms-1">
                                         {{
                                         convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }}</a>
+                                    <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
+
+                                    </div>
+                                   
                                 </div>
+                                <div class="col-sm-12 row">
+                                    <a href="#" class="mediumtxt col-6 mt-3">  جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
+
+                                        <div class="col-6 tamas_btn ">
+                                            <button @click="showPhone = true" type="button"
+                                                class="btn btn-success btnmodal">اطلاعات تماس</button>
+
+                                        </div>
+                                        
+                                    </div>
+
                                 <div class="col-8 mt-4"></div>
                                 <div class="col-4 mt-4">
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
@@ -165,10 +185,10 @@
                                     <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
                                         <button @click="showPhone = true" type="button" class="btn btn-success btnmodal">تماس</button>
                                     </div>
-                                
+
                                     <div v-if="showPhone" id="myModal" class="modal">
                                         <div class="modal-content">
-                                            <span @click="showPhone = false" class="close">&times;</span>
+                                            <span @click="showPhone = false" class="hiding">&times;</span>
                                             <p href="#" class="Title">شماره تماس : {{ useNotice.notice.mobile }}</p>
                                         </div>
                                     </div>
@@ -176,24 +196,24 @@
                                 </div>
 
                             </div>
-                      
+
                             <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-                                <div class="row">
-                                    <div class="col-4 text-start">
+                                <div class="col-sm-12 row">
+                                    <div class="col-4 text-add">
                                         <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">
-                                        +</button>
+                                            +</button>
                                     </div>
                                     <div class="col-4">
-                                        <div class="form-group">
+                                        <div class="form">
                                             <input type="number" class="form-text" v-model="count">
                                         </div>
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-4 text-minez">
                                         <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">
-                                        - </button>
+                                            - </button>
                                     </div>
                                 </div>
-                                 
+
                                 <div v-if="useCart.error" class="alert alert-error">
                                     {{ useCart.error.message }}
                                 </div>
@@ -213,7 +233,7 @@
 
                         </div>
                         <div class="col-12 map_box">
-                            <div v-if="useNotice.notice.address != null" class="col  mappingg">
+                            <div v-if="useNotice.notice.address != null" class="col mappingg">
                                 <LMap v-if="useNotice.notice" id="map" ref="mapRef" :zoom="16"
                                     :center="[useNotice.notice.address.lat, useNotice.notice.address.lng]">
                                     <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -264,7 +284,7 @@
 
                 </div>
 
-               
+
             </div>
 
 
@@ -291,7 +311,7 @@ const pending = ref(null);
 const showPhone = ref(false)
 const count = ref(useCart.count);
 watch(useCart, async (newdata) => {
-    if (cart.value?.items.length >= 1){
+    if (cart.value?.items.length >= 1) {
         cart.value.items = newdata.cart.items;
         console.log(newdata.cart.items[0].count);
         count.value = newdata.cart.items[0].count;

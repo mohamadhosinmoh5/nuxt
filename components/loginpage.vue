@@ -27,8 +27,9 @@
             <div  class="FormPass col" :style="auth.sendingSms ? `display:block` : 'display:none;'">
                 <input type="text" placeholder=" کد تایید" v-model="code">
             </div>
-            <div class="col mt-2">
+            <div class="col-sm-12 mt-2">
                 <a href="#" class="subtitle">شرایط و قوانین استفاده و سیاست نامه حریم خصوصی هومنگر را می پزیرم</a>
+                <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate">
             </div>
             <div class="col">
                 <div class="row mt-2">
