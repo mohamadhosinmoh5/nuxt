@@ -1632,7 +1632,6 @@ input:checked+.slider:before {
   .line{
     border: 1px solid var(--neutral-g6, #F1F1F1);
     display: flex;
-    width: 95%;
   
   }
   

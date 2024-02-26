@@ -1,7 +1,8 @@
 <template>
     <div class="row info-box mt-5">
         <!-- {{user.user.offices[0].ability.visits[0].matter_target.title}} -->
-        <div class="box-info col-3">
+        <div class="topBoxes row">
+            <div class="box-info col-2">
             <div class="card-title">
                 <div class="col">
                     <a href="#" class="sub">تعداد ثبت مانده</a>
@@ -11,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="box-info col-3">
+        <div class="box-info col-2 ms-3">
             <div class="card-title">
                 <div class="col">
                     <a href="#" class="sub">تعداد ویژه مانده</a>
@@ -21,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="box-info col-3">
+        <div class="box-info ms-3 col-2">
             <div class="card-title">
                 <div class="col">
                     <a href="#" class="sub">تعداد نردبان مانده</a>
@@ -31,9 +32,11 @@
                 </div>
             </div>
         </div>
+        </div>
 
     </div>
-    <div class="col-sm-12 daftar-detailes">
+    <div class="mainBoxess mt-4">
+        <div class="col-sm-12">
         <div v-for="user in user.user.offices[0].ability.visits" class="col">
             <div class="col-sm mt-3">
                 <a href="#" class="title ms-5"> تعداد {{ user.number }}  بازدید از آگهی های  </a>
@@ -43,6 +46,7 @@
             </div>
         </div>
 
+    </div>
     </div>
 </template>
 

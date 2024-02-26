@@ -3,40 +3,41 @@
     <div class="container">
 
         <div class="row">
+            <!-- <div v-if="loading = false" class="spinner-border text-primary" role="status"></div> -->
             <div class="col-sm-7 Box-Licence">
                 <UModal v-if="isOpen">
                     <div class="moda-boxes row">
                         <div class="col-sm-12">
                             <div class="col">
                                 <a href="#" class="exit" @click="isOpen = false">
-                                <i   class="fa-solid fa-arrow-right"></i>
+                                    <i class="fa-solid fa-arrow-right"></i>
                                 </a>
                                 <a href="#" class="tile ms-2">انتخاب نحوه پرداخت</a>
                             </div>
                             <div class="border-modal mt-2"></div>
                             <div class="col-10 own-buying ">
-                              <div class="txte">
-                                <div class="col">
-                                    <a href="#" class="tile">کیف پول نفدی</a>
+                                <div class="txte">
+                                    <div class="col">
+                                        <a href="#" class="tile">کیف پول نفدی</a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="sub">پرداخت مستقیم از کیف پول نفدی</a>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <a href="#" class="sub">پرداخت مستقیم از کیف پول نفدی</a>
-                                </div>
-                              </div>
                             </div>
                             <div class="col-10 own-buying mt-2">
                                 <div class="txte">
-                                <div class="col">
-                                    <a href="#" class="tile"> درگاه بانکی </a>
+                                    <div class="col">
+                                        <a href="#" class="tile"> درگاه بانکی </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="#" class="sub">پرداخت مستقیم از درگاه بانکی</a>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <a href="#" class="sub">پرداخت مستقیم از درگاه بانکی</a>
-                                </div>
-                              </div>
                             </div>
-                            
-                                <button type="button" class="btn col-10  btn-secondary">پرداخت</button>
-                           
+
+                            <button type="button" class="btn col-10  btn-secondary">پرداخت</button>
+
                         </div>
                     </div>
                 </UModal>
@@ -76,7 +77,7 @@
 
 <script setup>
 import { useAuthStore } from '../store/auth';
-
+const loading = ref(true);
 const pricing = ref(null)
 const useUser = useAuthStore();
 const isOpen = ref(false);

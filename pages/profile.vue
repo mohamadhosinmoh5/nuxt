@@ -63,30 +63,39 @@
                             <i class="fa-solid fa-money-bill"></i>
                             <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-5"> اشتراک های من</a>
                         </div>
-                        <div class="col hover mt-3">
+                        <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
+                            <div class="col hover mt-3">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('Rolls')" href="#" class="mediumtxt ms-5">قوانین مقررات</a>
+                            <a href="#" class="mediumtxt ms-5">قوانین مقررات</a>
                         </div>
-                        <div class="col hover mt-3">
-                            <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('ContactUs')" href="#" class="mediumtxt ms-5"> تماس با ما</a>
-                        </div>
+                        </NuxtLink>
+                       
+                        <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
+                            <div class="col hover mt-3">
+                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                <a  href="#" class="mediumtxt ms-5"> تماس با ما</a>
+                            </div>
+                        </NuxtLink>
+
                     </div>
 
 
-                   
+
                 </div>
                 <div class="col-sm-1">
+
                     <button v-if="closeBox" type="button" id="closeicon" class="close mt-5" @click="closeBox = false">
-                        <i class="fa-solid fa-arrow-left"></i>
+                        <img src="assets/img/left.png" style="width: 30px;" alt="">
+
                     </button>
                     <button v-if="!closeBox" type="button" class="close mt-5" @click="closeBox = true">
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <img src="assets/img/right.png" style="width: 30px;" alt="">
+
                     </button>
                 </div>
                 <div class="col-sm-9">
 
-                    <dashboard :user = "user" v-if="showDashboard" />
+                    <dashboard :user="user" v-if="showDashboard" />
                     <cash-wallet v-if="showWallet" />
                     <buylicence v-if="BuyLicence" />
                     <myproduct v-if="MyProduct" />
@@ -130,7 +139,7 @@ const user = ref(useUser.user);
 const pricing = ref(null)
 const subScribe = ref(null)
 const carts = ref(null)
-const closeBox = ref(true);
+const closeBox = ref(false);
 const showDashboard = ref(true);
 const showWallet = ref(false);
 const BuyLicence = ref(false);
@@ -167,7 +176,7 @@ const changeMenu = (name) => {
         case 'BuyLicence':
             BuyLicence.value = true;
             break;
-        case 'MyProduct':   
+        case 'MyProduct':
             MyProduct.value = true;
             break;
         case 'MyOrder':
@@ -189,7 +198,7 @@ const changeMenu = (name) => {
 
 setTimeout(() => {
 
-  
+
 
     useUser.getSubScribe().then((r) => {
         subScribe.value = r;
