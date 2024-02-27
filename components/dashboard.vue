@@ -1,53 +1,82 @@
 <template>
-    <div class="row info-box mt-5">
+    <div class="info-box col-sm-12 mt-5">
         <!-- {{user.user.offices[0].ability.visits[0].matter_target.title}} -->
-        <div class="topBoxes row">
-            <div class="box-info col-2">
-            <div class="card-title">
-                <div class="col">
-                    <a href="#" class="sub">تعداد ثبت مانده</a>
+        <div class="col row">
+            <div class="col-sm-4 box-info">
+                <div class="col card-body">
+                    <div class="col row">
+                        <div class="col-sm">
+                            <a href="#" class="wallettxt">کیف پول نقدی : 0 تومان</a>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="button" class="col-sm-5 btn btn-light">
+                                <a href="#" class="btntext">افزایش موجودی</a>
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
-                <div class="col">
-                    <a href="#" class="tile">0</a>
+            </div>
+            <div id="roaunded" class="col-sm-4 box-info">
+                <div class="col card-body">
+                    <div class="col row">
+                        <div class="col-sm">
+                            <a href="#" class="wallettxt">کیف پول اعتباری : 0تومان</a>
+                        </div>
+                        <div class="col-sm-12">
+                            <button type="button" class="col-sm-5 btn btn-light">
+                                <a href="#" class="btntext">افزایش موجودی</a>
+                            </button>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
-        <div class="box-info col-2 ms-3">
-            <div class="card-title">
-                <div class="col">
-                    <a href="#" class="sub">تعداد ویژه مانده</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="tile">0</a>
-                </div>
-            </div>
-        </div>
-        <div class="box-info ms-3 col-2">
-            <div class="card-title">
-                <div class="col">
-                    <a href="#" class="sub">تعداد نردبان مانده</a>
-                </div>
-                <div class="col">
-                    <a href="#" class="tile">0</a>
+        <div class="row bento">
+            <div class="col-sm-2 box-buttom mt-5">
+                <div class="col card-body">
+                    <div class="col">
+                        <a href="#" class="wallettxt">اشتراک های فعال</a>
+                    </div>
+                    <div class="borderrs"></div>
+                    <a href="#" class="greentxt">درحال انجام</a>
                 </div>
             </div>
-        </div>
+            <div id="roaunded" class="col-sm-6 box-buttom mt-5">
+                <div class="col card-body">
+                    <div class="col row">
+
+                        <a href="#" class="wallettxt">
+                            <img src="/_nuxt/assets/img/basket.svg" style="width: 30px;" alt="">
+                            خرید های من
+                        </a>
+                    </div>
+                    <div class="borderrs"></div>
+                    <!-- <a href="#" id="" class="lice mt-2">درحال انجام</a> -->
+                    <div class="col-sm-12  mt-5">
+                        <a href="#" class="styling">سبد خرید شما خالیه</a>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
-    <div class="mainBoxess mt-4">
+    <!-- <div class="mainBoxess">
         <div class="col-sm-12">
-        <div v-for="user in user.user.offices[0].ability.visits" class="col">
+        
             <div class="col-sm mt-3">
-                <a href="#" class="title ms-5"> تعداد {{ user.number }}  بازدید از آگهی های  </a>
-                <a href="#" class="title">{{ user.matter_target.title }}</a>
+                <a href="#" class="title ms-5"> تعداد {{ user.user.offices[0].ability.visits[2].number }}  بازدید از آگهی های  </a>
+                <a href="#" class="title">{{ user.user.offices[0].ability.visits[2].matter_target.title }}</a>
 
 
             </div>
-        </div>
+       
 
     </div>
-    </div>
+    </div> -->
 </template>
 
 
