@@ -24,7 +24,7 @@ export const useOfficeStore = defineStore('office', {
     actions: {
       async getNoticeOffice(officeId){
       
-        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${officeId}/page/notices?per_page=25&page=1`);
+        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${officeId}/page/notices?per_page=15&page=1`);
         
         this.pending = pendings;
         if(errors.value){
@@ -32,8 +32,8 @@ export const useOfficeStore = defineStore('office', {
         }
         
         if(notices.value){
-          console.log(notices.value);
-          this.allNotices = JSON.parse(JSON.stringify(notices.value.data));
+          console.log(notices.value.items);
+          this.allNotices = JSON.parse(JSON.stringify(notices.value.items));
         }
 
         return {

@@ -35,7 +35,6 @@
                                         <img src="~/assets/img/arrow-left.svg" alt="">
                                     </a>
                                 </div>
-
                             </div>
                         </div>
                     </div>
