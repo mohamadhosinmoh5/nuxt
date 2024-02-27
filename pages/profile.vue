@@ -1,41 +1,65 @@
 <template>
-    <!-- {{user}} -->
     <!-- {{ pricing.items[0].title }} -->
     <!-- {{ subScribe }} -->
     <!-- {{ carts }} -->
+    <!-- {{ offices }} -->
 
     <div class="container-fluid">
         <div class="row ">
-
             <div class="col-12">
                 <div class="border"></div>
                 <div class="TitleText">
                     <div class="col mt-3">
-                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <i class="fa fa-home " aria-hidden="true"></i>
                         <h class="myhomenger ms-2">هومنگر من</h>
-                        <a href="#" class="daftar">
-                            <i class="fa fa-repeat" aria-hidden="true"></i>
+                        <a @click="modalOpen = true" href="#" class="taghiratDaftar">
+                            <i class="fa fa-repeat taghiratDaftar" aria-hidden="true"></i>
                             تقیرات دفتر
                         </a>
+                    </div>
+                    <div v-if="modalOpen" class="daftar-modal">
+                        <div class="daftarDetailes">
+                            <div class="col-sm-12">
+                                <div class="col">
+                                    <a href="#" @click="modalOpen = false">
+                                        <i id="khoroj" class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                    <a href="#" id="korojtxt" class="ms-2">انتخاب نحوه پرداخت</a>
+                                </div>
+                                <div class="border-modal mt-2"></div>
+
+                                <div v-for="user in user.offices[0].ability.visits" class="col-sm row">
+                                    <a href="" class="wallettxt mt-3">
+                                        {{ user.matter_target.title }}
+
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
             <div class="row">
+                <div class="btnside col-sm-1">
+
+                    <button v-if="closeBox" type="button" id="" class="close mt-5" @click="closeBox = false">
+                        <img src="assets/img/sidebar.png" style="width: 35px;" alt="">
+
+                    </button>
+                    <button v-if="!closeBox" type="button" class="close mt-5" @click="closeBox = true">
+                        <img src="assets/img/closebox.png" style="width: 35px;" alt="">
+
+                    </button>
+                </div>
 
                 <div :class="(closeBox) ? `col-sm-2 liness dropdown-box` : `open-box col-sm-2 liness`">
 
                     <div class="col-sm-12">
 
-                        <div class="TopTitle">
 
-                            <div class="col mt-4">
-                                <a href="#" class="sub">موجودی کیف پول نقدی : 0تومان</a>
-                            </div>
-                            <div class="col">
-                                <a href="#" class="sub">موجودی کیف پول اعتباری : 0تومان</a>
-                            </div>
-                        </div>
                         <div class="col mt-4 hover">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
                             <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-5">پیشخوان</a>
@@ -65,15 +89,15 @@
                         </div>
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
                             <div class="col hover mt-3">
-                            <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a href="#" class="mediumtxt ms-5">قوانین مقررات</a>
-                        </div>
+                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                <a href="#" class="mediumtxt ms-5">قوانین مقررات</a>
+                            </div>
                         </NuxtLink>
-                       
+
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
                             <div class="col hover mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a  href="#" class="mediumtxt ms-5"> تماس با ما</a>
+                                <a href="#" class="mediumtxt ms-5"> تماس با ما</a>
                             </div>
                         </NuxtLink>
 
@@ -82,17 +106,8 @@
 
 
                 </div>
-                <div class="col-sm-1">
 
-                    <button v-if="closeBox" type="button" id="closeicon" class="close mt-5" @click="closeBox = false">
-                        <img src="assets/img/left.png" style="width: 30px;" alt="">
 
-                    </button>
-                    <button v-if="!closeBox" type="button" class="close mt-5" @click="closeBox = true">
-                        <img src="assets/img/right.png" style="width: 30px;" alt="">
-
-                    </button>
-                </div>
                 <div class="col-sm-9">
 
                     <dashboard :user="user" v-if="showDashboard" />
@@ -148,7 +163,7 @@ const MyOrder = ref(false);
 const MyLicence = ref(false);
 const Rolls = ref(false);
 const ContactUs = ref(false);
-
+const modalOpen = ref(false);
 
 
 

@@ -1,5 +1,5 @@
 <template>
-    <!-- <div class="modal-overlay">
+    <div class="modal-overlay">
         <div class="modal">
             <img class="check" src="~/assets/check-icon.png" alt="" />
             <h6>Saved!</h6>
@@ -7,7 +7,7 @@
             <button>Go Home</button>
         </div>
         
-    </div> -->
+    </div>
 </template>
 
 <script>

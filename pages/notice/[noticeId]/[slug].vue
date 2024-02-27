@@ -120,7 +120,7 @@
                                 <div v-if="useNotice.notice.address != null" class="col-md-4">
                                     <a href="#" class="subtitle">محله : </a>
                                     <a href="#" class="texts">{{
-                                        useNotice.notice.address.address.postal_address }}</a>
+                                        useNotice.notice.address.address.neighbourhood }}</a>
                                 </div>
                                 <div class="col-4">
                                     <a href="#" class="subtitle">
@@ -182,9 +182,9 @@
                                            {{ useCart.message }}
                                        </div>
                                    </div>
-                                    <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
+                                    <!-- <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
                                         <button @click="showPhone = true" type="button" class="btn btn-success btnmodal">تماس</button>
-                                    </div>
+                                    </div> -->
 
                                     <div v-if="showPhone" id="myModal" class="modal">
                                         <div class="modal-content">
