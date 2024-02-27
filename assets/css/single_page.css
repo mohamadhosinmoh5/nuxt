@@ -123,7 +123,7 @@
     /* width: 90px; */
     /* margin-right: 40px; */
     /* margin-bottom: 30px; */
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border-radius: 10px;
     background-color: var(--cf-green-color);
     color: var(--cf-light-color);
@@ -344,6 +344,7 @@
 
 
 .box-title {
+    padding: 10px;
     height: auto;
     border-radius: 10px;
     border-style: solid;
@@ -482,11 +483,14 @@
 .mainimages {
     position: relative;
     width: 100%;
+    background-position: center;
     height: 450px;
     border-radius: 10px;
     left: 20px;
-
+    background-attachment: fixed;
+    background-size: cover;
 }
+
 @media screen and (max-width: 992px) {
     .mainimages {
         position: relative;
@@ -1121,7 +1125,7 @@
     position: relative;
     display: inline-block;
     top: 12px;
-    left: 40px;
+    /* left: 40px; */
 }
 .form input{
     position: relative;

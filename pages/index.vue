@@ -215,7 +215,7 @@ export default {
     <NuxtLayout name="header"></NuxtLayout>
       <div class="row" ref="contentBox">
         <div class="row mt-4">
-          <div class="col-3">
+          <div class="col-sm-3">
             <!-- <div class="switchBox">
               <p class="switchItem">نقشه</p>
                 <label class="switch switchItem">
@@ -369,16 +369,18 @@ export default {
                         <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt=""> &nbsp; {{office.title}} </h4>
                       </div>
 
-                      <div class="col-12 mt-3">
-                        <h4 class="descktop-office-matter">{{office.matter.title}}</h4>
+                      <div class="col-12 mt-3 p-3">
+                        <div class="row">
+                          <div class="col-9">
+                            <h4 class="descktop-office-matter">{{office.matter.title}}</h4>
+                          </div>
+                          <div class="col-3">
+                            <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+                              <img src="~/assets/img/arrow-left.svg" alt="">
+                          </a>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12" dir="ltr">
-                      <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
-                          <img src="~/assets/img/arrow-left.svg" alt="">
-                      </a>
                     </div>
                   </div>
               </div>

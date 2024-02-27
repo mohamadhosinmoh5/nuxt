@@ -14,8 +14,6 @@
         <div v-if="useNotice.notice" class="row">
             <div class="row">
                 <div class="col-sm-7 col-md-7">
-                    <!-- AX -->
-
                     <div class="row myimages">
                         <div class="col-3">
                             <div class="scrollBar">
@@ -135,7 +133,7 @@
                                     </div>
 
                                 </div>
-                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">قیمت : {{ useNotice.notice.pricing.price }}</div>
+                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">قیمت : {{ convertPrice(useNotice.notice.pricing.price) }}</div>
                             </div>
                             <div class="lineee mt-3"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
@@ -192,25 +190,30 @@
                                             <p href="#" class="Title">شماره تماس : {{ useNotice.notice.mobile }}</p>
                                         </div>
                                     </div>
-
                                 </div>
 
                             </div>
 
-                            <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-                                <div class="col-sm-12 row">
-                                    <div class="col-4 text-add">
-                                        <button class="btn btn-info" @click="useCart.addToCart(useNotice?.notice?.id)">
-                                            +</button>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="form">
-                                            <input type="number" class="form-text" v-model="count">
+                            <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct mt-4">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-4 btn-right">
+                                            <button @click="useCart.addToCart(useNotice?.notice?.id,count),addCart = true,count++" class="btn btn-success">
+                                                <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn" role="status"></div>
+                                                <div v-else>+</div>
+                                              </button>
                                         </div>
-                                    </div>
-                                    <div class="col-4 text-minez">
-                                        <button class="btn btn-danger" @click="useCart.removeCart(useNotice?.notice?.id)">
-                                            - </button>
+                                        <div class="col-4">
+                                            <div class="form-number">
+                                                <input disabled type="number" class="form-text numberCount" v-model="count">
+                                            </div>
+                                        </div>
+                                        <div class="col-4 btn-left">
+                                            <button @click="useCart.removeCart(useNotice?.notice?.id,count),addCart = false,(count >=1 ) ? count-- : 0" class="btn btn-success">
+                                                <div v-if="useCart.pending==true && !addCart" class="spinner-border spinner-btn" role="status"></div>
+                                                <div v-else>-</div>
+                                              </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -309,11 +312,12 @@ const mainImage = ref(null);
 const cart = ref(null);
 const pending = ref(null);
 const showPhone = ref(false)
-const count = ref(useCart.count);
+const count = ref(0);
+const addCart = ref(null)
 watch(useCart, async (newdata) => {
     if (cart.value?.items.length >= 1) {
         cart.value.items = newdata.cart.items;
-        console.log(newdata.cart.items[0].count);
+        // console.log(newdata.cart.items[0].count);
         count.value = newdata.cart.items[0].count;
     }
 })
@@ -325,8 +329,11 @@ setTimeout(async () => {
 
     useNotice.getSimilar(params.noticeId);
 
-    cart.value = await useCart.getCart();
-
+    await useCart.getCart().then((r)=>{
+        console.log(r);
+        cart.value = r;
+        count.value = r.items[0].count;
+    });
 });
 
 

@@ -110,24 +110,23 @@
                     </div>
                 
                 </div>
-
+     
 
                 <div v-if="showOffice" class="col-sm-12 mt-2 mapBox">
                     <div ref="mapDiv" class="stickyStyle" >
-                      <LMap v-if="allNotices"
+                      <LMap
                         id="map"
                         ref="mapRef"
                         :zoom="16"
-                        :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
-                        @zoomend="changeZoom"
+                        :center="office?.address?.geom?.coordinates"
                       >
                       
                         <l-circle-marker
-                        :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
+                        :lat-lng="office?.address?.geom?.coordinates"
                         :radius="10"
                         color="red"
                       />
-                        <l-marker :lat-lng="[notice.address.lat,notice.address.lng]">
+                        <l-marker :lat-lng="office?.address?.geom?.coordinates">
                         </l-marker>
               
                       </LMap>
@@ -143,6 +142,7 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useOfficeStore } from '../store/office';
+import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'

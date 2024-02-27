@@ -267,12 +267,24 @@ body {
     width: 70%;
 }
 .descktop-office-title{
-  font-size: 16px;
+  font-size: 20px;
 }
 
+.btn-right button{
+    margin: 0 50%;
+    }
+.numberCount{
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px;
+    top: 5px;
+    border: 1px solid #dadada;
+}
 .descktop-office-matter{
   font-size: 14px;
   margin-right: 10px;
+  color: #5a5a5a;
 }
 
 .mobile-img-box .img {
@@ -286,10 +298,10 @@ body {
 }
 
 .descktop-img-box .img {
-  width: 100%;
-  height: 100%;
-  /* min-height: 120px; */
-  max-height: 150px;
+    width: 100px;
+    height: 100px;
+    min-height: 100px;
+    max-height: 150px;
   border-radius: 15px;
   background-position: center;
   background-repeat: no-repeat;
@@ -340,6 +352,10 @@ body {
 
 .mobile-notice-title{
   font-size: 16px;
+}
+
+.nav-link{
+    cursor: pointer;
 }
 
 .mobile-section{
@@ -1211,6 +1227,10 @@ input.checkBox {
 
 .range-input {
     position: relative;
+}
+
+.form-number{
+    padding:5px ;
 }
 
 .labalMetr{
