@@ -135,7 +135,7 @@
 
 .daftar_text {
     text-decoration: none;
-    font-size: small;
+    font-size: medium;
     color: var(--cf-title-color);
     font-family: 'Vazir';
 
@@ -448,7 +448,9 @@
     color: var(--cf-subtitle-color);
     font-family: 'Vazir';
 }
-
+.daftar_textt:hover{
+    color: var(--cf-subtitle-color);
+}
 .detailicons {
     position: relative;
     right: 15%;
@@ -712,12 +714,14 @@
 }
 
 .mediumtxt {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--cf-title-color);
     text-decoration: none;
     font-family: 'Vazir';
 }
-
+.mediumtxt:hover{
+    color: var(--cf-title-color);
+}
 .card1 {
     border-radius: 10px;
     width: 150px;
@@ -866,7 +870,7 @@
         padding: 20px;
         right: 6%;
         /* justify-content: space-evenly; */
-        top: 5%;
+        top: 10%;
     }
 }
 

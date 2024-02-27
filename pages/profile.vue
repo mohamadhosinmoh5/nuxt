@@ -14,7 +14,7 @@
                         <h class="myhomenger ms-2">هومنگر من</h>
                         <a @click="modalOpen = true" href="#" class="taghiratDaftar">
                             <i class="fa fa-repeat taghiratDaftar" aria-hidden="true"></i>
-                            تقیرات دفتر
+                            تغیرات  دفتر
                         </a>
                     </div>
                     <div v-if="modalOpen" class="daftar-modal">
@@ -24,7 +24,7 @@
                                     <a href="#" @click="modalOpen = false">
                                         <i id="khoroj" class="fa-solid fa-arrow-right"></i>
                                     </a>
-                                    <a href="#" id="korojtxt" class="ms-2">انتخاب نحوه پرداخت</a>
+                                    <a href="#" id="korojtxt" class="ms-2"> انتخواب دفتر  </a>
                                 </div>
                                 <div class="border-modal mt-2"></div>
 

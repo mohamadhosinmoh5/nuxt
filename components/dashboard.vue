@@ -1,6 +1,5 @@
 <template>
     <div class="info-box col-sm-12 mt-5">
-        <!-- {{user.user.offices[0].ability.visits[0].matter_target.title}} -->
         <div class="col row">
             <div class="col-sm-4 box-info">
                 <div class="col card-body">

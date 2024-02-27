@@ -96,8 +96,8 @@
                                     <div class="col-md box_warning">
                                         <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
                                         <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی</a>
-                                        <img src="assets/img/SinglePage_Image/row.svg" style="float: left;" alt="">
-                                        <a href="#" class="daftar_textt ms-1"> گزارش </a>
+                                        <img src="assets/img/SinglePage_Image/row.svg" style="float: left;position: relative; top: 5px;" alt="">
+                                        <a href="#" class="daftar_textt ms-1 mt-1"> گزارش </a>
 
                                     </div>
                                 </div>
@@ -154,16 +154,16 @@
                                         useNotice.notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">
                                         {{
-                                        convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }}</a>
+                                        convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }}  تومان  </a>
                                     <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
 
                                     </div>
                                    
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-6 mt-3">  جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
+                                    <a href="#" class="mediumtxt col-7 mt-3">  جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
 
-                                        <div class="col-6 tamas_btn ">
+                                        <div class="col-5 tamas_btn mt-2">
                                             <button @click="showPhone = true" type="button"
                                                 class="btn btn-success btnmodal">اطلاعات تماس</button>
 
@@ -226,10 +226,10 @@
                     </div>
                     <div class="col-sm-12 row">
                         <div class="col-12 box_daftar">
-                            <img src="assets/img/SinglePage_Image/homeenger.svg" alt="" style="width: 35px;">
-                            <a href="#" class="daftar_text ms-1">هومنگر</a>
-                            <img src="assets/img/SinglePage_Image/row.svg" style="float: left;" alt="">
-                            <a href="#" class="daftar_textt ms-1"> دفتر ها </a>
+                            <img src="assets/img/SinglePage_Image/homeenger.svg" alt="" style="width: 40px;">
+                            <a href="#" class="daftar_text ms-2">هومنگر</a>
+                            <img src="assets/img/SinglePage_Image/row.svg" style="float: left; top: 6px;position: relative;" alt="">
+                            <a href="#" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
 
                         </div>
                         <div class="col-12 map_box">
