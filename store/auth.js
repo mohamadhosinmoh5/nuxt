@@ -41,7 +41,7 @@ export const useAuthStore = defineStore('Auth', {
             const token = useCookie('token',{
               expires: d
             });
-             token.value = this.token;
+             this.token = this.token;
              return navigateTo('/');
           }
         },
@@ -59,7 +59,7 @@ export const useAuthStore = defineStore('Auth', {
             }
 
             if(data.value){
-              if(this.getdefaultOffice == 0 && useCookie('defaultOffice')==null){
+              if(this.getdefaultOffice == 0 && !useCookie('defaultOffice')){
                 console.log(data.value.offices[0]);
                 this.setDefaultOffice(data.value.offices[0].id);
               }else{
@@ -150,6 +150,134 @@ export const useAuthStore = defineStore('Auth', {
         }
       }
       ,
+      async wallet(){
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/credit-wallets?page=1`, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
+      async transaction(){
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/transactions?page=1`, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
+      async deposit(amount){
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
+        `, {
+          method:'post',
+          body:{
+            amount:amount
+          },
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
+      async transactionBankReceipts(){
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
+        `, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
+      async transactionBankReceipts(sheba,withdraw_method){
+        //monthly
+        //weekly
+        //manually
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}
+        `, {
+          method:'PUT',
+          body:{
+            sheba:sheba,
+            withdraw_method:withdraw_method
+          },
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
       setDefaultOffice(id){
 
           const d = new Date();

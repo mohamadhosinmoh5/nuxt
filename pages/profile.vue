@@ -3,7 +3,8 @@
     <!-- {{ subScribe }} -->
     <!-- {{ carts }} -->
     <!-- {{ offices }} -->
-
+    <!-- {{ transactions }} -->
+    <!-- {{ transactionBankReceipts }} -->
     <div class="container-fluid">
         <div class="row ">
             <div class="col-12">
@@ -32,7 +33,6 @@
                                     <a @click="useUser.setDefaultOffice(office.id),navigateTo('/')" :class="(office.id == useUser.getdefaultOffice) ? `wallettxt active mt-3` : `wallettxt mt-3`">
                                         {{ office.title }}
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,12 @@
 
                     </div>
                 </div>
-
+                <div v-if="useUser.error?.message" class="notif error text-center">
+                    <span @click="useUser.error.message = null" class="closeNotife">x</span>
+                    <p>
+                      {{ useUser.error.message }}
+                    </p>
+                  </div>
 
                 <div class="col-sm-9">
 
@@ -152,7 +157,8 @@ const MyLicence = ref(false);
 const Rolls = ref(false);
 const ContactUs = ref(false);
 const modalOpen = ref(false);
-
+const transactions = ref(null);
+const transactionBankReceipts = ref(null)
 
 
 
@@ -210,6 +216,20 @@ setTimeout(() => {
     useUser.getCarts().then((r) => {
         carts.value = r;
     })
+
+    useUser.getCarts().then((r) => {
+        carts.value = r;
+    })
+
+    useUser.transaction().then((r) => {
+        transactions.value = r;
+    })
+
+    useUser.transactionBankReceipts().then((r) => {
+        transactionBankReceipts.value = r;
+    })
+
+
 }, 0);
 
 </script>

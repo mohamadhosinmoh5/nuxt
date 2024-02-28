@@ -135,8 +135,13 @@
                                     </div>
 
                                 </div>
-                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">قیمت : {{
-                                    convertPrice(useNotice.notice.pricing.price) }}</div>
+                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">
+                                    قیمت : {{ (useNotice?.notice?.pricing?.discount_percent > 0) ?
+                                        convertPrice(useNotice.notice?.pricing.price - (useNotice.notice?.pricing.price
+                                            *
+                                            useNotice.notice.pricing.discount_percent / 100)) :
+                                        convertPrice(useNotice.notice?.pricing.price) }} تومان
+                                </div>
                             </div>
                             <div class="lineee mt-3"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
@@ -280,7 +285,7 @@
                         </div>
                         <!-- add Cards-->
                         <div v-for="notice in allNotices" :key="notice.id" class="col-sm-4 mt-5">
-                            <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
+                            <div href="#">
                                 <Notice :Notice="notice" />
                             </div>
                         </div>
@@ -326,6 +331,7 @@ const showPhone = ref(false)
 const count = ref(0);
 const addCart = ref(null);
 const loadingStyle = ref(true);
+const allNotices = ref(null)
 
 watch(useCart, async (newdata) => {
     // loadingStyle.value = false;
@@ -340,10 +346,11 @@ watch(useCart, async (newdata) => {
 setTimeout(async () => {
     await useNotice.getNotice(params.noticeId).then((r) => {
         pending.value = false;
+        useNotice.getSimilar(params.noticeId,r.category.id).then((r2)=>{
+            allNotices.value = r2;
+    });
     });
     loadingStyle.value = false;
-
-    useNotice.getSimilar(params.noticeId);
 
     await useCart.getCart().then((r) => {
         console.log(r);

@@ -101,10 +101,9 @@ export const useNoticeStore = defineStore('notice', {
       
       },
       async getSimilar(noticeId,category_id){
-        const query = `
-        ?per_page=10&page=1&cities=گرگان&fetch_all=false
-        `;
-        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/notices/${query}&similar_notice_id=${noticeId}&category_id=${category_id}`,
+        const auth = useAuthStore();
+        const query = `?per_page=10&page=1&fetch_all=false`;
+        const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/notices${query}&similar_notice_id=${noticeId}&category_id=${category_id}`,
         {
           method:'get',
           headers:{
