@@ -152,18 +152,32 @@
     width: 100px;
 }
 
-.spinner-border {
-    text-align: center;
-    justify-content: center;
-    position: relative;
-    /* margin-right: 50%; */
-    margin-top: 15%;
+.text-secondary {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    z-index: 9999;
 }
-
+@media screen and (max-width: 992px) {
+    .text-secondary {
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        z-index: 9999;
+    }
+}
+.slugs{
+     position: relative;
+    right: 50%;
+    top: 30%;
+    z-index: 9999;
+}
 .range {
     height: 80px;
     width: 100%;
     position: absolute;
+    display: block;
+    justify-content: center;
     margin-top: 6%;
     /* background-color: var(--cf-light-color); */
 
@@ -450,9 +464,11 @@
     color: var(--cf-subtitle-color);
     font-family: 'Vazir';
 }
-.daftar_textt:hover{
+
+.daftar_textt:hover {
     color: var(--cf-subtitle-color);
 }
+
 .detailicons {
     position: relative;
     right: 15%;
@@ -664,7 +680,7 @@
         border-left: none;
         position: relative;
         bottom: 50px;
-        
+
     }
 }
 
@@ -723,9 +739,11 @@
     text-decoration: none;
     font-family: 'Vazir';
 }
-.mediumtxt:hover{
+
+.mediumtxt:hover {
     color: var(--cf-title-color);
 }
+
 .card1 {
     border-radius: 10px;
     width: 150px;
@@ -849,7 +867,24 @@
     display: block;
     text-align: start;
 }
-
+.wallettxts{
+    text-decoration: none;
+    color: var(--cf-title-color);
+    /* font-family: 'Vazir'; */
+    font-size: 25px;
+    position: relative;
+    display: block;
+    text-align: start;
+}
+.wallettxtss{
+    text-decoration: none;
+    color: var(--cf-title-color);
+    /* font-family: 'Vazir'; */
+    font-size: 15px;
+    position: relative;
+    display: block;
+    text-align: start;
+}
 .wallettxt:hover {
     color: var(--cf-title-color);
 }

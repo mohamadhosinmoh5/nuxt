@@ -6,7 +6,8 @@
             {{ params.slug }}
         </title>
         <!-- addin html code -->
-        <div v-if="useNotice.pending" class="spinner-border mt-4" role="status"></div>
+
+        <div v-if="loadingStyle" class="spinner-border text-secondary" role="status"></div>
 
         <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
             {{ useNotice.error.message }}
@@ -94,7 +95,8 @@
                                     <div class="col-md box_warning">
                                         <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
                                         <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی</a>
-                                        <img src="assets/img/SinglePage_Image/row.svg" style="float: left;position: relative; top: 5px;" alt="">
+                                        <img src="assets/img/SinglePage_Image/row.svg"
+                                            style="float: left;position: relative; top: 5px;" alt="">
                                         <a href="#" class="daftar_textt ms-1 mt-1"> گزارش </a>
 
                                     </div>
@@ -133,7 +135,8 @@
                                     </div>
 
                                 </div>
-                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">قیمت : {{ convertPrice(useNotice.notice.pricing.price) }}</div>
+                                <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">قیمت : {{
+                                    convertPrice(useNotice.notice.pricing.price) }}</div>
                             </div>
                             <div class="lineee mt-3"></div>
                             <div v-if="useNotice.notice.section_data_collection.length >= 1"
@@ -148,38 +151,39 @@
 
 
                                 <div v-if="useNotice.notice.section_data_collection[2]" class="col-6">
-                                    <a  href="#" class="subtitle">{{
+                                    <a href="#" class="subtitle">{{
                                         useNotice.notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">
                                         {{
-                                        convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }}  تومان  </a>
+                                            convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }} تومان
+                                    </a>
                                     <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
 
                                     </div>
-                                   
+
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-7 mt-3">  جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
+                                    <a href="#" class="mediumtxt col-7 mt-3"> جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
 
-                                        <div class="col-5 tamas_btn mt-2">
-                                            <button @click="showPhone = true" type="button"
-                                                class="btn btn-success btnmodal">اطلاعات تماس</button>
+                                    <div class="col-5 tamas_btn mt-2">
+                                        <button @click="showPhone = true" type="button"
+                                            class="btn btn-success btnmodal">اطلاعات تماس</button>
 
-                                        </div>
-                                        
                                     </div>
+
+                                </div>
 
                                 <div class="col-8 mt-4"></div>
                                 <div class="col-4 mt-4">
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
-                                
-                                       <div v-if="useCart.error">
-                                           {{ useCart.error.message }}
-                                       </div>
-                                       <div v-if="useCart.message">
-                                           {{ useCart.message }}
-                                       </div>
-                                   </div>
+
+                                        <div v-if="useCart.error">
+                                            {{ useCart.error.message }}
+                                        </div>
+                                        <div v-if="useCart.message">
+                                            {{ useCart.message }}
+                                        </div>
+                                    </div>
                                     <!-- <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
                                         <button @click="showPhone = true" type="button" class="btn btn-success btnmodal">تماس</button>
                                     </div> -->
@@ -198,10 +202,13 @@
                                 <div class="col-sm-12">
                                     <div class="row">
                                         <div class="col-4 btn-right">
-                                            <button @click="useCart.addToCart(useNotice?.notice?.id,count),addCart = true,count++" class="btn btn-success">
-                                                <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn" role="status"></div>
+                                            <button
+                                                @click="useCart.addToCart(useNotice?.notice?.id, count), addCart = true, count++"
+                                                class="btn btn-success">
+                                                <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn"
+                                                    role="status"></div>
                                                 <div v-else>+</div>
-                                              </button>
+                                            </button>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-number">
@@ -209,10 +216,13 @@
                                             </div>
                                         </div>
                                         <div class="col-4 btn-left">
-                                            <button @click="useCart.removeCart(useNotice?.notice?.id,count),addCart = false,(count >=1 ) ? count-- : 0" class="btn btn-success">
-                                                <div v-if="useCart.pending==true && !addCart" class="spinner-border spinner-btn" role="status"></div>
+                                            <button
+                                                @click="useCart.removeCart(useNotice?.notice?.id, count), addCart = false, (count >= 1) ? count-- : 0"
+                                                class="btn btn-success">
+                                                <div v-if="useCart.pending == true && !addCart"
+                                                    class="spinner-border spinner-btn" role="status"></div>
                                                 <div v-else>-</div>
-                                              </button>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +241,8 @@
                         <div class="col-12 box_daftar">
                             <img src="assets/img/SinglePage_Image/homeenger.svg" alt="" style="width: 40px;">
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
-                            <img src="assets/img/SinglePage_Image/row.svg" style="float: left; top: 6px;position: relative;" alt="">
+                            <img src="assets/img/SinglePage_Image/row.svg" style="float: left; top: 6px;position: relative;"
+                                alt="">
                             <a href="#" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
 
                         </div>
@@ -313,8 +324,12 @@ const cart = ref(null);
 const pending = ref(null);
 const showPhone = ref(false)
 const count = ref(0);
-const addCart = ref(null)
+const addCart = ref(null);
+const loadingStyle = ref(true);
+
 watch(useCart, async (newdata) => {
+    // loadingStyle.value = false;
+
     if (cart.value?.items.length >= 1) {
         cart.value.items = newdata.cart.items;
         // console.log(newdata.cart.items[0].count);
@@ -326,10 +341,11 @@ setTimeout(async () => {
     await useNotice.getNotice(params.noticeId).then((r) => {
         pending.value = false;
     });
+    loadingStyle.value = false;
 
     useNotice.getSimilar(params.noticeId);
 
-    await useCart.getCart().then((r)=>{
+    await useCart.getCart().then((r) => {
         console.log(r);
         cart.value = r;
         count.value = r.items[0].count;
