@@ -59,9 +59,11 @@ export const useAuthStore = defineStore('Auth', {
             }
 
             if(data.value){
-              if(this.getdefaultOffice == 0){
+              if(this.getdefaultOffice == 0 && useCookie('defaultOffice')==null){
                 console.log(data.value.offices[0]);
                 this.setDefaultOffice(data.value.offices[0].id);
+              }else{
+                this.getdefaultOffice = useCookie('defaultOffice');
               }
               return this.user = data.value;
             }
@@ -149,7 +151,14 @@ export const useAuthStore = defineStore('Auth', {
       }
       ,
       setDefaultOffice(id){
-        this.getdefaultOffice = id;
+
+          const d = new Date();
+          d.setDate(d.getDate() + 7);
+          const defaultOffice = useCookie('defaultOffice',{
+            expires: d
+          });
+          defaultOffice.value = id;
+          this.getdefaultOffice = defaultOffice.value;
       },
       async refresh($data){
          await this.allNotices.push(...$data);

@@ -859,6 +859,7 @@
 }
 
 .wallettxt {
+    cursor: pointer;
     text-decoration: none;
     color: var(--cf-title-color);
     font-family: 'Vazir';
@@ -1396,7 +1397,8 @@
     height: 70%;
     padding: 20px;
     right: 25%;
-
+    overflow: scroll;
+    height: 70vh;
     position: fixed;
     border: 1px solid var(--cf-grey-icon-color);
     width: 50% !important;

@@ -12,26 +12,25 @@
                     <div class="col mt-3">
                         <i class="fa fa-home " aria-hidden="true"></i>
                         <h class="myhomenger ms-2">هومنگر من</h>
-                        <a @click="modalOpen = true" href="#" class="taghiratDaftar">
+                        <a @click="modalOpen = true" style="cursor: pointer;" class="taghiratDaftar">
                             <i class="fa fa-repeat taghiratDaftar" aria-hidden="true"></i>
-                            تغیرات  دفتر
+                            تغییر دفتر
                         </a>
                     </div>
                     <div v-if="modalOpen" class="daftar-modal">
                         <div class="daftarDetailes">
                             <div class="col-sm-12">
                                 <div class="col">
-                                    <a href="#" @click="modalOpen = false">
+                                    <a @click="modalOpen = false">
                                         <i id="khoroj" class="fa-solid fa-arrow-right"></i>
                                     </a>
-                                    <a href="#" id="korojtxt" class="ms-2"> انتخواب دفتر  </a>
+                                    <a id="korojtxt" class="ms-2">انتخاب  دفتر</a>
                                 </div>
                                 <div class="border-modal mt-2"></div>
 
-                                <div v-for="user in user.offices[0].ability.visits" class="col-sm row">
-                                    <a href="" class="wallettxt mt-3">
-                                        {{ user.matter_target.title }}
-
+                                <div v-for="office in user.offices" class="col-sm row">
+                                    <a @click="useUser.setDefaultOffice(office.id),navigateTo('/')" :class="(office.id == useUser.getdefaultOffice) ? `wallettxt active mt-3` : `wallettxt mt-3`">
+                                        {{ office.title }}
                                     </a>
 
                                 </div>
@@ -56,10 +55,7 @@
                 </div>
 
                 <div :class="(closeBox) ? `col-sm-2 liness dropdown-box` : `open-box col-sm-2 liness`">
-
                     <div class="col-sm-12">
-
-
                         <div class="col mt-4 hover">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
                             <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-5">پیشخوان</a>
@@ -102,9 +98,6 @@
                         </NuxtLink>
 
                     </div>
-
-
-
                 </div>
 
 
@@ -138,12 +131,7 @@
   
 <!-- script -->
 <script setup>
-import { click } from 'ol/events/condition';
 import { useAuthStore } from '../store/auth';
-import { useMapStore } from '../store/map';
-import { useNoticeStore } from '../store/notice';
-import { useOfficeStore } from '../store/office';
-import { useSearchStore } from '../store/search';
 
 definePageMeta({
     middleware: 'auth'
