@@ -20,8 +20,8 @@
                         <div class="col-12">
                             <a href="#" class="subtitle">{{ sectionData.field.title }}</a>
                         </div>
-                        <div class="col-12">
-                            <span v-if="sectionData.data[0] == true">دارد</span>
+                        <div class="col-12 ">
+                            <span  v-if="sectionData.data[0] == true">دارد</span>
                             <span v-if="sectionData.data[0] && sectionData.data[0] !== true">{{ sectionData.data[0]
                             }}</span>
                             <span v-if="!sectionData.data[0]">ندارد</span>

@@ -136,7 +136,7 @@
 
 .daftar_text {
     text-decoration: none;
-    font-size: small;
+    font-size: medium;
     color: var(--cf-title-color);
     font-family: 'Vazir';
 
@@ -152,18 +152,32 @@
     width: 100px;
 }
 
-.spinner-border {
-    text-align: center;
-    justify-content: center;
-    position: relative;
-    /* margin-right: 50%; */
-    margin-top: 15%;
+.text-secondary {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    z-index: 9999;
 }
-
+@media screen and (max-width: 992px) {
+    .text-secondary {
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        z-index: 9999;
+    }
+}
+.slugs{
+     position: relative;
+    right: 50%;
+    top: 30%;
+    z-index: 9999;
+}
 .range {
     height: 80px;
     width: 100%;
     position: absolute;
+    display: block;
+    justify-content: center;
     margin-top: 6%;
     /* background-color: var(--cf-light-color); */
 
@@ -451,6 +465,10 @@
     font-family: 'Vazir';
 }
 
+.daftar_textt:hover {
+    color: var(--cf-subtitle-color);
+}
+
 .detailicons {
     position: relative;
     right: 15%;
@@ -662,7 +680,7 @@
         border-left: none;
         position: relative;
         bottom: 50px;
-        
+
     }
 }
 
@@ -716,10 +734,14 @@
 }
 
 .mediumtxt {
-    font-size: 16px;
+    font-size: 14px;
     color: var(--cf-title-color);
     text-decoration: none;
     font-family: 'Vazir';
+}
+
+.mediumtxt:hover {
+    color: var(--cf-title-color);
 }
 
 .card1 {
@@ -846,7 +868,24 @@
     display: block;
     text-align: start;
 }
-
+.wallettxts{
+    text-decoration: none;
+    color: var(--cf-title-color);
+    /* font-family: 'Vazir'; */
+    font-size: 25px;
+    position: relative;
+    display: block;
+    text-align: start;
+}
+.wallettxtss{
+    text-decoration: none;
+    color: var(--cf-title-color);
+    /* font-family: 'Vazir'; */
+    font-size: 15px;
+    position: relative;
+    display: block;
+    text-align: start;
+}
 .wallettxt:hover {
     color: var(--cf-title-color);
 }
@@ -871,7 +910,7 @@
         padding: 20px;
         right: 6%;
         /* justify-content: space-evenly; */
-        top: 5%;
+        top: 10%;
     }
 }
 
