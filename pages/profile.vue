@@ -109,13 +109,13 @@
                 <div class="col-sm-9">
 
                     <dashboard :user="user" v-if="showDashboard" />
-                    <cash-wallet v-if="showWallet" />
+                     <cash-wallet v-if="showWallet" />
                     <buylicence v-if="BuyLicence" />
                     <myproduct v-if="MyProduct" />
                     <myorder v-if="MyOrder" />
-                    <mylycence v-if="MyLicence" />
-                    <roll v-if="Rolls" />
-                    <contact v-if="ContactUs" />
+                    <mylicence v-if="MyLicence" />
+                     <roll v-if="Rolls" />
+                     <contact v-if="ContactUs" />
 
                     <!-- <dashboard />
                   <dashboard />
@@ -207,12 +207,6 @@ const changeMenu = (name) => {
 
 setTimeout(() => {
 
-
-
-    useUser.getSubScribe().then((r) => {
-        subScribe.value = r;
-    })
-
     useUser.getCarts().then((r) => {
         carts.value = r;
     })
@@ -225,9 +219,9 @@ setTimeout(() => {
         transactions.value = r;
     })
 
-    useUser.transactionBankReceipts().then((r) => {
-        transactionBankReceipts.value = r;
-    })
+    // useUser.transactionBankReceipts().then((r) => {
+    //     transactionBankReceipts.value = r;
+    // })
 
 
 }, 0);

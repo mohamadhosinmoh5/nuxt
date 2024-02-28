@@ -116,7 +116,6 @@ export const useAuthStore = defineStore('Auth', {
         }
       },
       async getSubScribe(){
-        // https://panel.homeenger.com/api/matters/1/pricings?page=1
         const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/subscribes?page=1`, {
           method:'get',
           headers:{
@@ -150,6 +149,23 @@ export const useAuthStore = defineStore('Auth', {
         }
       }
       ,
+      async getPendingCart(){
+        // https://panel.homeenger.com/api/matters/1/pricings?page=1
+        const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/cart-items/pending?page=1&per_page=25/`, {
+          method:'get',
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+
+        if(data.value){
+          return data.value;
+        }
+      },
       async wallet(){
         const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/credit-wallets?page=1`, {
           method:'get',
@@ -197,6 +213,33 @@ export const useAuthStore = defineStore('Auth', {
         }
       },
       async deposit(amount){
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
+        `, {
+          method:'post',
+          body:{
+            amount:amount
+          },
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
+       async deposit(amount){
         const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
         `, {
           method:'post',
