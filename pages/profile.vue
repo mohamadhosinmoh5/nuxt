@@ -58,30 +58,30 @@
                     <div class="col-sm-12">
                         <div class="col mt-4 hover">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-5">پیشخوان</a>
+                            <a @click="changeMenu('showDashboard')" class="mediumtxt ms-5 ">پیشخوان</a>
                         </div>
                         <div class="col hover mt-3">
                             <i class="fa-solid fa-wallet"></i>
-                            <a @click="changeMenu('showWallet')" href="#" class="mediumtxt ms-5">کیف پول نقدی</a>
+                            <a @click="changeMenu('showWallet')" class="mediumtxt ms-5">کیف پول نقدی</a>
                         </div>
                         <div class="col hover mt-3">
                             <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('BuyLicence')" href="#" class="mediumtxt ms-5"> خرید اشتراک</a>
+                            <a @click="changeMenu('BuyLicence')"  class="mediumtxt ms-5"> خرید اشتراک</a>
 
                         </div>
 
 
                         <div class="col hover mt-3">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <a @click="changeMenu('MyProduct')" href="#" class="mediumtxt ms-5"> خرید های من</a>
+                            <a @click="changeMenu('MyProduct')"  class="mediumtxt ms-5"> خرید های من</a>
                         </div>
                         <div class="col hover mt-3">
                             <i class="fa-solid fa-arrow-down-wide-short"></i>
-                            <a @click="changeMenu('MyOrder')" href="#" class="mediumtxt ms-5"> سفارش های من </a>
+                            <a @click="changeMenu('MyOrder')"  class="mediumtxt ms-5"> سفارش های من </a>
                         </div>
                         <div class="col hover mt-3">
                             <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-5"> اشتراک های من</a>
+                            <a @click="changeMenu('MyLicence')" class="mediumtxt ms-5"> اشتراک های من</a>
                         </div>
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
                             <div class="col hover mt-3">
@@ -109,13 +109,13 @@
                 <div class="col-sm-9">
 
                     <dashboard :user="user" v-if="showDashboard" />
-                     <cash-wallet v-if="showWallet" />
+                    <cash-wallet v-if="showWallet" />
                     <buylicence v-if="BuyLicence" />
                     <myproduct v-if="MyProduct" />
                     <myorder v-if="MyOrder" />
                     <mylicence v-if="MyLicence" />
-                     <roll v-if="Rolls" />
-                     <contact v-if="ContactUs" />
+                    <roll v-if="Rolls" />
+                    <contact v-if="ContactUs" />
 
                     <!-- <dashboard />
                   <dashboard />
@@ -129,10 +129,6 @@
         </div>
     </div>
 </template>
-
-
-
-
   
 <!-- script -->
 <script setup>
@@ -159,8 +155,6 @@ const ContactUs = ref(false);
 const modalOpen = ref(false);
 const transactions = ref(null);
 const transactionBankReceipts = ref(null)
-
-
 
 const changeMenu = (name) => {
     console.log(name);
@@ -215,13 +209,6 @@ setTimeout(() => {
         carts.value = r;
     })
 
-    useUser.transaction().then((r) => {
-        transactions.value = r;
-    })
-
-    // useUser.transactionBankReceipts().then((r) => {
-    //     transactionBankReceipts.value = r;
-    // })
 
 
 }, 0);

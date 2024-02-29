@@ -166,6 +166,38 @@ export const useAuthStore = defineStore('Auth', {
           return data.value;
         }
       },
+      async getpostPriceRequest(){
+        
+        const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/cart-items/post-pricing-requests?page=1&per_page=25`,{
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+
+        if(data.value){
+          return data.value;
+        }
+      },
+      async getDoneFailed(){
+        
+        const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/cart-items/done-failed?page=1&per_page=25`,{
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+
+        if(errors.value){
+          this.error = errors.value.data;
+        }
+
+        if(data.value){
+          return data.value;
+        }
+      },
       async wallet(){
         const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/credit-wallets?page=1`, {
           method:'get',
@@ -239,33 +271,6 @@ export const useAuthStore = defineStore('Auth', {
           return data.value;
         }
       },
-       async deposit(amount){
-        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
-        `, {
-          method:'post',
-          body:{
-            amount:amount
-          },
-          headers:{
-            "Authorization":"Bearer "+this.token
-          }
-        });
-  
-        if(pendings){
-          this.pending = pendings;
-        }
-  
-        if(errors.value)
-        {
-          this.error = errors.value.data;
-        }
-  
-        if(data.value)
-        {
-          this.pending = false;
-          return data.value;
-        }
-      },
       async transactionBankReceipts(){
         const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
         `, {
@@ -290,7 +295,7 @@ export const useAuthStore = defineStore('Auth', {
           return data.value;
         }
       },
-      async transactionBankReceipts(sheba,withdraw_method){
+      async transactionSetting(sheba,withdraw_method){
         //monthly
         //weekly
         //manually

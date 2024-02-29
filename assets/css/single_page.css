@@ -736,6 +736,7 @@
 }
 
 .mediumtxt {
+    cursor: pointer;
     font-size: 14px;
     color: var(--cf-title-color);
     text-decoration: none;
