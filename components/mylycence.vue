@@ -25,12 +25,21 @@
             </div>
         </div>
     </div>
+
+    {{ setFalse() }}
 </template>
 
 
 <script setup>
 const closeBox = ref(true);
 const ShowBtn = ref(true);
+const emit = defineEmits(['clicked'])
 
+const loadingStyle = (query) => {
+    emit('clicked', query)
+}
+
+//get data and then loader hide
+loadingStyle(false);
 
 </script>

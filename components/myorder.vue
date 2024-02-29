@@ -8,16 +8,16 @@
 
             </div>
             <div v-if="loading" class="col-sm-12 tab-Detaile">
-                    loading
-                </div>
+                loading
+            </div>
 
-                <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
-                    verify
-                </div>
+            <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
+                verify
+            </div>
 
-                <div v-if="finish" class="col-sm-12 tab-Detaile">
-                    setting
-                </div>
+            <div v-if="finish" class="col-sm-12 tab-Detaile">
+                setting
+            </div>
             <div ref="underline" class="col-2 underline"></div>
         </div>
     </div>
@@ -33,28 +33,35 @@ const sectiontwo = ref(false);
 const finish = ref(false);
 
 
-const changeOrderMenue = ((name) =>{
-loading.value = false;
-sectiontwo.value = false;
-finish.value = false;
+const changeOrderMenue = ((name) => {
+    loading.value = false;
+    sectiontwo.value = false;
+    finish.value = false;
+    const emit = defineEmits(['clicked'])
 
-switch (name) {
-    case 'loading':
-        underline.value.style.left = "25%";
-        loading.value = true;
-        break;
-    case 'sectiontwo':
-        underline.value.style.left = "-10%";
-        sectiontwo.value = true;
-        break;
-    case 'finish':
-        underline.value.style.left = "-40%";
-        finish.value = true;
-        break;
+    const loadingStyle = (query) => {
+        emit('clicked', query)
+    }
 
-    default:
-        break;
-}
+    switch (name) {
+        case 'loading':
+            underline.value.style.left = "25%";
+            loading.value = true;
+            break;
+        case 'sectiontwo':
+            underline.value.style.left = "-10%";
+            sectiontwo.value = true;
+            break;
+        case 'finish':
+            underline.value.style.left = "-40%";
+            finish.value = true;
+            break;
+
+        default:
+            break;
+    }
 })
+//get data and then loader hide
+loadingStyle(false);
 
 </script>

@@ -38,7 +38,9 @@
 .tile {
     text-decoration: none;
     font-size: medium;
-    font-weight: 'Vazir';
+    /* font-weight: 'Vazir'; */
+    font-weight: 400;
+    /* padding: 5px; */
     color: var(--cf-dark-color);
 }
 
@@ -56,7 +58,7 @@
 .Tozihat a {
     text-decoration: none;
     color: var(--cf-green-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     /* margin-right: 100px; */
 
 }
@@ -75,15 +77,25 @@
     text-decoration: none;
     font-size: large;
     color: var(--cf-title-color);
-    font-family: 'Vazir';
-
+    font-family: 'anjoman';
 }
-
+.Titleontop{
+    margin: 10px;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--cf-title-color);
+    font-family: 'anjoman';
+}
+.Titleontop:hover{
+    color: var(--cf-title-color);
+}
 .Price {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'Vazir';
-    font-size: 13px;
+    font-family: 'anjoman';
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .Price:hover {
@@ -96,12 +108,24 @@
 
 .subtitle {
     text-decoration: none;
-    font-size: medium;
+    font-weight: 400;
+    font-size: 14px;
+    /* font-size: medium; */
     color: var(--cf-subtitle-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 
 }
-
+.figmafont{
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    /* font-size: medium; */
+    color: var(--cf-subtitle-color);
+    font-family: 'anjoman';
+}
+.figmafont:hover{
+    color: var(--cf-subtitle-color);
+}
 .subtitle:hover {
     color: var(--cf-subtitle-color);
 }
@@ -110,7 +134,7 @@
     text-decoration: none;
     font-size: small;
     color: var(--cf-title-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .mediumtitle:hover {
@@ -138,8 +162,7 @@
     text-decoration: none;
     font-size: medium;
     color: var(--cf-title-color);
-    font-family: 'Vazir';
-
+    font-family: 'anjoman';
 }
 
 .daftar_text:hover {
@@ -158,6 +181,7 @@
     top: 30%;
     z-index: 9999;
 }
+
 @media screen and (max-width: 992px) {
     .text-secondary {
         position: absolute;
@@ -166,12 +190,14 @@
         z-index: 9999;
     }
 }
-.slugs{
-     position: relative;
+
+.slugs {
+    position: relative;
     right: 50%;
     top: 30%;
     z-index: 9999;
 }
+
 .range {
     height: 80px;
     width: 100%;
@@ -223,7 +249,9 @@
 .texts {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-size: 14px;
+    font-family: 'anjoman';
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .texts:hover {
@@ -231,7 +259,7 @@
 }
 
 .box_tozihat {
-    /* width: 100%; */
+    width: 95%;
     position: relative;
     height: auto;
     min-height: 150px;
@@ -242,13 +270,19 @@
     border-color: var(--cf-grey-icon-color);
 }
 
-/* @media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) {
     .box_tozihat {
-        left: 0;
-        top: 0;
-        right: 8%;
+        width: 100%;
+        position: relative;
+        height: auto;
+        min-height: 150px;
+        max-height: 700px;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
     }
-} */
+}
 
 .mappingg {
     left: 10px;
@@ -257,6 +291,17 @@
     width: 95%;
     position: relative;
     top: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    .mappingg {
+        right: 20px;
+        border-radius: 10px;
+        height: 300px;
+        width: 95%;
+        position: relative;
+        top: 20px;
+    }
 }
 
 /* .range .sliderValue span:after {
@@ -366,6 +411,19 @@
     border-color: var(--cf-grey-icon-color);
 }
 
+@media screen and (max-width: 992px) {
+    .box-title {
+        position: relative;
+        right: 9%;
+        padding: 10px;
+        height: auto;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+    }
+}
+
 .box-title a {
     position: relative;
     top: 10px;
@@ -374,7 +432,8 @@
 .box_daftar {
     position: relative;
     top: 10px;
-    width: 93%;
+    left: 2%;
+    width: 95%;
     height: 74px;
     border-radius: 10px;
     border-radius: 10px;
@@ -382,10 +441,27 @@
     border-width: 0.5px;
     border-color: var(--cf-grey-icon-color);
     padding: 20px;
+}
+
+@media screen and (max-width: 992px) {
+    .box_daftar {
+        position: relative;
+        top: 10px;
+        width: 93%;
+        right: 6%;
+        height: 74px;
+        border-radius: 10px;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+        padding: 20px;
+    }
 }
 
 .box_warning {
     position: relative;
+    width: 95%;
     height: 74px;
     border-radius: 10px;
     border-style: solid;
@@ -394,9 +470,24 @@
     padding: 20px;
 }
 
+@media screen and (max-width: 992px) {
+    .box_warning {
+        position: relative;
+        width: 98%;
+        height: 74px;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+        padding: 20px;
+    }
+}
+
 .Tozihat {
+    /* padding: 10px; */
     position: relative;
-    /* right: 7%; */
+    /* width: 93%; */
+    /* left: 7%; */
 }
 
 
@@ -404,12 +495,19 @@
 .box_moshakhasat {
     position: relative;
     text-align: center;
-    /* padding: 10px; */
-    /* margin: 10px; */
     border-radius: 10px;
     border-style: solid;
     border-width: 2px;
     border-color: var(--cf-grey-icon-color);
+}
+
+@media screen and (max-width: 992px) {
+    .box_moshakhasat {
+        position: relative;
+        margin-left: 0px;
+        margin-right: 0px;
+        /* top: 97px; */
+    }
 }
 
 .borders {
@@ -422,6 +520,15 @@
     text-align: center;
     height: 0px;
     border: 1px solid var(--cf-grey-icon-color);
+}
+
+.forAll {}
+
+@media screen and (max-width: 992px) {
+    .forAll {
+        /* margin-left: -60px !important;
+        margin-right: -60px !important; */
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -462,7 +569,7 @@
     text-decoration: none;
     font-size: small;
     color: var(--cf-subtitle-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .daftar_textt:hover {
@@ -525,7 +632,14 @@
 
 .myimages {
     position: relative;
-    left: 5%;
+    left: 7%;
+}
+
+@media screen and (max-width: 992px) {
+    .myimages {
+        position: relative;
+        left: 0%;
+    }
 }
 
 .LogInModal {
@@ -655,7 +769,7 @@
 }
 
 .open-box {
-
+    /* width: 100%; */
     padding: 10px;
     z-index: 11111;
     position: fixed;
@@ -667,7 +781,7 @@
     .open-box {
         position: relative;
         background-color: var(--cf-light-color);
-
+        width: 100%;
         /* visibility: collapse; */
         transition: 1s;
 
@@ -688,7 +802,7 @@
     font-size: 25px;
     text-decoration: none;
     color: var(--cf-title-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .title:hover {
@@ -707,7 +821,7 @@
     text-decoration: none;
     color: var(--cf-subtitle-color);
     font-size: 15px;
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .sub:hover {
@@ -725,7 +839,7 @@
 
 .taghiratDaftar {
     font-size: medium;
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     color: var(--cf-green-color);
 }
 
@@ -734,10 +848,10 @@
 }
 
 .mediumtxt {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--cf-title-color);
     text-decoration: none;
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .mediumtxt:hover {
@@ -841,7 +955,7 @@
 .styling {
     text-decoration: none;
     color: var(--cf-title-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     font-size: medium;
 }
 
@@ -862,13 +976,14 @@
     cursor: pointer;
     text-decoration: none;
     color: var(--cf-title-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     font-size: larger;
     position: relative;
     display: block;
     text-align: start;
 }
-.wallettxts{
+
+.wallettxts {
     text-decoration: none;
     color: var(--cf-title-color);
     /* font-family: 'Vazir'; */
@@ -877,7 +992,24 @@
     display: block;
     text-align: start;
 }
-.wallettxtss{
+
+.wallettxts-describtion {
+    text-decoration: none;
+    color: var(--cf-title-color);
+    font-family: 'anjoman';
+    font-weight: 400;
+    font-size: 16px;
+    position: relative;
+    display: block;
+    text-align: start;
+    padding: 10px;
+}
+
+.wallettxts-describtion:hover {
+    color: var(--cf-title-color)
+}
+
+.wallettxtss {
     text-decoration: none;
     color: var(--cf-title-color);
     /* font-family: 'Vazir'; */
@@ -886,6 +1018,7 @@
     display: block;
     text-align: start;
 }
+
 .wallettxt:hover {
     color: var(--cf-title-color);
 }
@@ -933,25 +1066,21 @@
 
 .hover:hover {
     background-color: var(--cf-grey-icon-color);
-    width: 80%;
+    /* width: 80%; */
     border-radius: 5px;
     height: 30px;
     margin: 5px;
-
-
 }
+
 
 .hover a:hover {
     color: var(--cf-dark-color);
 }
 
-.hover a {
-    position: relative;
-    left: 30px;
-}
+
 
 .myhomenger {
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     font-size: 20px;
 }
 
@@ -1079,7 +1208,7 @@
 .tabbar-detailes a {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     position: relative;
     top: 20px;
     justify-content: center;
@@ -1098,7 +1227,7 @@
 
 .btntext {
     color: var(--cf-light-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     text-decoration: none;
 }
 
@@ -1190,7 +1319,7 @@
 .Licenes {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .Licenes:hover {
@@ -1230,7 +1359,7 @@
     padding: 10px;
     text-decoration: none;
     color: var(--cf-green-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
     font-size: 20px;
 }
 
@@ -1426,7 +1555,7 @@
 
 #korojtxt {
     color: var(--cf-dark-color);
-    font-family: 'Vazir';
+    font-family: 'anjoman';
 }
 
 .fa-home {

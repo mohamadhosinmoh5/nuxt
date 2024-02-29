@@ -236,7 +236,7 @@
             </div>
           </div>
       </div>
-      <div v-if="infinity != null  && !infinity.fetchingData"  class="spinner-border-background">
+      <div v-if="infinity != null  && infinity.fetchingData"  class="spinner-border-background">
         <br>
         <br>
         در حال بارگیری <br>
@@ -385,6 +385,7 @@ export default {
               this.allOffices =  r.allOffices;
               this.pending = false;
             });
+            this.pending = false;
           }
         }, 0);
       },

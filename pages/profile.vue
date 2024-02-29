@@ -24,12 +24,13 @@
                                     <a @click="modalOpen = false">
                                         <i id="khoroj" class="fa-solid fa-arrow-right"></i>
                                     </a>
-                                    <a id="korojtxt" class="ms-2">انتخاب  دفتر</a>
+                                    <a id="korojtxt" class="ms-2">انتخاب دفتر</a>
                                 </div>
                                 <div class="border-modal mt-2"></div>
 
                                 <div v-for="office in user.offices" class="col-sm row">
-                                    <a @click="useUser.setDefaultOffice(office.id),navigateTo('/')" :class="(office.id == useUser.getdefaultOffice) ? `wallettxt active mt-3` : `wallettxt mt-3`">
+                                    <a @click="useUser.setDefaultOffice(office.id), navigateTo('/')"
+                                        :class="(office.id == useUser.getdefaultOffice) ? `wallettxt active mt-3` : `wallettxt mt-3`">
                                         {{ office.title }}
                                     </a>
 
@@ -55,60 +56,60 @@
                 </div>
 
                 <div :class="(closeBox) ? `col-sm-2 liness dropdown-box` : `open-box col-sm-2 liness`">
-                    <div class="col-sm-12">
-                        <div class="col mt-4 hover">
+                    <div class="col-md-12">
+                        <div class="col-sm-12 mt-4 hover">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-5">پیشخوان</a>
+                            <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-2">پیشخوان</a>
                         </div>
-                        <div class="col hover mt-3">
+                        <div class="col-sm-12 hover mt-3">
                             <i class="fa-solid fa-wallet"></i>
-                            <a @click="changeMenu('showWallet')" href="#" class="mediumtxt ms-5">کیف پول نقدی</a>
+                            <a @click="changeMenu('showWallet')" href="#" class="mediumtxt ms-2">کیف پول نقدی</a>
                         </div>
-                        <div class="col hover mt-3">
+                        <div class="col-sm-12 hover mt-3">
                             <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('BuyLicence')" href="#" class="mediumtxt ms-5"> خرید اشتراک</a>
+                            <a @click="changeMenu('BuyLicence')" href="#" class="mediumtxt ms-1"> خرید اشتراک</a>
 
                         </div>
 
 
-                        <div class="col hover mt-3">
+                        <div class="col-sm-12 hover mt-3">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <a @click="changeMenu('MyProduct')" href="#" class="mediumtxt ms-5"> خرید های من</a>
+                            <a @click="changeMenu('MyProduct')" href="#" class="mediumtxt ms-1"> خرید های من</a>
                         </div>
-                        <div class="col hover mt-3">
+                        <div class="col-sm-12 hover mt-3">
                             <i class="fa-solid fa-arrow-down-wide-short"></i>
-                            <a @click="changeMenu('MyOrder')" href="#" class="mediumtxt ms-5"> سفارش های من </a>
+                            <a @click="changeMenu('MyOrder')" href="#" class="mediumtxt ms-1"> سفارش های من </a>
                         </div>
-                        <div class="col hover mt-3">
+                        <div class="col-sm-12 hover mt-3">
                             <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-5"> اشتراک های من</a>
+                            <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-1"> اشتراک های من</a>
                         </div>
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
                             <div class="col hover mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a href="#" class="mediumtxt ms-5">قوانین مقررات</a>
+                                <a href="#" class="mediumtxt ms-2">قوانین مقررات</a>
                             </div>
                         </NuxtLink>
 
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
                             <div class="col hover mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a href="#" class="mediumtxt ms-5"> تماس با ما</a>
+                                <a href="#" class="mediumtxt ms-2"> تماس با ما</a>
                             </div>
                         </NuxtLink>
 
                     </div>
                 </div>
 
-
+                <!-- {{ loading }} -->
                 <div class="col-sm-9">
-
+                    <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
                     <dashboard :user="user" v-if="showDashboard" />
                     <cash-wallet v-if="showWallet" />
-                    <buylicence v-if="BuyLicence" />
-                    <myproduct v-if="MyProduct" />
-                    <myorder v-if="MyOrder" />
-                    <mylycence v-if="MyLicence" />
+                    <buylicence @clicked="loadingStyle" :loading="loading" v-if="BuyLicence" />
+                    <myproduct @clicked="loadingStyle" :loading="loading" v-if="MyProduct" />
+                    <myorder @clicked="loadingStyle" :loading="loading" v-if="MyOrder" />
+                    <mylycence @clicked="loadingStyle" :loading="loading" v-if="MyLicence" />
                     <roll v-if="Rolls" />
                     <contact v-if="ContactUs" />
 
@@ -152,12 +153,16 @@ const MyLicence = ref(false);
 const Rolls = ref(false);
 const ContactUs = ref(false);
 const modalOpen = ref(false);
+const loading = ref(false)
 
 
+const loadingStyle = (query) => {
+    loading.value = false;
+}
 
 
 const changeMenu = (name) => {
-    console.log(name);
+    loading.value = true;
     showDashboard.value = false;
     showWallet.value = false;
     BuyLicence.value = false;
@@ -167,7 +172,7 @@ const changeMenu = (name) => {
     Rolls.value = false;
     ContactUs.value = false;
 
-
+    
 
     switch (name) {
         case 'showDashboard':
