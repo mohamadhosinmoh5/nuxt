@@ -300,18 +300,20 @@ const addAdress = async () => {
   addressModal.value.style.display = 'none';
 }
 
-const pay = (id) => {
+const pay = async (id) => {
   pending.value = true;
   if(useCart.status.portal == 'cash'){
     useCart.pay(id).then((r)=>{
       pending.value = false;
       window.location.href = r.action;
     })
+    
   }else{
     useCart.pay(id).then((r)=>{
       pending.value = false;
     })
   }
+
 }
 
 setTimeout(async () => {

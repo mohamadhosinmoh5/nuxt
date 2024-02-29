@@ -18,6 +18,7 @@ import { useAuthStore } from './auth';
     const address = ref(null);
     const auth = useAuthStore();
     const activeAdress = ref(null);
+    const payLink = ref(null);
     const status = reactive({address : false,requestPrice : true,portal : false});
 
     (useCookie('token')) ?  token.value = useCookie('token') : error.value = {message:'ابتدا وارد شوید تا سبد خرید دسترسی داشته باشید '};
@@ -132,7 +133,6 @@ import { useAuthStore } from './auth';
       }
 
     }
-    
 
     async function getAdress(){
 
@@ -265,7 +265,7 @@ import { useAuthStore } from './auth';
       if(data.value)
       {
         pending.value = false;
-        return cart.value = data.value;
+        return payLink.value = data.value.action;
       }
     }
 
@@ -277,6 +277,7 @@ import { useAuthStore } from './auth';
       status.portal = name;
     }
 
+
     return {
       cart,
       totalProduct,
@@ -287,6 +288,7 @@ import { useAuthStore } from './auth';
       pending,
       status,
       massage,
+      payLink,
       getCart,
       addToCart,
       removeCart,

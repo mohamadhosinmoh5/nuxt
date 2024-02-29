@@ -3,7 +3,8 @@
     <!-- {{ subScribe }} -->
     <!-- {{ carts }} -->
     <!-- {{ offices }} -->
-
+    <!-- {{ transactions }} -->
+    <!-- {{ transactionBankReceipts }} -->
     <div class="container-fluid">
         <div class="row ">
             <div class="col-12">
@@ -33,7 +34,6 @@
                                         :class="(office.id == useUser.getdefaultOffice) ? `wallettxt active mt-3` : `wallettxt mt-3`">
                                         {{ office.title }}
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -100,8 +100,13 @@
 
                     </div>
                 </div>
+                <div v-if="useUser.error?.message" class="notif error text-center">
+                    <span @click="useUser.error.message = null" class="closeNotife">x</span>
+                    <p>
+                      {{ useUser.error.message }}
+                    </p>
+                  </div>
 
-                <!-- {{ loading }} -->
                 <div class="col-sm-9">
                     <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
                     <dashboard :user="user" v-if="showDashboard" />
@@ -153,8 +158,8 @@ const MyLicence = ref(false);
 const Rolls = ref(false);
 const ContactUs = ref(false);
 const modalOpen = ref(false);
-const loading = ref(false)
-
+const transactions = ref(null);
+const transactionBankReceipts = ref(null)
 
 const loadingStyle = (query) => {
     loading.value = false;
@@ -206,15 +211,23 @@ const changeMenu = (name) => {
 
 setTimeout(() => {
 
-
-
-    useUser.getSubScribe().then((r) => {
-        subScribe.value = r;
+    useUser.getCarts().then((r) => {
+        carts.value = r;
     })
 
     useUser.getCarts().then((r) => {
         carts.value = r;
     })
+
+    useUser.transaction().then((r) => {
+        transactions.value = r;
+    })
+
+    // useUser.transactionBankReceipts().then((r) => {
+    //     transactionBankReceipts.value = r;
+    // })
+
+
 }, 0);
 
 </script>

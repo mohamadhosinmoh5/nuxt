@@ -772,7 +772,10 @@
     /* width: 100%; */
     padding: 10px;
     z-index: 11111;
+    /* height: auto; */
+    height: 100vh;
     position: fixed;
+    overflow: scroll;
     right: 0;
     transition: all ease-in-out 0.5s;
 }
