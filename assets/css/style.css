@@ -1094,6 +1094,10 @@ input.checkBox {
     background: transparent
 }
 
+.cursor-pointer{
+    cursor: pointer !important;
+}
+
 .slick-dots li button:focus,
 .slick-dots li button:hover {
     outline: none

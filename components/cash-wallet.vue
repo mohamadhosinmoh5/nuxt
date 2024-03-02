@@ -87,40 +87,75 @@
                 <div class="col-4">
                     <span @click="chnageTabMenu('verify')"> فیش واریزی</span>
                 </div>
-                <div class="col-4">
-                    <span @click="chnageTabMenu('setting')"> تنظیمات</span>
+                <div ref="underline" class="col-2 underline"></div>
+             
                 </div>
-            </div>
-            <div ref="underline" class="col-2 underline"></div>
 
-            <div class="row">
+                <div v-if="wallet"  class="col-sm-12 tab-Detaile">
+                    <div v-for="(item, index) in transactions.items" :key="index">
+                    
+                        <div class="row">
+                            <div class="col-6">
+                                <a href="#">مبلغ : </a>
+                            </div>
+                            <div class="col-6">
+                                <a href="#">{{item.amount}}</a>
+                            </div>
+                        </div>
+                    
+                        <div class="row mt-2">
+                            <div class="col-6">
+                                <a href="#">نوع : </a>
+                            </div>
+                            <div class="col-6">
+                                <span v-if="item.type ==`deposit`">واریز</span> 
+                                <span v-else>نا مشخص</span>
+                            </div>
+                        </div>
+                     
 
-                <div v-if="wallet" class="col-sm-12 mt-3 mobil">
+                        <div class="col mt-2">
+                            <a href="#">وضعیت : </a>
+                            <span v-if="item.status ==`failed`">نا موفق</span> 
+                            <span v-else>موفق</span>
+                        </div>
 
-                    <div class="col">
-                        <a href="#" class="mabalegh">مبلغ : </a>
-                        <a href="#" class="mabalegh">250,000</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">نوع : </a>
-                        <a href="#" class="mabalegh">واریزی</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">وضعیت : </a>
-                        <a href="#" class="mabalegh">انجام شده</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">کدرهیگیری : </a>
-                        <a href="#" class="mabalegh">ندارد</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">توضیحات : </a>
-                        <a href="#" class="mabalegh">شارژ کیفه پول</a>
-                    </div>
+                        <div class="col mt-2">
+                            <a href="#">کدرهیگیری : </a>
+                            <span v-if="item.ref_id">{{item.ref_id}}</span>
+                            <span v-else>ندارد</span>
+                        </div>
+                        
+                        <div class="col mt-2">
+                            <a href="#">توضیحات : </a>
+                            <a href="#">{{item.description}}</a>
+                        </div>
+                     </div>
                 </div>
                 <div v-if="verify" class="col-sm-12">
 
-                    verify
+                <div v-if="verify" class="col-sm-12 tab-Detaile">
+                    <div class="row">
+
+                        <table class="table table-light">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
 
                 </div>
                 <div v-if="setting" class="col-sm-12  ">
@@ -164,14 +199,16 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+            </div>
 </template>
 
 
 
 
 <script setup>
+import { useAuthStore } from '~/store/auth';
+
+
 const closeBox = ref(true);
 const ShowBtn = ref(true);
 const underline = ref(null);
@@ -179,17 +216,13 @@ const payiinBorder = ref(null);
 const wallet = ref(true)
 const verify = ref(false)
 const setting = ref(false)
-const isOpen = ref(false);
-const tasfie = ref(false);
-const bank = ref(true);
-const fish = ref(false);
-
-
-const emit = defineEmits(['clicked'])
-
-const loadingStyle = (query) => {
-  emit('clicked',query)
-} 
+const sheba = ref(null)
+const withdraw = ref(null)
+const useUser = useAuthStore();
+const transactions = ref(null)
+const transactionBankReceipts = ref(null)
+const Message = ref(null)
+const amount = ref(null)
 
 const chnageTabMenu = (name) => {
     wallet.value = false;
@@ -248,5 +281,28 @@ onMounted(() => {
         // underline.value.style.left = "-40%";
     }, 0);
 
-})
+    useUser.transaction().then((r) => {
+        transactions.value = r;
+    })
+
+    useUser.transactionBankReceipts().then((r) => {
+        transactionBankReceipts.value = r;
+    })
+
+    const addSetting = async () => {
+        // value of withdraw :
+        //monthly
+        //weekly
+        //manually
+        useUser.transactionSetting(sheba.value,withdraw.value).then(()=>{
+                Message.value = 'تنظیمات ذخیره شد';
+        })
+    }
+
+    const deposit = async () => {
+        useUser.deposit(amount).then(()=>{
+                Message.value = 'تنظیمات ذخیره شد';
+        })
+    }
+
 </script>

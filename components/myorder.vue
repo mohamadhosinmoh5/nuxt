@@ -8,16 +8,16 @@
 
             </div>
             <div v-if="loading" class="col-sm-12 tab-Detaile">
-                loading
-            </div>
+                    {{PendingCart}}
+                </div>
 
-            <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
-                verify
-            </div>
+                <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
+                    {{postPriceRequest}}
+                </div>
 
-            <div v-if="finish" class="col-sm-12 tab-Detaile">
-                setting
-            </div>
+                <div v-if="finish" class="col-sm-12 tab-Detaile">
+                    {{DoneFailed}}
+                </div>
             <div ref="underline" class="col-2 underline"></div>
         </div>
     </div>
@@ -25,13 +25,17 @@
 
 
 <script setup>
+import { useAuthStore } from '../store/auth';
 import { load } from 'ol/Image';
 
 const underline = ref(null);
 const loading = ref(true);
 const sectiontwo = ref(false);
 const finish = ref(false);
-
+const PendingCart = ref(null);
+const postPriceRequest = ref(null);
+const DoneFailed = ref(null);
+const useUser = useAuthStore();
 
 const changeOrderMenue = ((name) => {
     loading.value = false;
@@ -63,5 +67,20 @@ const changeOrderMenue = ((name) => {
 })
 //get data and then loader hide
 loadingStyle(false);
+
+
+useUser.getPendingCart().then((r) => {
+    PendingCart.value = r;
+})
+
+useUser.getpostPriceRequest().then((r) => {
+    postPriceRequest.value = r;
+})
+
+useUser.getDoneFailed().then((r) => {
+    DoneFailed.value = r;
+})
+
+
 
 </script>
