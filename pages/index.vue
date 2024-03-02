@@ -282,13 +282,13 @@ export default {
                       </div>
                     </div>
                   </div>
-                  <div class="col-5 text-end">
+                  <div v-if="!officeShow" class="col-5 text-end">
                     <span class="backCat" @click="lastCategory">
                       <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
                     </span>
                   </div>
                 </div>
-                <ul class="categoryBox">
+                <ul v-if="!officeShow" class="categoryBox">
                   <li v-for="(item, index) in categories" :key="index">
                     <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
                   <a @click="getCategory(item.id)" class="link">{{item.title}}</a>

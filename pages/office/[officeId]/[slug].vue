@@ -116,17 +116,20 @@
                     <div ref="mapDiv" class="stickyStyle" >
                       <LMap
                         id="map"
-                        ref="mapRef"
                         :zoom="16"
-                        :center="office?.address?.geom?.coordinates"
-                      >
+                        :center="office?.address?.geom?.coordinates" >
                       
-                        <l-circle-marker
+                        <!-- <l-circle-marker
                         :lat-lng="office?.address?.geom?.coordinates"
                         :radius="10"
                         color="red"
-                      />
+                      /> -->
                         <l-marker :lat-lng="office?.address?.geom?.coordinates">
+                            <l-popup @ready="ready" >
+                                <div class="title">
+                                    تنتینتشسنیتش
+                                </div>
+                              </l-popup>
                         </l-marker>
               
                       </LMap>
@@ -142,7 +145,6 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useOfficeStore } from '../store/office';
-import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'
