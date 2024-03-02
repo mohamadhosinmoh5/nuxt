@@ -39,16 +39,16 @@
 
                             <single-section v-if="useNotice.notice.section_data_collection.length >= 1"
                                 v-for="section in useNotice.notice.section_data_collection" :section="section" />
-                            <div class="row col-sm-12 mt-3">
-                                <div class="row Tozihat ">
+                            <div class="col-sm-12 mt-3">
+                                <div class="row Tozihat">
                                     <div class="col-sm col-md">
-                                        <img class="ms-3" src="assets/img/SinglePage_Image/money.svg" alt=""
+                                        <img src="assets/img/SinglePage_Image/money.svg" alt=""
                                             style="width: 30px;">
                                         <a href="#"> توضیحات</a>
                                     </div>
                                 </div>
-                                <div class="col-11 ms-4 mt-3 box_tozihat">
-                                    <a href="#" class="tile">
+                                <div class="col-12  mt-3 box_tozihat">
+                                    <a href="#" class="wallettxts-describtion">
                                         {{ useNotice.notice.description }}
                                     </a>
                                 </div>
@@ -56,7 +56,7 @@
 
                             <div class=" col row Tozihat mt-3">
                                 <div class="col">
-                                    <img class="ms-3" src="assets/img/SinglePage_Image/money.svg" alt=""
+                                    <img src="assets/img/SinglePage_Image/money.svg" alt=""
                                         style="width: 30px;">
                                     <a href="#"> کارشناسی قیت</a>
                                 </div>
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="Warn mt-3 ms-3 col-11">
+                                <div class="Warn mt-3 ms-2 col-12">
                                     <div class="col-md box_warning">
                                         <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
                                         <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی</a>
@@ -111,19 +111,19 @@
                     <div class="col row mt-5">
                         <div class="row col-11 box-title">
                             <div class="col-12">
-                                <a href="#" class="Title">
+                                <a href="#" class="Titleontop">
                                     {{ useNotice.notice.title }}
                                 </a>
                             </div>
 
                             <div class="boxdetailes col-md-12 row">
                                 <div v-if="useNotice.notice.address != null" class="col-md-4">
-                                    <a href="#" class="subtitle">محله : </a>
+                                    <a href="#" class="figmafont">محله : </a>
                                     <a href="#" class="texts">{{
                                         useNotice.notice.address.address.neighbourhood }}</a>
                                 </div>
                                 <div class="col-4">
-                                    <a href="#" class="subtitle">
+                                    <a href="#" class="figmafont">
                                         کد آگهی :
                                     </a>
                                     <a href="#" class="texts"> {{ useNotice.notice.id }}</a>
@@ -168,9 +168,9 @@
 
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-7 mt-3"> جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
+                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
 
-                                    <div class="col-5 tamas_btn mt-2">
+                                    <div class="col-4 tamas_btn mt-2">
                                         <button @click="showPhone = true" type="button"
                                             class="btn btn-success btnmodal">اطلاعات تماس</button>
 
