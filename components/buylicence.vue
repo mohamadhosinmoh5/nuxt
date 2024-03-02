@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <!-- <div v-if="loading = false" class="spinner-border text-primary" role="status"></div> -->
-        <div v-if="loadingStyle" class="spinner-border text-secondary" role="status"></div>
+        
             <div class="col-sm-7 Box-Licence">
                 
                 <UModal v-if="isOpen">
