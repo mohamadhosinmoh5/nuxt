@@ -226,7 +226,7 @@ export default {
             </div> -->
             <div class="row tab_box">
               <div class="activeItem"></div>
-              <a @click="showMap=false" class="col-6 tabItem"> فیلتر ها  </a>
+              <a @click="showMap=false" class="col-6 tabItem active"> فیلتر ها  </a>
               <a @click="showMap=true" class="col-6 tabItem"> نقشه</a>
             </div>
           </div>

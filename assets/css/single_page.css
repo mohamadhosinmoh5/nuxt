@@ -3,7 +3,7 @@
     --cf-dark-color: #1b1b1b;
     --cf-light-color: #dedede;
     --cf-light-grey: #7a7a7a;
-    --cf-title-color: #141414;
+    --cf-title-color: #636363;
     --cf-light-color: #FFF;
     --cf-subtitle-color: #808487;
     --cf-green-color: #197C82;
@@ -136,7 +136,7 @@
 
 .daftar_text {
     text-decoration: none;
-    font-size: small;
+    font-size: medium;
     color: var(--cf-title-color);
     font-family: 'Vazir';
 
@@ -152,18 +152,32 @@
     width: 100px;
 }
 
-.spinner-border {
-    text-align: center;
-    justify-content: center;
-    position: relative;
-    /* margin-right: 50%; */
-    margin-top: 15%;
+.text-secondary {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    z-index: 9999;
 }
-
+@media screen and (max-width: 992px) {
+    .text-secondary {
+        position: absolute;
+        left: 50%;
+        top: 70%;
+        z-index: 9999;
+    }
+}
+.slugs{
+     position: relative;
+    right: 50%;
+    top: 30%;
+    z-index: 9999;
+}
 .range {
     height: 80px;
     width: 100%;
     position: absolute;
+    display: block;
+    justify-content: center;
     margin-top: 6%;
     /* background-color: var(--cf-light-color); */
 
@@ -390,15 +404,15 @@
 .box_moshakhasat {
     position: relative;
     text-align: center;
-    padding: 10px;
-    margin: 10px;
+    /* padding: 10px; */
+    /* margin: 10px; */
     border-radius: 10px;
     border-style: solid;
     border-width: 2px;
     border-color: var(--cf-grey-icon-color);
 }
 
-.borders{
+.borders {
     width: 95%;
     /* display: flex; */
     position: relative;
@@ -409,13 +423,15 @@
     height: 0px;
     border: 1px solid var(--cf-grey-icon-color);
 }
+
 @media screen and (max-width: 992px) {
     .borders {
         position: relative;
         top: 97px;
     }
 }
-.hiding{
+
+.hiding {
     position: absolute;
     cursor: pointer;
     color: #aaaaaa;
@@ -425,9 +441,11 @@
     font-size: 28px;
     font-weight: bold;
 }
-.spacing{
+
+.spacing {
     padding: 20px;
 }
+
 .Moshabe {
     text-align: start;
 }
@@ -445,6 +463,10 @@
     font-size: small;
     color: var(--cf-subtitle-color);
     font-family: 'Vazir';
+}
+
+.daftar_textt:hover {
+    color: var(--cf-subtitle-color);
 }
 
 .detailicons {
@@ -500,6 +522,7 @@
         left: 0px;
     }
 }
+
 .myimages {
     position: relative;
     left: 5%;
@@ -540,6 +563,7 @@
     /* border: none; */
     width: 70% !important;
 }
+
 @media screen and (max-width: 992px) {
     .Login-content {
         background-color: var(--cf-light-color);
@@ -555,6 +579,7 @@
         width: 100% !important;
     }
 }
+
 .maydetailes {
     background-color: white;
 }
@@ -623,20 +648,41 @@
 
 .dropdown-box {
     position: relative;
+    background-color: var(--cf-light-color);
+    z-index: 1111;
     right: -100%;
     transition: all ease-in-out 0.5s;
 }
 
 .open-box {
-    position: relative;
+    padding: 10px;
+    z-index: 11111;
+    /* height: auto; */
+    height: 100vh;
+    position: fixed;
+    overflow: scroll;
     right: 0;
     transition: all ease-in-out 0.5s;
 }
 
 @media screen and (max-width: 992px) {
+    .open-box {
+        position: relative;
+        background-color: var(--cf-light-color);
+
+        /* visibility: collapse; */
+        transition: 1s;
+
+
+    }
+}
+
+@media screen and (max-width: 992px) {
     .liness {
         border-left: none;
-        height: 50%;
+        position: relative;
+        bottom: 50px;
+
     }
 }
 
@@ -656,7 +702,7 @@
     position: relative;
     right: 25px;
     text-decoration: none;
-    color: var(--cf-green-color);
+    /* color: var(--cf-green-color); */
 }
 
 .sub {
@@ -679,11 +725,26 @@
     border: 0.5px solid var(--cf-navicon-color);
 }
 
+.taghiratDaftar {
+    font-size: medium;
+    font-family: 'Vazir';
+    color: var(--cf-green-color);
+}
+
+.taghiratDaftar:hover {
+    color: var(--cf-green-color);
+}
+
 .mediumtxt {
-    font-size: 16px;
+    cursor: pointer;
+    font-size: 14px;
     color: var(--cf-title-color);
     text-decoration: none;
     font-family: 'Vazir';
+}
+
+.mediumtxt:hover {
+    color: var(--cf-title-color);
 }
 
 .card1 {
@@ -727,27 +788,139 @@
 }
 
 .box-info {
+    position: relative;
+    left: 7%;
     padding: 10px;
-    /* height: 80px; */
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;
     border-color: var(--cf-grey-icon-color);
+    box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
     /* background-color: var(--cf-light-grey); */
+}
+
+.box-buttom {
+    position: relative;
+    left: 7%;
+    padding: 10px;
+    min-height: 200px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: var(--cf-grey-icon-color);
+    box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+}
+
+/* .bento{
+    position: relative;
+    margin: 10px;
+} */
+.borderrs {
+    position: relative;
+    width: 100%;
+    top: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border: 0.5px solid var(--cf-grey-icon-color)
+}
+
+.lice {
+    position: relative;
+    display: block;
+    text-align: start;
+}
+
+#roaunded {
+    margin-right: 10px;
+}
+
+@media screen and (max-width: 992px) {
+    #roaunded {
+        margin-right: 0px;
+        margin-top: 10px;
+    }
+}
+
+.styling {
+    text-decoration: none;
+    color: var(--cf-title-color);
+    font-family: 'Vazir';
+    font-size: medium;
+}
+
+.styling:hover {
+    color: var(--cf-title-color);
+}
+
+.greentxt {
+    text-decoration: none;
+    color: var(--cf-green-color);
+    position: relative;
+    top: 50px;
+    display: block;
+    text-align: start;
+}
+
+.wallettxt {
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--cf-title-color);
+    font-family: 'Vazir';
+    font-size: larger;
+    position: relative;
+    display: block;
+    text-align: start;
+}
+.wallettxts{
+    text-decoration: none;
+    color: var(--cf-title-color);
+    /* font-family: 'Vazir'; */
+    font-size: 25px;
+    position: relative;
+    display: block;
+    text-align: start;
+}
+.wallettxtss{
+    text-decoration: none;
+    color: var(--cf-title-color);
+    /* font-family: 'Vazir'; */
+    font-size: 15px;
+    position: relative;
+    display: block;
+    text-align: start;
+}
+.wallettxt:hover {
+    color: var(--cf-title-color);
 }
 
 .info-box {
     position: absolute;
     width: 100%;
+    /* display: flex; */
+    right: 30%;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 20px;
     /* justify-content: space-evenly; */
     top: 5%;
 }
 
-.mainBoxess a{
+@media screen and (max-width: 992px) {
+    .info-box {
+        position: absolute;
+        width: 100%;
+        padding: 20px;
+        right: 6%;
+        /* justify-content: space-evenly; */
+        top: 10%;
+    }
+}
+
+.mainBoxess a {
     font-size: 18px;
 }
+
 .mainBoxess {
     position: absolute;
     text-align: start;
@@ -756,9 +929,9 @@
     top: 30%;
 }
 
-.topBoxes{
-    margin: 10px;
-    padding: 10px;
+.topBoxes {
+    /* margin: 10px;
+    padding: 10px; */
 }
 
 .hover:hover {
@@ -794,17 +967,34 @@
 
 @media screen and (max-width: 992px) {
     .close {
-        position: fixed;
+        position: relative;
         /* bottom: 50%; */
         top: 0px;
-        left: 0px; 
+        bottom: 30px;
+        display: block;
+        /* visibility: collapse; */
+        /* left: 90%; */
         border: none;
         border-radius: 10px;
         background-color: transparent;
     }
 }
 
+@media screen and (min-width: 999px) {
+    .close {
+        display: none;
+    }
+}
 
+.close {
+    background-color: var(--cf-light-color);
+    z-index: 1111;
+}
+
+.btnside {
+    position: relative;
+    bottom: 20px;
+}
 
 .clickBTN {
     margin-right: 150%;
@@ -860,8 +1050,19 @@
     position: relative;
     width: 50% !important;
     left: 25%;
-    right: 25%;
+    right: 50%;
     margin-top: 5%;
+}
+
+@media screen and (max-width: 992px) {
+    .box-information {
+        position: relative;
+        width: 50% !important;
+        left: 25%;
+        right: 25%;
+        margin-top: 5%;
+
+    }
 }
 
 .card-money {
@@ -914,7 +1115,16 @@
 .myOrder {
     position: relative;
     top: 50px;
-    right: 25%;
+    right: 50%;
+}
+
+@media screen and (max-width: 992px) {
+    .myOrder {
+        position: relative;
+        top: 50px;
+        right: 25%;
+
+    }
 }
 
 .underline {
@@ -995,13 +1205,28 @@
 /* by licence */
 .Box-Licence {
     position: relative;
-    top: 90px;
+    padding: 20px;
+    top: 40px;
     min-height: 600px;
     max-height: 1100px;
-    /* left: 30%; */
+    right: 30%;
     /* background-color: var(--cf-light-grey); */
     border: 1px solid var(--cf-navicon-color);
     border-radius: 10px;
+}
+
+@media screen and (max-width: 992px) {
+    .Box-Licence {
+        position: absolute;
+        padding: 20px;
+        top: 20%;
+        min-height: 600px;
+        max-height: 1100px;
+        left: 0%;
+        /* border: 1px solid var(--cf-navicon-color); */
+        border-radius: 10px;
+
+    }
 }
 
 .buy-title {
@@ -1121,41 +1346,106 @@
 
     }
 }
+
 .form {
     position: relative;
     display: inline-block;
     top: 12px;
     /* left: 40px; */
 }
-.form input{
+
+.form input {
     position: relative;
     padding: 5px;
     border-radius: 6px;
     border: 2px solid var(--cf-grey-icon-color);
 }
-.text-add button{
+
+.text-add button {
     position: relative;
     bottom: 5px;
     float: right;
 }
-.text-minez button{
+
+.text-minez button {
     position: relative;
     bottom: 5px;
     float: left;
 
 }
-.txttt{
+
+.txttt {
     position: relative;
     left: 30%;
     text-align: start;
 }
-.linkss{
+
+.linkss {
     text-decoration: none;
 }
 
-.fa-address-book{
+.fa-address-book {
     color: var(--cf-dark-color)
 }
-.box-title:hover{
+
+.box-title:hover {
     border: 2px solid var(--cf-green-color);
+}
+
+.daftar-modal {
+    background-color: var(--cf-light-color);
+    /* opacity: 1; */
+    z-index: 11111;
+    border-radius: 10px;
+    height: 70%;
+    padding: 20px;
+    right: 25%;
+    overflow: scroll;
+    height: 70vh;
+    position: fixed;
+    border: 1px solid var(--cf-grey-icon-color);
+    width: 50% !important;
+}
+
+@media screen and (max-width: 992px) {
+    .daftar-modal {
+        background-color: var(--cf-light-color);
+        /* opacity: 1; */
+        z-index: 11111;
+        border-radius: 10px;
+        height: 70%;
+        padding: 20px;
+        left: 0%;
+
+        position: fixed;
+        border: 1px solid var(--cf-grey-icon-color);
+        width: 100% !important;
+    }
+}
+
+#khoroj {
+    color: var(--cf-dark-color);
+}
+
+#korojtxt {
+    color: var(--cf-dark-color);
+    font-family: 'Vazir';
+}
+
+.fa-home {
+    position: relative;
+    display: block;
+    float: left;
+}
+
+.toppingTile a {
+    color: var(--cf-dark-color);
+}
+
+#outlinbuttons {
+    padding: 10px;
+    position: relative;
+    left: 20%;
+    border-radius: 10px;
+    border: 1px solid var(--cf-green-color);
 }

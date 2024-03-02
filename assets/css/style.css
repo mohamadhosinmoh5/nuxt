@@ -1077,6 +1077,10 @@ input.checkBox {
     background: transparent
 }
 
+.cursor-pointer{
+    cursor: pointer !important;
+}
+
 .slick-dots li button:focus,
 .slick-dots li button:hover {
     outline: none
@@ -1155,6 +1159,13 @@ input.checkBox {
     cursor: pointer;
 }
 
+.wallettxt.active {
+    border: 2px solid green;
+    padding: 5px;
+    border-radius: 10px;
+    width: 95%;
+    box-shadow: 0px 0px 3px 3px #e7e7e7;
+}
 .addresses{
     overflow: scroll;
     max-height: 350px;
