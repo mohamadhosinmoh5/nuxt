@@ -44,7 +44,7 @@
                             </button>
                           </div>
                           <div class="col-7">
-                            <button @click="requestPrice(cart?.items[0].id)" class="btn btn-danger">
+                            <button @click="requestPrice(cart?.items[0].id)" class="btn btn-danger mt-4">
                               <div v-if="useCart.pending == true" class="spinner-border spinner-btn" role="status"></div>
                                 درخواست قیمت گذاری
                             </button>
@@ -60,7 +60,7 @@
                         <div class="modal-content">
                           <div class="modal-header">
                             <h5 class="modal-title">افزودن آدرس</h5>
-                            <button @click="addressBoxModel = false" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button @click="addressBoxModel = false" type="button" class="closeCart" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                             </button>
                           </div>
@@ -80,9 +80,12 @@
                             </div>
                             
                           </div>
-                          <div class="modal-footer">
-                            <button type="button" @click="addAdress" class="btn btn-primary">افزودن آدرس</button>
-                            <button type="button" @click="addressBoxModel = false" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <div class="row">
+                            <div class="col-2"></div>
+                            <button type="button" @click="addAdress" class="btn btn-primary col-3">افزودن آدرس</button>
+                            <div class="col-2"></div>
+                            <button type="button" @click="addressBoxModel = false" class="btn btn-secondary col-3" data-dismiss="modal">Close</button>
+                            <div class="col-2"></div>
                           </div>
                         </div>
                       </div>

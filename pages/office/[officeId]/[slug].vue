@@ -53,7 +53,12 @@
                         @click="showOffice = true, showNotice = false">آدرس در نقشه</a>
                 </li>
             </ul>
-
+            
+            <!-- <div v-if="allNotices.length < 1 && showNotice" class="row">
+                <div class="col-sm-12 alert alert-danger mt-3 text-center">
+                    آگهی وجود ندارد
+                </div>
+            </div> -->
             <div v-if="allNotices != null && showNotice" v-for="notice in allNotices" :key="notice.id"
                 class="col-sm-3 mt-5">
                 <div class="row box-notice">
@@ -145,7 +150,6 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useOfficeStore } from '../store/office';
-import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'
