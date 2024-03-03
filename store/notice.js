@@ -102,7 +102,7 @@ export const useNoticeStore = defineStore('notice', {
       },
       async getSimilar(noticeId,category_id){
         const auth = useAuthStore();
-        const query = `?per_page=10&page=1&fetch_all=false`;
+        const query = `?per_page=8&page=1&fetch_all=false`;
         const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/notices${query}&similar_notice_id=${noticeId}&category_id=${category_id}`,
         {
           method:'get',
@@ -117,7 +117,7 @@ export const useNoticeStore = defineStore('notice', {
         }
         
         if(notices.value){
-          this.similarNotice = JSON.parse(JSON.stringify(notices.value.data));
+          this.similarNotice = notices.value;
         }
         
         return {

@@ -59,9 +59,9 @@ export const useAuthStore = defineStore('Auth', {
             }
 
             if(data.value){
-              if(this.getdefaultOffice == 0 && !useCookie('defaultOffice')){
-                console.log(data.value.offices[0]);
-                this.setDefaultOffice(data.value.offices[0].id);
+              if(this.getdefaultOffice == 0 && useCookie('defaultOffice') ==null){
+                console.log(data.value?.offices[0]);
+                this.setDefaultOffice(data.value?.offices[0].id);
               }else{
                 this.getdefaultOffice = useCookie('defaultOffice');
               }
