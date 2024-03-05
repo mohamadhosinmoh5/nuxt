@@ -4,7 +4,9 @@ import { defineStore } from 'pinia';
 export const useAuthStore = defineStore('Auth', {
     state: () => ({ user: null,pricing:null ,error:null,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
     getters: {
-      
+      getError: (state)=>{
+        return state.error;
+      }
     },
     actions: {
         async sendSms(mobile){
@@ -50,6 +52,7 @@ export const useAuthStore = defineStore('Auth', {
 
             this.user= data.value.user;
             this.token = data.value.access_token;
+           
             const d = new Date();
             d.setDate(d.getDate() + 7);
             const token = useCookie('token',{
@@ -73,9 +76,9 @@ export const useAuthStore = defineStore('Auth', {
             }
 
             if(data.value){
-              if(this.getdefaultOffice == 0 && useCookie('defaultOffice') ==null){
-                console.log(data.value?.offices[0]);
-                this.setDefaultOffice(data.value?.offices[0].id);
+              console.log(data.value);
+              if(this.getdefaultOffice == 0){
+                this.setDefaultOffice(data.value.offices[0].id);
               }else{
                 this.getdefaultOffice = useCookie('defaultOffice');
               }

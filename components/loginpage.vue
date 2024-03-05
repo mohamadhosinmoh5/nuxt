@@ -29,9 +29,9 @@
             </div>
             <div class="col-sm-12 mt-2">
                 <a href="#" class="subtitle">شرایط و قوانین استفاده و سیاست نامه حریم خصوصی هومنگر را می پزیرم</a>
-                <input class="form-check-input ms-2" type="checkbox" v-model="checkBox" id="flexCheckIndeterminate">
-                <div v-if="auth.pending" class="spinner-border" style="position: absolute;left: 30px;top: 38%;" role="status"></div>
-                <div v-if="auth.error" class="alert alert-danger text-center" >{{ auth.error.message }}</div>
+                <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate">
+                <div v-if="auth.pending" class="spinner-border" style="position: absolute;left: 30px ;top:42%;" role="status"></div>
+                <div v-if="auth.error" class="alert alert-danger" >{{ auth.error.message }}</div>
             </div>
             <div class="col">
                 <div class="row mt-2">

@@ -124,17 +124,24 @@
                             </div>
                         </div> -->
 
-                </div>
-
-            </div>
-
-
-            <div v-if="showOffice" class="col-sm-12 mt-2 mapBox">
-                <div ref="mapDiv" class="stickyStyle">
-                    <LMap id="map" ref="mapRef" :zoom="16" :center="office?.address?.geom?.coordinates">
-
-                        <l-circle-marker :lat-lng="office?.address?.geom?.coordinates" :radius="10" color="red" />
+                <div v-if="showOffice" class="col-sm-12 mt-2 mapBox">
+                    <div ref="mapDiv" class="stickyStyle" >
+                      <LMap
+                        id="map"
+                        :zoom="16"
+                        :center="office?.address?.geom?.coordinates" >
+                      
+                        <!-- <l-circle-marker
+                        :lat-lng="office?.address?.geom?.coordinates"
+                        :radius="10"
+                        color="red"
+                      /> -->
                         <l-marker :lat-lng="office?.address?.geom?.coordinates">
+                            <l-popup @ready="ready" >
+                                <div class="title">
+                                    تنتینتشسنیتش
+                                </div>
+                              </l-popup>
                         </l-marker>
 
                     </LMap>
