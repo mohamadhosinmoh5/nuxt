@@ -80,7 +80,7 @@ export const useNoticeStore = defineStore('notice', {
         }
       },
       async fetchData(){
-        console.log(this.query);
+        
         const {data:notices,pending:pendings,error:errors,refresh} = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/v2/notices${this.query}`);
         
         this.pending = pendings;

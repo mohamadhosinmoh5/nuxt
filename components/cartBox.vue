@@ -17,6 +17,68 @@
             </NeshanMap> -->
 
               <div v-if="cart?.items.length >= 1" class="row" dir="rtl">
+                <div class="col-sm-8">
+                  <div class="row" dir="rtl">
+                                <h5 class="mb-3"><a href="/" class="text-body"><i
+                                      class="fas fa-long-arrow-alt-left me-2"></i>صفحه اصلی </a>
+                                </h5>
+                              <hr>
+              
+                              <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                  <p class="mb-1">سبد خرید</p>
+                                  <p class="mb-0">شما تعداد {{(cart?.items.length < 1) ? 0 : cart?.items.length}} محصول در سبد خرید خود دارید</p>
+                                </div>
+                              </div>
+                              <div v-for="(item, index) in cart?.items" :key="index" class="cart-item">
+                                  <div v-if="item.count != 0" class="mb-3">
+                                    <div >
+                                      <div class="d-flex justify-content-between">
+                                        <div class="d-flex flex-row align-items-center">
+                                          <div class="image-cart">
+                                            <img
+                                              :src="`${useRuntimeConfig().public.BaseUrl}/${item.notice?.gallery[0].image}`"
+                                              class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                          </div>
+                                          <div class="ms-3">
+                                            <h5>{{item.notice.title}}</h5>
+                                            <p class="small mb-0">{{item.notice.category.title}}</p>
+                                          </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                          <div class="row">
+                                            <div class="col-4">
+                                              <button @click="useCart.addToCart(item.notice.id,item.count),addCart = true,item.count++" class="btn-cus btn-success">
+                                                <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn" role="status"></div>
+                                                <div v-else>+</div>
+                                              </button>
+                                            </div>
+                                            <div class="col-4 text-center">
+                                              <h5 class="fw-normal mb-0">
+                                                <div class="form-group">
+                                                  <input id="count" class="form-control" disabled type="text" v-model="item.count">
+                                                </div>
+                                              </h5>
+                                            </div>
+                                            <div class="col-4">
+                                              <button @click="useCart.removeCart(item.notice.id,item.count),addCart = false,item.count--" class="btn-cus btn-success">
+                                                <div v-if="useCart.pending==true && !addCart" class="spinner-border spinner-btn" role="status"></div>
+                                                <div v-else>-</div>
+                                              </button>
+                                            </div>
+                                          </div>
+                                          <div style="width: 80px;">
+                                           {{ convertPrice(item.notice.pricing.price)}}
+                                            <!-- {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان -->
+                                          </div>
+                                          <a @click="useCart.deleteCart(item.notice.id),item.count=0" href="#" style="color: #cecece;margin-right:20px"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div>
+            </div>
                 <div class="col-sm-4 box-address" dir="rtl">
                   <div v-if="cart?.items[0].post_price_tow_stage" class="all-address">
                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -122,68 +184,7 @@
                       </button>
                 </div>
 
-                <div class="col-sm-8">
-                      <div class="row" dir="rtl">
-                                    <h5 class="mb-3"><a href="/" class="text-body"><i
-                                          class="fas fa-long-arrow-alt-left me-2"></i>صفحه اصلی </a>
-                                    </h5>
-                                  <hr>
-                  
-                                  <div class="d-flex justify-content-between align-items-center mb-4">
-                                    <div>
-                                      <p class="mb-1">سبد خرید</p>
-                                      <p class="mb-0">شما تعداد {{(cart?.items.length < 1) ? 0 : cart?.items.length}} محصول در سبد خرید خود دارید</p>
-                                    </div>
-                                  </div>
-                                  <div v-for="(item, index) in cart?.items" :key="index" class="cart-item">
-                                      <div v-if="item.count != 0" class="mb-3">
-                                        <div >
-                                          <div class="d-flex justify-content-between">
-                                            <div class="d-flex flex-row align-items-center">
-                                              <div class="image-cart">
-                                                <img
-                                                  :src="`${useRuntimeConfig().public.BaseUrl}/${item.notice?.gallery[0].image}`"
-                                                  class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
-                                              </div>
-                                              <div class="ms-3">
-                                                <h5>{{item.notice.title}}</h5>
-                                                <p class="small mb-0">{{item.notice.category.title}}</p>
-                                              </div>
-                                            </div>
-                                            <div class="d-flex flex-row align-items-center">
-                                              <div class="row">
-                                                <div class="col-4">
-                                                  <button @click="useCart.addToCart(item.notice.id,item.count),addCart = true,item.count++" class="btn-cus btn-success">
-                                                    <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn" role="status"></div>
-                                                    <div v-else>+</div>
-                                                  </button>
-                                                </div>
-                                                <div class="col-4 text-center">
-                                                  <h5 class="fw-normal mb-0">
-                                                    <div class="form-group">
-                                                      <input id="count" class="form-control" disabled type="text" v-model="item.count">
-                                                    </div>
-                                                  </h5>
-                                                </div>
-                                                <div class="col-4">
-                                                  <button @click="useCart.removeCart(item.notice.id,item.count),addCart = false,item.count--" class="btn-cus btn-success">
-                                                    <div v-if="useCart.pending==true && !addCart" class="spinner-border spinner-btn" role="status"></div>
-                                                    <div v-else>-</div>
-                                                  </button>
-                                                </div>
-                                              </div>
-                                              <div style="width: 80px;">
-                                               {{ convertPrice(item.notice.pricing.price)}}
-                                                <!-- {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان -->
-                                              </div>
-                                              <a @click="useCart.deleteCart(item.notice.id),item.count=0" href="#" style="color: #cecece;margin-right:20px"><i class="fas fa-trash-alt"></i></a>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                  </div>
-                                </div>
-                </div>
+                
               </div>
         
               <div v-if="!pending && cart?.items.length < 1" class="error alert alert-danger text-center">

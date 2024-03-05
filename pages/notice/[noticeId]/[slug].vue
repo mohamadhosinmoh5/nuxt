@@ -166,7 +166,7 @@
 
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
+                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر با ما تماس بگیرید</a>
 
                                     <div class="col-4 tamas_btn mt-2">
                                         <button @click="showPhone = true" type="button"
@@ -192,7 +192,7 @@
                                     </div> -->
 
                                     <div v-if="showPhone" id="myModal" class="modal">
-                                        <div class="modal-content">
+                                        <div class="modal-content-index">
                                             <span @click="showPhone = false" class="hiding">&times;</span>
                                             <p href="#" class="Title">شماره تماس : {{ notice.mobile }}</p>
                                         </div>
@@ -246,7 +246,7 @@
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
                             <img src="assets/img/SinglePage_Image/row.svg" style="float: left; top: 6px;position: relative;"
                                 alt="">
-                            <a :href="`office/${useNotice.office?.uuid}/${useNotice.office?.title}/?id=${office?.id}`" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
+                            <a :href="`${useRuntimeConfig().public.BaseUrl}/office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
 
                         </div>
                         <div class="col-12 map_box">
@@ -411,7 +411,7 @@ setTimeout(async () => {
     useNotice.getNotice(params.noticeId).then((r) => {
         notice.value = r;
         pending.value = false;
-        getSimilar(r.category.id);  
+        getSimilar(r.category.id);
     });
     loadingStyle.value = false;
 
@@ -424,13 +424,13 @@ setTimeout(async () => {
 
 
 const getSimilar = (catId)=>{
-        useNotice.getSimilar(params.noticeId,catId).then((r2)=>{
-                allNotices.value = r2.allNotices;
-            });
+    useNotice.getSimilar(params.noticeId,catId).then((r2)=>{
+            allNotices.value = r2.allNotices;
+        });
 }
 
 const setBaseImage = (urlImage) => {
-    mainImage.value.src = `${useRuntimeConfig().public.BaseUrl}/${urlImage}`;
+    mainImage.value.style.backgroundImage = `url("${useRuntimeConfig().public.BaseUrl}/${urlImage}")`;
 }
 
 
