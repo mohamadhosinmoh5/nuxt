@@ -15,7 +15,14 @@
         </div>
   
         <div class="col-2 text-end">
-          <a href="#"><img src="assets/img/shop_icon.svg"/></a>
+          <a v-if="useCart.cart?.items[0].count" href="/cart">
+            <div class="count-cart">
+                {{useCart.cart?.items[0].count}}
+              </div>
+              <img  src="~/assets/img/basket.svg" alt="">
+          </a>
+          <a v-else disabled><img src="~/assets/img/basket.svg" alt=""></a>
+          <!-- <a href="#"><img src="assets/img/shop_icon.svg"/></a> -->
         </div>
       </div>
 
@@ -295,6 +302,7 @@
 <!-- script -->
 <script >
 import { useAuthStore } from '../store/auth';
+import { useCartStore } from '../store/cart';
 import { useMapStore } from '../store/map';
 import { useNoticeStore } from '../store/notice';
 import { useOfficeStore } from '../store/office';
@@ -509,7 +517,9 @@ export default {
   // $bus.$emit.$on('filterUptaded', ($event) => console.log($event))
  }
  ,mounted() {
-        setTimeout(() => {
+   
+   setTimeout(() => {
+          var token = useCookie('token');
           this.notices.fetchData().then((r)=> {
             this.defaultNotices = r.allNotices;
             this.allNotices =  r.allNotices;
@@ -520,6 +530,18 @@ export default {
             this.categories =  r;
             this.pending = false;
           });
+
+          this.useCart.getCategory().then((r)=> {
+            this.categories =  r;
+            this.pending = false;
+          });
+
+          if(token != null){
+          this.auth.token = token;
+          this.auth.getMe()
+          this.useCart.getCart()
+            
+          }
 
         }, 0);
 
@@ -545,9 +567,10 @@ export default {
     const auth =  useAuthStore();
     const useMap = useMapStore();
     const useSearch = useSearchStore();
+    const useCart = useCartStore();
     // **only return the whole store** instead of destructuring
 
-    return { notices,offices,auth,useMap,useSearch}
+    return { notices,offices,auth,useMap,useSearch,useCart}
   },
 }
 
