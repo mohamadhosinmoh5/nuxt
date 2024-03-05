@@ -528,12 +528,47 @@
     border: 1px solid var(--cf-grey-icon-color);
 }
 
-.forAll {}
+.bordersss {
+    border: 1px solid var(--cf-grey-icon-color);
+
+}
+
+.title-cart {
+    color: var(--cf-green-color);
+    font-size: 16px;
+    font-family: 'anjoman';
+}
+
+
+
+.Box-Tozihat {
+    position: relative;
+    /* right: 1%; */
+    padding: 10px;
+    width: 100%;
+    min-height: 200px;
+    /* right: 15%; */
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: var(--cf-grey-icon-color);
+    box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+    /* background-color: var(--cf-light-grey); */
+}
 
 @media screen and (max-width: 992px) {
-    .forAll {
-        /* margin-left: -60px !important;
-        margin-right: -60px !important; */
+    .Box-Tozihat {
+        position: relative;
+        /* right: 1%; */
+        padding: 10px;
+        width: 100%;
+        min-height: 200px;
+        /* right: 15%; */
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+        box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
     }
 }
 
@@ -622,6 +657,23 @@
     height: 450px;
     border-radius: 10px;
     left: 20px;
+    /* background-attachment: fixed; */
+    /* background-size: cover; */
+}
+
+.imageBoxe {
+    /* border: 1px solid var(--cf-dark-color); */
+    width: 100%;
+}
+
+.cartImage {
+    position: relative;
+    width: 100%;
+    background-position: center;
+    height: 200px;
+
+    border-radius: 10px;
+    /* left: 20px; */
     background-attachment: fixed;
     background-size: cover;
 }
@@ -775,8 +827,9 @@
     width: 0px !important;
     /* transition: all ease-in-out 0.5s; */
 }
-.navbar-profile{
-    top: 20px;
+
+.navbar-profile {
+    /* top: 20px; */
     right: 10px;
     position: relative;
     width: 20%;
@@ -792,16 +845,19 @@
         float: right;
     }
 }
+
 @media screen and (max-width: 576px) {
     .mobil {
         margin: 10px;
-       
+
     }
 }
-.main-box{
+
+.main-box {
     width: 80%;
     float: left;
 }
+
 .open-box {
     /* width: 100%; */
     padding: 10px;
@@ -843,11 +899,14 @@
 }
 
 .title {
-    font-size: 25px;
+    font-size: 16px;
+    display: block;
+    text-align: center;
     text-decoration: none;
     color: var(--cf-title-color);
     font-family: 'anjoman';
 }
+
 
 .title:hover {
     color: var(--cf-dark-color);
@@ -947,6 +1006,7 @@
     position: relative;
     /* right: 1%; */
     padding: 20px;
+    right: 15%;
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;
@@ -955,10 +1015,72 @@
     /* background-color: var(--cf-light-grey); */
 }
 
+.top-text {
+    position: relative;
+    top: 10px;
+    right: 7%;
+}
+
+@media screen and (max-width: 992px) {
+    .top-text {
+        position: relative;
+        top: 10px;
+        right: 0%;
+    }
+}
+
+.Sub-Cart {
+    color: var(--cf-title-color);
+    font-size: 14px;
+    font-family: 'anjoman';
+}
+
+.maincart-Title {
+    color: var(--cf-title-color);
+    font-size: 18px;
+    font-family: 'anjoman';
+}
+
+.cart-Tozihat {
+    color: var(--cf-title-color);
+    font-size: 16px;
+    font-family: 'anjoman';
+}
+
+.box-cart {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    max-height: 2000px;
+    right: 10%;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: var(--cf-grey-icon-color);
+    /* box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4); */
+    /* background-color: var(--cf-light-grey); */
+}
+
+
+.cartTitle {
+    position: relative;
+    text-decoration: none;
+    bottom: 80px;
+    left: 20px;
+    display: block;
+    text-align: start;
+    color: var(--cf-title-color);
+    font-family: 'anjoman';
+}
+
+.cartTitle:hover {
+    color: var(--cf-title-color);
+}
+
 .box-buttom {
     position: relative;
     /* left: 7%; */
-    right: 1%;
+    right: 15%;
     padding: 10px;
     min-height: 200px;
     border-radius: 10px;
@@ -967,10 +1089,12 @@
     border-color: var(--cf-grey-icon-color);
     box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
 }
-.topboxes{
+
+.topboxes {
     position: absolute;
     right: 20%;
 }
+
 @media screen and (max-width: 992px) {
     .topboxes {
         position: relative;
@@ -978,6 +1102,7 @@
         /* margin: 10px; */
     }
 }
+
 /* .bento{
     position: relative;
     margin: 10px;
@@ -985,12 +1110,19 @@
 .borderrs {
     position: relative;
     width: 100%;
-    top: 10px;
+    top: 15px;
     padding-left: 0px;
     padding-right: 0px;
     border: 0.5px solid var(--cf-grey-icon-color)
 }
-
+.linese{
+    position: relative;
+    width: 100%;
+    top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border: 0.5px solid var(--cf-grey-icon-color)
+}
 .lice {
     position: relative;
     display: block;
@@ -998,7 +1130,7 @@
 }
 
 #roaunded {
-    /* margin-right: 10px; */
+    margin-right: 10px;
 }
 
 @media screen and (max-width: 992px) {
@@ -1012,7 +1144,9 @@
     text-decoration: none;
     color: var(--cf-title-color);
     font-family: 'anjoman';
-    font-size: medium;
+    font-size: 12px;
+    display: block;
+    text-align: center;
 }
 
 .styling:hover {
@@ -1023,9 +1157,13 @@
     text-decoration: none;
     color: var(--cf-green-color);
     position: relative;
-    top: 50px;
+    top: 20px;
+    font-size: 14px;
     display: block;
     text-align: start;
+}
+.greentxt:hover{
+    color: var(--cf-green-color);
 }
 
 .wallettxt {
@@ -1038,13 +1176,15 @@
     display: block;
     text-align: start;
 }
-.mabalegh{
+
+.mabalegh {
     text-decoration: none;
     color: var(--cf-title-color);
     /* font-family: 'Vazir'; */
     font-size: 15px;
     font-family: 'anjoman';
 }
+
 .wallettxts {
     text-decoration: none;
     color: var(--cf-title-color);
@@ -1279,14 +1419,24 @@
     top: 20%;
 }
 
-.navbar-box{
+.navbar-box {
     position: relative;
 }
 
-.close-navbar{
-   border: none;
-   border-radius: 15px;
+.close-navbar {
+    border: none;
+    border-radius: 15px;
 }
+
+@media screen and (min-width: 576px) {
+    .close-navbar {
+        display: none;
+        border: none;
+        border-radius: 15px;
+
+    }
+}
+
 
 .tarkoneshha {
     text-decoration: none;
@@ -1353,11 +1503,13 @@
     left: 24%;
     border: 1px solid var(--cf-green-color);
 }
-.box-wall{
+
+.box-wall {
     border: 1px solid var(--cf-grey-icon-color);
     border-radius: 10px;
     padding: 10px;
 }
+
 /* 
 @media screen and (max-width: 992px) {
     .underline {
@@ -1384,7 +1536,7 @@
     margin-left: auto;
 }
 
-.moving{
+.moving {
     position: absolute;
     top: 200px;
     right: 20%;
@@ -1524,7 +1676,8 @@
     height: 100%;
     overflow: auto;
 }
-.paying{
+
+.paying {
     background-color: var(--cf-light-color);
     opacity: 1;
     padding: 20px;
@@ -1542,6 +1695,7 @@
     height: 80%;
     overflow: auto;
 }
+
 @media screen and (max-width: 576px) {
     .paying {
         background-color: var(--cf-light-color);
@@ -1563,6 +1717,7 @@
 
     }
 }
+
 @media screen and (max-width: 992px) {
     .paying {
         background-color: var(--cf-light-color);
@@ -1584,36 +1739,44 @@
 
     }
 }
-.bank{
+
+.bank {
     text-decoration: none;
     font-family: 'anjoman';
     color: var(--cf-green-color)
 }
-.bank:hover{
+
+.bank:hover {
     color: var(--cf-green-color);
 }
-.fish{
+
+.fish {
     color: var(--cf-green-color);
     font-family: 'anjoman';
     text-decoration: none;
     display: block;
     text-align: end;
 }
-.fish:hover{
+
+.fish:hover {
     color: var(--cf-green-color);
 }
-.payiin-border{
+
+.payiin-border {
     border: 0.5px solid var(--cf-light-grey);
     width: 25%;
 }
-.txtpay{
+
+.txtpay {
     text-decoration: none;
     font-size: 14px;
     color: var(--cf-title-color);
 }
-.txtpay:hover{
+
+.txtpay:hover {
     color: var(--cf-title-color);
 }
+
 .border-modal {
     border: 0.5px solid var(--cf-grey-icon-color);
 }
@@ -1752,13 +1915,15 @@
         width: 100% !important;
     }
 }
-.border-left{
+
+.border-left {
     border-left: 1px solid var(--cf-title-color);
     height: 100vi;
     position: relative;
     top: 25px;
-    
+
 }
+
 #khoroj {
     color: var(--cf-dark-color);
 }

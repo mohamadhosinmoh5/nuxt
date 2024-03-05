@@ -286,7 +286,7 @@
                     <roll v-if="Rolls" />
                     <contact v-if="ContactUs" />
 
-                    <!-- <dashboard />
+                  <dashboard />
                   <dashboard />
                   <dashboard />
                   <dashboard /> -->
@@ -370,9 +370,9 @@ const changeMenu = (name) => {
 }
 
 setTimeout(() => {
-    loadingStyle(false);
     useUser.getCarts().then((r) => {
         carts.value = r;
+        loadingStyle(false);
     })
 
     useUser.getCarts().then((r) => {
