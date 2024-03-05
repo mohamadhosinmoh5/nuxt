@@ -75,10 +75,7 @@
 
         <div class="col-12 mt-2">
           <div class="col-12 mt-1 mob-map">
-            <div @click="showMap=false" style="float:right !important;right:10px;" class="closeFilter">
-              <img width="20" src="assets/img/cross-icon.svg" >
-            </div>
-        
+            
             <div v-if="showNotice"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
              
               <LMap v-if="allNotices"

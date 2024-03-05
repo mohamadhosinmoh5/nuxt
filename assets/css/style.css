@@ -337,7 +337,7 @@ body {
     top: 0px;
     left: 0%;
     background: transparent;
-    color: black;
+    /* color: black; */
     height: 100vh;
     text-align: center;
     width: 100%;
