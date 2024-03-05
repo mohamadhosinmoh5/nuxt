@@ -115,7 +115,7 @@
     <!-- show category box -->
     <div ref="categoryCanvas" class="categoryCanvas">
       <div @click="closeCategory" class="closeFilter">
-        <img width="20" src="assets/img/cross-icon.svg" >
+        <img width="20" src="assets/img/left.png" >
       </div>
      <div class="row mt-4">
       <div class="col-sm-12 ">
@@ -169,34 +169,28 @@
               </div>
               <div v-if="notice?.section_data.length > 1" class="row">
                 
-                <div  class="col-12 mobile-section">
+                <div  class="col-sm mobile-section mt-3">
                   <p>
                     {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} متر
                   </p>
-                </div>
-    
-                <div class="col-12 mobile-section">
                   <p>
                     {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
                   </p>
-                </div>
-    
-    
-                <div class="col-12 margin-fix">
-                  <div class="row">
+                  <p>
+                    <div class="row">
                     <div class="col-10 mobile-section">
                         {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
                     </div>
 
-                    <div class="col-2 mobile-section">
+                    <div class="col-2 mobile-section ">
                         <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
                             <img src="~/assets/img/arrow-left.svg" alt="">
                         </a>
                     </div>
 
                 </div>
+                  </p>
                 </div>
-
               </div>
 
               <div class="col-sm-12" v-if="notice?.section_data.length < 1">
@@ -251,7 +245,7 @@
 
     <div ref="filterCanvas" class="filterCanvas" tabindex="-1" id="navbarOffcanvasLg">
         <div @click="closeFilter" class="closeFilter">
-          <img width="20" src="assets/img/cross-icon.svg" >
+          <img width="20" src="assets/img/left.png" >
         </div>
         <Filter v-if="noticeShow" :status="pending" @clicked="filterUptaded" />
     </div>
@@ -259,31 +253,33 @@
     <div class="navbar">
         <div class="list-item">
             <button type="button" class="prson">
-                <img src="assets/img/home-1 2.svg" />
+                <img src="assets/img/home-1 2.svg" style="width: 20px;" />
                 <a href="#" class="homeIcon">خانه</a>
             </button>
         </div>
         <div class="list-item">
             <button type="button" class="prson">
-                <img src="assets/img/note-21 1.svg" />
-                <a href="#">خدمات</a>
+                <img src="assets/img/note-21 1.svg"  style="width: 20px;"/>
+                <a href="#" class="txtIcons">خدمات</a>
+            </button>
+        </div>
+        <div  class="list-item">
+            <button type="button" @click="showMap=true" class="circle">
+               <p class="Maptext">
+                نقشه
+               </p>
             </button>
         </div>
         <div class="list-item">
-            <button type="button" class="circle">
-                <img src="assets/img/add 2.svg" />
+            <button type="button" class="prson" >
+                <img src="assets/img/notification-bing 2.svg"  style="width: 20px;"/>
+                <a href="#"  class="txtIcons">اعلانات</a>
             </button>
         </div>
         <div class="list-item">
-            <button type="button" class="prson">
-                <img src="assets/img/notification-bing 2.svg" />
-                <a href="#">اعلانات</a>
-            </button>
-        </div>
-        <div class="list-item">
-            <button type="button" class="prson">
-                <img src="assets/img/profile-circle 3.svg" />
-                <a href="#">پروفایل</a>
+            <button type="button" class="prson" >
+                <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
+                <a href="#"  class="txtIcons">پروفایل</a>
             </button>
         </div>
     </div>
@@ -303,6 +299,8 @@ import { useMapStore } from '../store/map';
 import { useNoticeStore } from '../store/notice';
 import { useOfficeStore } from '../store/office';
 import { useSearchStore } from '../store/search';
+
+const mapping = ref(true);
 
 export default {
   data(){

@@ -167,20 +167,50 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 mt-5">
-                <div class="row">
-        
-                    <div :class="(closeBox) ? `col-sm-2 liness dropdown-box` : `navbar-box col-sm-2 liness`">
-                        <button v-if="closeBox" type="button" id="" class="close-navbar mt-5" @click="closeBox = false">
-                            <img src="assets/img/sidebar.png" style="width: 35px;" alt="">
-    
-                        </button>
-                        <button v-if="!closeBox" type="button" class="close-navbar mt-5" @click="closeBox = true">
-                            <img src="assets/img/closebox.png" style="width: 35px;" alt="">
-    
-                        </button>
-                        <div class="col-md-12">
-                            <div class="col-sm-12 mt-4 hover">
+            <div class="row">
+                <div class="btnside col-sm-1">
+
+                    <button v-if="closeBox" type="button" id="" class="close mt-5" @click="closeBox = false">
+                        <img src="assets/img/sidebar.png" style="width: 35px;" alt="">
+
+                    </button>
+                    <button v-if="!closeBox" type="button" class="close mt-5" @click="closeBox = true">
+                        <img src="assets/img/closebox.png" style="width: 35px;" alt="">
+
+                    </button>
+                </div>
+
+                <div :class="(closeBox) ? `col-sm-2 liness dropdown-box` : `open-box col-sm-2 liness`">
+                    <div class="col-sm-12">
+                        <div class="col mt-4 hover">
+                            <i class="fa fa-address-book" aria-hidden="true"></i>
+                            <a @click="changeMenu('showDashboard')" class="mediumtxt ms-5 ">پیشخوان</a>
+                        </div>
+                        <div class="col hover mt-3">
+                            <i class="fa-solid fa-wallet"></i>
+                            <a @click="changeMenu('showWallet')" class="mediumtxt ms-5">کیف پول نقدی</a>
+                        </div>
+                        <div class="col hover mt-3">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <a @click="changeMenu('BuyLicence')"  class="mediumtxt ms-5"> خرید اشتراک</a>
+
+                        </div>
+
+
+                        <div class="col hover mt-3">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <a @click="changeMenu('MyProduct')"  class="mediumtxt ms-5"> خرید های من</a>
+                        </div>
+                        <div class="col hover mt-3">
+                            <i class="fa-solid fa-arrow-down-wide-short"></i>
+                            <a @click="changeMenu('MyOrder')"  class="mediumtxt ms-5"> سفارش های من </a>
+                        </div>
+                        <div class="col hover mt-3">
+                            <i class="fa-solid fa-money-bill"></i>
+                            <a @click="changeMenu('MyLicence')" class="mediumtxt ms-5"> اشتراک های من</a>
+                        </div>
+                        <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
+                            <div class="col hover mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
                                 <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-2">پیشخوان</a>
                             </div>
@@ -245,12 +275,28 @@
                     </div>
                 </div>
 
-            </div>
+                <div class="col-sm-9">
+
+                    <dashboard :user="user" v-if="showDashboard" />
+                    <cash-wallet v-if="showWallet" />
+                    <buylicence v-if="BuyLicence" />
+                    <myproduct v-if="MyProduct" />
+                    <myorder v-if="MyOrder" />
+                    <mylicence v-if="MyLicence" />
+                    <roll v-if="Rolls" />
+                    <contact v-if="ContactUs" />
+
+                  <dashboard />
+                  <dashboard />
+                  <dashboard />
+                  <dashboard /> -->
+           
+          
              <div class="notif">
 
             </div>
-        </div>
-    </div> -->
+       
+   
 </template>
   
 <!-- script -->
@@ -329,9 +375,9 @@ const changeMenu = (name) => {
 }
 
 setTimeout(() => {
-    loadingStyle(false);
     useUser.getCarts().then((r) => {
         carts.value = r;
+        loadingStyle(false);
     })
 
     useUser.getCarts().then((r) => {

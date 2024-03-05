@@ -76,18 +76,19 @@
          <Loginpage @clicked="modalStatus(status)" />
         </div>
         
-        <div class="col-2">
+        <div class="col-2 bag-icon">
             <a v-if="useCart.cart?.items[0].count" href="/cart">
               <div class="count-cart">
                   {{useCart.cart?.items[0].count}}
                 </div>
-                <img src="~/assets/img/basket.svg" alt="">
+                <img  src="~/assets/img/basket.svg" alt="">
             </a>
             <a v-else disabled><img src="~/assets/img/basket.svg" alt=""></a>
         </div>
         <div class="col-4 mt-2">
           <a class="addNotice disabled">
             ثبت اگهی
+            <span id="tooltiptext">به زودی</span>
           </a>
         </div>
       </div>

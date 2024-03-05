@@ -14,8 +14,8 @@
                 <div class="col-6">
                     <a href="#" class="Title">0تومان</a>
                 </div>
-                <div  class="col-6">
-                    <button  @click="tasfie = true" type="button" class="btn btn-light">
+                <div class="col-6">
+                    <button @click="tasfie = true" type="button" class="btn btn-light">
                         <a href="#" class="btntext">تسفیه </a>
 
                     </button>
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div v-if="fish" class="col fish-detailes">خالی است</div>
-                            <button type="button" class="btn col-10  btn-secondary">ثبت</button>
+                            <button @click="deposit()" type="button" class="btn col-10  btn-secondary">ثبت</button>
 
                         </div>
                     </div>
@@ -62,19 +62,20 @@
                             </div>
                             <div class="border-modal mt-2"></div>
                             <div class="row mt-3">
-                            <div class="col">
-                                <p>مبلغ مورد نظر جهت برداشت از کیف پول را وارد کنید</p>
-                            </div>
-                                
+                                <div class="col">
+                                    <p>مبلغ مورد نظر جهت برداشت از کیف پول را وارد کنید</p>
+                                </div>
+
                             </div>
                             <div v-if="bank" class="col bank-detailes">
-                                <a href="#" class="txtpay"> حد اکثر تا سه روز کاری مبلغ درخواستی به حساب شبای ثبت شده واریز خواهد شد. </a>
+                                <a href="#" class="txtpay"> حد اکثر تا سه روز کاری مبلغ درخواستی به حساب شبای ثبت شده واریز
+                                    خواهد شد. </a>
                                 <div class="col-12 forms">
                                     <input type="text" placeholder="مبلغ(تومان)">
                                 </div>
                             </div>
                             <div v-if="fish" class="col fish-detailes">خالی است</div>
-                            <button type="button" class="btn col-10  btn-secondary">ثبت</button>
+                            <button @click="deposit()" type="button" class="btn col-10  btn-secondary">ثبت</button>
 
                         </div>
                     </div>
@@ -87,81 +88,115 @@
                 <div class="col-4">
                     <span @click="chnageTabMenu('verify')"> فیش واریزی</span>
                 </div>
-                <div class="col-4">
-                    <span @click="chnageTabMenu('setting')"> تنظیمات</span>
+                <div ref="underline" class="col-2 underline"></div>
+
+            </div>
+
+            <div v-if="wallet" class="col-sm-12 tab-Detaile">
+                <div v-for="(item, index) in transactions.items" :key="index">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <a href="#">مبلغ : </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="#">{{ item.amount }}</a>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <a href="#">نوع : </a>
+                        </div>
+                        <div class="col-6">
+                            <span v-if="item.type == `deposit`">واریز</span>
+                            <span v-else>نا مشخص</span>
+                        </div>
+                    </div>
+
+
+                    <div class="col mt-2">
+                        <a href="#">وضعیت : </a>
+                        <span v-if="item.status == `failed`">نا موفق</span>
+                        <span v-else>موفق</span>
+                    </div>
+
+                    <div class="col mt-2">
+                        <a href="#">کدرهیگیری : </a>
+                        <span v-if="item.ref_id">{{ item.ref_id }}</span>
+                        <span v-else>ندارد</span>
+                    </div>
+
+                    <div class="col mt-2">
+                        <a href="#">توضیحات : </a>
+                        <a href="#">{{ item.description }}</a>
+                    </div>
                 </div>
             </div>
-            <div ref="underline" class="col-2 underline"></div>
+            <div v-if="verify" class="col-sm-12">
 
-            <div class="row">
+                <div v-if="verify" class="col-sm-12 tab-Detaile">
+                    <div class="row">
 
-                <div v-if="wallet" class="col-sm-12 mt-3 mobil">
-
-                    <div class="col">
-                        <a href="#" class="mabalegh">مبلغ : </a>
-                        <a href="#" class="mabalegh">250,000</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">نوع : </a>
-                        <a href="#" class="mabalegh">واریزی</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">وضعیت : </a>
-                        <a href="#" class="mabalegh">انجام شده</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">کدرهیگیری : </a>
-                        <a href="#" class="mabalegh">ندارد</a>
-                    </div>
-                    <div class="col mt-2">
-                        <a href="#" class="mabalegh">توضیحات : </a>
-                        <a href="#" class="mabalegh">شارژ کیفه پول</a>
+                        <table class="table table-light">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
-                <div v-if="verify" class="col-sm-12">
 
-                    verify
+            </div>
+            <div v-if="setting" class="col-sm-12  ">
 
+                <div class="col shaba mt-5">
+                    <a href="#" class="Title ">*شبا</a>
                 </div>
-                <div v-if="setting" class="col-sm-12  ">
-
-                    <div class="col shaba mt-5">
-                        <a href="#" class="Title ">*شبا</a>
-                    </div>
-                    <div class="col-10 forms">
-                        <input type="text" placeholder="شماره شبا">
-                    </div>
-                    <div class="text-shaba mt-3">
-                        <a href="#">شماره شبا شما که بانک به شما داده است برای مثال : IR234525690123456789011234</a>
-                    </div>
-                    <div class="mediumtxt mt-2">
-                        <a href="#" class="Title">نحوه تسفیه حساب</a>
-                    </div>
-                    <div class="form-check mobil">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                        <label class="form-check-label" for="flexCheckIndeterminate">
-                            هفتگی
-                        </label>
-                    </div>
-                    <div class="form-check mobil">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                        <label class="form-check-label" for="flexCheckIndeterminate">
-                            ماهانه
-                        </label>
-                    </div>
-                    <div class="form-check mobil" >
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
-                        <label class="form-check-label" for="flexCheckIndeterminate">
-                            دستی
-                        </label>
-                    </div>
-                    <button type="button" class="col-2 btn btn-success">ثبت</button>
-                    <div class="col warn">
-                        <a href="#" class="mediumtxt">توجه</a>
-                    </div>
-                    <div class="col multyline">
-                        <a href="#">ادامه توضیحات</a>
-                    </div>
+                <div class="col-10 forms">
+                    <input type="text" placeholder="شماره شبا">
+                </div>
+                <div class="text-shaba mt-3">
+                    <a href="#">شماره شبا شما که بانک به شما داده است برای مثال : IR234525690123456789011234</a>
+                </div>
+                <div class="mediumtxt mt-2">
+                    <a href="#" class="Title">نحوه تسفیه حساب</a>
+                </div>
+                <div class="form-check mobil">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        هفتگی
+                    </label>
+                </div>
+                <div class="form-check mobil">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        ماهانه
+                    </label>
+                </div>
+                <div class="form-check mobil">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        دستی
+                    </label>
+                </div>
+                <button type="button" class="col-2 btn btn-success">ثبت</button>
+                <div class="col warn">
+                    <a href="#" class="mediumtxt">توجه</a>
+                </div>
+                <div class="col multyline">
+                    <a href="#">ادامه توضیحات</a>
                 </div>
             </div>
         </div>
@@ -175,8 +210,7 @@
 import { useAuthStore } from '~/store/auth';
 
 
-const closeBox = ref(true);
-const ShowBtn = ref(true);
+
 const underline = ref(null);
 const payiinBorder = ref(null);
 const wallet = ref(true)
@@ -201,7 +235,7 @@ const chnageTabMenu = (name) => {
     verify.value = false;
     setting.value = false;
 
-
+   
     switch (name) {
         case 'wallet':
             underline.value.style.left = "0%";
@@ -255,26 +289,29 @@ onMounted(() => {
 
     useUser.transaction().then((r) => {
         transactions.value = r;
+        loadingStyle(false);
     })
 
     useUser.transactionBankReceipts().then((r) => {
         transactionBankReceipts.value = r;
+        loadingStyle(false);
+
     })
   })
+  
     const addSetting = async () => {
         // value of withdraw :
-        //monthly
-        //weekly
-        //manually
-        useUser.transactionSetting(sheba.value,withdraw.value).then(()=>{
-                Message.value = 'تنظیمات ذخیره شد';
+        // monthly;
+        // weekly;
+        // manually;
+        useUser.transactionSetting(sheba.value, withdraw.value).then(() => {
+            Message.value = 'تنظیمات ذخیره شد';
         })
     }
 
     const deposit = async () => {
-        useUser.deposit(amount).then(()=>{
-                Message.value = 'تنظیمات ذخیره شد';
+        useUser.deposit(amount).then(() => {
+            Message.value = 'تنظیمات ذخیره شد';
         })
     }
-
 </script>
