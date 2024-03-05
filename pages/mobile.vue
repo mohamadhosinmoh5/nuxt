@@ -33,7 +33,7 @@
               <div ref="searchBox" class="searchResult">
                 <div class="row">
                   <div @click="closeSearch" class="closeFilter">
-                    <img width="20" src="assets/img/cross-icon.svg" >
+                    <img width="20" src="assets/img/right.png" >
                   </div>
                   <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
                     <div class="row">
@@ -68,9 +68,7 @@
 
         <div class="col-12 mt-2">
           <div class="col-12 mt-1 mob-map">
-            <div @click="showMap=false" style="float:right !important;right:10px;" class="closeFilter">
-              <img width="20" src="assets/img/cross-icon.svg" >
-            </div>
+           
 
             <div  ref="mapDiv"  class="mob-stickyStyle" >
              
@@ -85,7 +83,7 @@
                 style="height:100vh;"
               >
         
-              <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
+              <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
                 <LTileLayer
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                   attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
@@ -115,7 +113,7 @@
     <!-- show category box -->
     <div ref="categoryCanvas" class="categoryCanvas">
       <div @click="closeCategory" class="closeFilter">
-        <img width="20" src="assets/img/left.png" >
+        <img width="20" src="assets/img/right.png" >
       </div>
      <div class="row mt-4">
       <div class="col-sm-12 ">
@@ -164,33 +162,33 @@
           <div class="col-8">
             <div class="row">
               <div class="col-12">
-                <h4 class="mobile-notice-title">{{notice.title}}</h4>
+                <h4 class="mobile-notice-title ms-1">{{notice.title}}</h4>
               </div>
-              <div v-if="notice?.section_data.length > 1" class="row">
+              <div v-if="notice?.section_data.length > 1" class="row mt-2">
                 
-                <div  class="col-sm mobile-section mt-3">
-                  <p>
+                <div  class="col-sm mobile-section ms-1">
+                
                     {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} متر
-                  </p>
-                  <p>
-                    {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
-                  </p>
-                  <p>
-                    <div class="row">
-                    <div class="col-10 mobile-section">
-                        {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
-                    </div>
-
-                    <div class="col-2 mobile-section ">
-                        <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                            <img src="~/assets/img/arrow-left.svg" alt="">
-                        </a>
-                    </div>
+                </div>
+                <div class="col-sm mobile-section ms-1">
+                  {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
 
                 </div>
-                  </p>
                 </div>
+                <div class="col-sm margin-fix">
+                  <div class="row ms-1">
+                  <div class="col-10 mobile-section">
+                      {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
+                  </div>
+
+                  <div class="col-2 mobile-section ">
+                      <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                          <img src="~/assets/img/arrow-left.svg" alt="">
+                      </a>
+                  </div>
+
               </div>
+                </div>
 
               <div class="col-sm-12" v-if="notice?.section_data.length < 1">
                 <div class="row">
@@ -244,7 +242,7 @@
 
     <div ref="filterCanvas" class="filterCanvas" tabindex="-1" id="navbarOffcanvasLg">
         <div @click="closeFilter" class="closeFilter">
-          <img width="20" src="assets/img/left.png" >
+          <img width="20" src="assets/img/right.png" >
         </div>
         <Filter v-if="noticeShow" :status="pending" @clicked="filterUptaded" />
     </div>
@@ -263,10 +261,17 @@
             </button>
         </div>
         <div  class="list-item">
-            <button type="button" @click="showMap=true" class="circle">
-               <p class="Maptext">
+            <button v-if="!showMap" type="button" @click="showMap=true" class="circle">
+               <p  class="Maptext">
                 نقشه
                </p>
+              
+            </button>
+            <button v-if="showMap" type="button" @click="showMap=false" class="circle">
+              <p  class="Maptext">
+                لیست
+               </p>
+              
             </button>
         </div>
         <div class="list-item">
@@ -342,13 +347,13 @@ export default {
       this.$refs["categoryCanvas"].style.left = '100%';
     },
     showCategory(){
-      this.$refs["categoryCanvas"].style.left = '4%';
+      this.$refs["categoryCanvas"].style.left = '-2%';
     }
     ,closeFilter(){
       this.$refs["filterCanvas"].style.bottom = '-100vh';
     },
     showFilter(){
-      this.$refs["filterCanvas"].style.bottom = '70px';
+      this.$refs["filterCanvas"].style.bottom = '0px';
     },filterUptaded(query,section){
       this.pending = true;
       if(query){
@@ -488,12 +493,12 @@ export default {
     showCat(val){
       if(val){
         this.showMap = false;
-        this.$refs.noticeBox.classList.remove('col-sm-8');
-        this.$refs.noticeBox.classList.add('col-sm-9');
+        // this.$refs.noticeBox.classList.remove('col-sm-8');
+        // this.$refs.noticeBox.classList.add('col-sm-9');
       }else{
         this.showMap = true;
-        this.$refs.noticeBox.classList.remove('col-sm-9');
-        this.$refs.noticeBox.classList.add('col-sm-8');
+        // this.$refs.noticeBox.classList.remove('col-sm-9');
+        // this.$refs.noticeBox.classList.add('col-sm-8');
       }
     }
   },

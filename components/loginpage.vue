@@ -22,7 +22,7 @@
                     این شماره ارسال خواهد شد</a>
             </div>
             <div :style="!auth.sendingSms ? `display:block` : 'display:none;'" class="FormNumber col">
-                <input type="text" placeholder="شماره همراه"  v-model="mobile">
+                <input type="text" placeholder="شماره همراه" @input="checkMobile(mobile)"  v-model="mobile">
             </div>
             <div  class="FormPass col" :style="auth.sendingSms ? `display:block` : 'display:none;'">
                 <input type="text" placeholder=" کد تایید" v-model="code">
@@ -30,6 +30,8 @@
             <div class="col-sm-12 mt-2">
                 <a href="#" class="subtitle">شرایط و قوانین استفاده و سیاست نامه حریم خصوصی هومنگر را می پزیرم</a>
                 <input class="form-check-input ms-2" type="checkbox" value="" id="flexCheckIndeterminate">
+                <div v-if="auth.pending" class="spinner-border" style="position: absolute;left: 30px ;top:42%;" role="status"></div>
+                <div v-if="auth.error" class="alert alert-danger" >{{ auth.error.message }}</div>
             </div>
             <div class="col">
                 <div class="row mt-2">
@@ -50,12 +52,18 @@ const auth = useAuthStore();
 
 const mobile = ref(null)
 const code = ref(null)
-
+const loader = ref(false)
 const emit = defineEmits(['clicked'])
 const ShowModal = (status) => {
   emit('clicked',status)
 }
 
+
+const checkMobile = (mobile) => {
+ if(mobile.length >= 10){
+    auth.sendSms(mobile)
+ }
+}
 
 const login = ()=>{
     auth.login(code.value,mobile.value).then( ()=>{

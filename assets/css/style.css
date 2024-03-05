@@ -358,10 +358,11 @@ body {
     width: 100%;
     z-index: 222222222;
     overflow: scroll;
-    height: 90vh;
+    height: 100%;
+    /* top: 5px; */
     /* right: 2%; */
-    bottom: 100vh;
-    padding: 5px;
+    /* bottom: 100px; */
+    padding: 15px;
     border-radius: 15px;
 
 }
@@ -369,13 +370,14 @@ body {
 .categoryCanvas {
     position: fixed;
     background: rgb(255, 255, 255);
-    width: 100%;
-    bottom: 64px;
+    /* width: 100%; */
+    bottom: 100px;
     overflow: scroll;
-    height: 90vh;
-    z-index: 20;
-    /* right: 2%; */
-    padding: 7px;
+    height: 100vh;
+    margin: 10px;
+    right: 0%;
+    top: -10px;
+    padding: 10px;
     z-index: 222222222;
     border-radius: 15px;
     left: 100%;
@@ -434,7 +436,7 @@ body {
 .categoryBox li {
     width: 100%;
     padding: 7px 0;
-    margin-right: 20px;
+    /* margin-right: 20px; */
     list-style: none;
     cursor: pointer;
 }
@@ -1824,9 +1826,10 @@ input:checked+.slider:before {
     /* clip-path: polygon(31% 0, 48% 26%, 66% 0, 98% 0, 100% 98%, 0 100%, 0 0); */
     height: 65px;
     width: 100%;
-    position: fixed;
+    position: sticky;
+    overflow: inherit;
     right: 0;
-    bottom: 0px;
+    bottom: 2px;
 }
 
 .list-item {
@@ -1880,10 +1883,29 @@ input:checked+.slider:before {
 
 .searchLoader {
     position: absolute;
+    color: var(--cf-title-color);
     left: 0;
     top: 0;
 }
-
+/* .loaderrr {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+   
+    border-top: 3px solid var(--cf-title-color);
+    border-right: 3px solid transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }  */
 .list-item a {
     color: var(--cf-navicon-color);
     text-decoration: none;
