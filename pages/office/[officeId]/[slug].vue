@@ -53,7 +53,7 @@
                         @click="showOffice = true, showNotice = false">آدرس در نقشه</a>
                 </li>
             </ul>
-            
+            </div>
             <!-- <div v-if="allNotices.length < 1 && showNotice" class="row">
                 <div class="col-sm-12 alert alert-danger mt-3 text-center">
                     آگهی وجود ندارد
@@ -150,7 +150,7 @@
 
         </div>
 
-
+        </div>
     </div>
 </template>
 
