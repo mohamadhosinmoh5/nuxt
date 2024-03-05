@@ -2,26 +2,32 @@
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('Auth', {
-    state: () => ({ user: null,pricing:null ,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
+    state: () => ({ user: null,pricing:null ,error:null,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
     getters: {
       
     },
     actions: {
         async sendSms(mobile){
           
-            const { data, pending, error, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/login-send-verify-code`, {
+            const { data, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/login-send-verify-code`, {
                 method:'post',
                 body:{
                     mobile:mobile
                 }
               });
 
+              this.pending = pendings;
+            if(errors.value){
+              this.error = errors.value.data;
+            }
+
               if(data.value){
+                
                 this.sendingSms = true;
               }
         },
         async login(code,mobile){
-          const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/login`, {
+          const { data, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/login`, {
             method:'post',
             body:{
                 mobile:mobile,
@@ -29,11 +35,19 @@ export const useAuthStore = defineStore('Auth', {
             }
           });
           
-          if(errors.hasOwnProperty('value')){
-            this.error = errors.value.data.message;
+          this.pending = pendings;
+          if(errors.value){
+            this.error = errors.value.data;
           }
 
           if(data.value){
+
+            if(this.getdefaultOffice == 0 ){
+              this.setDefaultOffice(data.value?.user.offices[0].id);
+            }else{
+              this.getdefaultOffice = useCookie('defaultOffice');
+            }
+
             this.user= data.value.user;
             this.token = data.value.access_token;
             const d = new Date();
@@ -41,7 +55,7 @@ export const useAuthStore = defineStore('Auth', {
             const token = useCookie('token',{
               expires: d
             });
-             this.token = this.token;
+            token.value = this.token;
              return navigateTo('/');
           }
         },
