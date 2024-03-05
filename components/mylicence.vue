@@ -32,13 +32,20 @@
 <script setup>
 import { useAuthStore } from '../store/auth';
 
+const emit = defineEmits(['clicked'])
+
+const loadingStyle = (query) => {
+  emit('clicked',query)
+}
+
+
 const subScribe = ref(null);
 
 const useUser = useAuthStore();
 
 useUser.getSubScribe().then((r) => {
-   
         subScribe.value = r;
+        loadingStyle(false);
     })
 
 </script>

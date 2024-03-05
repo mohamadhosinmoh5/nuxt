@@ -3,9 +3,8 @@
 
     <div class="container">
         <div class="row">
-            <!-- <div v-if="loading = false" class="spinner-border text-primary" role="status"></div> -->
         
-            <div class="col-sm-7 Box-Licence">
+            <div class="col-sm-7 Box-Licence mt-5">
                 
                 <UModal v-if="isOpen">
                     <div class="moda-boxes row">
@@ -95,7 +94,6 @@ const loadingStyle = (query) => {
 
 setTimeout(() => {
     useUser.getPricing().then((r) => {
-        console.log(r);
         pricing.value = r;
         loadingStyle(false);
 

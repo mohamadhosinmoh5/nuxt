@@ -1,5 +1,5 @@
 <template>
-    <div class="col-sm-12 mt-5">
+    <div class="col-sm-12">
         <UModal v-if="isOpen">
             <div class="paying row">
                 <div class="col-sm-12">
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                     <div ref="payiinBorder" class="payiin-border"></div>
-                    <div  class="col bank-detailes mt-4">
+                    <div class="col bank-detailes mt-4">
                         <a href="#" class="txtpay">مبلغ مورد نظر را جهت افزودن به کیف پول وارد گنید</a>
                         <div class="col-12 forms">
                             <input type="text" placeholder="مبلغ(تومان)">
@@ -31,62 +31,61 @@
                 </div>
             </div>
         </UModal>
-        <div class="row ">
-            <div class="col-sm-6 box-info ">
-                    <div class="row">
-                        <div class="col-sm">
-                            <a href="#" class="wallettxt">کیف پول نقدی : 0 تومان</a>
-                        </div>
-                        <div class="col-sm-12">
-                            <button @click="isOpen = true" type="button" class="col-sm-5 btn btn-light">
-                                <a href="#" class="btntext">افزایش موجودی</a>
-                            </button>
-                        </div>
+        <div class="row">
+            <div class="col-sm box-info mt-5">
+                <div class="row">
+                    <div class="col-sm">
+                        <a href="#" class="wallettxt">کیف پول نقدی : 0 تومان</a>
                     </div>
+                    <div class="col-sm-12">
+                        <button @click="isOpen = true" type="button" class="col-sm-5 btn btn-light">
+                            <a href="#" class="btntext">افزایش موجودی</a>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div id="roaunded" class="col-sm-6 box-info">
-                    <div class=" row">
-                        <div class="col-sm">
-                            <a href="#" class="wallettxt">کیف پول اعتباری : 0تومان</a>
-                        </div>
-                        <div class="col-sm-12">
-                            <button type="button" class="col-sm-5 btn btn-light">
-                                <a href="#" class="btntext">افزایش موجودی</a>
-                            </button>
-                        </div>
+            <div id="roaunded" class="col-sm box-info mt-5">
+                <div class=" row">
+                    <div class="col-sm">
+                        <a href="#" class="wallettxt">کیف پول اعتباری : 0تومان</a>
                     </div>
+                    <div class="col-sm-12">
+                        <button @click="isOpen = true" type="button" class="col-sm-5 btn btn-light">
+                            <a href="#" class="btntext">افزایش موجودی</a>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
 
         <div class="row ">
-            <div class="col-sm-4 box-buttom mt-5">
+            <div class="col-sm-3 box-buttom mt-5">
                 <div class="col card-body">
                     <div class="col">
                         <a href="#" class="wallettxt">اشتراک های فعال</a>
                     </div>
                     <div class="borderrs"></div>
-                    <a href="#" class="greentxt">درحال انجام</a>
+                    <p href="#" class="greentxt">اشتراک فعال ندارید , فعلا مهمون هومنگر باش</p>
                 </div>
             </div>
-            <div id="roaunded" class="col-sm-8 box-buttom mt-5">
+            <div  id="roaunded" class="col-sm box-buttom mt-5">
                 <div class="col card-body">
                     <div class="col row">
-
-                        <a href="#" class="wallettxt">
+                        <p href="#" class="wallettxt">
                             <img src="/_nuxt/assets/img/basket.svg" style="width: 30px;" alt="">
                             خرید های من
-                        </a>
+                        </p>
                     </div>
-                    <div class="borderrs"></div>
+                    <div class="linese"></div>
                     <!-- <a href="#" id="" class="lice mt-2">درحال انجام</a> -->
-                    <div class="col-sm-12  mt-5">
-                        <a href="#" class="styling">سبد خرید شما خالیه</a>
+                    <div class="col-sm-12 mt-2">
+                        <p href="#" class="styling"> سبد خرید شما خالی است!  </p>
                     </div>
                 </div>
             </div>
         </div>
-      
+
     </div>
     <!-- <div class="mainBoxess">
         <div class="col-sm-12">
@@ -109,7 +108,7 @@ const isOpen = ref(false);
 const bank = ref(true);
 const fish = ref(false);
 const user = defineProps(['user']);
-console.log(user);
+
 
 
 
