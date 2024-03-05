@@ -1,6 +1,6 @@
 /* single page  */
 :root {
-    --cf-dark-color: #1b1b1b;
+    --cf-dark-color: #25282b;
     --cf-light-color: #dedede;
     --cf-light-grey: #7a7a7a;
     --cf-title-color: #636363;
@@ -346,7 +346,20 @@
     border-bottom-left-radius: 15px;
     padding: 20px;
     right: 25%;
+    top: 0;
+    position: fixed;
+    border: 1px solid #dadada;
+    width: 50% !important;
+}
 
+.modal-content-index {
+    background-color: var(--cf-light-color);
+    opacity: 1;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    padding: 20px;
+    right: 25%;
+    top: 40vh;
     position: fixed;
     border: 1px solid #dadada;
     width: 50% !important;
@@ -1799,10 +1812,10 @@
 }
 
 .btn-secondary {
-    position: absolute;
+    /* position: absolute; */
     /* margin-right: 30%; */
-    top: 90%;
-    left: 10%;
+    /* top: 90%; */
+    /* left: 10%; */
     background-color: var(--cf-green-color);
     border: 1px solid var(--cf-navicon-color);
     color: var(--cf-light-color);

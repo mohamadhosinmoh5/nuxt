@@ -12,14 +12,14 @@
         <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
             {{ useNotice.error.message }}
         </div>
-        <div v-if="useNotice.notice" class="row">
+        <div v-if="notice" class="row">
             <div class="row">
                 <div class="col-sm-7 col-md-7">
                     <div class="row myimages">
                         <div class="col-3">
                             <div class="scrollBar">
                                 <div class="smalimage">
-                                    <img @click="setBaseImage(image)" v-for="{ image, index } in useNotice.notice.gallery"
+                                    <img @click="setBaseImage(image)" v-for="{ image, index } in notice.gallery"
                                         :key="index" class="bannerImage"
                                         :src="`${useRuntimeConfig().public.BaseUrl}/${image}`" alt="">
                                 </div>
@@ -28,7 +28,7 @@
                         <div class="col-9">
                             <div class="col-md">
                                 <img ref="mainImage" id="mainimage"
-                                    :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${useNotice.notice.gallery[0].image});`"
+                                    :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"
                                     class="mainimages mt-5" alt="">
                             </div>
                         </div>
@@ -37,8 +37,8 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            <single-section v-if="useNotice.notice.section_data_collection.length >= 1"
-                                v-for="section in useNotice.notice.section_data_collection" :section="section" />
+                            <single-section v-if="notice.section_data_collection.length >= 1"
+                                v-for="section in notice.section_data_collection" :section="section" />
                             <div class="col-sm-12 mt-3">
                                 <div class="row Tozihat">
                                     <div class="col-sm col-md">
@@ -49,40 +49,40 @@
                                 </div>
                                 <div class="col-12  mt-3 box_tozihat">
                                     <a href="#" class="wallettxts-describtion">
-                                        {{ useNotice.notice.description }}
+                                        {{ notice.description }}
                                     </a>
                                 </div>
                             </div>
 
-                            <div class=" col row Tozihat mt-3">
+                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing !=null" class=" col row Tozihat mt-3">
                                 <div class="col">
                                     <img src="assets/img/SinglePage_Image/money.svg" alt=""
                                         style="width: 30px;">
                                     <a href="#"> کارشناسی قیت</a>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing !=null" class="row">
                                 <div class="col-11 ms-4 mt-2 reng_box">
                                     <div class="range ">
                                         <div class="sliderValue">
 
                                         </div>
-                                        <div v-if="useNotice.notice.price_expert_rating != null" class="col-10  field">
+                                       
+                                        <div v-if="useNotice?.notice?.price_expert_rating != null" class="col-10  field">
                                             <input disabled type="range" min="0" max="100"
-                                                value=" {{ useNotice.notice.price_expert_rating }}">
+                                                :value="notice.price_expert_rating">
                                             <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">
                                         </div>
-                                        <div v-else>
-                                            قیمت : {{ (useNotice.notice.pricing.discount_percent > 0) ?
-                                                convertPrice(useNotice.notice?.pricing.price - (useNotice.notice?.pricing.price
+                                       
+                                        <div v-else-if="notice?.pricing !=null">
+                                            قیمت : {{ (notice?.pricing?.discount_percent > 0) ?
+                                                convertPrice(notice?.pricing?.price - (notice?.pricing?.price
                                                     *
-                                                    useNotice.notice.pricing.discount_percent / 100)) :
-                                                convertPrice(useNotice.notice?.pricing.price) }} تومان
+                                                    notice.pricing?.discount_percent / 100)) :
+                                                convertPrice(notice?.pricing?.price) }} تومان
                                         </div>
+                                        
                                     </div>
-
-
-
                                 </div>
                             </div>
                             <div class="row">
@@ -112,21 +112,21 @@
                         <div class="row col-11 box-title">
                             <div class="col-12">
                                 <a href="#" class="Titleontop">
-                                    {{ useNotice.notice.title }}
+                                    {{ notice.title }}
                                 </a>
                             </div>
 
                             <div class="boxdetailes col-md-12 row">
-                                <div v-if="useNotice.notice.address != null" class="col-md-4">
+                                <div v-if="notice.address != null" class="col-md-4">
                                     <a href="#" class="figmafont">محله : </a>
                                     <a href="#" class="texts">{{
-                                        useNotice.notice.address.address.neighbourhood }}</a>
+                                        notice.address.address.neighbourhood }}</a>
                                 </div>
                                 <div class="col-4">
                                     <a href="#" class="figmafont">
                                         کد آگهی :
                                     </a>
-                                    <a href="#" class="texts"> {{ useNotice.notice.id }}</a>
+                                    <a href="#" class="texts"> {{ notice.id }}</a>
                                 </div>
                                 <div class="col-sm-4 detailicons">
                                     <div class="col">
@@ -137,38 +137,36 @@
                                 </div>
                                 <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">
                                     قیمت : {{ (useNotice?.notice?.pricing?.discount_percent > 0) ?
-                                        convertPrice(useNotice.notice?.pricing.price - (useNotice.notice?.pricing.price
+                                        convertPrice(notice?.pricing.price - (notice?.pricing.price
                                             *
-                                            useNotice.notice.pricing.discount_percent / 100)) :
-                                        convertPrice(useNotice.notice?.pricing.price) }} تومان
+                                            notice.pricing.discount_percent / 100)) :
+                                        convertPrice(notice?.pricing.price) }} تومان
                                 </div>
                             </div>
                             <div class="lineee mt-3"></div>
-                            <div v-if="useNotice.notice.section_data_collection.length >= 1"
+                            <div v-if="notice.section_data_collection.length >= 1"
                                 class="boxdetailes col-xs-12 row mt-3">
-                                <div class="col-6">
+                                <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                                        useNotice.notice.section_data_collection[2].items[0].field.title }}:</a>
+                                        notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                                        convertPrice(useNotice.notice.section_data_collection[2].items[0].data[0]) }} تومان
+                                        convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
                                     </a>
                                 </div>
 
 
-                                <div v-if="useNotice.notice.section_data_collection[2]" class="col-6">
+                                <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                                        useNotice.notice.section_data_collection[2].items[1].field.title }}:</a>
+                                        notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">
                                         {{
-                                            convertPrice(useNotice.notice.section_data_collection[2].items[1].data[0]) }} تومان
+                                            convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
                                     </a>
-                                    <div v-if="!useNotice?.notice?.category?.properties?.is_product" class="row">
-
-                                    </div>
+                                
 
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر بیشتر با ما تماس بگیرید</a>
+                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر با ما تماس بگیرید</a>
 
                                     <div class="col-4 tamas_btn mt-2">
                                         <button @click="showPhone = true" type="button"
@@ -194,9 +192,9 @@
                                     </div> -->
 
                                     <div v-if="showPhone" id="myModal" class="modal">
-                                        <div class="modal-content">
+                                        <div class="modal-content-index">
                                             <span @click="showPhone = false" class="hiding">&times;</span>
-                                            <p href="#" class="Title">شماره تماس : {{ useNotice.notice.mobile }}</p>
+                                            <p href="#" class="Title">شماره تماس : {{ notice.mobile }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -248,23 +246,23 @@
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
                             <img src="assets/img/SinglePage_Image/row.svg" style="float: left; top: 6px;position: relative;"
                                 alt="">
-                            <a href="#" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
+                            <a :href="`${useRuntimeConfig().public.BaseUrl}/office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
 
                         </div>
                         <div class="col-12 map_box">
-                            <div v-if="useNotice.notice.address != null" class="col mappingg">
-                                <LMap v-if="useNotice.notice" id="map" ref="mapRef" :zoom="16"
-                                    :center="[useNotice.notice.address.lat, useNotice.notice.address.lng]">
+                            <div v-if="notice.address != null" class="col mappingg">
+                                <LMap v-if="notice" id="map" ref="mapRef" :zoom="16"
+                                    :center="[notice.address.lat, notice.address.lng]">
                                     <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                         attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
                                         layer-type="base" name="OpenStreetMap" />
 
-                                    <l-circle-marker :lat-lng="[useNotice.notice.address.lat, useNotice.notice.address.lng]"
+                                    <l-circle-marker :lat-lng="[notice.address.lat, notice.address.lng]"
                                         :radius="10" color="red" />
-                                    <l-marker :lat-lng="[useNotice.notice.address.lat, useNotice.notice.address.lng]">
+                                    <l-marker :lat-lng="[notice.address.lat, notice.address.lng]">
                                         <l-popup @ready="ready">
                                             <div class="title">
-                                                {{ useNotice.notice.title }}
+                                                {{ notice.title }}
                                             </div>
                                         </l-popup>
                                     </l-marker>
@@ -282,13 +280,78 @@
                             <a href="#" class="Title">اگهی های مشابه</a>
                             <img src="assets/img/SinglePage_Image/row.svg" id="moshabeIcon" alt="">
                             <a href="#" class="subtitle ms-2" id="moshabeIcon">مشاهده همه</a>
+
                         </div>
                         <!-- add Cards-->
-                        <div v-for="notice in allNotices" :key="notice.id" class="col-sm-4 mt-5">
-                            <div href="#">
-                                <Notice :Notice="notice" />
-                            </div>
-                        </div>
+                       <div class="box-similer row">
+                           <div v-if="allNotices !== null" v-for="notice in allNotices?.items" :key="notice.id"
+                           class="col-sm-3 mt-5">
+                           <div class="row box-notice">
+                               <div class="col-sm-12 img-box">
+                                   <div class="img"
+                                       :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
+                                   </div>
+                               </div>
+           
+                               <div class="col-sm-12 mt-3">
+                                   <div class="titleNotice">
+                                       <h4 class>{{ notice.title }}</h4>
+                                   </div>
+                               </div>
+           
+           
+                               <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
+                                   <div class="row">
+                                       <div class="col-6 text-section">
+                                           {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
+                                               notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                       </div>
+           
+                                       <div v-if="notice?.section_data_collection[0].items[5]" class="col-6 text-section">
+                                           {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
+                                               notice?.section_data_collection[0].items[5]?.data[0] }}
+                                       </div>
+           
+                                       <div class="col-sm-12 text-section mt-4">
+                                           <div class="row">
+                                               <div v-if="notice?.section_data_collection[2].items[0]" class="col-10">
+                                                   {{ notice?.section_data_collection[2].items[0]?.field?.title }} : {{
+                                                       convertPrice(notice?.section_data_collection[2].items[0]?.data[0]) }} تومان
+                                               </div>
+           
+                                               <div class="col-2">
+                                                   <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                       <img src="~/assets/img/arrow-left.svg" alt="">
+                                                   </a>
+                                               </div>
+           
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                               <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
+                                       <div class="row">
+                                           <div class="col-sm-12 text-section mt-4">
+                                               <div class="row">
+                                                   <div class="col-10">
+                                                       قیمت : {{ (notice?.pricing?.discount_percent > 0) ? convertPrice(notice?.pricing?.price - (notice?.pricing?.price * notice?.pricing?.discount_percent / 100)) :  convertPrice(notice?.pricing?.price)}} تومان
+                                                   </div>
+                       
+                                                   <div class="col-2">
+                                                       <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                           <img src="~/assets/img/arrow-left.svg" alt="">
+                                                       </a>
+                                                   </div>
+                   
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </div> -->
+           
+                           </div>
+                       </div>
+        
 
                     </div>
                 </div>
@@ -300,7 +363,6 @@
 
                 <div class="col-sm-12">
                     <!-- <single-notice :notice="useNotice?.notice" /> -->
-
                 </div>
 
 
@@ -332,6 +394,8 @@ const count = ref(0);
 const addCart = ref(null);
 const loadingStyle = ref(true);
 const allNotices = ref(null)
+const notice = ref(null)
+const oneRequest = ref(0)
 
 watch(useCart, async (newdata) => {
     // loadingStyle.value = false;
@@ -344,24 +408,29 @@ watch(useCart, async (newdata) => {
 })
 
 setTimeout(async () => {
-    await useNotice.getNotice(params.noticeId).then((r) => {
+    useNotice.getNotice(params.noticeId).then((r) => {
+        notice.value = r;
         pending.value = false;
-        useNotice.getSimilar(params.noticeId,r.category.id).then((r2)=>{
-            allNotices.value = r2;
-    });
+        getSimilar(r.category.id);
     });
     loadingStyle.value = false;
 
     await useCart.getCart().then((r) => {
-        console.log(r);
         cart.value = r;
         count.value = r.items[0].count;
     });
-});
 
+})
+
+
+const getSimilar = (catId)=>{
+    useNotice.getSimilar(params.noticeId,catId).then((r2)=>{
+            allNotices.value = r2.allNotices;
+        });
+}
 
 const setBaseImage = (urlImage) => {
-    mainImage.value.src = `${useRuntimeConfig().public.BaseUrl}/${urlImage}`;
+    mainImage.value.style.backgroundImage = `url("${useRuntimeConfig().public.BaseUrl}/${urlImage}")`;
 }
 
 

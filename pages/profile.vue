@@ -326,6 +326,11 @@ const transactions = ref(null);
 const transactionBankReceipts = ref(null)
 const loading = ref(true);
 
+const loadingStyle = (query) => {
+    loading.value = false;
+}
+
+
 const changeMenu = (name) => {
     loading.value = true;
     showDashboard.value = false;

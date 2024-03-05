@@ -224,6 +224,12 @@ const transactionBankReceipts = ref(null)
 const Message = ref(null)
 const amount = ref(null)
 
+const emit = defineEmits(['clicked'])
+
+const loadingStyle = (query) => {
+  emit('clicked',query)
+} 
+
 const chnageTabMenu = (name) => {
     wallet.value = false;
     verify.value = false;
@@ -272,13 +278,6 @@ const changePayiintTab = (name) => {
 
 }
 
-const emit = defineEmits(['clicked'])
-
-const loadingStyle = (query) => {
-  emit('clicked',query)
-}
-
-
 // loadingStyle(false);
 onMounted(() => {
     setTimeout(() => {
@@ -298,7 +297,8 @@ onMounted(() => {
         loadingStyle(false);
 
     })
-
+  })
+  
     const addSetting = async () => {
         // value of withdraw :
         // monthly;
@@ -314,6 +314,4 @@ onMounted(() => {
             Message.value = 'تنظیمات ذخیره شد';
         })
     }
-}
-)
 </script>

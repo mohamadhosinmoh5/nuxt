@@ -14,9 +14,27 @@
     src: url(../font/AnjomanMax-Regular.ttf);
 }
 
+@font-face {
+    font-family: anjomanWebBold;
+    src: url(../font/AnjomanMax-CnBold.woff);
+}
 
+@font-face {
+    font-family: anjomanWebFat;
+    src: url(../font/AnjomanMax-CnFat.woff);
+}
+
+@font-face {
+    font-family: anjomanWebLight;
+    src: url(../font/AnjomanMax-CnLight.woff);
+}
+
+@font-face {
+    font-family: anjomanWebThin;
+    src: url(../font/AnjomanMax-Thin.woff);
+}
 :root {
-    --cf-dark-color: #1b1b1b;
+    --cf-dark-color: #25282b;
     --cf-light-color: #dedede;
     --cf-light-grey: #7a7a7a;
     --cf-title-color: #141414;
@@ -31,7 +49,7 @@
 }
 
 body {
-    font-family: anjoman, sans-serif !important;
+    font-family: anjomanWebBold, sans-serif !important;
     font-weight: bold;
     -moz-font-feature-settings: "ss05";
     -webkit-font-feature-settings: "ss05";
@@ -62,10 +80,29 @@ body {
     color: #666777;
 }
 
+#my-input{
+    font-family: anjomanReqular !important;
+    -moz-font-feature-settings: "ss05";
+    -webkit-font-feature-settings: "ss05";
+    font-feature-settings: "ss05";
+}
+
+.disable{
+    filter: blur(4px);
+    
+}
+
+.disable-after{
+    content: 'غیر فعال می باشد';
+    position: absolute;
+    top: 30%;
+    font-size: 30px;
+    font-family: anjoman;
+}
 .location {
 
     text-decoration: none;
-    font-family: anjoman, sans-serif;
+    font-family: anjomanWebBold, sans-serif;
     font-size: 15px;
     width: 59%;
     color: #7a7a7a;
@@ -255,7 +292,7 @@ body {
 }
 
 .text-section {
-    font-family: Vazir;
+    font-family: anjoman;
     text-align: start;
     font-size: 14px;
     color: #5a5a5a;
@@ -305,6 +342,22 @@ body {
     text-align: center;
     width: 100%;
     height: 100vh;
+}
+
+.spinner-border-background-index{
+    position: fixed;
+    background: #535353a2;
+    top:86px;
+    height: 100vh;
+    text-align: center;
+    width: 100%;
+}
+
+.spinner-border-background-index div {
+    position: absolute;
+    left: 60%;
+    height: 80px;
+    width: 80px;
 }
 
 .descktop-office-title {
@@ -392,7 +445,9 @@ body {
 }
 
 @media only screen and (max-width:570px) {}
-
+.count-cart{
+    top:auto !important;
+}
 .mobile-notice-title {
     font-size: 14px;
     font-weight: 400;
@@ -477,7 +532,7 @@ body {
     border-radius: 15px;
     padding: 7px 10px;
     background: white;
-
+    margin: 10px;
 }
 
 .margin-fix {
@@ -770,6 +825,9 @@ select {
     font-size: 16px;
     color: #52575c !important;
     font-family: anjomanReqular;
+    -moz-font-feature-settings: "ss05";
+    -webkit-font-feature-settings: "ss05";
+    font-feature-settings: "ss05";
 }
 
 input.checkBox {
@@ -1382,10 +1440,19 @@ label {
 .fixedCat {
     position: fixed;
     overflow: scroll;
-    top: 0;
+    top: 100px;
     width: 24%;
     height: 90vh;
 }
+
+.fixedCat2 {
+    position: fixed;
+    overflow: scroll;
+    top: 100px;
+    width: 33%;
+    height: 90vh;
+}
+
 
 .fixedMap {
     position: fixed;
@@ -1404,7 +1471,7 @@ label {
 .relativeCat {
     position: unset;
     overflow: scroll;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 .hideMapBox {
@@ -1582,13 +1649,15 @@ input:checked+.slider:before {
 
 
 .tab_box {
+    width: 90%;
+    display: flex;
     text-align: center;
     padding: 10px;
     border-radius: 10px;
     background: var(--neutral-g6, #F1F1F1);
     position: relative;
-    width: 111%;
-    /* right: 1%; */
+    margin: 0 auto;
+    max-height: 43px;
     /* flex-shrink: 0; */
 }
 
@@ -1937,9 +2006,11 @@ input:checked+.slider:before {
     background-color: var(--cf-green-color);
     border: none;
     position: fixed;
+    width: 70px;
     bottom: 35px;
-    border-radius: 40px;
+    border-radius: 50%;
     border: 4px solid var(--cf-light-color);
+    height: 70px;
 }
 
 .Maptext {
@@ -2009,6 +2080,18 @@ input:checked+.slider:before {
 }
 
 
+.box-similer { 
+    height:500px;
+    overflow: scroll;
+
+}
+
+.closeCart {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border: none;
+}
 /*  shoping cart */
 
 /* 

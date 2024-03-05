@@ -23,6 +23,7 @@ export default defineNuxtConfig({
       public: {
          BaseUrl: process.env.BASE_URL,
          Limit: process.env.LIMIT,
+         homeUrl: process.env.Home_URL,
       }
    },
    devtools: { enabled: false },
