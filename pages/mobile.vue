@@ -15,7 +15,7 @@
         </div>
   
         <div class="col-2 text-end">
-          <a href="#"><img src="assets/img/shop_icon.svg"/></a> 
+          <a href="#"><img src="assets/img/shop_icon.svg"/></a>
         </div>
       </div>
 
@@ -60,7 +60,7 @@
                 
               <li>
                 <a data-bs-toggle="offcanvas"
-                data-bs-target="#navbarOffcanvasLg" @click="showCategory"  class="nav-item nav-link  filter-box" href="#"> دسته بندی :  {{(lastCat != null) ? lastCat[0][0].title : 'همه آگهی ها'}} </a>
+                data-bs-target="#navbarOffcanvasLg" @click="showCategory"  class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{lastCat ? lastCat : 'همه آگهی ها'}} </a>
               </li>
             </ul>
       </div>
@@ -71,14 +71,14 @@
             <div @click="showMap=false" style="float:right !important;right:10px;" class="closeFilter">
               <img width="20" src="assets/img/cross-icon.svg" >
             </div>
-
-            <div  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
+        
+            <div v-if="showNotice"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
              
               <LMap v-if="allNotices"
                 id="map"
                 ref="mapRef"
                 :zoom="12"
-                :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
+                :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
                 @zoomend="changeZoom"
                 @click="markersIconCallback"
 
@@ -94,11 +94,11 @@
                 />
               
                 <l-circle-marker
-                :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
+                :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
                 :radius="10"
                 color="red"
               />
-                <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
+                <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address?.lat,notice.address?.lng]">
                   <l-popup @ready="ready" >
                     <div class="title">
                       {{ notice.title }}
@@ -123,7 +123,8 @@
           <div class="col-6">
             <div class="row">
               <div class="col-12">
-                <h5 class="category-title" style="font-size: 20px;">دسته بندی ها</h5>
+                <h5 v-if="lastCat !==null" class="category-title">{{lastCat}}</h5>
+                <h5 v-else class="category-title">دسته بندی ها</h5>
               </div>
               <div class="col-12">
                 <div v-if="pending" class="spinner-border" role="status"></div>
@@ -139,7 +140,7 @@
         <ul class="categoryBox">
           <li v-for="(item, index) in categories" :key="index">
             <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
-          <a @click="getCategory(item.id)" class="link">{{item.title}}</a>
+          <a @click="getCategory(item.id),setCat(item)" class="link">{{item.title}}</a>
           </li>
         </ul>
       </div>
@@ -334,6 +335,9 @@ export default {
     }
   },
   methods: {
+    setCat(item){
+      this.lastCat = item.title;
+    },
    closeSearch(){
       this.$refs.searchBox.style.display = 'none';
     },
@@ -407,12 +411,13 @@ export default {
         },
         getCategory(noticeId){
           this.pending = true;
+          this.lastCat = null;
           this.notices.getCategory(noticeId).then((r)=> {
             this.categories =  r;
-            if(r.length === 0) {
-              this.lastCat =  this.notices.lastCategory.slice(-1);
+            if(r.length == 0) {
               this.closeCategory();
               this.notices.fetchData().then((r)=>{
+                console.log(r);
                 this.allNotices = r.allNotices;
               });
             }

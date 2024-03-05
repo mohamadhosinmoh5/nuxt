@@ -24,6 +24,8 @@ export default {
       officeShow:false,
       showMap:false,
       showCat:true,
+      scrolled:false,
+      lastCat:null,
       polygonGrg : [[36.873978, 54.346216],[36.880184, 54.500138],[36.794162, 54.506150],[36.786775, 54.357092],[36.873978, 54.346216]],
       center :ref({
         "latitude": 36.830367834795,
@@ -32,7 +34,10 @@ export default {
     }
   },
   methods: {
-    filterUptaded(query,section){
+    setCat(item){
+      this.lastCat = item.title;
+    }
+    ,filterUptaded(query,section){
       this.pending = true;
       if(query){
         setTimeout(() => {
@@ -88,17 +93,22 @@ export default {
           this.notices.getCategory(noticeId).then((r)=> {
             this.categories =  r;
             this.notices.fetchData().then((r)=>{
-              this.allNotices = r.allNotices;
+              if(r.allNotices.length >= 1){
+                this.allNotices = r.allNotices;
+              }
               this.pending=false;
             });
             this.pending = false;
           });
         },
         lastCategory(){
+          this.lastCat = null;
           if(this.notices.getclickCat <= 1){
-          if(this.notices.getclickCat == 0){
-            return
-          }
+
+            if(this.notices.getclickCat == 0){
+              return
+            }
+
             this.categories = this.notices.lastCategory[1];
             this.allNotices = this.defaultNotices;
             this.notices.categories = null;
@@ -135,21 +145,35 @@ export default {
     showMap(val){
       if(val){
         this.showCat =false
+        // menuAndMapBox
         this.$refs.noticeBox.classList.remove('col-sm-9');
+        this.$refs.menuAndMapBox.classList.remove('col-sm-3');
         this.$refs.noticeBox.classList.add('col-sm-8');
+        this.$refs.menuAndMapBox.classList.add('col-sm-4');
       }else{
         this.showCat =true
+        this.$refs.menuAndMapBox.classList.remove('col-sm-4');
         this.$refs.noticeBox.classList.remove('col-sm-8');
+        this.$refs.menuAndMapBox.classList.add('col-sm-3');
         this.$refs.noticeBox.classList.add('col-sm-9');
       }
     },
     showCat(val){
       if(val){
         this.showMap = false;
+        if(this.scrolled){
+          this.$refs.menuAndMap.classList.remove('fixedCat2');
+          this.$refs.menuAndMap.classList.add('fixedCat');
+        }
         this.$refs.noticeBox.classList.remove('col-sm-8');
         this.$refs.noticeBox.classList.add('col-sm-9');
       }else{
         this.showMap = true;
+        if(this.scrolled){
+          this.$refs.menuAndMap.classList.remove('fixedCat');
+        this.$refs.menuAndMap.classList.add('fixedCat2');
+        }
+
         this.$refs.noticeBox.classList.remove('col-sm-9');
         this.$refs.noticeBox.classList.add('col-sm-8');
       }
@@ -181,15 +205,23 @@ export default {
         window.addEventListener('scroll',()=>{
           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
           let width = window.innerWidth;
-          console.log(width);
+
           if(scrollTop > 200  && width > 527){
-            this.$refs.menuBox.classList.remove('relativeCat');
-            this.$refs.menuBox.classList.add('fixedCat');
+            this.scrolled = true;
+            this.$refs.menuAndMap.classList.remove('relativeCat');
+            if(this.showMap){
+              this.$refs.menuAndMap.classList.add('fixedCat2');
+            }else{
+              this.$refs.menuAndMap.classList.add('fixedCat');
+            }
           }
 
           if(scrollTop < 200){
-            this.$refs.menuBox.classList.remove('fixedCat');
-            this.$refs.menuBox.classList.add('relativeCat');
+            this.scrolled = false;
+            this.$refs.menuAndMap.classList.remove('fixedCat');
+            this.$refs.menuAndMap.classList.remove('fixedCat2');
+
+            this.$refs.menuAndMap.classList.add('relativeCat');
           }
         })
   },
@@ -224,83 +256,89 @@ export default {
                 </label>
               <p  class="switchItem">فیلترها</p>
             </div> -->
-            <div class="row tab_box">
+
+          </div>
+        </div>
+
+        <div ref="menuAndMapBox" class="col-sm-3 menu" >
+          <div ref="menuAndMap" class="row">
+          <div  class="tab_box">
               <div class="activeItem"></div>
               <a @click="showMap=false" class="col-6 tabItem active"> فیلتر ها  </a>
               <a @click="showMap=true" class="col-6 tabItem"> نقشه</a>
-            </div>
           </div>
-        </div>
-  
-        <div v-if="showMap" class="col-sm-4 mt-2 mapBox">
-          <div ref="mapDiv" class="stickyStyle" >
-            <LMap v-if="allNotices"
-              id="map"
-              ref="mapRef"
-              :zoom="16"
-              :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
-              @zoomend="changeZoom"
-              @click="markersIconCallback"
-            >
-            <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
-              <LTileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-                layer-type="base"
-                name="OpenStreetMap"
-              />
-            
-              <l-circle-marker
-              :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
-              :radius="10"
-              color="red"
-            />
-              <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
-                <l-popup @ready="ready" >
-                  <div class="title">
-                    {{ notice.title }}
-                  </div>
-                </l-popup>
-              </l-marker>
-    
-            </LMap>
-          </div>
-        </div>
-  
-        <div v-if="showCat" ref="menu" class="col-sm-3 menu" >
-          <div class="">
-            <div class="row mt-5 " ref="menuBox" >
-             <div class="col-sm-12 ">
-                <div class="row category-box">
-                  <div class="col-7">
-                    <div class="row">
-                      <div class="col-12 margin-fix">
-                        <h5 class="category-title">دسته بندی ها</h5>
+            <div class="row">
+              <div v-if="showCat">
+                <div class="row mt-5 " ref="menuBox" >
+                 <div class="col-sm-12 ">
+                    <div class="row category-box">
+                      <div class="col-7">
+                        <div class="row">
+                          <div class="col-12 margin-fix">
+                            <h5 v-if="lastCat !==null" class="category-title">{{lastCat}}</h5>
+                            <h5 v-else class="category-title">دسته بندی ها</h5>
+                          </div>
+                          <div class="col-12">
+                            <div v-if="pending" class="spinner-border" role="status"></div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-12">
-                        <div v-if="pending" class="spinner-border" role="status"></div>
+                      <div class="col-5 text-end">
+                        <span class="backCat" @click="lastCategory">
+                          <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
+                        </span>
                       </div>
                     </div>
+                    <ul class="categoryBox">
+                      <li v-for="(item, index) in categories" :key="index">
+                        <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
+                      <a @click="getCategory(item.id),setCat(item)" class="link">{{item.title}}</a>
+                      </li>
+                    </ul>
                   </div>
-                  <div v-if="!officeShow" class="col-5 text-end">
-                    <span class="backCat" @click="lastCategory">
-                      <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
-                    </span>
+                  <div :class="(officeShow) ? `disable` : ``">
+                    <Filter :status="pending" @clicked="filterUptaded" />
                   </div>
                 </div>
-                <ul v-if="!officeShow" class="categoryBox">
-                  <li v-for="(item, index) in categories" :key="index">
-                    <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
-                  <a @click="getCategory(item.id)" class="link">{{item.title}}</a>
-                  </li>
-                </ul>
               </div>
-              <div v-if="!officeShow" class="">
-                <Filter :status="pending" @clicked="filterUptaded" />
+    
+              <div v-if="showMap" class="stickyStyle" >
+                <LMap v-if="allNotices"
+                  id="map"
+                  ref="mapRef"
+                  :zoom="16"
+                  :center="[allNotices[1].address.lat, allNotices[1].address.lng]"
+                  @zoomend="changeZoom"
+                  @click="markersIconCallback"
+                >
+                <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
+                  <LTileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                    layer-type="base"
+                    name="OpenStreetMap"
+                  />
+                
+                  <l-circle-marker
+                  :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]"
+                  :radius="10"
+                  color="red"
+                />
+                  <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
+                    <l-popup @ready="ready" >
+                      <div class="title">
+                        {{ notice.title }}
+                      </div>
+                    </l-popup>
+                  </l-marker>
+        
+                </LMap>
               </div>
-            </div>
+            
           </div>
-        </div>
+          </div>
+          </div>
+
         <!-- start Card-->
         <div ref="noticeBox" class="col-sm-9">
           <div class="row category-box-sort">
@@ -325,17 +363,17 @@ export default {
   
           <div  class="row" :style="noticeShow ? `display:flex` : 'display:none;'">
             <!-- Card 1-->
-          <div v-if="infinity != null  && infinity.fetchingData"  class="spinner-border-background">
+          <div v-if="infinity != null  && infinity.fetchingData" class="spinner-border-background-index">
             <br>
             <br>
-            در حال بارگیری <br>
+            <br>
             <div class="spinner-border mt-5" role="status"></div>
           </div>
       
         <div class="col-sm-12 text-center">
           <div v-if="pending" class="spinner-border" role="status"></div>
         </div>
-              <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4 mt-5">
+              <div v-for="notice in allNotices" :key="notice.id"  class="col-sm-4">
                 <div @mouseenter="showPop(`marker_${notice.id}`)" href="#">
                   <Notice :Notice="notice" />
                 </div>

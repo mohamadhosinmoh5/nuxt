@@ -120,9 +120,9 @@
             <section class="range-slider">
               <div class="range-input">
                 <input type="range" class="min" min="0" max="100" v-model="minSection"
-                  @input="sectionQuery({ field_id: 8, type: 'numeric', inputName: 'Metr' })" step="10">
+                  @input="sectionQuery({ field_id: 8, type: 'numeric', inputName: 'Metr' })" step="1">
                 <input type="range" class="max" min="0" max="100" v-model="maxSection"
-                  @input="sectionQuery({ field_id: 8, type: 'numeric', inputName: 'Metr' })" step="10">
+                  @input="sectionQuery({ field_id: 8, type: 'numeric', inputName: 'Metr' })" step="1">
               </div>
             </section>
           </div>
@@ -134,11 +134,11 @@
           <label class="filter-Title" for="my-select">عمر ساختمان</label>
           <select v-model="ageText" @change="sectionQuery({ field_id: 5, category: 'select', value: ageText })"
             id="my-select" class="custom-select mt-3" name="">
-            <option value="کمتر از 5 سال">کمتر از 5 سال</option>
+            <option value="">بدون فیلتر</option>
             <option value="نوساز">نوساز</option>
+            <option value="کمتر از 5 سال">کمتر از 5 سال</option>
             <option value="بین 5 تا 10 سال">بین 5 تا 10 سال</option>
             <option value="بیش از 10 سال">بیش از 10 سال</option>
-
           </select>
         </div>
       </div>
@@ -148,6 +148,7 @@
           <label class="filter-Title" for="my-select"> موقعیت طبقه</label>
           <select v-model="position" @change="sectionQuery({ field_id: 7, category: 'select', value: position })"
             id="my-select" class="custom-select mt-3" name="">
+            <option value=""> همه طبقات</option>
             <option value="اول"> اول</option>
             <option value="دوم"> دوم</option>
             <option value="سوم"> سوم</option>
