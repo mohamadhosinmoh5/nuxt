@@ -19,7 +19,7 @@
           @zoomend="changeZoom"
           @click="markersIconCallback"
         >
-        <l-polygon :lat-lngs="polygonGrg" color="green"></l-polygon>
+        <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
           <LTileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"

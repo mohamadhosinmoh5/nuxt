@@ -35,7 +35,7 @@
               style="color: #666777;font-size: 14px;text-align: right;
               padding: 6px 35px;">
               <div v-if="searchPending" class="searchLoader">
-                <div class="spinner-border" role="status"></div>
+                <div class="loader-search" role="status"></div>
               </div>
               <div ref="searchBox" class="searchResult">
                 <div class="row">
@@ -74,7 +74,7 @@
         </div>
 
         <div class="col-12 mt-2">
-          <div class="col-12 mt-1 mob-map">
+          <div  class="col-12 mt-1 mob-map">
             
             <div v-if="showNotice"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
              
@@ -118,7 +118,7 @@
     </div>
     <!-- show category box -->
     <div ref="categoryCanvas" class="categoryCanvas">
-      <div @click="closeCategory" class="closeFilter">
+      <div @click="closeCategory" class="closeFilterr">
         <img width="20" src="assets/img/right.png" >
       </div>
      <div class="row mt-4">
@@ -162,15 +162,21 @@
         در حال بارگیری <br>
         <div class="spinner-border mt-5" role="status"></div>
       </div>
-      <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
+     
+        <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
           <div class="col-4 mobile-img-box">
-            <div class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
+            <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+              <div class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
+            </a>
           </div>
           <div class="col-8">
             <div class="row">
+             <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
               <div class="col-12">
                 <h4 class="mobile-notice-title ms-1">{{notice.title}}</h4>
               </div>
+             </a>
+             <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
               <div v-if="notice?.section_data.length > 1" class="row mt-2">
                 
                 <div  class="col-sm mobile-section ms-1">
@@ -182,8 +188,11 @@
 
                 </div>
                 </div>
+             </a>
+               
                 <div class="col-sm margin-fix">
-                  <div class="row ms-1">
+                  <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
+                    <div class="row ms-1">
                   <div class="col-10 mobile-section">
                       {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
                   </div>
@@ -195,7 +204,9 @@
                   </div>
 
               </div>
+                  </a>
                 </div>
+               
 
               <div class="col-sm-12" v-if="notice?.section_data.length < 1">
                 <div class="row">
@@ -219,6 +230,7 @@
             </div>
           </div>
       </div>
+      
     </div>
 
     <div v-if="officeShow" class="row content">
@@ -247,7 +259,7 @@
       </div>
     </div>
 
-    <div ref="filterCanvas" class="filterCanvas" tabindex="-1" id="navbarOffcanvasLg">
+    <div ref="filterCanvas" class="filterCanvas" style="display: none;" tabindex="-1" id="navbarOffcanvasLg">
         <div @click="closeFilter" class="closeFilter">
           <img width="20" src="assets/img/right.png" >
         </div>
@@ -276,7 +288,7 @@
             </button>
             <button v-if="showMap" type="button" @click="showMap=false" class="circle">
               <p  class="Maptext">
-                لیست
+                آگهی ها
                </p>
               
             </button>
@@ -365,6 +377,7 @@ export default {
     },
     showFilter(){
       this.$refs["filterCanvas"].style.bottom = '0px';
+      this.$refs["filterCanvas"].style.display = 'block';
     },filterUptaded(query,section){
       this.pending = true;
       if(query){
