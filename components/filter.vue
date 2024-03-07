@@ -25,7 +25,7 @@
               </div>
             </div>
           </div>
-          <div class="col-sm-12 mt-2">
+          <div class="col-sm-12 mt-4">
             <section class="range-slider">
               <div class="range-input">
                 <input type="range" class="min" min="0" max="100000000000" v-model="minPrice"
