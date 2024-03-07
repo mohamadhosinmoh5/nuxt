@@ -210,10 +210,34 @@
     position: absolute;
     display: block;
     justify-content: center;
-    margin-top: 6%;
+    margin-top: 4%;
     /* background-color: var(--cf-light-color); */
+}
 
+.range-txt {
+    color: var(--cf-title-color);
+    font-size: 16px;
+    font-family: 'anjoman';
+}
 
+@media screen and (max-width: 992px) {
+    .range-txt {
+        color: var(--cf-title-color);
+        font-size: 12px;
+        font-family: 'anjoman';
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .range {
+        height: 80px;
+        width: 100%;
+        position: absolute;
+        display: block;
+        left: 5%;
+        justify-content: center;
+        margin-top: 7%;
+    }
 }
 
 .reng_box {
@@ -355,14 +379,13 @@
 .modal-content-index {
     background-color: var(--cf-light-color);
     opacity: 1;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    padding: 20px;
-    right: 25%;
-    top: 40vh;
+    border-radius: 15px;
+    padding: 5px;
+    right: 70%;
+    top: 50vh;
     position: fixed;
     border: 1px solid #dadada;
-    width: 50% !important;
+    width: 20% !important;
 }
 
 .modal-content p {
@@ -399,6 +422,7 @@
 
 .range .field img {
     position: relative;
+    right: 10%;
     width: 75%;
 }
 
@@ -1146,7 +1170,7 @@
 }
 
 .hiding-box {
-    position: fixed;
+    position: sticky;
     height: 0px;
     overflow: hidden;
     background: white;
@@ -1158,7 +1182,7 @@
 }
 
 .show-box {
-    position: none;
+    position: sticky;
     height: auto;
     /* z-index: 1111; */
 }

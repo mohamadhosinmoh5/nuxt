@@ -1591,19 +1591,19 @@ label {
 }
 
 .mob-stickyStyle {
-    position: absolute;
-    left: 0px;
-    margin-right: 0 !important;
-    width: 100%;
+    position: sticky;
+    left: 0;
+    margin-right: -12px !important;
+    width: 106%;
     height: 10vh;
     overflow: hidden;
 }
 
 .showMap {
-    top: -2px;
+    top: 50px;
     position: fixed;
     height: 100vh;
-    z-index: 1;
+    z-index: 222222;
 }
 
 .closeBox {
