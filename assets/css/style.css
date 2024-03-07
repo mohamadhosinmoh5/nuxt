@@ -1575,6 +1575,7 @@ label {
     background: #df0a0a;
     border-radius: 50%;
     text-align: center;
+    z-index: 1111;
     top: 10px;
     width: 20px;
     height: 20px;

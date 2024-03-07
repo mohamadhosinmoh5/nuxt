@@ -302,7 +302,7 @@ export default {
                 </div>
               </div>
     
-              <div v-if="showMap" class="stickyStyle" >
+              <div v-if="showMap && allNotices[0].address != null" class="stickyStyle" >
                 <LMap v-if="allNotices"
                   id="map"
                   ref="mapRef"

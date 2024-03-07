@@ -23,7 +23,6 @@
                                       class="fas fa-long-arrow-alt-left me-2"></i>صفحه اصلی </a>
                                 </h5>
                               <hr>
-              
                               <div class="d-flex justify-content-between align-items-center mb-4">
                                 <div>
                                   <p class="mb-1">سبد خرید</p>
@@ -32,7 +31,7 @@
                               </div>
                               <div v-for="(item, index) in cart?.items" :key="index" class="cart-item">
                                   <div v-if="item.count != 0" class="mb-3">
-                                    <div >
+                                    <div>
                                       <div class="d-flex justify-content-between">
                                         <div class="d-flex flex-row align-items-center">
                                           <div class="image-cart">

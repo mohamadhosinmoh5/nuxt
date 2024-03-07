@@ -76,7 +76,7 @@
         <div class="col-12 mt-2">
           <div  class="col-12 mt-1 mob-map">
             
-            <div v-if="showNotice"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
+            <div v-if="showNotice && allNotices && allNotices[1]?.address != null"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
              
               <LMap v-if="allNotices"
                 id="map"
@@ -176,9 +176,8 @@
                 <h4 class="mobile-notice-title ms-1">{{notice.title}}</h4>
               </div>
              </a>
-             <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
-              <div v-if="notice?.section_data.length > 1" class="row mt-2">
-                
+             <a v-if="notice?.section_data.length >= 1" :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
+              <div  class="row mt-2">
                 <div  class="col-sm mobile-section ms-1">
                 
                     {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} متر
@@ -190,7 +189,7 @@
                 </div>
              </a>
                
-                <div class="col-sm margin-fix">
+                <div v-if="notice?.section_data.length >= 1" class="col-sm margin-fix">
                   <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
                     <div class="row ms-1">
                   <div class="col-10 mobile-section">
@@ -300,13 +299,19 @@
             </button>
         </div>
         <div class="list-item">
-            <button type="button" class="prson" >
+            <button v-if="!login" @click="isShowModal=true" type="button" class="prson" >
                 <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
                 <a href="#"  class="txtIcons">پروفایل</a>
             </button>
+            <button v-if="login" type="button" class="prson" >
+              <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
+              <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons text-info">پروفایل</a>
+          </button>
         </div>
     </div>
-
+    <div v-if="!token && isShowModal" id="LogInModal" class="LogInModal">
+      <Loginpage @clicked="modalStatus(status)" />
+     </div>
     <!-- <div class="notic" id="card1"></div> -->
 
 </template>
@@ -349,6 +354,9 @@ export default {
       searchTimeOut:null,
       searchResult:null,
       searchPending:false,
+      login:false,
+      isShowModal:false,
+      token: null,
       polygonGrg : [[36.873978, 54.346216],[36.880184, 54.500138],[36.794162, 54.506150],[36.786775, 54.357092],[36.873978, 54.346216]],
       center :ref({
         "latitude": 36.830367834795,
@@ -357,6 +365,9 @@ export default {
     }
   },
   methods: {
+    modalStatus(status){
+      this.isShowModal = status;
+    },
     setCat(item){
       this.lastCat = item.title;
     },
@@ -391,7 +402,7 @@ export default {
         }
         this.notices.fetchQuery().then((r)=>{
           if(r.allNotices == null){
-            this.error = 'دیتایی با این فیلتر وجود ندارد :('
+            this.error.value.value = 'دیتایی با این فیلتر وجود ندارد :('
             return;
           }
           this.allNotices = r.allNotices;
@@ -536,7 +547,7 @@ export default {
  ,mounted() {
    
    setTimeout(() => {
-          var token = useCookie('token');
+         
           this.notices.fetchData().then((r)=> {
             this.defaultNotices = r.allNotices;
             this.allNotices =  r.allNotices;
@@ -548,16 +559,17 @@ export default {
             this.pending = false;
           });
 
-          this.useCart.getCategory().then((r)=> {
-            this.categories =  r;
-            this.pending = false;
-          });
-
-          if(token != null){
-          this.auth.token = token;
-          this.auth.getMe()
-          this.useCart.getCart()
-            
+          this.token =  (useCookie('token')) ? useCookie('token') :null;
+          if(this.token != null){
+            this.auth.token = this.token;
+            this.auth.getMe().then(()=>{
+              this.useCart.getCart().then((r)=>{
+                this.cart = r;
+              })
+            })
+            this.login = true;
+          }else{
+            this.login = false;
           }
 
         }, 0);
@@ -565,7 +577,6 @@ export default {
         window.addEventListener('scroll',()=>{
           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
           let width = window.innerWidth;
-          console.log(width);
           if(scrollTop > 200 && width < 527){
             this.$refs.menuBox.classList.remove('relativeCat');
             this.$refs.menuBox.classList.add('fixedCat');
