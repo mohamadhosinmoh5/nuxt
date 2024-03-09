@@ -88,7 +88,7 @@
         <div class="col-4 mt-2">
           <a class="addNotice disabled">
             ثبت اگهی
-            <span id="tooltiptext">به زودی</span>
+            <!-- <span id="tooltiptext">به زودی</span> -->
           </a>
         </div>
       </div>

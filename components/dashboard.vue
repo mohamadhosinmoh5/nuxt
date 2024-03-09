@@ -81,28 +81,30 @@
                         </p>
                     </div>
                     <div class="linese"></div>
+                   
                     <!-- <a href="#" id="" class="lice mt-2">درحال انجام</a> -->
-                    <!-- <div class="row mt-2">
+                    <div v-if="carts.items" class="row mt-2">
                         <div class="col-4">
+                            
                             <div class="col-sm imageBoxe">
                                 <img ref="mainImage" id=""
-                                    :src="`${useRuntimeConfig().public.BaseUrl}/${carts.items[0].items[0].notice.gallery[0].image}`"
+                                    :src="`${useRuntimeConfig().public.BaseUrl}/${carts?.items[0]?.items[0]?.notice?.gallery[0]?.image}`"
                                     class="prodict-image ms-2" alt="">
                             </div>
                         </div>
                         <div class="col-8">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <p class="maincart-Title">{{ carts.items[0].items[0].notice.title }}</p>
+                                    <p class="maincart-Title">{{ carts.items[0]?.items[0]?.notice?.title }}</p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p class="maincart-Title"> مبلغ {{ carts.items[0].items[0].total_price }} تومان</p>
+                                    <p class="maincart-Title"> مبلغ {{ carts?.items[0]?.items[0]?.total_price }} تومان</p>
 
                                 </div>
                             </div>
-                            <p class="maincart-Title"> تعداد {{ carts.items[0].items[0].count }}</p>
+                            <p class="maincart-Title"> تعداد {{ carts?.items[0]?.items[0]?.count }}</p>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,10 +143,12 @@ const loadingStyle = (query) => {
     emit('clicked', query)
 }
 
-useUser.getCarts().then((r) => {
-    carts.value = r;
-    loadingStyle(false);
-})
+setTimeout(() => {
+    useUser.getCarts().then((r) => {
+        carts.value = r;
+        loadingStyle(false);
+    })
+}, 0);
 
 
 const changePayiintTab = (name) => {
