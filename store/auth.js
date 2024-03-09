@@ -289,7 +289,7 @@ export const useAuthStore = defineStore('Auth', {
         }
       },
       async transactionBankReceipts(){
-        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/deposit
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/wallets/${this.getdefaultOffice}/transaction-bank-receipts?page=1
         `, {
           method:'get',
           headers:{
