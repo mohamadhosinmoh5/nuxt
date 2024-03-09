@@ -677,6 +677,13 @@
     border: 1px solid var(--cf-grey-icon-color);
 }
 
+.z-index-10{
+    z-index: 10 !important;
+}
+
+.z-index-1000 {
+    z-index: 10000 !important;
+}
 
 .btn {
     float: left;
@@ -887,6 +894,11 @@
 }
 
 @media screen and (max-width: 576px) {
+    .modal-content {
+        width: 100% !important;
+        top: 0;
+        right: 0;
+    }
     .navbar-profile {
         position: relative;
         width: 100%;

@@ -271,7 +271,7 @@
                             <img src="assets/img/SinglePage_Image/dot.svg" alt="">
                             <a href="#" class="Title">اگهی های مشابه</a>
                             <img src="assets/img/SinglePage_Image/row.svg" id="moshabeIcon" alt="">
-                            <a href="#" class="subtitle ms-2" id="moshabeIcon">مشاهده همه</a>
+                            <!-- <a href="#" class="subtitle ms-2" id="moshabeIcon">مشاهده همه</a> -->
 
                         </div>
                         <!-- add Cards-->
@@ -367,6 +367,7 @@
 <script setup>
 import { useCartStore } from '../store/cart';
 import { useNoticeStore } from '../store/notice';
+import { useMapStore } from '../store/map';
 
 definePageMeta({
     middleware: 'auth'

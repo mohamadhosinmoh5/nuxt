@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="row">
-            <ul class="nav nav-tabs">
+            <ul class="nav  z-index-10">
                 <li class="nav-item">
                     <a :class="(showNotice) ? `nav-link active` : `nav-link`" @click="showNotice = true, showOffice = false"
                         aria-current="page">آگهی ها</a>
@@ -54,7 +54,7 @@
                 </li>
             </ul>
         </div>
-            <div v-if="allNotices[0] == null && showNotice" class="row">
+            <div v-if="allNotices !=null && allNotices[0] == null && showNotice" class="row">
                 <div class="col-sm-12 alert alert-danger mt-3 text-center">
                     آگهی وجود ندارد
                 </div>
@@ -74,7 +74,6 @@
                                 <h4 class>{{ notice.title }}</h4>
                             </div>
                         </div>
-
 
                         <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
                             <div class="row">
@@ -105,26 +104,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
-                                <div class="row">
-                                    <div class="col-sm-12 text-section mt-4">
-                                        <div class="row">
-                                            <div class="col-10">
-                                                قیمت : {{ (notice?.pricing?.discount_percent > 0) ? convertPrice(notice?.pricing?.price - (notice?.pricing?.price * notice?.pricing?.discount_percent / 100)) :  convertPrice(notice?.pricing?.price)}} تومان
-                                            </div>
-                
-                                            <div class="col-2">
-                                                <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                                                    <img src="~/assets/img/arrow-left.svg" alt="">
-                                                </a>
-                                            </div>
-            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-
              
                 </div>
                 </div>
@@ -132,29 +111,19 @@
 
             <div v-if="showOffice"  class="row">
                 <div class="col-sm-12 mt-2 mapBox">
-                    <div v-if="latLon != null" ref="mapDiv" class="stickyStyle" >
-                       
+                    <div v-if="latLon != null" style="width: 100%;height:250px;">
                         <LMap
-                        id="map"
-                        :zoom="16"
-                        :center="[latLon[0],latLon[1]]">
+                            id="map"
+                            :zoom="16"
+                            :center="[latLon[0],latLon[1]]">
                     
-                        <!-- <l-circle-marker
-                        :lat-lng="office?.address?.geom?.coordinates"
-                        :radius="10"
-                        color="red"
-                    /> -->
                         <l-marker :lat-lng="[latLon[0],latLon[1]]">
-                            <!-- <l-popup @ready="ready" >
-                                <div class="title">
-                                    تنتینتشسنیتش
-                                </div>
-                            </l-popup> -->
+                       
                         </l-marker>
 
-                    </LMap>
+                        </LMap>
+                    </div>
                 </div>
-            </div>
             </div>
     </div>
 </template>
