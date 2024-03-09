@@ -64,14 +64,17 @@
                             <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing !=null" class="row">
                                 <div class="col-11 ms-4 mt-2 reng_box">
                                     <div class="range ">
-                                        <div class="sliderValue">
-
-                                        </div>
-                                       
                                         <div v-if="useNotice?.notice?.price_expert_rating != null" class="col-10  field">
                                             <input disabled type="range" min="0" max="100"
                                                 :value="notice.price_expert_rating">
                                             <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">
+                                            <div class="row">
+                                                <div class="col ms-4 range-txt">شکار</div>
+                                                <div class="col range-txt">اکازیون</div>
+                                                <div class="col range-txt">منصفانه</div>
+                                                <div class="col range-txt">خیلی بالا</div>
+                                                <div class="col range-txt">غیر منصفانه</div>
+                                            </div>
                                         </div>
                                        
                                         <div v-else-if="notice?.pricing !=null">

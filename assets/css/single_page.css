@@ -210,10 +210,34 @@
     position: absolute;
     display: block;
     justify-content: center;
-    margin-top: 6%;
+    margin-top: 4%;
     /* background-color: var(--cf-light-color); */
+}
 
+.range-txt {
+    color: var(--cf-title-color);
+    font-size: 16px;
+    font-family: 'anjoman';
+}
 
+@media screen and (max-width: 992px) {
+    .range-txt {
+        color: var(--cf-title-color);
+        font-size: 12px;
+        font-family: 'anjoman';
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .range {
+        height: 80px;
+        width: 100%;
+        position: absolute;
+        display: block;
+        left: 5%;
+        justify-content: center;
+        margin-top: 7%;
+    }
 }
 
 .reng_box {
@@ -355,14 +379,13 @@
 .modal-content-index {
     background-color: var(--cf-light-color);
     opacity: 1;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    padding: 20px;
-    right: 25%;
-    top: 40vh;
+    border-radius: 15px;
+    padding: 5px;
+    right: 70%;
+    top: 50vh;
     position: fixed;
     border: 1px solid #dadada;
-    width: 50% !important;
+    width: 20% !important;
 }
 
 .modal-content p {
@@ -399,6 +422,7 @@
 
 .range .field img {
     position: relative;
+    right: 10%;
     width: 75%;
 }
 
@@ -677,6 +701,17 @@
 .imageBoxe {
     /* border: 1px solid var(--cf-dark-color); */
     width: 100%;
+}
+
+.prodict-image {
+    position: relative;
+    width: 50%;
+    background-position: center;
+    height: 100px;
+    border-radius: 10px;
+    /* left: 20px; */
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .cartImage {
@@ -1019,13 +1054,28 @@
     position: relative;
     /* right: 1%; */
     padding: 20px;
-    right: 15%;
+    /* right: 0%; */
+    /* margin: 20px; */
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;
     border-color: var(--cf-grey-icon-color);
     box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
     /* background-color: var(--cf-light-grey); */
+}
+
+@media screen and (max-width: 992px) {
+    .box-info {
+        position: relative;
+        /* right: 1%; */
+        padding: 20px;
+        left: 8%;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+        box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+    }
 }
 
 .top-text {
@@ -1093,7 +1143,7 @@
 .box-buttom {
     position: relative;
     /* left: 7%; */
-    right: 15%;
+    /* right: 15%; */
     padding: 10px;
     min-height: 200px;
     border-radius: 10px;
@@ -1101,6 +1151,40 @@
     border-width: 0.5px;
     border-color: var(--cf-grey-icon-color);
     box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+}
+
+@media screen and (max-width: 992px) {
+    .box-buttom {
+        position: relative;
+        left: 8%;
+        /* right: 15%; */
+        padding: 10px;
+        /* margin: 20px; */
+        min-height: 200px;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+        box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+    }
+}
+
+.hiding-box {
+    position: sticky;
+    height: 0px;
+    overflow: hidden;
+    background: white;
+    /* transform: rotatey(10deg); */
+    visibility: initial;
+    animation: spin 5s;
+    top: 0;
+    /* z-index: 1111; */
+}
+
+.show-box {
+    position: sticky;
+    height: auto;
+    /* z-index: 1111; */
 }
 
 .topboxes {
@@ -1128,7 +1212,8 @@
     padding-right: 0px;
     border: 0.5px solid var(--cf-grey-icon-color)
 }
-.linese{
+
+.linese {
     position: relative;
     width: 100%;
     top: 0px;
@@ -1136,6 +1221,7 @@
     padding-right: 0px;
     border: 0.5px solid var(--cf-grey-icon-color)
 }
+
 .lice {
     position: relative;
     display: block;
@@ -1175,7 +1261,8 @@
     display: block;
     text-align: start;
 }
-.greentxt:hover{
+
+.greentxt:hover {
     color: var(--cf-green-color);
 }
 
@@ -1426,6 +1513,14 @@
     text-align: center;
 }
 
+.btn-sabt {
+    position: relative;
+    right: 10%;
+    top: 50%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 .changed {
     /* position: relative; */
     /* right: 20%; */
@@ -1621,6 +1716,14 @@
     border-radius: 10px;
 }
 
+.btn-pardakht {
+    position: relative;
+    top: 30%;
+    right: 5%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 @media screen and (max-width: 992px) {
     .Box-Licence {
         position: absolute;
@@ -1641,6 +1744,10 @@
     color: var(--cf-green-color);
     font-family: 'anjoman';
     font-size: 20px;
+}
+
+.buy-title:hover {
+    color: var(--cf-green-color);
 }
 
 .daftar-detailes {
@@ -1768,7 +1875,7 @@
     font-family: 'anjoman';
     text-decoration: none;
     display: block;
-    text-align: end;
+    /* text-align: end; */
 }
 
 .fish:hover {

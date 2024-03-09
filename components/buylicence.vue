@@ -37,7 +37,7 @@
                                 </div>
                             </div>
 
-                            <button type="button" class="btn col-10  btn-secondary">پرداخت</button>
+                            <button type="button" class="btn-pardakht col-10  btn-secondary">پرداخت</button>
 
                         </div>
                     </div>
