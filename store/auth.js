@@ -199,6 +199,33 @@ export const useAuthStore = defineStore('Auth', {
           return data.value;
         }
       },
+      async answerRequestPostPricing(id,amount){
+        const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/carts/items/${id}/answer-request-post-pricing
+        `, {
+          method:'post',
+          body:{
+            post_price:amount
+          },
+          headers:{
+            "Authorization":"Bearer "+this.token
+          }
+        });
+  
+        if(pendings){
+          this.pending = pendings;
+        }
+  
+        if(errors.value)
+        {
+          this.error = errors.value.data;
+        }
+  
+        if(data.value)
+        {
+          this.pending = false;
+          return data.value;
+        }
+      },
       async getDoneFailed(){
         
         const { data, pending, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${this.getdefaultOffice}/cart-items/done-failed?page=1&per_page=25`,{

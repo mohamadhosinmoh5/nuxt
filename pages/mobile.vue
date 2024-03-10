@@ -209,14 +209,11 @@
           </a>
           <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
             <div v-if="notice?.section_data.length > 1" class="row mt-2">
-
               <div class="col-sm mobile-section ms-1">
-
                 {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} متر
               </div>
               <div class="col-sm mobile-section ms-1">
                 {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
-
               </div>
             </div>
           </a>
