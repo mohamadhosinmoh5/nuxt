@@ -18,8 +18,9 @@
                     
                     <div class="col-sm-12" v-if="notice?.section_data.length >= 1">
                         <div class="row">
+                           
                             <div class="col-6 text-section">
-                                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0]?.data[0] }} متر
+                                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0]?.data[0] }} <span v-if="notice?.section_data[1]">متر</span>
                             </div>
     
                             <div v-if="notice?.section_data[1]" class="col-6 text-section">
@@ -31,6 +32,7 @@
                                     <div v-if="notice?.section_data[2]" class="col-10">
                                         {{ notice?.section_data[2]?.field?.title }} : {{ convertPrice(notice?.section_data[2]?.data[0]) }} تومان
                                     </div>
+                                    <span v-else>قیمت : {{notice?.pricing.price}} تومان</span>
         
                                     <div class="col-2">
                                         <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">

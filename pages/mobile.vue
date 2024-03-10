@@ -58,7 +58,7 @@
         <div class="col-12 mt-2">
           <div  class="col-12 mt-1 mob-map">
             
-            <div v-if="showNotice && allNotices && allNotices[1]?.address != null"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
+            <div v-if="showNotice && allNotices && allNotices[1]?.address != null"  ref="mapDiv" @click="showMap=true" >
              
               <LMap v-if="allNotices"
                 id="map"
@@ -319,10 +319,9 @@
                <p  class="Maptext">
                 نقشه
                </p>
-              
             </button>
             <button v-if="showMap" type="button" @click="showMap=false" class="circle">
-              <p  class="Maptext">
+              <p class="Maptext">
                 آگهی ها
                </p>
               
@@ -476,7 +475,7 @@ export default {
       this.$refs[id][0].leafletObject.openPopup();
     },
     markersIconCallback(point) {
-    
+      
     },
     getCategory(noticeId) {
       this.pending = true;
@@ -552,10 +551,12 @@ export default {
     showMap(val) {
      
       if (val) {
-        this.showCat = false
+        this.showCat = false;
+        console.log(this.showMap);
         // this.$refs.content.classList.add('closeBox');
         this.$refs.mapDiv.classList.add('showMap');
       } else {
+        console.log(this.showMap);
         this.showCat = true
         // this.$refs.content.classList.add('openBox');
         this.$refs.mapDiv.classList.remove('showMap');
