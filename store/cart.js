@@ -19,7 +19,7 @@ import { useAuthStore } from './auth';
     const auth = useAuthStore();
     const activeAdress = ref(null);
     const payLink = ref(null);
-    const status = reactive({address : false,requestPrice : true,portal : false});
+    const status = reactive({address : false,requestPrice : true,portal : 'cash'});
 
     (useCookie('token')) ?  token.value = useCookie('token') : error.value = {message:'ابتدا وارد شوید تا سبد خرید دسترسی داشته باشید '};
 

@@ -308,15 +308,19 @@ const pay = async (id) => {
   if(useCart.status.portal == 'cash'){
     useCart.pay(id).then((r)=>{
       pending.value = false;
-      window.location.href = r.action;
+      redirect(r)
     })
-    
   }else{
     useCart.pay(id).then((r)=>{
       pending.value = false;
     })
   }
 
+}
+
+const redirect = (link) =>{
+  console.log(link);
+  window.location.href = link;
 }
 
 setTimeout(async () => {
