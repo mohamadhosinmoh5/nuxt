@@ -894,6 +894,10 @@
 }
 
 @media screen and (max-width: 576px) {
+    .modal-content-index{
+        width: 100% !important;
+        right: 0;
+    }
     .modal-content {
         width: 100% !important;
         top: 0;

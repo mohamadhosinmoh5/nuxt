@@ -452,10 +452,10 @@ body {
     z-index: 222222222;
     overflow: scroll;
     height: 100%;
-    /* top: 5px; */
-    /* right: 2%; */
-    /* bottom: 100px; */
-    padding: 15px;
+    /* top: 100vh; */
+    /* left: 100%; */
+    bottom: -100vh;
+    padding: 15px 15px;
     border-radius: 15px;
 
 }
@@ -1637,12 +1637,7 @@ label {
     overflow: hidden;
 }
 
-.showMap {
-    top: 0px;
-    position: fixed;
-    height: 100vh;
-    z-index: 22222222;
-}
+
 
 .closeBox {
     overflow: hidden;
@@ -2148,7 +2143,15 @@ input:checked+.slider:before {
 }
 
 .mob-map {
-    height: 50px;
+    height: 70px ;
+    overflow: hidden;
+}
+
+.showMap {
+    top: 0px;
+    /* position: absolute !important; */
+    height: 100vh !important;
+    z-index: 22222222;
 }
 
 .leaflet-control-attribution.leaflet-control {

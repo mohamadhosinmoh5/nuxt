@@ -32,7 +32,7 @@
                                     <div v-if="notice?.section_data[2]" class="col-10">
                                         {{ notice?.section_data[2]?.field?.title }} : {{ convertPrice(notice?.section_data[2]?.data[0]) }} تومان
                                     </div>
-                                    <span v-else>قیمت : {{notice?.pricing.price}} تومان</span>
+                                    <span v-else>قیمت : {{convertPrice(notice?.pricing.price)}} تومان</span>
         
                                     <div class="col-2">
                                         <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">

@@ -18,24 +18,24 @@
                             <a href="#" @click="changePayiintTab('bank')" class="bank">درگاه بانکی</a>
                         </div>
                         <div class="col-6">
-                            <a href="#" @click="changePayiintTab('fish')" class="fish">فیش واریزی</a>
+                            <a href="#" @click="changePayiintTab('fish')" class="fish disable">فیش واریزی</a>
                         </div>
                     </div>
                     <!-- <div ref="payiinBorder" class="payiin-border"></div> -->
                     <div class="col bank-detailes mt-4">
                         <a href="#" class="txtpay">مبلغ مورد نظر را جهت افزودن به کیف پول وارد گنید</a>
                         <div class="col-12 forms">
-                            <input type="text" placeholder="مبلغ(تومان)">
+                            <input v-model="price" type="text" placeholder="مبلغ(تومان)">
                         </div>
                     </div>
                     <div v-if="fish" class="col fish-detailes">خالی است</div>
-                    <button type="button" class="btn-sabt col-10  btn-secondary">ثبت</button>
+                    <button @click="deposit()" type="button" class="btn-sabt col-10  btn-secondary">ثبت</button>
 
                 </div>
             </div>
         </UModal>
         <div class="row">
-            <div class="col-sm box-info mt-5 ms-5">
+            <!-- <div class="col-sm box-info mt-5 ms-5">
                 <div class="row">
                     <div class="col-sm">
                         <a href="#" class="wallettxt">کیف پول نقدی : 0 تومان</a>
@@ -46,7 +46,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div id="roaunded" class="col-sm box-info mt-5 ms-5">
                 <div class=" row">
                     <div class="col-sm">
@@ -135,6 +135,7 @@ const isOpen = ref(false);
 const bank = ref(true);
 const fish = ref(false);
 const user = defineProps(['user']);
+const price = ref(null)
 
 
 const emit = defineEmits(['clicked'])
@@ -172,4 +173,15 @@ const changePayiintTab = (name) => {
     }
 
 }
+
+const deposit = async () => {
+        useUser.deposit(price.value).then((r) => {
+            if(r.action){
+                window.location = r.action;
+            }
+            // loadingStyle(false);
+        })
+    }
+
+
 </script>
