@@ -69,7 +69,11 @@
                         <a href="#" class="wallettxt">اشتراک های فعال</a>
                     </div>
                     <div class="borderrs"></div>
-                    <p href="#" class="greentxt">اشتراک فعال ندارید , فعلا مهمون هومنگر باش</p>
+                    <p v-if="!subScribe" class="greentxt">اشتراک فعال ندارید , فعلا مهمون هومنگر باش</p>
+                    <span class="greentxt" v-if="subScribe" v-for="(item, index) in subScribe.items" :key="index" >
+                        {{item.matter_pricing.title}}
+                        <br>
+                    </span>
                 </div>
             </div>
             <div id="roaunded" class="col-sm box-buttom mt-5 ms-5">
@@ -136,6 +140,7 @@ const bank = ref(true);
 const fish = ref(false);
 const user = defineProps(['user']);
 const price = ref(null)
+const subScribe = ref(null)
 
 const emit = defineEmits(['clicked'])
 
@@ -147,6 +152,10 @@ setTimeout(() => {
     useUser.getCarts().then((r) => {
         carts.value = r;
         loadingStyle(false);
+    })
+
+    useUser.getSubScribe().then((r) => {
+        subScribe.value = r;
     })
 }, 0);
 
@@ -180,6 +189,9 @@ const deposit = async () => {
             // loadingStyle(false);
         })
     }
+
+    
+
 
 
 </script>

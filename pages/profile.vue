@@ -290,17 +290,13 @@
                   <dashboard />
                   <dashboard />
                   <dashboard /> -->
-           
-          
-             <div class="notif">
-
-            </div>
        
    
 </template>
   
 <!-- script -->
 <script setup>
+
 import { useAuthStore } from '../store/auth';
 
 definePageMeta({

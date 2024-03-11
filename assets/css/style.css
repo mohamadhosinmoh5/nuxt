@@ -1374,6 +1374,11 @@ input.checkBox {
     color: white;
 }
 
+.pay-cart.active2 {
+    border: rgb(4, 148, 4) 1px solid;
+    color: white;
+}
+
 #nprogress .spinner-icon {
     width: 18px;
     height: 18px;

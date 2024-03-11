@@ -17,27 +17,27 @@
                             </div>
                             <div class="border-modal mt-2"></div>
                             <div class="col-10 own-buying ">
-                                <div class="txte">
+                                <div @click="useCart.changePay('wallet'),wallet=true"  :class="wallet ? `pay-cart txte active2` :`pay-cart txte`">
                                     <div class="col">
-                                        <a href="#" class="tile">کیف پول نفدی</a>
+                                        <a href="#" class="tile">کیف پول نقدی</a>
                                     </div>
                                     <div class="col">
-                                        <a href="#" class="sub">پرداخت مستقیم از کیف پول نفدی</a>
+                                        <a href="#" class="sub">پرداخت مستقیم از کیف پول نقدی</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-10 own-buying mt-2">
-                                <div class="txte">
+                                <div @click="useCart.changePay('cash'),wallet=false"  :class="!wallet ? `pay-cart txte active2` :`pay-cart txte`" >
                                     <div class="col">
                                         <a href="#" class="tile"> درگاه بانکی </a>
                                     </div>
-                                    <div class="col">
+                                    <div>
                                         <a href="#" class="sub">پرداخت مستقیم از درگاه بانکی</a>
                                     </div>
                                 </div>
                             </div>
 
-                            <button type="button" class="btn-pardakht col-10  btn-secondary">پرداخت</button>
+                            <button @click="pay(subId)" type="button" class="btn-pardakht col-10  btn-secondary">پرداخت</button>
 
                         </div>
                     </div>
@@ -61,13 +61,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="prices">
+                            <a href="#">{{ item.price }} تومان</a>
+                        </div>
+                        <button @click="isOpen = true,setSubId(item.id)" type="button" style="float: right;" class="btn col-8 btn-outline-secondary">خرید
+                            اشتراک</button>
                     </div>
 
-                    <div class="prices">
-                        <a href="#">{{ pricing.items[0].price }} تومان</a>
-                    </div>
-                    <button @click="isOpen = true" type="button" class="btn col-8 btn-outline-secondary">خرید
-                        اشتراک</button>
+                 
 
                 </div>
             </div>
@@ -79,10 +81,15 @@
 
 
 <script setup>
+import { useCartStore } from '../store/cart';
 import { useAuthStore } from '../store/auth';
 const pricing = ref(null)
 const useUser = useAuthStore();
 const isOpen = ref(false);
+const useCart = useCartStore();
+const subId = ref(null);
+const wallet = ref(false);
+const pending = ref(false);
 
 const emit = defineEmits(['clicked'])
 
@@ -90,7 +97,25 @@ const loadingStyle = (query) => {
   emit('clicked',query)
 }
 
+const pay = async (subIds) => {
 
+  if(useCart.status.portal == 'cash'){
+    useCart.paySub(subIds).then((r)=>{
+      pending.value = false;
+      window.location.href = r;
+    })
+  }else{
+    useCart.paySub(subIds).then((r)=>{
+      pending.value = false;
+    })
+  }
+
+}
+
+
+const setSubId = (id) => {
+    subId.value = id;
+}
 
 setTimeout(() => {
     useUser.getPricing().then((r) => {
