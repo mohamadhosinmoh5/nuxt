@@ -54,6 +54,22 @@
           </div>
         </div>
   
+        <div class="row">
+          <div class="col-sm-12 navMenu">
+            <ul>
+              <li>
+                <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
+                  class="nav-item nav-link  filter-box" href="#">فیلتر ها {{ countQuery }} <img class=""
+                    src="~/assets/img/filter_search.svg" alt=""></a>
+              </li>
+  
+              <li>
+                <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showCategory"
+                  class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{ lastCat ? lastCat : 'همه آگهی ها' }} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
         <div class="col-12 mt-2">
           <div class="col-12 mt-1">
@@ -96,22 +112,7 @@
         </div>
       </div>
        <!--Show filter-->
-      <div class="row">
-        <div class="col-sm-12 navMenu">
-          <ul>
-            <li>
-              <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
-                class="nav-item nav-link  filter-box" href="#">فیلتر ها {{ countQuery }} <img class=""
-                  src="~/assets/img/filter_search.svg" alt=""></a>
-            </li>
-
-            <li>
-              <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showCategory"
-                class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{ lastCat ? lastCat : 'همه آگهی ها' }} </a>
-            </li>
-          </ul>
-        </div>
-      </div>
+  
   
     </div>
   </div>
@@ -129,9 +130,6 @@
                 <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
                 <h5 v-else class="category-title">دسته بندی ها</h5>
               </div>
-              <div class="col-12">
-                <div v-if="pending" class="spinner-border" role="status"></div>
-              </div>
             </div>
           </div>
           <div class="col-6 text-end">
@@ -146,6 +144,8 @@
             <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
           </li>
         </ul>
+
+        <span v-if="emptyCat" class=" alert-danger">{{emptyCat}}</span>
       </div>
     </div>
   </div>
@@ -365,6 +365,7 @@ export default {
       searchTimeOut: null,
       searchResult: null,
       searchPending: false,
+      emptyCat:null,
       polygonGrg: [[36.873978, 54.346216], [36.880184, 54.500138], [36.794162, 54.506150], [36.786775, 54.357092], [36.873978, 54.346216]],
       center: ref({
         "latitude": 36.830367834795,
@@ -456,17 +457,22 @@ export default {
       this.lastCat = null;
       this.notices.getCategory(noticeId).then((r) => {
         this.categories = r;
+        console.log(r);
         if (r.length == 0) {
+          this.emptyCat = `دسته بندی ${this.lastCat} اخرین دسته بندی می باشد می توانید از دکمه بازگشت استفاده کنید`;
           this.closeCategory();
           this.notices.fetchData().then((r) => {
           
             this.allNotices = r.allNotices;
           });
+        }else{
+          this.emptyCat = null;
         }
         this.pending = false;
       });
     },
     lastCategory() {
+      this.emptyCat = null;
       if (this.notices.getclickCat <= 1) {
         this.categories = this.notices.lastCategory[1];
         this.allNotices = this.defaultNotices;
