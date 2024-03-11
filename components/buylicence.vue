@@ -68,10 +68,22 @@
                         <button @click="isOpen = true,setSubId(item.id)" type="button" style="float: right;" class="btn col-8 btn-outline-secondary">خرید
                             اشتراک</button>
                     </div>
-
-                 
-
                 </div>
+                
+                <div v-if="pending" class="border-fixed">
+                    <div class="spinner-border " role="status"></div>
+                  </div>
+    
+                  <div v-if="message" class="notif ">
+                    <span @click="message = null" class="closeNotife">x</span>
+                      {{message }}
+                  </div>
+                  <div v-if="useCart.error?.message" class="notif error text-center">
+                    <span @click="useCart.error.message = null" class="closeNotife">x</span>
+                    <p>
+                      {{ useCart.error.message }}
+                    </p>
+                  </div>
             </div>
 
 

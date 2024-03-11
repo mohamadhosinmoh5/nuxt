@@ -1484,6 +1484,7 @@
     border-left: 8px solid green;
     bottom: 20px;
     left: 0;
+    z-index: 11;
     position: fixed;
     overflow: hidden;
     transform: translateX(calc(20% + 10px));
