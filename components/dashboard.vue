@@ -137,7 +137,6 @@ const fish = ref(false);
 const user = defineProps(['user']);
 const price = ref(null)
 
-
 const emit = defineEmits(['clicked'])
 
 const loadingStyle = (query) => {
@@ -150,7 +149,6 @@ setTimeout(() => {
         loadingStyle(false);
     })
 }, 0);
-
 
 const changePayiintTab = (name) => {
     bank.value = false;
