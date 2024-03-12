@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
         <div class="container">
     
             <div id="navbar" class="row">
@@ -123,4 +123,4 @@
 <script setup>
 let allCountery = ref([]);
 
-</script>
+</script> -->

@@ -364,8 +364,8 @@ export default {
   
             <div class="col-3">
                   <div class="row">
-                    <div class="col-4"><img class="pointer" src="~/assets/img/sort1.svg" alt=""></div>
-                    <div class="col-4"><img class="pointer" src="~/assets/img/sort2.svg" alt=""></div>
+                    <div class="col-4 disable"><img class="pointer" src="~/assets/img/sort1.svg" alt=""></div>
+                    <div class="col-4 disable"><img class="pointer" src="~/assets/img/sort2.svg" alt=""></div>
                     <div class="col-4"><img class="pointer" src="~/assets/img/sort3.svg" alt=""></div>
                   </div>
             </div>

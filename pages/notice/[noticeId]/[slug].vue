@@ -239,7 +239,7 @@
                                         <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی </a>
                                         <img src="assets/img/SinglePage_Image/row.svg"
                                             style="float: left;position: relative; top: 5px;" alt="">
-                                        <a href="#" class="daftar_textt ms-1 mt-1"> گزارش </a>
+                                        <a href="#" class="daftar_textt ms-1 mt-1"> بزودی </a>
                                     </div>
                                 </div>
                             </div>
@@ -418,53 +418,55 @@
                         <div class="box-similer row">
                             <div v-if="allNotices !== null" v-for="notice in allNotices?.items" :key="notice.id"
                                 class="col-sm-3 mt-5">
-                                <div class="row box-notice">
-                                    <div class="col-sm-12 img-box">
-                                        <div class="img"
-                                            :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12 mt-3">
-                                        <div class="titleNotice">
-                                            <h4 class>{{ notice.title }}</h4>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
-                                        <div class="row">
-                                            <div class="col-6 text-section">
-                                                {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
-                notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
+                                    <div class="row box-notice">
+                                        <div class="col-sm-12 img-box">
+                                            <div class="img"
+                                                :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
                                             </div>
-
-                                            <div v-if="notice?.section_data_collection[0].items[5]"
-                                                class="col-6 text-section">
-                                                {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
-                notice?.section_data_collection[0].items[5]?.data[0] }}
+                                        </div>
+    
+                                        <div class="col-sm-12 mt-3">
+                                            <div class="titleNotice">
+                                                <h4 class>{{ notice.title }}</h4>
                                             </div>
-
-                                            <div class="col-sm-12 text-section mt-4">
-                                                <div class="row">
-                                                    <div v-if="notice?.section_data_collection[2].items[0]"
-                                                        class="col-10">
-                                                        {{ notice?.section_data_collection[2].items[0]?.field?.title }}
-                                                        : {{
-                convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
-            }} تومان
+                                        </div>
+    
+                                        <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
+                                            <div class="row">
+                                                <div class="col-6 text-section">
+                                                    {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
+                    notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                                </div>
+    
+                                                <div v-if="notice?.section_data_collection[0].items[5]"
+                                                    class="col-6 text-section">
+                                                    {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
+                    notice?.section_data_collection[0].items[5]?.data[0] }}
+                                                </div>
+    
+                                                <div class="col-sm-12 text-section mt-4">
+                                                    <div class="row">
+                                                        <div v-if="notice?.section_data_collection[2].items[0]"
+                                                            class="col-10">
+                                                            {{ notice?.section_data_collection[2].items[0]?.field?.title }}
+                                                            : {{
+                    convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
+                }} تومان
+                                                        </div>
+    
+                                                        <div class="col-2">
+                                                            <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                                <img src="~/assets/img/arrow-left.svg" alt="">
+                                                            </a>
+                                                        </div>
+    
                                                     </div>
-
-                                                    <div class="col-2">
-                                                        <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                                                            <img src="~/assets/img/arrow-left.svg" alt="">
-                                                        </a>
-                                                    </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                                 <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
                                        <div class="row">
                                            <div class="col-sm-12 text-section mt-4">

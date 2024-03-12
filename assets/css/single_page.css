@@ -371,7 +371,7 @@
     background-color: var(--cf-light-color);
     opacity: 1;
     border-radius: 15px;
-    top: 60px;
+    top: 42px;
     right: 10px;
     padding: 5px;
     border: 1px solid #dadada;
@@ -1694,6 +1694,7 @@
 }
 
 @media screen and (min-width: 576px) {
+
     .close-navbar {
         display: none;
         border: none;
@@ -1986,6 +1987,9 @@
 }
 
 @media screen and (max-width: 576px) {
+    .notif {
+        max-width: 356px !important;
+    }
     .paying {
         background-color: var(--cf-light-color);
         opacity: 1;
