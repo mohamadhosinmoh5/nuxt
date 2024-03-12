@@ -26,6 +26,7 @@ export default {
       showCat:true,
       scrolled:false,
       lastCat:null,
+      emptyCat:null,
       polygonGrg : [[36.873978, 54.346216],[36.880184, 54.500138],[36.794162, 54.506150],[36.786775, 54.357092],[36.873978, 54.346216]],
       center :ref({
         "latitude": 36.830367834795,
@@ -92,16 +93,24 @@ export default {
           this.pending = true;
           this.notices.getCategory(noticeId).then((r)=> {
             this.categories =  r;
-            this.notices.fetchData().then((r)=>{
+            if(r.length == 0){
+              this.emptyCat = `دسته بندی ${this.lastCat} اخرین دسته بندی می باشد می توانید از دکمه بازگشت استفاده کنید`;
+              this.notices.fetchData().then((r)=>{
               if(r.allNotices.length >= 1){
                 this.allNotices = r.allNotices;
               }
               this.pending=false;
             });
+
+            }else{
+              this.emptyCat = null;
+            }
+
             this.pending = false;
           });
         },
         lastCategory(){
+          this.emptyCat = null;
           this.lastCat = null;
           if(this.notices.getclickCat <= 1){
 
@@ -295,6 +304,7 @@ export default {
                       <a @click="getCategory(item.id),setCat(item)" class="link">{{item.title}}</a>
                       </li>
                     </ul>
+                    <span v-if="emptyCat" class=" alert-danger">{{emptyCat}}</span>
                   </div>
                   <div :class="(officeShow) ? `disable` : ``">
                     <Filter :status="pending" @clicked="filterUptaded" />

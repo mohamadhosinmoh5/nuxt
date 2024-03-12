@@ -462,7 +462,6 @@ export default {
           this.emptyCat = `دسته بندی ${this.lastCat} اخرین دسته بندی می باشد می توانید از دکمه بازگشت استفاده کنید`;
           this.closeCategory();
           this.notices.fetchData().then((r) => {
-          
             this.allNotices = r.allNotices;
           });
         }else{
