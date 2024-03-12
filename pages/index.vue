@@ -82,8 +82,8 @@ export default {
         }
       },
       showPop(id){
-        console.log(id);
         this.$refs[id][0].leafletObject.openPopup();
+        var map = this.$refs.mapRef;
       },
       markersIconCallback(point){
               console.log(point);

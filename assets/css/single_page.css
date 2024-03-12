@@ -677,6 +677,13 @@
     border: 1px solid var(--cf-grey-icon-color);
 }
 
+.z-index-10{
+    z-index: 10 !important;
+}
+
+.z-index-1000 {
+    z-index: 10000 !important;
+}
 
 .btn {
     float: left;
@@ -887,6 +894,15 @@
 }
 
 @media screen and (max-width: 576px) {
+    .modal-content-index{
+        width: 100% !important;
+        right: 0;
+    }
+    .modal-content {
+        width: 100% !important;
+        top: 0;
+        right: 0;
+    }
     .navbar-profile {
         position: relative;
         width: 100%;
@@ -1468,6 +1484,7 @@
     border-left: 8px solid green;
     bottom: 20px;
     left: 0;
+    z-index: 11;
     position: fixed;
     overflow: hidden;
     transform: translateX(calc(20% + 10px));

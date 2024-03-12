@@ -19,7 +19,7 @@ import { useAuthStore } from './auth';
     const auth = useAuthStore();
     const activeAdress = ref(null);
     const payLink = ref(null);
-    const status = reactive({address : false,requestPrice : true,portal : false});
+    const status = reactive({address : false,requestPrice : true,portal : 'cash'});
 
     (useCookie('token')) ?  token.value = useCookie('token') : error.value = {message:'ابتدا وارد شوید تا سبد خرید دسترسی داشته باشید '};
 
@@ -272,6 +272,41 @@ import { useAuthStore } from './auth';
       }
     }
 
+    async function paySub(subId){
+      console.log(token.value.value);
+      const { data, pending:pendings, error:errors,refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/offices/${auth.getdefaultOffice}/subscribes/pay`, {
+        method:'post',
+        query:{
+          pay_method: status.portal,
+          matter_pricing_id:subId
+        },
+        headers:{
+          "Authorization":"Bearer "+token.value.value,
+          'accept': 'application/json',
+          'Access-Control-Allow-Origin': "*",
+          'content-type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Credentials': 'true',
+        },
+        // mode: 'no-cors'
+      });
+
+      if(pendings){
+        pending.value = pendings;
+      }
+
+      if(errors.value)
+      {
+        pending.value = false;
+        error.value = errors.value.data;
+      }
+
+      if(data.value)
+      {
+        pending.value = false;
+        return payLink.value = data.value.action;
+      }
+    }
+
     async function deleteCart(id){
       await updateCart(0,id,true,null)
     }
@@ -292,6 +327,7 @@ import { useAuthStore } from './auth';
       status,
       massage,
       payLink,
+      paySub,
       getCart,
       addToCart,
       removeCart,

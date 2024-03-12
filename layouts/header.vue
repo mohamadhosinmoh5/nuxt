@@ -9,7 +9,7 @@
    </div> -->
 
 
-  <div class="row p-2 nav">
+  <div class="row p-2 nav z-index-1000">
     <div class="col-sm-3">
       <div class="row mt-2">
         <div class="col-md-5 mt-2">

@@ -27,7 +27,7 @@
     </div>
        <!--Show search box-->
        <div class="row search-box">
-        <div v-if="showCat" class="col-12 ">
+        <div  class="col-12 ">
         <div class="form-group" style="position:relative;">
           <img class="search-icon" src="~/assets/img/search.svg" alt="">
           <input type="text" v-model="textSearch" class="form-control form-style" name="" id=""
@@ -56,17 +56,16 @@
   
 
         <div class="col-12 mt-2">
-          <div  class="col-12 mt-1 mob-map">
+          <div class="col-12 mt-1">
             
-            <div v-if="showNotice && allNotices && allNotices[1]?.address != null"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
-             
+            <div v-if="allNotices && allNotices[1]?.address != null" class="mob-map" ref="mapDiv" @click="showMap=true" >
+              
               <LMap v-if="allNotices"
                 id="map"
                 ref="mapRef"
                 :zoom="12"
                 :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
                 @zoomend="changeZoom"
-                @click="markersIconCallback"
 
                 style="height:100vh;"
               >
@@ -91,14 +90,13 @@
                     </div>
                   </l-popup>
                 </l-marker>
-      
               </LMap>
             </div>
           </div>
         </div>
       </div>
        <!--Show filter-->
-      <div v-if="showCat" class="row">
+      <div class="row">
         <div class="col-sm-12 navMenu">
           <ul>
             <li>
@@ -114,36 +112,7 @@
           </ul>
         </div>
       </div>
-       <!--Show Map-->
-      <!-- <div class="col-12 mt-2">
-        <div class="col-12 mt-1 mob-map">
-
-          <div v-if="showNotice" ref="mapDiv" @click="showMap = true" class="mob-stickyStyle">
-
-            <LMap v-if="allNotices" id="map" ref="mapRef" :zoom="12"
-              :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]" @zoomend="changeZoom"
-              @click="markersIconCallback" style="height:100vh;">
-
-              <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
-              <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-                layer-type="base" name="OpenStreetMap" />
-
-              <l-circle-marker :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]" :radius="10"
-                color="red" />
-              <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`" :key="notice.id"
-                :lat-lng="[notice.address?.lat, notice.address?.lng]">
-                <l-popup @ready="ready">
-                  <div class="title">
-                    {{ notice.title }}
-                  </div>
-                </l-popup>
-              </l-marker>
-
-            </LMap>
-          </div>
-        </div>
-      </div> -->
+  
     </div>
   </div>
   <!-- show category box -->
@@ -180,6 +149,15 @@
       </div>
     </div>
   </div>
+
+  <div ref="filterCanvas" class="filterCanvas pb-5">
+    <div @click="closeFilter" class="closeFilterr">
+      <img width="20" src="assets/img/right.png">
+    </div>
+    <div class="row mt-4">
+      <Filter :status="pending" @clicked="filterUptaded" />
+    </div>
+  </div>
 </div>
   <div v-if="noticeShow" ref="content" class="row content">
     <div class="col-sm-12 text-center">
@@ -206,25 +184,20 @@
             <div class="col-12">
               <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
             </div>
-          </a>
-          <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
-            <div v-if="notice?.section_data.length > 1" class="row mt-2">
-
-              <div class="col-sm mobile-section ms-1">
-
-                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} متر
+          
+            <div v-if="notice?.section_data.length >= 1" class="row mt-2">
+              <div v-if="notice?.section_data[0]" class="col-sm mobile-section ms-1">
+                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }}  <span v-if="notice?.section_data[1]">متر</span>
               </div>
-              <div class="col-sm mobile-section ms-1">
+              <div v-if="notice?.section_data[1]" class="col-sm mobile-section ms-1">
                 {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
-
               </div>
-            </div>
-          </a>
+            
 
-          <div class="col-sm margin-fix">
-            <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
+          <div class="col-sm margin-fix ">
+            <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link" >
               <div class="row ms-1">
-                <div class="col-10 mobile-section">
+                <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
                   {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
                 </div>
 
@@ -233,11 +206,11 @@
                     <img src="~/assets/img/arrow-left.svg" alt="">
                   </a>
                 </div>
-
               </div>
             </a>
           </div>
-
+        </div>
+      </a>
 
           <div class="col-sm-12" v-if="notice?.section_data.length < 1">
             <div class="row">
@@ -245,8 +218,8 @@
                 <div class="row">
                   <div class="col-10">
                     قیمت : {{ (notice.pricing.discount_percent > 0) ? convertPrice(notice?.pricing.price -
-          (notice?.pricing.price * notice.pricing.discount_percent / 100)) :
-          convertPrice(notice?.pricing.price) }} تومان
+                    (notice?.pricing.price * notice.pricing.discount_percent / 100)) :
+                    convertPrice(notice?.pricing.price) }} تومان
                     <br>
                     <del style="font-size: 12px;">{{ convertPrice(notice?.pricing.price) }}</del> <span
                       class="text-danger">{{ notice.pricing.discount_percent }} %</span>
@@ -322,10 +295,9 @@
                <p  class="Maptext">
                 نقشه
                </p>
-              
             </button>
             <button v-if="showMap" type="button" @click="showMap=false" class="circle">
-              <p  class="Maptext">
+              <p class="Maptext">
                 آگهی ها
                </p>
               
@@ -368,8 +340,6 @@ import { useMapStore } from '../store/map';
 import { useNoticeStore } from '../store/notice';
 import { useOfficeStore } from '../store/office';
 import { useSearchStore } from '../store/search';
-
-const mapping = ref(true);
 
 export default {
   data() {
@@ -479,7 +449,7 @@ export default {
       this.$refs[id][0].leafletObject.openPopup();
     },
     markersIconCallback(point) {
-    
+      
     },
     getCategory(noticeId) {
       this.pending = true;
@@ -553,28 +523,28 @@ export default {
       }
     },
     showMap(val) {
-     
+      console.log(val);
       if (val) {
-        this.showCat = false
+        // this.showMap = true;
         // this.$refs.content.classList.add('closeBox');
         this.$refs.mapDiv.classList.add('showMap');
       } else {
-        this.showCat = true
-        // this.$refs.content.classList.add('openBox');
         this.$refs.mapDiv.classList.remove('showMap');
+        // this.shoMap = false
+        // this.$refs.content.classList.add('openBox');
       }
     },
-    showCat(val) {
-      if (val) {
-        this.showMap = false;
-        // this.$refs.noticeBox.classList.remove('col-sm-8');
-        // this.$refs.noticeBox.classList.add('col-sm-9');
-      } else {
-        this.showMap = true;
-        // this.$refs.noticeBox.classList.remove('col-sm-9');
-        // this.$refs.noticeBox.classList.add('col-sm-8');
-      }
-    }
+    // showCat(val) {
+    //   if (val) {
+    //     this.showMap = false;
+    //     // this.$refs.noticeBox.classList.remove('col-sm-8');
+    //     // this.$refs.noticeBox.classList.add('col-sm-9');
+    //   } else {
+    //     this.showMap = true;
+    //     // this.$refs.noticeBox.classList.remove('col-sm-9');
+    //     // this.$refs.noticeBox.classList.add('col-sm-8');
+    //   }
+    // }
   },
   computed: {
 
@@ -589,6 +559,11 @@ export default {
       this.notices.fetchData().then((r) => {
         this.defaultNotices = r.allNotices;
         this.allNotices = r.allNotices;
+        this.pending = false;
+      });
+
+      this.notices.getCategory().then((r) => {
+        this.categories = r;
         this.pending = false;
       });
 
