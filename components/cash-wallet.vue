@@ -1,23 +1,14 @@
 <template>
-    <div class="row mt-5">
-        <div class="col-sm-10 offset-sm-1">
+    <div class="row all-boxes">
+        <div class="col-sm-10 offset-sm-1 mt-5">
             <div class="row box-wall">
-                <div class="col-6">
-                    <a href="#" class="Title">کیف پول نقدی</a>
+                <div class="col-5">
+                    <a href="#" class="Title">  کیف پول نقدی : 0تومان</a>
                 </div>
-                <div class="col-6">
+            
+                <div class="col-7">
                     <button @click="isOpen = true" type="button" class="col-sm-5 btn btn-light">
                         <a href="#" class="btntext">افزایش موجودی</a>
-                    </button>
-                </div>
-
-                <div class="col-6">
-                    <a href="#" class="Title">0تومان</a>
-                </div>
-                <div class="col-6">
-                    <button @click="tasfie = true" type="button" class="btn btn-light">
-                        <a href="#" class="btntext">تسفیه </a>
-
                     </button>
                 </div>
                 <UModal v-if="isOpen">
@@ -84,19 +75,19 @@
             </div>
             <div class="row mt-5 mobil">
                 <div class="col-4">
-                    <span @click="chnageTabMenu('wallet')"> تراکنش ها</span>
+                    <a  class="tab-txts" @click="chnageTabMenu('wallet')">تراکنش ها</a>
                 </div>
                 <div class="col-4">
-                    <span @click="chnageTabMenu('verify')"> فیش واریزی</span>
+                    <a  class="tab-txts"  @click="chnageTabMenu('verify')"> فیش واریزی</a>
                 </div>
-                <!-- <div class="col-4">
-                    <span @click="chnageTabMenu('seting')">تنظیمات</span>
-                </div> -->
+                <div class="col-4">
+                    <a  class="tab-txts" @click="chnageTabMenu('setting')">تنظیمات</a>
+                </div>
                 <!-- <div ref="underline" class="col-2 underline"></div> -->
 
             </div>
 
-            <div v-if="wallet" class="col-sm-12 spacings">
+            <div v-if="wallet" class="col-sm-12 spacings mt-3">
                 <div class="" v-for="(item, index) in transactions?.items" :key="index">
 
                     <div class="row">
@@ -136,18 +127,19 @@
             </div>
             <div v-if="verify" class="col-sm-12">
 
-                <div v-if="verify" class="col-sm-12 tab-Detaile">
-                    <div class="row">
-                        {{ transactionBankReceipts }}
-                        <table class="table table-light">
+                <div v-if="verify" class="col-sm-12">
+                    <div class="row mt-3 ">
+                        <!-- {{ transactionBankReceipts }} -->
+                        <p class="fishing">تراکنشی برای نمایش وجود ندارد</p>
+                        <!-- <table class="table table-light">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>#</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
+                                    <td>تراکنشی برای نمایش وجود ندارد</td>
                                 </tr>
                             </tbody>
                             <tfoot>
@@ -155,13 +147,14 @@
                                     <th>#</th>
                                 </tr>
                             </tfoot>
-                        </table>
+                        </table> -->
                     </div>
                 </div>
 
             </div>
             <div v-if="setting" class="col-sm-12">
 
+               <div class="onMobile">
                 <div class="col shaba mt-5">
                     <a href="#" class="Title ">*شبا</a>
                 </div>
@@ -171,6 +164,7 @@
                 <div class="text-shaba mt-3">
                     <a href="#">شماره شبا شما که بانک به شما داده است برای مثال : IR234525690123456789011234</a>
                 </div>
+               </div>
                 <!-- <div class="form-check">
                     <input id="my-input" class="form-check-input"  type="text" name="" >
                     <label for="my-input" class="form-check-label">sheba</label>
@@ -189,10 +183,14 @@
                 </div>
                 <button @click="addSetting" type="button" class="col-2 btn btn-success mt-5">ثبت</button>
                 <div class="col warn">
-                    <a href="#" class="mediumtxt">توجه</a>
+                    <p class="mediumtxtes">توجه</p>
                 </div>
                 <div class="col multyline">
-                    <a href="#">ادامه توضیحات</a>
+                    <p> برای انچام تسفیه حساب لازم است تمامی بخش های  اطلاعات مالک دفتر شما تایید شده باشد</p>
+                    <p>شبا ارائه شده توسط شما باید متعلق به شخص حقیقی باشد که بخش اطلاعات مالک دفتر تکمیل شده باشد</p>
+                    <p>در تسفیه هفتگی به صورت خودکار در اول هر هفته حساب شما تسفیه شده و پول به شماره شبا ثبت شده واریز می گردد</p>
+                    <p>در تسفیه ماهانه بصورت خودکار در اول هر ماه حساب شما تصفیه شده و پول به شماره شبا ثبت شده واریز می گردد</p>
+                    <p>در تصفیه دستی باید مبلغ درخواستی را از بخش درخواست تصفیه ثبت کنید حد اکثر تا سه روز کاری مبلغ درخواستی به حساب شبای ثبت شده واریز خواهد شد</p>
                 </div>
             </div>
         </div>
@@ -209,9 +207,9 @@ import { useAuthStore } from '~/store/auth';
 
 const underline = ref(null);
 const payiinBorder = ref(null);
-const wallet = ref(false)
+const wallet = ref(true)
 const verify = ref(false)
-const setting = ref(true)
+const setting = ref(false)
 const sheba = ref(null)
 const withdraw = ref(null)
 const useUser = useAuthStore();
@@ -241,15 +239,15 @@ const chnageTabMenu = (name) => {
    
     switch (name) {
         case 'wallet':
-            underline.value.style.left = "0%";
+            // underline.value.style.left = "0%";
             wallet.value = true;
             break;
         case 'verify':
-            underline.value.style.left = "-33%";
+            // underline.value.style.left = "-33%";
             verify.value = true;
             break;
         case 'setting':
-            underline.value.style.left = "-67%";
+            // underline.value.style.left = "-67%";
             setting.value = true;
             break;
         default:
@@ -259,48 +257,48 @@ const chnageTabMenu = (name) => {
 
 }
 
-const changePayiintTab = (name) => {
-    bank.value = false;
-    fish.value = false;
+// const changePayiintTab = (name) => {
+//     bank.value = false;
+//     fish.value = false;
 
-    switch (name) {
-        case 'bank':
-            payiinBorder.value.style.left = "0%";
-            bank.value = true;
+//     switch (name) {
+//         case 'bank':
+//             payiinBorder.value.style.left = "0%";
+//             bank.value = true;
 
-            break;
-        case 'fish':
-            payiinBorder.value.style.left = "20%";
-            fish.value = true;
+//             break;
+//         case 'fish':
+//             payiinBorder.value.style.left = "20%";
+//             fish.value = true;
 
-            break;
-        default:
-            break;
+//             break;
+//         default:
+//             break;
 
-    }
+//     }
 
-}
+// }
 
 // loadingStyle(false);
-onMounted(() => {
-    setTimeout(() => {
-        underline.value.style.left = "0%";
-        payiinBorder.value.style.left = "20%";
+
+
+  setTimeout(() => {
+        // underline.value.style.left = "0%";
+        // payiinBorder.value.style.left = "20%";
         // underline.value.style.left = "-10%";
         // underline.value.style.left = "-40%";
+        useUser.transaction().then((r) => {
+            transactions.value = r;
+            console.log(r);
+            loadingStyle(false);
+        })
+    
+        useUser.transactionBankReceipts().then((r) => {
+            transactionBankReceipts.value = r;
+            // loadingStyle(false);
+    
+        })
     }, 0);
-
-    useUser.transaction().then((r) => {
-        transactions.value = r;
-        loadingStyle(false);
-    })
-
-    useUser.transactionBankReceipts().then((r) => {
-        transactionBankReceipts.value = r;
-        loadingStyle(false);
-
-    })
-  })
   
     const addSetting = async () => {
         // value of withdraw :
@@ -309,6 +307,8 @@ onMounted(() => {
         // manually;
         useUser.transactionSetting(sheba.value, withdraw.value).then(() => {
             Message.value = 'تنظیمات ذخیره شد';
+            // loadingStyle(false);
+
         })
     }
 

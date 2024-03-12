@@ -461,7 +461,8 @@ p{
     /* top: 100vh; */
     left: 0;
     bottom: -100vh;
-    padding: 15px 20px;
+    margin: 10px;
+    padding: 15px 15px;
     border-radius: 15px;
 
 }
@@ -1648,8 +1649,15 @@ label {
     overflow: hidden;
 }
 
-
-
+.tab-txts{
+    text-decoration: none;
+    color: var(--cf-dark-color);
+    font-family: 'anjoman';
+    font-size: 16px;
+}
+.tab-txts:hover{
+    color: var(--cf-dark-color);
+}
 .closeBox {
     overflow: hidden;
     height: 0px !important;

@@ -2,7 +2,7 @@
     <!-- {{carts}} -->
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row all-boxes">
             <div class="col-sm-12 box-cart mt-5">
                 <div class=" top-text">
                     <div class="row">

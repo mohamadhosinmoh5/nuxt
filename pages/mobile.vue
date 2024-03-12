@@ -285,7 +285,7 @@
             </button>
         </div>
         <div class="list-item">
-            <button type="button" class="prson">
+            <button type="button" class="prson disabled">
                 <img src="assets/img/note-21 1.svg"  style="width: 20px;"/>
                 <a href="#" class="txtIcons">خدمات</a>
             </button>
@@ -304,7 +304,7 @@
             </button>
         </div>
         <div class="list-item">
-            <button type="button" class="prson" >
+            <button type="button" class="prson disabled" >
                 <img src="assets/img/notification-bing 2.svg"  style="width: 20px;"/>
                 <a href="#"  class="txtIcons">اعلانات</a>
             </button>
@@ -316,7 +316,7 @@
             </button>
             <button v-if="login" type="button" class="prson" >
               <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-              <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons text-info">پروفایل</a>
+              <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons">پروفایل</a>
           </button>
         </div>
     </div>
@@ -609,7 +609,7 @@ export default {
 
       if (scrollTop > 50) {
        
-        if (scrollTop < this.top){
+        if (scrollTop > this.top){
           
           this.$refs.Header_box.classList.remove('hiding-box');
           this.$refs.Header_box.classList.add('show-box');
