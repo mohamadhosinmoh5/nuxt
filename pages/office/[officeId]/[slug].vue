@@ -53,104 +53,109 @@
                         @click="showOffice = true, showNotice = false">آدرس در نقشه</a>
                 </li>
             </ul>
-            </div>
-            <!-- <div v-if="allNotices.length < 1 && showNotice" class="row">
+        </div>
+            <div v-if="allNotices[0] == null && showNotice" class="row">
                 <div class="col-sm-12 alert alert-danger mt-3 text-center">
                     آگهی وجود ندارد
                 </div>
-            </div> -->
-            <div v-if="allNotices != null && showNotice" v-for="notice in allNotices" :key="notice.id"
-                class="col-sm-3 mt-5">
-                <div class="row box-notice">
-                    <div class="col-sm-12 img-box">
-                        <div class="img"
-                            :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 mt-3">
-                        <div class="titleNotice">
-                            <h4 class>{{ notice.title }}</h4>
-                        </div>
-                    </div>
-
-
-                    <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
-                        <div class="row">
-                            <div class="col-6 text-section">
-                                {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
-                                    notice?.section_data_collection[0].items[0]?.data[0] }} متر
-                            </div>
-
-                            <div v-if="notice?.section_data_collection[0].items[5]" class="col-6 text-section">
-                                {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
-                                    notice?.section_data_collection[0].items[5]?.data[0] }}
-                            </div>
-
-                            <div class="col-sm-12 text-section mt-4">
-                                <div class="row">
-                                    <div v-if="notice?.section_data_collection[2].items[0]" class="col-10">
-                                        {{ notice?.section_data_collection[2].items[0]?.field?.title }} : {{
-                                            convertPrice(notice?.section_data_collection[2].items[0]?.data[0]) }} تومان
-                                    </div>
-
-                                    <div class="col-2">
-                                        <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                                            <img src="~/assets/img/arrow-left.svg" alt="">
-                                        </a>
-                                    </div>
-
-                                </div>
+            </div>
+            <div v-if="allNotices != null && showNotice" class="row">
+                <div v-for="notice in allNotices" :key="notice.id"
+                    class="col-sm-3 mt-5">
+                    <div class="row box-notice">
+                        <div class="col-sm-12 img-box">
+                            <div class="img"
+                                :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
                             </div>
                         </div>
-                    </div>
 
-                    <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
+                        <div class="col-sm-12 mt-3">
+                            <div class="titleNotice">
+                                <h4 class>{{ notice.title }}</h4>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
                             <div class="row">
+                                <div class="col-6 text-section">
+                                    {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
+                                        notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                </div>
+
+                                <div v-if="notice?.section_data_collection[0].items[5]" class="col-6 text-section">
+                                    {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
+                                        notice?.section_data_collection[0].items[5]?.data[0] }}
+                                </div>
+
                                 <div class="col-sm-12 text-section mt-4">
                                     <div class="row">
-                                        <div class="col-10">
-                                            قیمت : {{ (notice?.pricing?.discount_percent > 0) ? convertPrice(notice?.pricing?.price - (notice?.pricing?.price * notice?.pricing?.discount_percent / 100)) :  convertPrice(notice?.pricing?.price)}} تومان
+                                        <div v-if="notice?.section_data_collection[2].items[0]" class="col-10">
+                                            {{ notice?.section_data_collection[2].items[0]?.field?.title }} : {{
+                                                convertPrice(notice?.section_data_collection[2].items[0]?.data[0]) }} تومان
                                         </div>
-            
+
                                         <div class="col-2">
                                             <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                                 <img src="~/assets/img/arrow-left.svg" alt="">
                                             </a>
                                         </div>
-        
+
                                     </div>
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
 
-                <div v-if="showOffice" class="col-sm-12 mt-2 mapBox">
-                    <div ref="mapDiv" class="stickyStyle" >
-                      <LMap
+                        <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
+                                <div class="row">
+                                    <div class="col-sm-12 text-section mt-4">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                قیمت : {{ (notice?.pricing?.discount_percent > 0) ? convertPrice(notice?.pricing?.price - (notice?.pricing?.price * notice?.pricing?.discount_percent / 100)) :  convertPrice(notice?.pricing?.price)}} تومان
+                                            </div>
+                
+                                            <div class="col-2">
+                                                <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                    <img src="~/assets/img/arrow-left.svg" alt="">
+                                                </a>
+                                            </div>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+             
+                </div>
+                </div>
+            </div>
+
+            <div v-if="showOffice"  class="row">
+                <div class="col-sm-12 mt-2 mapBox">
+                    <div v-if="latLon != null" ref="mapDiv" class="stickyStyle" >
+                       
+                        <LMap
                         id="map"
                         :zoom="16"
-                        :center="office?.address?.geom?.coordinates" >
-                      
+                        :center="[latLon[0],latLon[1]]">
+                    
                         <!-- <l-circle-marker
                         :lat-lng="office?.address?.geom?.coordinates"
                         :radius="10"
                         color="red"
-                      /> -->
-                        <l-marker :lat-lng="office?.address?.geom?.coordinates">
-                            <l-popup @ready="ready" >
+                    /> -->
+                        <l-marker :lat-lng="[latLon[0],latLon[1]]">
+                            <!-- <l-popup @ready="ready" >
                                 <div class="title">
                                     تنتینتشسنیتش
                                 </div>
-                              </l-popup>
+                            </l-popup> -->
                         </l-marker>
 
                     </LMap>
                 </div>
             </div>
-
-        </div>
-
-        </div>
+            </div>
     </div>
 </template>
 
@@ -161,7 +166,6 @@ import { useOfficeStore } from '../store/office';
 definePageMeta({
     middleware: 'auth'
 })
-
 
 const route = useRoute()
 const params = route.params;
@@ -175,6 +179,8 @@ const allNotices = ref(null);
 const showNotice = ref(true);
 const showOffice = ref(false);
 const loadingStyle = ref(true);
+const latLon = ref(null)
+
 watch(useCart, async (newdata) => {
     if (cart?.value?.items != null)
         cart.value.items = newdata.cart.items;
@@ -187,6 +193,8 @@ setTimeout(async () => {
     useOffice.getOffice(params.officeId).then((r) => {
         console.log(r);
         office.value = r;
+        latLon.value = r.address?.geom?.coordinates;
+      
     })
 
     useOffice.getNoticeOffice(query.id).then((r) => {

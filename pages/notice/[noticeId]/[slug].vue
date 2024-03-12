@@ -97,11 +97,10 @@
                                 <div class="Warn mt-3 ms-2 col-12">
                                     <div class="col-md box_warning">
                                         <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
-                                        <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی</a>
+                                        <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی </a>
                                         <img src="assets/img/SinglePage_Image/row.svg"
                                             style="float: left;position: relative; top: 5px;" alt="">
                                         <a href="#" class="daftar_textt ms-1 mt-1"> گزارش </a>
-
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +173,6 @@
                                     <div class="col-4 tamas_btn mt-2">
                                         <button @click="showPhone = true" type="button"
                                             class="btn btn-success btnmodal">اطلاعات تماس</button>
-
                                     </div>
 
                                 </div>
@@ -233,7 +231,7 @@
                                     </div>
                                 </div>
 
-                                <div v-if="useCart.error" class="alert alert-error">
+                                <div v-if="useCart.error" class="alert alert-danger">
                                     {{ useCart.error.message }}
                                 </div>
                                 <div v-if="useCart.message" class="alert alert-success">
@@ -249,8 +247,7 @@
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
                             <img src="assets/img/SinglePage_Image/row.svg" style="float: left; top: 6px;position: relative;"
                                 alt="">
-                            <a :href="`${useRuntimeConfig().public.BaseUrl}/office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
-
+                            <a :href="`../../office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`" class="daftar_textt ms-1 mt-2"> دفتر ها </a>
                         </div>
                         <div class="col-12 map_box">
                             <div v-if="notice.address != null" class="col mappingg">
@@ -261,15 +258,7 @@
                                         layer-type="base" name="OpenStreetMap" />
 
                                     <l-circle-marker :lat-lng="[notice.address.lat, notice.address.lng]"
-                                        :radius="10" color="red" />
-                                    <l-marker :lat-lng="[notice.address.lat, notice.address.lng]">
-                                        <l-popup @ready="ready">
-                                            <div class="title">
-                                                {{ notice.title }}
-                                            </div>
-                                        </l-popup>
-                                    </l-marker>
-
+                                        :radius="100" color="red" />
                                 </LMap>
                             </div>
                         </div>
@@ -301,7 +290,6 @@
                                        <h4 class>{{ notice.title }}</h4>
                                    </div>
                                </div>
-           
            
                                <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
                                    <div class="row">
@@ -405,8 +393,12 @@ watch(useCart, async (newdata) => {
 
     if (cart.value?.items.length >= 1) {
         cart.value.items = newdata.cart.items;
-        // console.log(newdata.cart.items[0].count);
-        count.value = newdata.cart.items[0].count;
+        console.log(notice.value);
+        if(newdata.cart.items[0].notice.id == notice.value.id){
+            count.value = newdata.cart.items[0].count;
+        }else{
+            count.value = 0;
+        }
     }
 })
 
@@ -420,7 +412,11 @@ setTimeout(async () => {
 
     await useCart.getCart().then((r) => {
         cart.value = r;
-        count.value = r.items[0].count;
+        if(r.items[0].notice.id == notice.value.id){
+            count.value = r.items[0].count;
+        }else{
+            count.value = 0;
+        }
     });
 
 })

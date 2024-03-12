@@ -168,7 +168,7 @@ import { useAuthStore } from './auth';
       if(count.value > 0){
         pending.value = true;
         count.value = number - 1;
-        console.log(count.value);
+    
         await updateCart(count.value,noticeId,true,null)
       }else{
         massage.value ='سبد خالی است '
@@ -190,15 +190,18 @@ import { useAuthStore } from './auth';
           }
         });
 
+
         if(pendings){
           pending.value = pendings;
         }
 
-        if(errors.value)
+      
+        if(errors.value?.data)
         {
-          this.error = errors.value.data;
+          console.log(errors.value.data);
+          error.value = errors.value.data;
         }
-
+        
         if(data.value)
         {
           if(reduce){
@@ -225,7 +228,7 @@ import { useAuthStore } from './auth';
 
       if(errors.value)
       {
-        this.error = errors.value.data;
+        error.value = errors.value.data;
       }
 
       if(data.value)
@@ -259,7 +262,7 @@ import { useAuthStore } from './auth';
       if(errors.value)
       {
         pending.value = false;
-        this.error = errors.value.data;
+        error.value = errors.value.data;
       }
 
       if(data.value)

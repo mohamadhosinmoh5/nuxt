@@ -51,6 +51,48 @@
                   </div>
                 </div>
               </div>
+          </div>
+        </div>
+  
+
+        <div class="col-12 mt-2">
+          <div  class="col-12 mt-1 mob-map">
+            
+            <div v-if="showNotice && allNotices && allNotices[1]?.address != null"  ref="mapDiv" @click="showMap=true" class="mob-stickyStyle" >
+             
+              <LMap v-if="allNotices"
+                id="map"
+                ref="mapRef"
+                :zoom="12"
+                :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
+                @zoomend="changeZoom"
+                @click="markersIconCallback"
+
+                style="height:100vh;"
+              >
+        
+              <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
+                <LTileLayer
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                  layer-type="base"
+                  name="OpenStreetMap"
+                />
+              
+                <l-circle-marker
+                :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
+                :radius="10"
+                color="red"
+              />
+                <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address?.lat,notice.address?.lng]">
+                  <l-popup @ready="ready" >
+                    <div class="title">
+                      {{ notice.title }}
+                    </div>
+                  </l-popup>
+                </l-marker>
+      
+              </LMap>
             </div>
           </div>
         </div>
@@ -73,7 +115,7 @@
         </div>
       </div>
        <!--Show Map-->
-      <div class="col-12 mt-2">
+      <!-- <div class="col-12 mt-2">
         <div class="col-12 mt-1 mob-map">
 
           <div v-if="showNotice" ref="mapDiv" @click="showMap = true" class="mob-stickyStyle">
@@ -101,7 +143,7 @@
             </LMap>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
   <!-- show category box -->
@@ -138,7 +180,7 @@
       </div>
     </div>
   </div>
-
+</div>
   <div v-if="noticeShow" ref="content" class="row content">
     <div class="col-sm-12 text-center">
       <div v-if="pending" class="spinner-border" role="status"></div>
@@ -260,67 +302,56 @@
         </div>
       </div>
     </div>
-    <div v-if="infinity != null && infinity.fetchingData" class="spinner-border-background">
-      <br>
-      <br>
-      در حال بارگیری <br>
-      <div class="spinner-border mt-5" role="status"></div>
     </div>
-
-    <div class="col-sm-12 text-center">
-      <div v-if="pending" class="spinner-border" role="status"></div>
+    <!-- this is for bottomNavigationBar -->
+    <div class="navbar">
+        <div class="list-item">
+            <button type="button" class="prson">
+                <img src="assets/img/home-1 2.svg" style="width: 20px;" />
+                <a href="#" class="homeIcon">خانه</a>
+            </button>
+        </div>
+        <div class="list-item">
+            <button type="button" class="prson">
+                <img src="assets/img/note-21 1.svg"  style="width: 20px;"/>
+                <a href="#" class="txtIcons">خدمات</a>
+            </button>
+        </div>
+        <div  class="list-item">
+            <button v-if="!showMap" type="button" @click="showMap=true" class="circle">
+               <p  class="Maptext">
+                نقشه
+               </p>
+              
+            </button>
+            <button v-if="showMap" type="button" @click="showMap=false" class="circle">
+              <p  class="Maptext">
+                آگهی ها
+               </p>
+              
+            </button>
+        </div>
+        <div class="list-item">
+            <button type="button" class="prson" >
+                <img src="assets/img/notification-bing 2.svg"  style="width: 20px;"/>
+                <a href="#"  class="txtIcons">اعلانات</a>
+            </button>
+        </div>
+        <div class="list-item">
+            <button v-if="!login" @click="isShowModal=true" type="button" class="prson" >
+                <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
+                <a href="#"  class="txtIcons">پروفایل</a>
+            </button>
+            <button v-if="login" type="button" class="prson" >
+              <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
+              <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons text-info">پروفایل</a>
+          </button>
+        </div>
     </div>
-  </div>
-
-  <div ref="filterCanvas" class="filterCanvas" style="display: none;" tabindex="-1" id="navbarOffcanvasLg">
-    <div @click="closeFilter" class="closeFilter">
-      <img width="20" src="assets/img/right.png">
-    </div>
-    <Filter v-if="noticeShow" :status="pending" @clicked="filterUptaded" />
-  </div>
-  <!-- this is for bottomNavigationBar -->
-  <div class="navbar">
-    <div class="list-item">
-      <button type="button" class="prson">
-        <img src="assets/img/home-1 2.svg" style="width: 20px;" />
-        <a href="#" class="homeIcon">خانه</a>
-      </button>
-    </div>
-    <div class="list-item">
-      <button type="button" class="prson">
-        <img src="assets/img/note-21 1.svg" style="width: 20px;" />
-        <a href="#" class="txtIcons">خدمات</a>
-      </button>
-    </div>
-    <div class="list-item">
-      <button v-if="!showMap" type="button" @click="showMap =true" class="circle">
-        <p class="Maptext">
-          نقشه
-        </p>
-
-      </button>
-      <button v-if="showMap" type="button" @click="showMap=false" class="circle">
-        <p class="Maptext">
-          آگهی ها
-        </p>
-
-      </button>
-    </div>
-    <div class="list-item">
-      <button type="button" class="prson">
-        <img src="assets/img/notification-bing 2.svg" style="width: 20px;" />
-        <a href="#" class="txtIcons">اعلانات</a>
-      </button>
-    </div>
-    <div class="list-item">
-      <button  type="button" class="prson">
-        <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
-        <a href="/profile" class="txtIcons">پروفایل</a>
-      </button>
-    </div>
-  </div>
-
-  <!-- <div class="notic" id="card1"></div> -->
+    <div v-if="!token && isShowModal" id="LogInModal" class="LogInModal">
+      <Loginpage @clicked="modalStatus(status)" />
+     </div>
+    <!-- <div class="notic" id="card1"></div> -->
 
 </template>
 
@@ -372,7 +403,10 @@ export default {
     }
   },
   methods: {
-    setCat(item) {
+    modalStatus(status){
+      this.isShowModal = status;
+    },
+    setCat(item){
       this.lastCat = item.title;
     },
     closeSearch() {
@@ -558,21 +592,32 @@ export default {
         this.pending = false;
       });
 
-      this.notices.getCategory().then((r) => {
-        this.categories = r;
-        this.pending = false;
-      });
-
-      this.useCart.getCategory().then((r) => {
-        this.categories = r;
-        this.pending = false;
-      });
+          this.token =  (useCookie('token')) ? useCookie('token') :null;
+          if(this.token != null){
+            this.auth.token = this.token;
+            this.auth.getMe().then(()=>{
+              this.useCart.getCart().then((r)=>{
+                this.cart = r;
+              })
+            })
+            this.login = true;
+          }else{
+            this.login = false;
+          }
 
       if (token != null) {
         this.auth.token = token;
         this.auth.getMe()
         this.useCart.getCart()
 
+        window.addEventListener('scroll',()=>{
+          let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+          let width = window.innerWidth;
+          if(scrollTop > 200 && width < 527){
+            this.$refs.menuBox.classList.remove('relativeCat');
+            this.$refs.menuBox.classList.add('fixedCat');
+          }
+        })
       }
 
     }, 0);
@@ -623,7 +668,9 @@ export default {
 
     return { notices, offices, auth, useMap, useSearch, useCart }
   },
+
 }
+  
 
 
 </script>

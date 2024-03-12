@@ -13,7 +13,7 @@
     <div class="col-sm-3">
       <div class="row mt-2">
         <div class="col-md-5 mt-2">
-          <a href="#" class="logo"><img width="100" src="assets/logo/logo.png" alt=""></a>
+          <a href="../../" class="logo"><img width="100" src="assets/logo/logo.png" alt=""></a>
         </div>
         <div class="col-md-1 text-center mt-3">
           <div class="line"></div>
@@ -73,7 +73,7 @@
         </div>
 
         <div v-if="!token && isShowModal" id="LogInModal" class="LogInModal">
-         <Loginpage @clicked="modalStatus(status)" />
+          <Loginpage @clicked="modalStatus(status)" />
         </div>
         
         <div class="col-2 bag-icon">
