@@ -2,9 +2,9 @@
     <div class="container">
         <div class="row myOrder">
             <div class="col-12 row tabbar-detailes">
-                <div @click="changeOrderMenue('loading')" class="col-4"><a href="#"> درحال انجام</a></div>
-                <div @click="changeOrderMenue('sectiontwo')" class="col-4"><a href="#"> دو مرحله ای</a></div>
-                <div @click="changeOrderMenue('finish')" class="col-4"><a href="#">انجام شده</a></div>
+                <div @click="changeOrderMenue('loading')" class="col-4"><a> درحال انجام</a></div>
+                <div @click="changeOrderMenue('sectiontwo')" class="col-4"><a> دو مرحله ای</a></div>
+                <div @click="changeOrderMenue('finish')" class="col-4"><a>انجام شده</a></div>
 
             </div>
             <div v-if="loading" class="col-sm-12 tab-Detaile">

@@ -44,26 +44,26 @@
                 </UModal>
                 <div class="row">
                     <div v-for="item in pricing.items" class="col-sm-12">
-                        <a href="#" class="buy-title">
+                        <a  class="buy-title">
                             {{ item.title }}
                         </a>
                         <div class="subtiles mt-2">
-                            <a href="#" class="sub">با دریافت این اشتراک قابلیت های زیر برای شما فعال خواهد شد</a>
+                            <a  class="sub">با دریافت این اشتراک قابلیت های زیر برای شما فعال خواهد شد</a>
                         </div>
                         <div class="subtitles mt-2">
-                            <a href="#" class="sub">دسترسی به بازدید آگهی</a>
+                            <a  class="sub">دسترسی به بازدید آگهی</a>
                         </div>
                         <div v-for="visit in item.visits" class="subtitles mt-2">
                             <div class="row">
                                 <div class=" col-sm-12">
-                                    <a href="#" class="Licenes">از {{ visit.matter_target.title }} تا </a>
-                                    <a href="#" class="Licenes">{{ visit.number }} عدد </a>
+                                    <a  class="Licenes">از {{ visit.matter_target.title }} تا </a>
+                                    <a  class="Licenes">{{ visit.number }} عدد </a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="prices">
-                            <a href="#">{{ item.price }} تومان</a>
+                            <a >{{ item.price }} تومان</a>
                         </div>
                         <button @click="isOpen = true,setSubId(item.id)" type="button" style="float: right;" class="btn col-8 btn-outline-secondary">خرید
                             اشتراک</button>
