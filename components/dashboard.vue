@@ -1,7 +1,7 @@
 <template>
 
 <!-- {{ carts }} -->
-    <div class="row">
+    <div class="row all-boxes">
         <div class="col-sm-12">
         <UModal v-if="isOpen">
             <div class="paying row">

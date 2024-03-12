@@ -2,9 +2,9 @@
     <div class="container-fluild">
         <div class="row">
             <div class="col-sm-12">
-                <div class="border"></div>
+                <div class="top-line"></div>
                 <div class="TitleText">
-                    <div class="col mt-3">
+                    <div class="col mt-3 ms-3">
                         <i class="fa fa-home " aria-hidden="true"></i>
                         <h class="myhomenger ms-2">هومنگر من</h>
                         <a @click="modalOpen = true" style="cursor: pointer;" class="taghiratDaftar">
@@ -39,54 +39,57 @@
 
 
         <div class="container-box">
-            <button v-if="closeBox" type="button" id="" class="close-navbar mt-5" @click="closeBox = false">
-                <img src="assets/img/left.png" style="width: 30px;">
 
-            </button>
-            <button v-if="!closeBox" type="button" class="close-navbar mt-5" @click="closeBox = true">
-                <img src="assets/img/right.png" style="width: 30px;">
-            </button>
+            <div class="btn-navbar">
+                <button v-if="closeBox" type="button" class="close-navbar mt-5" @click="closeBox = false">
+                    <img src="assets/img/SinglePage_Image/togmenue.png" style="width: 40px;">
 
+                </button>
+                <button v-if="!closeBox" type="button" class="close-navbar mt-5" @click="closeBox = true">
+                    <img src="assets/img/SinglePage_Image/closing.png" style="width: 40px;">
+                </button>
+            </div>
 
             <div :class="(closeBox) ? `navbar-profile dropdown-box` : `navbar-profile border-left`">
-                <div >
-                    <div class="col-md-12">
-                        <div class="col-sm-12 mt-4 hover">
+
+                <div>
+                    <div class="col-md-12 sidetext">
+                        <div class="col-sm-12 mt-4 ">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
                             <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-2">پیشخوان</a>
                         </div>
-                        <div class="col-sm-12 hover mt-3">
+                        <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-wallet"></i>
                             <a @click="changeMenu('showWallet')" href="#" class="mediumtxt ms-2">کیف پول نقدی</a>
                         </div>
-                        <div class="col-sm-12 hover mt-3">
+                        <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-money-bill"></i>
                             <a @click="changeMenu('BuyLicence')" href="#" class="mediumtxt ms-1"> خرید اشتراک</a>
 
                         </div>
 
 
-                        <div class="col-sm-12 hover mt-3">
+                        <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-cart-shopping"></i>
                             <a @click="changeMenu('MyProduct')" href="#" class="mediumtxt ms-1"> خرید های من</a>
                         </div>
-                        <div class="col-sm-12 hover mt-3">
+                        <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-arrow-down-wide-short"></i>
                             <a @click="changeMenu('MyOrder')" href="#" class="mediumtxt ms-1"> سفارش های من </a>
                         </div>
-                        <div class="col-sm-12 hover mt-3">
+                        <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-money-bill"></i>
                             <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-1"> اشتراک های من</a>
                         </div>
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
-                            <div class="col hover mt-3">
+                            <div class="col  mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
                                 <a href="#" class="mediumtxt ms-2">قوانین مقررات</a>
                             </div>
                         </NuxtLink>
 
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
-                            <div class="col hover mt-3">
+                            <div class="col  mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
                                 <a href="#" class="mediumtxt ms-2"> تماس با ما</a>
                             </div>
@@ -108,8 +111,8 @@
                 <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
 
 
-                <dashboard :user="user" v-if="showDashboard" />
-                <cash-wallet v-if="showWallet" />
+                <dashboard @clicked="loadingStyle" :loading="loading" :user="user" v-if="showDashboard" />
+                <cash-wallet @clicked="loadingStyle" :loading="loading" v-if="showWallet" />
                 <buylicence @clicked="loadingStyle" :loading="loading" v-if="BuyLicence" />
                 <myproduct @clicked="loadingStyle" :loading="loading" v-if="MyProduct" />
                 <myorder @clicked="loadingStyle" :loading="loading" v-if="MyOrder" />
@@ -290,10 +293,10 @@
                   <dashboard />
                   <dashboard />
                   <dashboard /> -->
-       
-   
+
+
 </template>
-  
+
 <!-- script -->
 <script setup>
 

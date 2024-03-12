@@ -455,6 +455,7 @@ body {
     /* top: 100vh; */
     /* left: 100%; */
     bottom: -100vh;
+    margin: 10px;
     padding: 15px 15px;
     border-radius: 15px;
 
@@ -1642,8 +1643,15 @@ label {
     overflow: hidden;
 }
 
-
-
+.tab-txts{
+    text-decoration: none;
+    color: var(--cf-dark-color);
+    font-family: 'anjoman';
+    font-size: 16px;
+}
+.tab-txts:hover{
+    color: var(--cf-dark-color);
+}
 .closeBox {
     overflow: hidden;
     height: 0px !important;
