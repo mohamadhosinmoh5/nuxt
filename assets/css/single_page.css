@@ -941,6 +941,10 @@
     }
 }
 
+.mobil{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 576px) {
     .mobil {
         margin: 10px;
