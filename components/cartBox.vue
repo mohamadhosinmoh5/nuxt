@@ -163,14 +163,14 @@
   
                       <div class="d-flex justify-content-between">
                         <p class="mb-2">مجموع قیمت اصلی</p>
-                        <p class="mb-2 text-info">تومان {{totalPriceNotice}}</p>
+                        <p class="mb-2 text-black">تومان {{totalPriceNotice}}</p>
                       </div>
   
                       <div class="d-flex justify-content-between mb-4">
                         <p class="mb-2">میزان سود شما</p>
                         <p class="mb-2 text-danger">تومان {{profit}}</p>
                       </div>
-                      <div class="row mb-5 mt-5">
+                      <div class="row mb-5 mt-5 p-5">
                         <div @click="useCart.changePay('wallet'),wallet=true"  :class="wallet ? `col-5 pay-cart active` :`col-5 pay-cart`">کیف پول نقدی</div>
                         <div class="col-2"></div>
                         <div @click="useCart.changePay('cash'),wallet=false" :class=" !wallet ? `col-5 pay-cart active` : `col-5 pay-cart`">پرداخت مستقیم</div>
