@@ -88,7 +88,7 @@
             </div>
 
             <div v-if="wallet" class="col-sm-12 spacings mt-3">
-                <div v-if="transactions?.items.length <= 1"  class="alert alert-danger">
+                <div v-if="transactions?.items.length <= 1" class="alert alert-danger">
                     <p>تراکنشی برای نمایش وجود ندارد</p>
                 </div>
                 <div class="" v-for="(item, index) in transactions?.items" :key="index">
@@ -125,6 +125,8 @@
                         <a class="variz">توضیحات : </a>
                         <a class="variz">{{ item.description }}</a>
                     </div>
+                    <div class="borderr mt-2"></div>
+
                 </div>
             </div>
             <div v-if="verify" class="col-sm-12">
@@ -132,7 +134,8 @@
                 <div v-if="verify" class="col-sm-12">
                     <div class="row mt-3 ">
                         <!-- {{ transactionBankReceipts }} -->
-                        <p v-if="transactionBankReceipts.items" class="alert alert-danger">تراکنشی برای نمایش وجود ندارد</p>
+                        <p v-if="transactionBankReceipts.items" class="alert alert-danger">تراکنشی برای نمایش وجود ندارد
+                        </p>
                         <!-- <div>{{ transactionBankReceipts.items }}</div> -->
                         <!-- <table class="table table-light">
                             <thead class="thead-light">
