@@ -1,5 +1,5 @@
 
-<template>
+<template #fallback>
     <div dir="rtl" class="container-fluild p-4">
         <NuxtLayout name="header"></NuxtLayout>
         <title>
@@ -95,9 +95,9 @@
                                         </div>
 
                                         <div class="col-2">
-                                            <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                            <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                                 <img src="~/assets/img/arrow-left.svg" alt="">
-                                            </a>
+                                            </NuxtLink>
                                         </div>
 
                                     </div>

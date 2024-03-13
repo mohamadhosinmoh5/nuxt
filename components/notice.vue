@@ -1,10 +1,10 @@
-<template>
+<template #fallback>
              <!-- <div class="col-6" v-for="section in notice?.section_data">
                             <sections :Section="section" />
             </div> -->
         <!-- <li><a href="">{{notice.title}}</a></li> -->
-            <a class="link" :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                
+            <!-- <a class="link" :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`"> -->
+                <NuxtLink class="link"  :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                 <div class="row box-notice">
                     <div class="col-sm-12 img-box">
                         <div class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
@@ -35,9 +35,9 @@
                                     <span v-else>قیمت : {{convertPrice(notice?.pricing.price)}} تومان</span>
         
                                     <div class="col-2">
-                                        <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                        <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                             <img src="~/assets/img/arrow-left.svg" alt="">
-                                        </a>
+                                        </NuxtLink>
                                     </div>
                                 </div>
                             </div>
@@ -53,9 +53,9 @@
                                     </div>
         
                                     <div class="col-2">
-                                        <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                        <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                             <img src="~/assets/img/arrow-left.svg" alt="">
-                                        </a>
+                                        </NuxtLink>
                                     </div>
     
                                 </div>
@@ -64,8 +64,8 @@
                     </div>
                     
                 </div>
-            
-            </a>
+            </NuxtLink>
+            <!-- </a> -->
    
 </template>
 

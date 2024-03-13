@@ -300,7 +300,9 @@ export default {
                     </div>
                     <ul class="categoryBox">
                       <li v-for="(item, index) in categories" :key="index">
-                        <img :src='`/_nuxt/assets/img/cat-${index+1}.svg`'>
+                        <img v-if="index == 0" src='/assets/img/cat1.svg'>
+                        <img v-if="index == 1" src='/assets/img/cat2.svg'>
+                        <img v-if="index == 2" src='/assets/img/cat3.svg'>
                       <a @click="getCategory(item.id),setCat(item)" class="link">{{item.title}}</a>
                       </li>
                     </ul>
@@ -423,9 +425,9 @@ export default {
                             <h4 class="descktop-office-matter">{{office.matter.title}}</h4>
                           </div>
                           <div class="col-3">
-                            <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+                            <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
                               <img src="~/assets/img/arrow-left.svg" alt="">
-                          </a>
+                          </NuxtLink>
                           </div>
                         </div>
                       </div>

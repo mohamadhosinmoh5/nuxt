@@ -1,4 +1,4 @@
-<template>
+<template #fallback>
     <div dir="rtl" class="container-fluild p-4">
         <NuxtLayout name="header"></NuxtLayout>
         <title>
@@ -386,8 +386,8 @@
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
                             <img src="assets/img/SinglePage_Image/row.svg"
                                 style="float: left; top: 6px;position: relative;" alt="">
-                            <a :href="`../../office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`"
-                                class="daftar_textt ms-1 mt-2"> دفتر ها </a>
+                            <NuxtLink :to="`../../office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`"
+                                class="daftar_textt ms-1 mt-2"> دفتر ها </NuxtLink>
                         </div>
                         <div class="col-12 map_box">
                             <div v-if="notice.address != null" class="col mappingg">
@@ -418,7 +418,7 @@
                         <div class="box-similer row">
                             <div v-if="allNotices !== null" v-for="notice in allNotices?.items" :key="notice.id"
                                 class="col-sm-3 mt-5">
-                                <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
+                                <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
                                     <div class="row box-notice">
                                         <div class="col-sm-12 img-box">
                                             <div class="img"
@@ -456,9 +456,9 @@
                                                         </div>
     
                                                         <div class="col-2">
-                                                            <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                            <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                                                                 <img src="~/assets/img/arrow-left.svg" alt="">
-                                                            </a>
+                                                            </NuxtLink>
                                                         </div>
     
                                                     </div>
@@ -466,7 +466,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </NuxtLink>
                                 <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
                                        <div class="row">
                                            <div class="col-sm-12 text-section mt-4">

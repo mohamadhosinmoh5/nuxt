@@ -44,7 +44,7 @@
               <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
                 <div class="row">
                   <div class="col-8 text-start">
-                    <a class="link" :href="`/notice/${item?.id}/${filterUrl(item?.title)}`">{{ item.title }}</a>
+                    <NuxtLink class="link" :to="`/notice/${item?.id}/${filterUrl(item?.title)}`">{{ item.title }}</NuxtLink>
                   </div>
                   <div class="col-4 text-center search-cat">
                     {{ item.category.title }}
@@ -173,14 +173,14 @@
 
     <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
       <div class="col-4 mobile-img-box">
-        <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+        <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
           <div class="img"
             :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
-        </a>
+        </NuxtLink>
       </div>
       <div class="col-8">
         <div class="row">
-          <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
+          <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
             <div class="col-12">
               <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
             </div>
@@ -195,22 +195,22 @@
             
 
           <div class="col-sm margin-fix ">
-            <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link" >
+            <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link" >
               <div class="row ms-1">
                 <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
                   {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
                 </div>
 
                 <div class="col-2 mobile-section ">
-                  <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                  <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
                     <img src="~/assets/img/arrow-left.svg" alt="">
-                  </a>
+                  </NuxtLink>
                 </div>
               </div>
-            </a>
+            </NuxtLink>
           </div>
         </div>
-      </a>
+      </NuxtLink>
 
           <div class="col-sm-12" v-if="notice?.section_data.length < 1">
             <div class="row">
@@ -226,9 +226,9 @@
                   </div>
 
                   <div class="col-2">
-                    <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                    <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
                       <img src="~/assets/img/arrow-left.svg" alt="">
-                    </a>
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
@@ -243,14 +243,14 @@
   <div v-if="officeShow" class="row content">
     <div v-for="(office, index) in allOffices" :key="index" class="row box-content">
       <div class="col-4 descktop-img-box">
-        <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+        <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
           <div v-if="office?.image_banner" class="img"
           :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
         <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
-        </a>
+        </NuxtLink>
       </div>
       <div class="col-8">
-        <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" class="ontapp">
+        <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" class="ontapp">
           <div class="row">
           <div class="col-12">
             <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt=""> &nbsp;
@@ -258,20 +258,20 @@
             <h4 class="mobile-notice-title">{{ office.title }}</h4>
           </div>
         </div>
-        </a>
+        </NuxtLink>
         <div class="col-12 mt-3">
-         <a class="ontap" :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" >
+         <NuxtLink class="ontap" :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" >
           <div class="row">
             <div class="col">
               <h4 class="descktop-office-txt">{{ office.matter.title }}</h4>
             </div>
             <div class="col">
-              <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+              <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
                 <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
-              </a>
+              </NuxtLink>
             </div>
           </div>
-         </a>
+         </NuxtLink>
         </div>
       </div>
     </div>
@@ -316,7 +316,7 @@
             </button>
             <button v-if="login" type="button" class="prson" >
               <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-              <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons">پروفایل</a>
+              <NuxtLink :to="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons">پروفایل</NuxtLink>
           </button>
         </div>
     </div>
