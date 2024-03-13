@@ -300,9 +300,9 @@ export default {
                     </div>
                     <ul class="categoryBox">
                       <li v-for="(item, index) in categories" :key="index">
-                        <img v-if="index == 0" src='/assets/img/cat1.svg'>
-                        <img v-if="index == 1" src='/assets/img/cat2.svg'>
-                        <img v-if="index == 2" src='/assets/img/cat3.svg'>
+                        <img v-if="index == 0" src='/assets/img/catOne.svg'>
+                        <img v-if="index == 1" src='/assets/img/catTow.svg'>
+                        <img v-if="index == 2" src='/assets/img/catTree.svg'>
                       <a @click="getCategory(item.id),setCat(item)" class="link">{{item.title}}</a>
                       </li>
                     </ul>
