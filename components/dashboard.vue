@@ -80,7 +80,7 @@
                 <div class="col card-body">
                     <div class="col row">
                         <p href="#" class="wallettxt">
-                            <img src="/_nuxt/assets/img/basket.svg" style="width: 30px;" alt="">
+                            <img src="/assets/img/basket.svg" style="width: 30px;" alt="">
                             خرید های من
                         </p>
                     </div>
