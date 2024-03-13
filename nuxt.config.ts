@@ -6,9 +6,6 @@ export default defineNuxtConfig({
       'nuxt3-leaflet',
       // '@nuxtjs/proxy'
     ],
-   //  proxy: {
-   //    '/api/': { target: 'https://api.homeenger.com/', pathRewrite: {'^/api/': ''}, changeOrigin: true }
-   //  },
    css:[
         '@/assets/css/main.css',
         '@/assets/css/bootstrap.min.css',
@@ -42,7 +39,6 @@ export default defineNuxtConfig({
             {type:"text/javascript",body:true ,src: '/js/bootstrap.min.js'},
             {type:"text/javascript",body:true ,src: '/js/font-awasom.js'},
             {type:"text/javascript",body:true ,src: '/js/sidemenue.js'},
-
           ]
       }
    },

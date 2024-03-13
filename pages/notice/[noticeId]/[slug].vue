@@ -33,84 +33,8 @@
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <single-section v-if="notice.section_data_collection.length >= 1"
-                                v-for="section in notice.section_data_collection" :section="section" />
-                            <div class="col-sm-12 mt-3">
-                                <div class="row Tozihat">
-                                    <div class="col-sm col-md">
-                                        <img src="assets/img/SinglePage_Image/money.svg" alt="" style="width: 30px;">
-                                        <a href="#"> توضیحات</a>
-                                    </div>
-                                </div>
-                                <div class="col-12  mt-3 box_tozihat">
-                                    <a href="#" class="wallettxts-describtion">
-                                        {{ notice.description }}
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing != null"
-                                class=" col row Tozihat mt-3">
-                                <div class="col">
-                                    <img src="assets/img/SinglePage_Image/money.svg" alt="" style="width: 30px;">
-                                    <a href="#"> کارشناسی قیت</a>
-                                </div>
-                            </div>
-                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing != null"
-                                class="row">
-                                <div class="col-11 ms-4 mt-2 reng_box">
-                                    <div class="range ">
-                                        <div v-if="useNotice?.notice?.price_expert_rating != null"
-                                            class="col-10  field">
-                                            <input disabled type="range" min="0" max="100"
-                                                :value="notice.price_expert_rating">
-                                            <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">
-                                            <div class="row">
-                                                <div class="col ms-4 range-txt">شکار</div>
-                                                <div class="col range-txt">اکازیون</div>
-                                                <div class="col range-txt">منصفانه</div>
-                                                <div class="col range-txt">خیلی بالا</div>
-                                                <div class="col range-txt">غیر منصفانه</div>
-                                            </div>
-                                        </div>
-
-                                        <div v-else-if="notice?.pricing != null">
-                                            قیمت : {{ (notice?.pricing?.discount_percent > 0) ?
-                convertPrice(notice?.pricing?.price - (notice?.pricing?.price
-                    *
-                    notice.pricing?.discount_percent / 100)) :
-                convertPrice(notice?.pricing?.price) }} تومان
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="Tozihat">
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="Warn mt-3 ms-2 col-12">
-                                    <div class="col-md box_warning">
-                                        <img src="assets/img/SinglePage_Image/warning.svg" alt="" style="width: 35px;">
-                                        <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی </a>
-                                        <img src="assets/img/SinglePage_Image/row.svg"
-                                            style="float: left;position: relative; top: 5px;" alt="">
-                                        <a href="#" class="daftar_textt ms-1 mt-1"> گزارش </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- end right -->
-                </div>
-                <div class="col-sm-5">
-                    <div class="col row mt-5">
+                     <!-- start mobile desc -->
+                    <div v-if="!desktop" class="col row mt-5">
                         <div class="row col-11 box-title">
                             <div class="col-12">
                                 <a href="#" class="Titleontop">
@@ -315,7 +239,7 @@
                                         <a href="#" class="daftar_text ms-1">ثبت تخلف و مشکل آگهی </a>
                                         <img src="assets/img/SinglePage_Image/row.svg"
                                             style="float: left;position: relative; top: 5px;" alt="">
-                                        <a href="#" class="daftar_textt ms-1 mt-1"> گزارش </a>
+                                        <a href="#" class="daftar_textt ms-1 mt-1"> بزودی </a>
                                     </div>
                                 </div>
                             </div>
@@ -494,53 +418,55 @@
                         <div class="box-similer row">
                             <div v-if="allNotices !== null" v-for="notice in allNotices?.items" :key="notice.id"
                                 class="col-sm-3 mt-5">
-                                <div class="row box-notice">
-                                    <div class="col-sm-12 img-box">
-                                        <div class="img"
-                                            :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12 mt-3">
-                                        <div class="titleNotice">
-                                            <h4 class>{{ notice.title }}</h4>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
-                                        <div class="row">
-                                            <div class="col-6 text-section">
-                                                {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
-                notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
+                                    <div class="row box-notice">
+                                        <div class="col-sm-12 img-box">
+                                            <div class="img"
+                                                :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
                                             </div>
-
-                                            <div v-if="notice?.section_data_collection[0].items[5]"
-                                                class="col-6 text-section">
-                                                {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
-                notice?.section_data_collection[0].items[5]?.data[0] }}
+                                        </div>
+    
+                                        <div class="col-sm-12 mt-3">
+                                            <div class="titleNotice">
+                                                <h4 class>{{ notice.title }}</h4>
                                             </div>
-
-                                            <div class="col-sm-12 text-section mt-4">
-                                                <div class="row">
-                                                    <div v-if="notice?.section_data_collection[2].items[0]"
-                                                        class="col-10">
-                                                        {{ notice?.section_data_collection[2].items[0]?.field?.title }}
-                                                        : {{
-                convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
-            }} تومان
+                                        </div>
+    
+                                        <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
+                                            <div class="row">
+                                                <div class="col-6 text-section">
+                                                    {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
+                    notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                                </div>
+    
+                                                <div v-if="notice?.section_data_collection[0].items[5]"
+                                                    class="col-6 text-section">
+                                                    {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
+                    notice?.section_data_collection[0].items[5]?.data[0] }}
+                                                </div>
+    
+                                                <div class="col-sm-12 text-section mt-4">
+                                                    <div class="row">
+                                                        <div v-if="notice?.section_data_collection[2].items[0]"
+                                                            class="col-10">
+                                                            {{ notice?.section_data_collection[2].items[0]?.field?.title }}
+                                                            : {{
+                    convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
+                }} تومان
+                                                        </div>
+    
+                                                        <div class="col-2">
+                                                            <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                                <img src="~/assets/img/arrow-left.svg" alt="">
+                                                            </a>
+                                                        </div>
+    
                                                     </div>
-
-                                                    <div class="col-2">
-                                                        <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                                                            <img src="~/assets/img/arrow-left.svg" alt="">
-                                                        </a>
-                                                    </div>
-
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                                 <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
                                        <div class="row">
                                            <div class="col-sm-12 text-section mt-4">

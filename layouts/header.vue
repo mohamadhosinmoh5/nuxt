@@ -97,10 +97,9 @@
     <!-- menu -->
     <div ref="navMenu" class="col-sm-12 navMenu">
       <ul>
-        <li><a class="nav-item nav-link" href="">فروشی متری</a></li>
         <li><a class="nav-item nav-link" href="">خانه</a></li>
-        <li><a class="nav-item nav-link" href="">هوش مصنوعی</a></li>
-        <li><a class="nav-item nav-link" href="">پکیج های دانلودی</a></li>
+        <li><a class="nav-item nav-link" href="https://abzar.homeenger.com/">ابزار محاسبه رهن و اجاره</a></li>
+        <li><a class="nav-item nav-link" href="https://panel.homeenger.com/ai">هوش مصنوعی</a></li>
       </ul>
     </div>
   </div>
