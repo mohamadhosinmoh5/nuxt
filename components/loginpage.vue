@@ -1,5 +1,5 @@
 <template>
-    <div class="Login-content" >
+    <div class="Login-content" id="overlay" >
         <div class="maydetailes col-sm-12">
             <div class="row">
 

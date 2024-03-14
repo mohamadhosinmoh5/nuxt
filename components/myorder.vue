@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row myOrder">
-            <div class="col-12 row">
+            <div class="col-12 row ording">
                 <div @click="changeOrderMenue('loading')" class="col-4"><a> درحال انجام</a></div>
                 <div class="col-4" @click="changeOrderMenue('sectiontwo')"><a> دو مرحله ای</a></div>
                 <div @click="changeOrderMenue('finish')" class="col-4"><a>انجام شده</a></div>
@@ -10,19 +10,19 @@
             <!-- <div ref="underline" class="col-2 underline"></div> -->
 
             <div v-if="loading" class="col-sm-12 tab-Detaile">
-                <div v-if="PendingCart.items.length < 1"><p class="alert alert-danger">empty</p></div>
+                <div v-if="PendingCart.items.length < 1"><p class="alert alert-danger">سفارشی وجود ندارد</p></div>
                 <div v-else>{{ PendingCart.items }}</div>
             </div>
 
             <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
-                <div v-if="postPriceRequest.items.length < 1"><p class="alert alert-danger">empty</p></div>
+                <div v-if="postPriceRequest.items.length < 1"><p class="alert alert-danger">سفارشی وجود ندارد</p></div>
                 <div v-else>
                 {{ postPriceRequest.items }}
                 </div>
             </div>
 
             <div v-if="finish" class="col-sm-12 tab-Detaile">
-                <div v-if="DoneFailed.items.length < 1"><p class="alert alert-danger">empty</p></div>
+                <div v-if="DoneFailed.items.length < 1"><p class="alert alert-danger">سفارشی وجود ندارد</p></div>
                 <div v-else>
                     {{ DoneFailed.items }}
                 </div>

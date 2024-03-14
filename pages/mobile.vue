@@ -152,10 +152,10 @@
 
   <div ref="filterCanvas" class="filterCanvas pb-5">
     <div @click="closeFilter" class="closeFilterr">
-      <img width="20" src="assets/img/right.png">
+      <!-- <img width="20" src="assets/img/right.png"> -->
     </div>
     <div class="row mt-4">
-      <Filter :status="pending" @clicked="filterUptaded" />
+      <Filter :status="pending" @clicked="filterUptaded" @closed="closeFilter" />
     </div>
   </div>
 </div>
@@ -185,7 +185,7 @@
               <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
             </div>
           
-            <div v-if="notice?.section_data.length >= 1" class="row mt-2">
+            <div v-if="notice?.section_data.length >= 1" class="row">
               <div v-if="notice?.section_data[0]" class="col-sm mobile-section ms-1">
                 {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }}  <span v-if="notice?.section_data[1]">متر</span>
               </div>
@@ -255,7 +255,7 @@
           <div class="col-12">
             <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt=""> &nbsp;
               {{ office.title }} </h4>
-            <h4 class="mobile-notice-title">{{ office.title }}</h4>
+            <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
           </div>
         </div>
         </a>
@@ -263,7 +263,7 @@
          <a class="ontap" :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" >
           <div class="row">
             <div class="col">
-              <h4 class="descktop-office-txt">{{ office.matter.title }}</h4>
+              <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
             </div>
             <div class="col">
               <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
@@ -298,7 +298,7 @@
             </button>
             <button v-if="showMap" type="button" @click="showMap=false" class="circle">
               <p class="Maptext">
-                آگهی ها
+                آگهی 
                </p>
               
             </button>

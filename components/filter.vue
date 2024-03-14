@@ -2,7 +2,6 @@
   <div class="col-sm-12">
     <h5 class="category-box">فیلتر ها</h5>
     <div class="row">
-
       <!-- Start section Filter -->
       <div class="col-sm-12">
         <div class="row">
@@ -181,9 +180,15 @@
       </div>
       <!-- end sectionFilter -->
       <div class="row">
-        <div class="col-12 mb-4 ">
-          <button class="btn-default w-100" @click="filterUptaded(query, true)">اعمال فیلتر</button>
+        <div class="col-12 mb-4">
+          <button class="btn-default w-50" @click="filterUptaded(query, true)">اعمال فیلتر</button>
+          <button ref="filterCanvas" class="btn-default-two w-30" @click="filterUptaded(query, true)">
+            <i class="fas fa-window-close mt-2"></i>
+            بیخیال
+          </button>
+
         </div>
+
         <div v-if="prop.status" class="col-2">
           <div class="spinner-border mt-4" role="status"></div>
         </div>
@@ -209,15 +214,20 @@ const position = ref("اول");
 const elevator = ref(false);
 const parking = ref(false);
 const pending = ref(false);
+
+
 const notices = useNoticeStore();
 let prop = defineProps(['status']);
 
 const emit = defineEmits(['clicked'])
+// const emit = defineEmits(['closed'])
 
 const filterUptaded = (query, section) => {
   emit('clicked', query, section)
 }
-
+// const closeFilter = (query) => {
+//   emit('closed', query)
+// }
 const persionNumber = (number) => {
   return Num2persian(number);
 }
@@ -246,6 +256,7 @@ const sectionQuery = ({ key = null, value = null, type = null, field_id = null, 
 const addQuery = (key, value) => {
   query.value[key] = value;
 }
+
 
 
 watch(minPrice, (value) => {

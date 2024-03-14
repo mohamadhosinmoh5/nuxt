@@ -302,6 +302,9 @@ p{
 .text-section {
     font-family: anjoman;
     text-align: start;
+    /* margin: 1px; */
+    position: relative;
+    right: 13px;
     font-size: 14px;
     color: #5a5a5a;
     font-weight: 500;
@@ -459,7 +462,7 @@ p{
     overflow: scroll;
     height: 100%;
     /* top: 100vh; */
-    left: 0;
+    /* left: 0; */
     bottom: -100vh;
     margin: 10px;
     padding: 15px 15px;
@@ -469,6 +472,9 @@ p{
 
 .ontap {
     text-decoration: none;
+    /* position: fixed; */
+    /* position: fixed; */
+    margin: -10px;
 }
 
 .categoryCanvas {
@@ -499,8 +505,8 @@ p{
 .closeFilterr {
     position: sticky;
     float: left;
-    left: 2%;
-    top: 0px;
+    left: 0px;
+    bottom: 0px;
     z-index: 99999999;
     cursor: pointer;
 }
@@ -525,6 +531,9 @@ p{
 
 .mobile-notice-title {
     font-size: 14px;
+    /* position: relative; */
+    padding-top: 10px;
+    margin-top: 5px;
     font-weight: 400;
     color: var(--cf-dark-color);
 }
@@ -539,6 +548,8 @@ p{
 
 .mobile-section {
     font-size: 12px;
+    /* position: relative; */
+    top: 15px;
     font-family: 'anjoman';
     color: var(--cf-title-color);
     font-weight: 500;
@@ -566,6 +577,7 @@ p{
     background: #f1f1f1;
     position: relative;
     right: 5%;
+    font-size: 14px;
     border: 1px solid #e1e1e1;
     border-radius: 10px 20px;
 }
@@ -1535,9 +1547,32 @@ label {
     border: 0;
     padding: 6px 12px;
     border-radius: 10px;
+    /* width: 100%; */
     margin-top: 20px;
+    position: relative;
+    bottom: 15px;
+    /* right: 100%; */
     color: white;
 }
+.btn-default-two{
+    background: var(--cf-grey-icon-color);
+    border: 0;
+    padding: 6px 12px;
+    border-radius: 10px;
+    /* width: 100%; */
+    margin-top: 20px;
+    position: relative;
+    bottom: 15px;
+    float: left;
+    /* right: 100%; */
+    color: var(--cf-title-color);
+}
+@media screen and (min-width: 576px) {
+    .btn-default-two{
+        display: none; 
+    }
+}
+
 
 .fixedCat {
     position: fixed;
@@ -2000,7 +2035,7 @@ input:checked+.slider:before {
 
     justify-content: space-evenly;
     background-color: rgb(246, 246, 246);
-    height: 60px;
+    height: 53px;
     width: 100%;
     position: fixed;
     overflow: inherit;
@@ -2115,7 +2150,7 @@ input:checked+.slider:before {
     border: none;
     position: fixed;
     width: 70px;
-    bottom: 30px;
+    bottom: 20px;
     border-radius: 50%;
     border: 4px solid var(--cf-light-color);
     height: 70px;
@@ -2155,7 +2190,7 @@ input:checked+.slider:before {
     /* height: 170px; */
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-
+    animation-delay: 3s;
     overflow-y: visible;
     width: 100%;
     background-color: rgb(246, 246, 246);

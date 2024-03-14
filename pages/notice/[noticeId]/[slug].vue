@@ -211,7 +211,7 @@
                                                     <li class="range-txt">اکازیون</li>
                                                     <li class="range-txt">منصفانه</li>
                                                     <li class="range-txt">خیلی بالا</li>
-                                                    <li class="range-txt">غیر منصفانه</li>
+                                                    <li class="col-2 range-txt">غیر منصفانه</li>
                                                 </ul>
                                             </div>
                                         </div>
