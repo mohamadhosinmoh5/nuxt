@@ -56,30 +56,27 @@
                     <div class="col-md-12 sidetext">
                         <div class="col-sm-12 mt-4 ">
                             <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-2">پیشخوان</a>
+                            <a @click="changeMenu('showDashboard')" class="mediumtxt ms-2">پیشخوان</a>
                         </div>
                         <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-wallet"></i>
-                            <a @click="changeMenu('showWallet')" href="#" class="mediumtxt ms-2">کیف پول نقدی</a>
+                            <a @click="changeMenu('showWallet')" class="mediumtxt ms-2">کیف پول نقدی</a>
                         </div>
                         <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('BuyLicence')" href="#" class="mediumtxt ms-1"> خرید اشتراک</a>
-
+                            <a @click="changeMenu('BuyLicence')" class="mediumtxt ms-1"> خرید اشتراک</a>
                         </div>
-
-
                         <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <a @click="changeMenu('MyProduct')" href="#" class="mediumtxt ms-1"> خرید های من</a>
+                            <a @click="changeMenu('MyProduct')" class="mediumtxt ms-1"> خرید های من</a>
                         </div>
                         <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-arrow-down-wide-short"></i>
-                            <a @click="changeMenu('MyOrder')" href="#" class="mediumtxt ms-1"> سفارش های من </a>
+                            <a @click="changeMenu('MyOrder')" class="mediumtxt ms-1"> سفارش های من </a>
                         </div>
                         <div class="col-sm-12  mt-3">
                             <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-1"> اشتراک های من</a>
+                            <a @click="changeMenu('MyLicence')" class="mediumtxt ms-1"> اشتراک های من</a>
                         </div>
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
                             <div class="col  mt-3">
@@ -108,9 +105,6 @@
             </div>
 
             <div :style="(closeBox) ? `width:100% !important;` : `width:80% !important;`">
-                <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
-
-
                 <dashboard @clicked="loadingStyle" :loading="loading" :user="user" v-if="showDashboard" />
                 <cash-wallet @clicked="loadingStyle" :loading="loading" v-if="showWallet" />
                 <buylicence @clicked="loadingStyle" :loading="loading" v-if="BuyLicence" />
@@ -119,6 +113,7 @@
                 <mylicence @clicked="loadingStyle" :loading="loading" v-if="MyLicence" />
                 <roll v-if="Rolls" />
                 <contact v-if="ContactUs" />
+                <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
             </div>
         </div>
     </div>

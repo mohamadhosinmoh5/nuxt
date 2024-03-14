@@ -5,6 +5,7 @@
         <div class="row all-boxes">
             <div class="col-sm-12 box-cart mt-5">
                 <div class=" top-text">
+                    <div v-if="!carts.items[0]" class="alert alert-danger"><p>سبد خرید شما خالیست</p></div>
                     <div class="row">
                         <div class="col">
                             <p class="title-cart">کد سبد</p>
@@ -35,6 +36,7 @@
                     </div>
                     <div class="col-8 mt-4">
                         <div class="row">
+                          
                             <div class="col-sm-6">
                                 <p  class="maincart-Title">{{ carts.items[0].items[0].notice.title }}</p>
                             </div>

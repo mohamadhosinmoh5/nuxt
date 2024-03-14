@@ -1,24 +1,33 @@
 <template>
     <div class="container">
         <div class="row myOrder">
-            <div class="col-12 row tabbar-detailes">
-                <div @click="changeOrderMenue('loading')" class="col-4"><a href="#"> درحال انجام</a></div>
-                <div @click="changeOrderMenue('sectiontwo')" class="col-4"><a href="#"> دو مرحله ای</a></div>
-                <div @click="changeOrderMenue('finish')" class="col-4"><a href="#">انجام شده</a></div>
+            <div class="col-12 row">
+                <div @click="changeOrderMenue('loading')" class="col-4"><a> درحال انجام</a></div>
+                <div class="col-4" @click="changeOrderMenue('sectiontwo')"><a> دو مرحله ای</a></div>
+                <div @click="changeOrderMenue('finish')" class="col-4"><a>انجام شده</a></div>
 
             </div>
+            <!-- <div ref="underline" class="col-2 underline"></div> -->
+
             <div v-if="loading" class="col-sm-12 tab-Detaile">
-                    {{PendingCart}}
-                </div>
+                <div v-if="PendingCart.items.length < 1"><p class="alert alert-danger">empty</p></div>
+                <div v-else>{{ PendingCart.items }}</div>
+            </div>
 
-                <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
-                    {{postPriceRequest}}
+            <div v-if="sectiontwo" class="col-sm-12 tab-Detaile">
+                <div v-if="postPriceRequest.items.length < 1"><p class="alert alert-danger">empty</p></div>
+                <div v-else>
+                {{ postPriceRequest.items }}
                 </div>
+            </div>
 
-                <div v-if="finish" class="col-sm-12 tab-Detaile">
-                    {{DoneFailed}}
+            <div v-if="finish" class="col-sm-12 tab-Detaile">
+                <div v-if="DoneFailed.items.length < 1"><p class="alert alert-danger">empty</p></div>
+                <div v-else>
+                    {{ DoneFailed.items }}
                 </div>
-            <div ref="underline" class="col-2 underline"></div>
+                
+            </div>
         </div>
     </div>
 </template>
@@ -41,23 +50,18 @@ const changeOrderMenue = ((name) => {
     loading.value = false;
     sectiontwo.value = false;
     finish.value = false;
-    const emit = defineEmits(['clicked'])
-
-    const loadingStyle = (query) => {
-        emit('clicked', query)
-    }
 
     switch (name) {
         case 'loading':
-            underline.value.style.left = "25%";
+            // underline.value.style.left = "0%";
             loading.value = true;
             break;
         case 'sectiontwo':
-            underline.value.style.left = "-10%";
+            // underline.value.style.right = "30%";
             sectiontwo.value = true;
             break;
         case 'finish':
-            underline.value.style.left = "-40%";
+            // underline.value.style.left = "-40%";
             finish.value = true;
             break;
 
@@ -66,19 +70,27 @@ const changeOrderMenue = ((name) => {
     }
 })
 //get data and then loader hide
-loadingStyle(false);
+// loadingStyle(false);
 
+const emit = defineEmits(['clicked'])
+
+const loadingStyle = (query) => {
+    emit('clicked', query)
+}
 
 useUser.getPendingCart().then((r) => {
     PendingCart.value = r;
+    loadingStyle(false);
 })
 
 useUser.getpostPriceRequest().then((r) => {
     postPriceRequest.value = r;
+    // loadingStyle(false);
 })
 
 useUser.getDoneFailed().then((r) => {
     DoneFailed.value = r;
+    // loadingStyle(false);
 })
 
 
