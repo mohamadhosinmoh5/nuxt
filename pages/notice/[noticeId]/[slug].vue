@@ -9,7 +9,7 @@
         <div v-if="loadingStyle" class="spinner-border text-secondary" role="status"></div>
 
         <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
-            {{ useNotice.error.message }}
+            {{ useNotice.error?.message }}
         </div>
         <div v-if="notice" class="row">
             <div class="row">
@@ -110,7 +110,7 @@
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
 
                                         <div v-if="useCart.error">
-                                            {{ useCart.error.message }}
+                                            {{ useCart.error?.message }}
                                         </div>
                                         <div v-if="useCart.message">
                                             {{ useCart.message }}
@@ -160,8 +160,8 @@
                                     </div>
                                 </div>
 
-                                <div v-if="useCart.error.message" class="alert alert-danger">
-                                    {{ useCart.error.message }}
+                                <div v-if="useCart.error?.message" class="alert alert-danger">
+                                    {{ useCart.error?.message }}
                                 </div>
                                 <div v-if="useCart.message" class="alert alert-success">
                                     {{ useCart.message }}
@@ -321,7 +321,7 @@
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
 
                                         <div v-if="useCart.error">
-                                            {{ useCart.error.message }}
+                                            {{ useCart.error?.message }}
                                         </div>
                                         <div v-if="useCart.message">
                                             {{ useCart.message }}
@@ -370,8 +370,8 @@
                                     </div>
                                 </div>
 
-                                <div v-if="useCart.error.message" class="alert alert-danger">
-                                    {{ useCart.error.message }}
+                                <div v-if="useCart.error?.message" class="alert alert-danger">
+                                    {{ useCart.error?.message }}
                                 </div>
                                 <div v-if="useCart.message" class="alert alert-success">
                                     {{ useCart.message }}

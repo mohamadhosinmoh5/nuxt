@@ -787,7 +787,7 @@
 }
 
 .myimages {
-    position: relative;
+    position: sticky;
     left: 7%;
 }
 
@@ -1392,34 +1392,32 @@
 }
 
 .hiding-box {
-    position: sticky;
-    height: 0px;
-    overflow: hidden;
-    border-radius: 20px;
-    background: white;
+    /* height: 0px  !important; */
+    /* overflow: hidden; */
     /* transform: rotatey(10deg); */
-    visibility: initial;
-    animation: spin 5s;
-    animation-delay: 3s;
-    /* transition: all 0.4s ease-out; */
-    top: 0;
+     animation: spin 5s;
+    /* animation-delay: 3s;  */
     /* z-index: 1111; */
+    position: fixed;
+    height: auto;
+    border-radius: 20px;
+    top: -100%;
+    background: white;
 }
 
 .show-box {
-    position: sticky;
+    position: fixed;
     height: auto;
     border-radius: 20px;
-    transition: all 0.4s ease-out;
+    top: 0;
+    background: white;
     /* transform: rotateY(-170deg) translateZ(1px); */
     /* animation:  show-box  5s infinite; */
-    animation-delay: 3s;
+
+
     /* z-index: 1111; */
 }
-@keyframes show-box  {
-    from {top: 0px;}
-    to {bottom: 200px;}
-  }
+
 .topboxes {
     position: absolute;
     right: 20%;

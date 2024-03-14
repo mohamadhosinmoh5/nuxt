@@ -407,7 +407,7 @@ export default {
           <div v-if="officeShow" class="row content">
             <div v-for="(office, index) in allOffices" :key="index" class="col-sm-12 col-md-6 col-xl-4 descktop-office">
               <div class="row">
-                <div class="col-4 descktop-img-box">
+                <div class="col-4 descktop-img-box mt-1">
                     <div v-if="office?.image_banner" class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
                     <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
                   </div>

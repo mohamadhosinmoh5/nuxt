@@ -25,9 +25,9 @@
         <!-- <a href="#"><img src="assets/img/shop_icon.svg"/></a> -->
       </div>
     </div>
-       <!--Show search box-->
-       <div class="row search-box">
-        <div  class="col-12 ">
+    <!--Show search box-->
+    <div class="row search-box">
+      <div class="col-12 ">
         <div class="form-group" style="position:relative;">
           <img class="search-icon" src="~/assets/img/search.svg" alt="">
           <input type="text" v-model="textSearch" class="form-control form-style" name="" id=""
@@ -51,114 +51,105 @@
                   </div>
                 </div>
               </div>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-sm-12 navMenu">
-            <ul>
-              <li>
-                <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
-                  class="nav-item nav-link  filter-box" href="#">فیلتر ها {{ countQuery }} <img class=""
-                    src="~/assets/img/filter_search.svg" alt=""></a>
-              </li>
-  
-              <li>
-                <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showCategory"
-                  class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{ lastCat ? lastCat : 'همه آگهی ها' }} </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 mt-2">
-          <div class="col-12 mt-1">
-            
-            <div v-if="allNotices && allNotices[1]?.address != null" class="mob-map" ref="mapDiv" @click="showMap=true" >
-              
-              <LMap v-if="allNotices"
-                id="map"
-                ref="mapRef"
-                :zoom="12"
-                :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
-                @zoomend="changeZoom"
-
-                style="height:100vh;"
-              >
-        
-              <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
-                <LTileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-                  layer-type="base"
-                  name="OpenStreetMap"
-                />
-              
-                <l-circle-marker
-                :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
-                :radius="10"
-                color="red"
-              />
-                <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address?.lat,notice.address?.lng]">
-                  <l-popup @ready="ready" >
-                    <div class="title">
-                      {{ notice.title }}
-                    </div>
-                  </l-popup>
-                </l-marker>
-              </LMap>
             </div>
           </div>
-        </div>
-      </div>
-       <!--Show filter-->
-  
-  
-    </div>
-  </div>
-  <!-- show category box -->
-  <div ref="categoryCanvas" class="categoryCanvas">
-    <div @click="closeCategory" class="closeFilterr">
-      <img width="20" src="assets/img/right.png">
-    </div>
-    <div class="row mt-4">
-      <div class="col-sm-12 ">
-        <div class="row category-box">
-          <div class="col-6">
-            <div class="row">
-              <div class="col-12">
-                <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
-                <h5 v-else class="category-title">دسته بندی ها</h5>
+
+          <div class="row">
+            <div class="col-sm-12 navMenu">
+              <ul>
+                <li>
+                  <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
+                    class="nav-item nav-link  filter-box" href="#">فیلتر ها {{ countQuery }} <img class=""
+                      src="~/assets/img/filter_search.svg" alt=""></a>
+                </li>
+
+                <li>
+                  <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showCategory"
+                    class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{ lastCat ? lastCat : 'همه آگهی ها' }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 mt-2">
+            <div class="col-12 mt-1">
+
+              <div v-if="allNotices && allNotices[1]?.address != null" class="mob-map" ref="mapDiv"
+                @click="showMap = true">
+
+                <LMap v-if="allNotices" id="map" ref="mapRef" :zoom="12"
+                  :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]" @zoomend="changeZoom"
+                  style="height:100vh;">
+
+                  <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
+                  <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                    layer-type="base" name="OpenStreetMap" />
+
+                  <l-circle-marker :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]" :radius="10"
+                    color="red" />
+                  <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`" :key="notice.id"
+                    :lat-lng="[notice.address?.lat, notice.address?.lng]">
+                    <l-popup @ready="ready">
+                      <div class="title">
+                        {{ notice.title }}
+                      </div>
+                    </l-popup>
+                  </l-marker>
+                </LMap>
               </div>
             </div>
           </div>
-          <div class="col-6 text-end">
-            <span class="backCat" @click="lastCategory">
-              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
-            </span>
-          </div>
         </div>
-        <ul class="categoryBox">
-          <li v-for="(item, index) in categories" :key="index">
-            <img :src='`/_nuxt/assets/img/cat-${index + 1}.svg`'>
-            <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
-          </li>
-        </ul>
+        <!--Show filter-->
 
-        <span v-if="emptyCat" class=" alert-danger">{{emptyCat}}</span>
+
+      </div>
+    </div>
+    <!-- show category box -->
+    <div ref="categoryCanvas" class="categoryCanvas">
+      <div @click="closeCategory" class="closeFilterr">
+        <img width="20" src="assets/img/right.png">
+      </div>
+      <div class="row mt-4">
+        <div class="col-sm-12 ">
+          <div class="row category-box">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-12">
+                  <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
+                  <h5 v-else class="category-title">دسته بندی ها</h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 text-end">
+              <span class="backCat" @click="lastCategory">
+                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
+              </span>
+            </div>
+          </div>
+          <ul class="categoryBox">
+            <li v-for="(item, index) in categories" :key="index">
+              <img :src='`/_nuxt/assets/img/cat-${index + 1}.svg`'>
+              <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
+            </li>
+          </ul>
+
+          <span v-if="emptyCat" class=" alert-danger">{{ emptyCat }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div ref="filterCanvas" class="filterCanvas pb-5">
+      <div @click="closeFilter" class="closeFilterr">
+        <!-- <img width="20" src="assets/img/right.png"> -->
+      </div>
+      <div class="row mt-4">
+        <Filter :status="pending" @clicked="filterUptaded" @closed="closeFilter" />
       </div>
     </div>
   </div>
-
-  <div ref="filterCanvas" class="filterCanvas pb-5">
-    <div @click="closeFilter" class="closeFilterr">
-      <!-- <img width="20" src="assets/img/right.png"> -->
-    </div>
-    <div class="row mt-4">
-      <Filter :status="pending" @clicked="filterUptaded" @closed="closeFilter" />
-    </div>
-  </div>
-</div>
   <div v-if="noticeShow" ref="content" class="row content">
     <div class="col-sm-12 text-center">
       <div v-if="pending" class="spinner-border" role="status"></div>
@@ -184,33 +175,35 @@
             <div class="col-12">
               <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
             </div>
-          
+
             <div v-if="notice?.section_data.length >= 1" class="row">
               <div v-if="notice?.section_data[0]" class="col-sm mobile-section ms-1">
-                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }}  <span v-if="notice?.section_data[1]">متر</span>
+                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} <span
+                  v-if="notice?.section_data[1]">متر</span>
               </div>
               <div v-if="notice?.section_data[1]" class="col-sm mobile-section ms-1">
                 {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
               </div>
-            
 
-          <div class="col-sm margin-fix ">
-            <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link" >
-              <div class="row ms-1">
-                <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
-                  {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
-                </div>
 
-                <div class="col-2 mobile-section ">
-                  <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
-                    <img src="~/assets/img/arrow-left.svg" alt="">
-                  </a>
-                </div>
+              <div class="col-sm margin-fix ">
+                <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
+                  <div class="row ms-1">
+                    <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
+                      {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }}
+                      تومان
+                    </div>
+
+                    <div class="col-2 mobile-section ">
+                      <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                        <img src="~/assets/img/arrow-left.svg" alt="">
+                      </a>
+                    </div>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
-        </div>
-      </a>
+            </div>
+          </a>
 
           <div class="col-sm-12" v-if="notice?.section_data.length < 1">
             <div class="row">
@@ -218,8 +211,8 @@
                 <div class="row">
                   <div class="col-10">
                     قیمت : {{ (notice.pricing.discount_percent > 0) ? convertPrice(notice?.pricing.price -
-                    (notice?.pricing.price * notice.pricing.discount_percent / 100)) :
-                    convertPrice(notice?.pricing.price) }} تومان
+          (notice?.pricing.price * notice.pricing.discount_percent / 100)) :
+          convertPrice(notice?.pricing.price) }} تومان
                     <br>
                     <del style="font-size: 12px;">{{ convertPrice(notice?.pricing.price) }}</del> <span
                       class="text-danger">{{ notice.pricing.discount_percent }} %</span>
@@ -242,88 +235,89 @@
 
   <div v-if="officeShow" class="row content">
     <div v-for="(office, index) in allOffices" :key="index" class="row box-content">
-      <div class="col-4 descktop-img-box">
+      <div class="col-4 descktop-img-box mt-3">
         <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
           <div v-if="office?.image_banner" class="img"
-          :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
-        <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
+            :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
+          <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
         </a>
       </div>
       <div class="col-8">
         <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" class="ontapp">
           <div class="row">
-          <div class="col-12">
-            <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt=""> &nbsp;
-              {{ office.title }} </h4>
-            <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
+            <div class="col-12">
+              <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt="">
+                &nbsp;
+                {{ office.title }} </h4>
+              <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
+            </div>
           </div>
-        </div>
         </a>
         <div class="col-12 mt-3">
-         <a class="ontap" :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" >
-          <div class="row">
-            <div class="col">
-              <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
+          <a class="ontap" :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+            <div class="row">
+              <div class="col">
+                <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
+              </div>
+              <div class="col">
+                <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+                  <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
+                </a>
+              </div>
             </div>
-            <div class="col">
-              <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
-                <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
-              </a>
-            </div>
-          </div>
-         </a>
+          </a>
         </div>
       </div>
     </div>
+  </div>
+  <!-- this is for bottomNavigationBar -->
+  <div class="navbar">
+    <div class="list-item">
+      <button type="button" class="prson">
+        <img src="assets/img/home-1 2.svg" style="width: 20px;" />
+        <a href="#" class="homeIcon">خانه</a>
+      </button>
     </div>
-    <!-- this is for bottomNavigationBar -->
-    <div class="navbar">
-        <div class="list-item">
-            <button type="button" class="prson">
-                <img src="assets/img/home-1 2.svg" style="width: 20px;" />
-                <a href="#" class="homeIcon">خانه</a>
-            </button>
-        </div>
-        <div class="list-item">
-            <button type="button" class="prson disabled">
-                <img src="assets/img/note-21 1.svg"  style="width: 20px;"/>
-                <a href="#" class="txtIcons">خدمات</a>
-            </button>
-        </div>
-        <div  class="list-item">
-            <button v-if="!showMap" type="button" @click="showMap=true" class="circle">
-               <p  class="Maptext">
-                نقشه
-               </p>
-            </button>
-            <button v-if="showMap" type="button" @click="showMap=false" class="circle">
-              <p class="Maptext">
-                آگهی 
-               </p>
-              
-            </button>
-        </div>
-        <div class="list-item">
-            <button type="button" class="prson disabled" >
-                <img src="assets/img/notification-bing 2.svg"  style="width: 20px;"/>
-                <a href="#"  class="txtIcons">اعلانات</a>
-            </button>
-        </div>
-        <div class="list-item">
-            <button v-if="!login" @click="isShowModal=true" type="button" class="prson" >
-                <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-                <a href="#"  class="txtIcons">پروفایل</a>
-            </button>
-            <button v-if="login" type="button" class="prson" >
-              <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-              <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons">پروفایل</a>
-          </button>
-        </div>
+    <div class="list-item">
+      <button type="button" class="prson disabled">
+        <img src="assets/img/note-21 1.svg" style="width: 20px;" />
+        <a href="#" class="txtIcons">خدمات</a>
+      </button>
     </div>
-    <div v-if="!token && isShowModal" id="LogInModal" class="LogInModal">
-      <Loginpage @clicked="modalStatus(status)" />
-     </div>
-    <!-- <div class="notic" id="card1"></div> -->
+    <div class="list-item">
+      <button v-if="!showMap" type="button" @click="showMap = true" class="circle">
+        <p class="Maptext">
+          نقشه
+        </p>
+      </button>
+      <button v-if="showMap" type="button" @click="showMap = false" class="circle">
+        <p class="Maptext">
+          آگهی
+        </p>
+
+      </button>
+    </div>
+    <div class="list-item">
+      <button type="button" class="prson disabled">
+        <img src="assets/img/notification-bing 2.svg" style="width: 20px;" />
+        <a href="#" class="txtIcons">اعلانات</a>
+      </button>
+    </div>
+    <div class="list-item">
+      <button v-if="!login" @click="isShowModal = true" type="button" class="prson">
+        <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
+        <a href="#" class="txtIcons">پروفایل</a>
+      </button>
+      <button v-if="login" type="button" class="prson">
+        <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
+        <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`" class="txtIcons">پروفایل</a>
+      </button>
+    </div>
+  </div>
+  <div v-if="!token && isShowModal" id="LogInModal" class="LogInModal">
+    <Loginpage @clicked="modalStatus(status)" />
+  </div>
+  <!-- <div class="notic" id="card1"></div> -->
 
 </template>
 
@@ -365,7 +359,7 @@ export default {
       searchTimeOut: null,
       searchResult: null,
       searchPending: false,
-      emptyCat:null,
+      emptyCat: null,
       polygonGrg: [[36.873978, 54.346216], [36.880184, 54.500138], [36.794162, 54.506150], [36.786775, 54.357092], [36.873978, 54.346216]],
       center: ref({
         "latitude": 36.830367834795,
@@ -374,10 +368,10 @@ export default {
     }
   },
   methods: {
-    modalStatus(status){
+    modalStatus(status) {
       this.isShowModal = status;
     },
-    setCat(item){
+    setCat(item) {
       this.lastCat = item.title;
     },
     closeSearch() {
@@ -401,7 +395,7 @@ export default {
     }, filterUptaded(query, section) {
       this.pending = true;
       if (query) {
-      
+
         this.countQuery = Object.keys(query).length;
         setTimeout(() => {
           if (section) {
@@ -441,16 +435,16 @@ export default {
       this.officeShow = false;
     },
     changeZoom(zoom) {
-     
+
       if (zoom.target._zoom > 16) {
-      
+
       }
     },
     showPop(id) {
       this.$refs[id][0].leafletObject.openPopup();
     },
     markersIconCallback(point) {
-      
+
     },
     getCategory(noticeId) {
       this.pending = true;
@@ -464,7 +458,7 @@ export default {
           this.notices.fetchData().then((r) => {
             this.allNotices = r.allNotices;
           });
-        }else{
+        } else {
           this.emptyCat = null;
         }
         this.pending = false;
@@ -518,7 +512,7 @@ export default {
     },
     allOffices(value) {
       if (value != null) {
-        
+
         this.infinity = useInfinity({
           window: window,
           url: 'api/v2/offices',
@@ -572,28 +566,28 @@ export default {
         this.pending = false;
       });
 
-          this.token =  (useCookie('token')) ? useCookie('token') :null;
-          if(this.token != null){
-            this.auth.token = this.token;
-            this.auth.getMe().then(()=>{
-              this.useCart.getCart().then((r)=>{
-                this.cart = r;
-              })
-            })
-            this.login = true;
-          }else{
-            this.login = false;
-          }
+      this.token = (useCookie('token')) ? useCookie('token') : null;
+      if (this.token != null) {
+        this.auth.token = this.token;
+        this.auth.getMe().then(() => {
+          this.useCart.getCart().then((r) => {
+            this.cart = r;
+          })
+        })
+        this.login = true;
+      } else {
+        this.login = false;
+      }
 
       if (token != null) {
         this.auth.token = token;
         this.auth.getMe()
         this.useCart.getCart()
 
-        window.addEventListener('scroll',()=>{
+        window.addEventListener('scroll', () => {
           let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
           let width = window.innerWidth;
-          if(scrollTop > 200 && width < 527){
+          if (scrollTop > 200 && width < 527) {
             this.$refs.menuBox.classList.remove('relativeCat');
             this.$refs.menuBox.classList.add('fixedCat');
           }
@@ -608,18 +602,19 @@ export default {
 
 
       if (scrollTop > 50) {
-       
-        if (scrollTop > this.top){
-          
+
+        if (scrollTop < this.top) {
+
           this.$refs.Header_box.classList.remove('hiding-box');
           this.$refs.Header_box.classList.add('show-box');
-        }else{
+        } else {
+          this.$refs.Header_box.classList.remove('show-box');
           this.$refs.Header_box.classList.add('hiding-box');
         }
         // this.$refs.menuBox.classList.remove('relativeCat');
         // this.$refs.menuBox.classList.add('fixedCat');
         // this.$refs.Header_box.classList.remove('relativeCat');
-       
+
         console.log(scrollTop);
         console.log(this.top);
         this.top = scrollTop;
@@ -650,7 +645,7 @@ export default {
   },
 
 }
-  
+
 
 
 </script>

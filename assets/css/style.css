@@ -316,15 +316,23 @@ p{
 }
 
 .content {
-    margin: 10px auto;
-    padding: 5px;
+    margin: 16px auto;
+    /* padding: 5px; */
+}
+
+.text-body{
+    text-decoration: none;
+    margin: 10px;
+    position: relative;
+    top: 10px;
+    font-family: 'anjoman';
 }
 
 .box-content {
-    padding: 10px;
+    padding: 3px;
     border: 1px solid #DADADA;
     border-radius: 15px;
-    margin: 10px 0;
+    margin: 5px 0;
     min-height: 100px;
 }
 
@@ -399,7 +407,8 @@ p{
 
 .descktop-office-title {
     font-size: 18px;
-    margin: 0px 10px;
+    padding-top: 5px;
+    /* margin: 0px 10px; */
 }
 
 .descktop-office:hover {
@@ -1558,7 +1567,8 @@ label {
     background: var(--cf-grey-icon-color);
     border: 0;
     padding: 6px 12px;
-    border-radius: 10px;
+    border-radius: 5px;
+    font-size: 14px;
     /* width: 100%; */
     margin-top: 20px;
     position: relative;
@@ -2006,9 +2016,30 @@ input:checked+.slider:before {
 }
 
 .box-address {
-    background: #f3f3f3;
-    margin-top: 10px;
+    background: #EFEFEF;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    top: 110px;
+    min-height: 300px;
+    /* margin-top: 10px; */
     padding: 10px;
+}
+.border-cart{
+    border: 1px solid var(--cf-grey-icon-color);
+    position: relative;
+    top: 40px;
+    width: 100%;
+}
+.cart-item{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+    position: relative;
+    left: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    background-color:  #EFEFEF;
 }
 
 .adress:hover {
