@@ -61,8 +61,8 @@
     </div>
     <div class="col-sm-4 mt-2" dir="ltr">
       <div class="row text-start">
-        <div v-if="token" class="col-2 profLink">
-          <a href="/profile">
+        <div v-if="token" class="col-2 profLink active">
+          <a class="active" href="/profile">
             <img src="~/assets/img/profile.svg" alt="">
           </a>
         </div>

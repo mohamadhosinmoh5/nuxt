@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('Auth', {
-    state: () => ({ user: null,pricing:null ,error:null,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
+    state: () => ({ user: null,pricing:null ,error:null,pending:null,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
     getters: {
       getError: (state)=>{
         return state.error;
@@ -18,7 +18,10 @@ export const useAuthStore = defineStore('Auth', {
                 }
               });
 
-              this.pending = pendings;
+              if(pendings){
+                this.pending = pendings.value;
+              }
+
             if(errors.value){
               this.error = errors.value.data;
             }
@@ -76,7 +79,6 @@ export const useAuthStore = defineStore('Auth', {
             }
 
             if(data.value){
-              console.log(data.value);
               if(this.getdefaultOffice == 0 && useCookie('defaultOffice') == null){
                 this.setDefaultOffice(data.value.offices[0].id);
               }else{

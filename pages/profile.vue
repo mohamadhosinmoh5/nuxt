@@ -86,7 +86,7 @@
                         </NuxtLink>
 
                         <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
-                            <div class="col  mt-3">
+                            <div class="col mt-3">
                                 <i class="fa fa-address-book" aria-hidden="true"></i>
                                 <a  class="mediumtxt ms-2"> تماس با ما</a>
                             </div>
