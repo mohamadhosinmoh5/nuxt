@@ -3,7 +3,7 @@
   <div ref="Header_box" class="row ">
     <div class="row mob-nav mt-2">
       <div class="col-2 menuToggle">
-        <a @click="showCategory" href="#"><img src="assets/img/menuToggle.svg" /></a>
+        <a @click="showCategory"><img src="assets/img/menuToggle.svg" /></a>
       </div>
 
       <div class="col-8">
@@ -110,8 +110,14 @@
     <!-- show category box -->
     <div ref="categoryCanvas" class="categoryCanvas">
       <div @click="closeCategory" class="closeFilterr">
-        <img width="20" src="assets/img/right.png">
+        <button ref="filterCanvas" class="btn-kkhorji" @click="filterUptaded(query, true)">
+          <p>
+            <i class="fas fa-window-close mt-2"></i>
+            بیخیال
+          </p>
+        </button>
       </div>
+
       <div class="row mt-4">
         <div class="col-sm-12 ">
           <div class="row category-box">
@@ -234,10 +240,10 @@
   </div>
 
   <div v-if="officeShow" class="row content">
-    <div v-for="(office, index) in allOffices" :key="index" class="row box-content">
-      <div class="col-4 descktop-img-box mt-3">
+    <div v-for="(office, index) in allOffices" :key="index" class="row box-daftares">
+      <div class="col-4 descktop-img-box mt-1">
         <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
-          <div v-if="office?.image_banner" class="img"
+          <div v-if="office?.image_icon" class="img "
             :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
           <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
         </a>
@@ -253,15 +259,15 @@
             </div>
           </div>
         </a>
-        <div class="col-12 mt-3">
+        <div class="col-12">
           <a class="ontap" :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
             <div class="row">
               <div class="col">
-                <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
+                <h4 class="descktop-office-txt ms-2 mt-3">{{ office.matter.title }}</h4>
               </div>
               <div class="col">
                 <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
-                  <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
+                  <img class="img-daftar mt-3" src="~/assets/img/arrow-left.svg" alt="">
                 </a>
               </div>
             </div>
@@ -309,7 +315,8 @@
         <a href="#" class="txtIcons">پروفایل</a>
       </button>
       <button v-if="login" type="button" class="prson">
-        <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
+        <img :href="`${useRuntimeConfig().public.Home_URL}/../profile`" src="assets/img/profile-circle 3.svg"
+          style="width: 20px;" />
         <a :href="`${useRuntimeConfig().public.Home_URL}/../profile`" class="txtIcons">پروفایل</a>
       </button>
     </div>
