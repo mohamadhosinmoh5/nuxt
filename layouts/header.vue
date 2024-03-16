@@ -61,12 +61,12 @@
     </div>
     <div class="col-sm-4 mt-2" dir="ltr">
       <div class="row text-start">
-        <div v-if="token" class="col-2 profLink active">
+        <div v-if="token" class="col-2 col-md-4 col-xl-2 profLink active">
           <a class="active" href="/profile">
             <img src="~/assets/img/profile.svg" alt="">
           </a>
         </div>
-        <div v-if="!token" @click="isShowModal = true" class="col-2 profLink">
+        <div v-if="!token" @click="isShowModal = true" class="col-3 profLink">
           <a href="#LogInModal">
             <img src="~/assets/img/profile.svg" alt="">
           </a>
@@ -175,16 +175,15 @@ const modalStatus = (status)=>{
 
     onMounted(() => {
       window.addEventListener('scroll',()=>{
-        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document
+        let scrollTop = document.documentElement.scrollTop || window.pageYOffset
+        console.log(scrollTop);
         if(scrollTop > 50){
-          navMenu.value.style.height = '0px';
           navMenu.value.style.overflow = 'hidden';
+          navMenu.value.style.height = '0px';
           navMenu.value.style.opacity = '0';
-
         }else{
           navMenu.value.style.height = '40px';
           navMenu.value.style.opacity = '1';
-
         }
       })
     })

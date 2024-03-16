@@ -10,7 +10,6 @@ export const useAuthStore = defineStore('Auth', {
     },
     actions: {
         async sendSms(mobile){
-          
             const { data, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/login-send-verify-code`, {
                 method:'post',
                 body:{
@@ -84,6 +83,7 @@ export const useAuthStore = defineStore('Auth', {
               }else{
                 this.getdefaultOffice = useCookie('defaultOffice');
               }
+              console.log(this.getdefaultOffice);
               return this.user = data.value;
             }
           }else{

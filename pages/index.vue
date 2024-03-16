@@ -84,7 +84,7 @@ export default {
       },
       showPop(id){
         this.$refs[id][0].leafletObject.openPopup();
-        var map = this.$refs.mapRef;
+        this.$refs.mapRef.leafletObject.panTo(this.$refs[id][0].latLng)
       },
       markersIconCallback(point){
               console.log(point);
@@ -323,9 +323,10 @@ export default {
                   @zoomend="changeZoom"
                   @click="markersIconCallback"
                 >
+                <!-- url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"  -->
                 <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
                   <LTileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
                     attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
                     layer-type="base"
                     name="OpenStreetMap"
@@ -339,7 +340,9 @@ export default {
                   <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address.lat,notice.address.lng]">
                     <l-popup @ready="ready" >
                       <div class="title">
-                        {{ notice.title }}
+                        <NuxtLink class="link" :href="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
+                          {{ notice.title }}
+                        </NuxtLink>
                       </div>
                     </l-popup>
                   </l-marker>
@@ -408,6 +411,7 @@ export default {
     
           <div v-if="officeShow" class="row content">
             <div v-for="(office, index) in allOffices" :key="index" class="col-sm-12 col-md-6 col-xl-4 descktop-office">
+              <NuxtLink class="link" :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&?id=${office?.id}`">
               <div class="row">
                 <div class="col-4 descktop-img-box">
                     <div v-if="office?.image_banner" class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
@@ -425,7 +429,7 @@ export default {
                             <h4 class="descktop-office-matter">{{office.matter.title}}</h4>
                           </div>
                           <div class="col-3">
-                            <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+                            <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&id=${office?.id}`">
                               <img src="~/assets/img/arrow-left.svg" alt="">
                           </NuxtLink>
                           </div>
@@ -434,6 +438,7 @@ export default {
                     </div>
                   </div>
               </div>
+            </NuxtLink>
             </div>
        
             <div v-if="infinity != null  && infinity.fetchingData"  class="spinner-border-background">

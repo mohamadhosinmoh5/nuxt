@@ -4,7 +4,7 @@
             </div> -->
         <!-- <li><a href="">{{notice.title}}</a></li> -->
             <!-- <a class="link" :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`"> -->
-                <NuxtLink class="link"  :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                <NuxtLink class="link"  :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                 <div class="row box-notice">
                     <div class="col-sm-12 img-box">
                         <div class="img" :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
@@ -35,7 +35,7 @@
                                     <span v-else>قیمت : {{convertPrice(notice?.pricing.price)}} تومان</span>
         
                                     <div class="col-2">
-                                        <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                        <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                                             <img src="~/assets/img/arrow-left.svg" alt="">
                                         </NuxtLink>
                                     </div>
@@ -53,7 +53,7 @@
                                     </div>
         
                                     <div class="col-2">
-                                        <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                        <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                                             <img src="~/assets/img/arrow-left.svg" alt="">
                                         </NuxtLink>
                                     </div>

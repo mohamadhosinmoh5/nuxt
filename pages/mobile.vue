@@ -44,7 +44,7 @@
               <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
                 <div class="row">
                   <div class="col-8 text-start">
-                    <NuxtLink class="link" :to="`/notice/${item?.id}/${filterUrl(item?.title)}`">{{ item.title }}</NuxtLink>
+                    <NuxtLink class="link" :to="`/notice?id=${item?.id}&slug=${filterUrl(item?.title)}`">{{ item.title }}</NuxtLink>
                   </div>
                   <div class="col-4 text-center search-cat">
                     {{ item.category.title }}
@@ -88,7 +88,7 @@
         
               <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
                 <LTileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
                   attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
                   layer-type="base"
                   name="OpenStreetMap"
@@ -102,7 +102,9 @@
                 <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address?.lat,notice.address?.lng]">
                   <l-popup @ready="ready" >
                     <div class="title">
+                    <NuxtLink class="link" :href="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                       {{ notice.title }}
+                    </NuxtLink>
                     </div>
                   </l-popup>
                 </l-marker>
@@ -140,7 +142,9 @@
         </div>
         <ul class="categoryBox">
           <li v-for="(item, index) in categories" :key="index">
-            <img :src='`/_nuxt/assets/img/cat-${index + 1}.svg`'>
+            <img v-if="index == 0" src='/assets/img/catOne.svg'>
+            <img v-if="index == 1" src='/assets/img/catTow.svg'>
+            <img v-if="index == 2" src='/assets/img/catTree.svg'>
             <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
           </li>
         </ul>
@@ -173,14 +177,14 @@
 
     <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
       <div class="col-4 mobile-img-box">
-        <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+        <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
           <div class="img"
             :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
         </NuxtLink>
       </div>
       <div class="col-8">
         <div class="row">
-          <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="ontap">
+          <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`" class="ontap">
             <div class="col-12">
               <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
             </div>
@@ -195,14 +199,14 @@
             
 
           <div class="col-sm margin-fix ">
-            <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link" >
+            <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`" class="link" >
               <div class="row ms-1">
                 <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
                   {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }} تومان
                 </div>
 
                 <div class="col-2 mobile-section ">
-                  <NuxtLink :to="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                  <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                     <img src="~/assets/img/arrow-left.svg" alt="">
                   </NuxtLink>
                 </div>
@@ -226,7 +230,7 @@
                   </div>
 
                   <div class="col-2">
-                    <NuxtLink :to="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                    <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                       <img src="~/assets/img/arrow-left.svg" alt="">
                     </NuxtLink>
                   </div>
@@ -243,14 +247,14 @@
   <div v-if="officeShow" class="row content">
     <div v-for="(office, index) in allOffices" :key="index" class="row box-content">
       <div class="col-4 descktop-img-box">
-        <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+        <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`">
           <div v-if="office?.image_banner" class="img"
           :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
         <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
         </NuxtLink>
       </div>
       <div class="col-8">
-        <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" class="ontapp">
+        <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`" class="ontapp">
           <div class="row">
           <div class="col-12">
             <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt=""> &nbsp;
@@ -266,7 +270,7 @@
               <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
             </div>
             <div class="col">
-              <NuxtLink :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+              <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`">
                 <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
               </NuxtLink>
             </div>
@@ -312,11 +316,11 @@
         <div class="list-item">
             <button v-if="!login" @click="isShowModal=true" type="button" class="prson" >
                 <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-                <a href="#"  class="txtIcons">پروفایل</a>
+                <a href=""  class="txtIcons">پروفایل</a>
             </button>
             <button v-if="login" type="button" class="prson" >
               <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-              <NuxtLink :to="`${useRuntimeConfig().public.Home_URL}/../profile`"  class="txtIcons">پروفایل</NuxtLink>
+              <NuxtLink :to="`${useRuntimeConfig().public.HomeUrl}/profile`"  class="txtIcons">پروفایل</NuxtLink>
           </button>
         </div>
     </div>
