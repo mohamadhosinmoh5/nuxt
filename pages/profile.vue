@@ -1,16 +1,46 @@
+<!-- TODO:
+Performance Site
+Performance Laptop
+CSS: Option Sticky
+Code Clean
+Webstorm IDE 
+Bug Fix
+ Commit Push->Origin(Github) Fetch
+ Branch -> Master
+ Branch -> clean
+ clean -> Master
+ Componet Sakhtan
+ Show error on My orders if(empty) => Componet Center Make one 
+ Modal Bootstrap shadow - overlay 
+
+-> 
+-->
+
 <template>
     <div class="container-fluild">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="top-line"></div>
-                <div class="TitleText">
-                    <div class="col mt-3 ms-3">
-                        <i class="fa fa-home " aria-hidden="true"></i>
-                        <h class="myhomenger ms-2">هومنگر من</h>
-                        <a @click="modalOpen = true" style="cursor: pointer;" class="taghiratDaftar">
-                            <i class="fa fa-repeat taghiratDaftar" aria-hidden="true"></i>
-                            تغییر دفتر
-                        </a>
+        <div class="container-box">
+
+            <div class="btn-navbar">
+                <button v-if="closeBox" type="button" class="close-navbar mt-5" @click="closeBox = false">
+                    <img src="assets/img/SinglePage_Image/togmenue.png" style="width: 40px;">
+
+                </button>
+            </div>
+
+            <div :class="(closeBox) ? `sidebar dropdown-box` : `sidebar border-left`">
+
+                <div class="logo_items col-sm-12">
+                    <div class="TitleText">
+                        <div class="col mt-3 ms-2">
+                            <img src="assets/img/home.png" style="width: 25px;" alt="">
+                            <h class="myhomenger ms-2">هومنگر من</h>
+                            <a @click="modalOpen = true" style="cursor: pointer;" class="taghiratDaftar">
+                                <i class="fa fa-repeat taghiratDaftar" aria-hidden="true"></i>
+                                <span class="ms-2"> تغییر دفتر
+                                </span>
+                            </a>
+                        </div>
+                        <div class="liner-border col-12 mt-3 ms-3"></div>
                     </div>
                     <div v-if="modalOpen" class="daftar-modal">
                         <div class="daftarDetailes">
@@ -34,63 +64,77 @@
 
                     </div>
                 </div>
-            </div>
-        </div>
+                <div class="menu_container">
+                    <div class="menu_items">
+                        <ul class="menu_item">
 
+                            <li class="item">
+                                <a href="#" @click="changeMenu('showDashboard')" class="link flex">
+                                    <img src="assets/img/home.png" style="width: 25px;position: relative; right: 10%"
+                                        alt="">
+                                    <span class="ms-4">پیشخوان</span>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="#" @click="changeMenu('showWallet')" class="link flex">
+                                    <img src="assets/img/wallet.png" style="width: 25px;position: relative; right: 10%"
+                                        alt="">
+                                    <span class="ms-4">کیف پول نقدی </span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="menu_item">
+                            <li class="item">
+                                <a href="#" @click="changeMenu('BuyLicence')" class="link flex">
+                                    <img src="assets/img/buy.png" style="width: 25px;position: relative; right: 10%"
+                                        alt="">
+                                    <span class="ms-4">خرید اشتراک </span>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="#" @click="changeMenu('MyProduct')" class="link flex">
+                                    <img src="assets/img/shopping-bag.png"
+                                        style="width: 25px;position: relative; right: 10%" alt="">
+                                    <span class="ms-4">خرید های من </span>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="#" @click="changeMenu('MyOrder')" class="link flex">
+                                    <img src="assets/img/purchase-order.png"
+                                        style="width: 25px;position: relative; right: 10%" alt="">
+                                    <span class="ms-4">سفارش های من</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="menu_item">
+                            <li class="item">
+                                <a href="#" @click="changeMenu('MyLicence')" class="link flex ">
+                                    <img src="assets/img/lists.png" style="width: 25px;position: relative; right: 10%"
+                                        alt="">
 
-        <div class="container-box">
+                                    <span class="ms-4">اشتراک های من</span>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="https://homeenger.com/mag/privacypolicy/" class="link flex">
+                                    <img src="assets/img/information.png"
+                                        style="width: 25px;position: relative; right: 10%" alt="">
 
-            <div class="btn-navbar">
-                <button v-if="closeBox" type="button" class="close-navbar mt-5" @click="closeBox = false">
-                    <img src="assets/img/SinglePage_Image/togmenue.png" style="width: 40px;">
+                                    <span class="ms-4">قوانین مقررات</span>
+                                </a>
+                            </li>
+                            <li class="item">
+                                <a href="https://homeenger.com/mag/contact-us/" class="link flex">
+                                    <img src="assets/img/contact-mail.png"
+                                        style="width: 25px;position: relative; right: 10%" alt="">
 
-                </button>
-                <button v-if="!closeBox" type="button" class="close-navbar mt-5" @click="closeBox = true">
-                    <img src="assets/img/SinglePage_Image/closing.png" style="width: 40px;">
-                </button>
-            </div>
-
-            <div :class="(closeBox) ? `navbar-profile dropdown-box` : `navbar-profile border-left`">
-
-                <div>
-                    <div class="col-md-12 sidetext">
-                        <div class="col-sm-12 mt-4 ">
-                            <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('showDashboard')" class="mediumtxt ms-2">پیشخوان</a>
-                        </div>
-                        <div class="col-sm-12  mt-3">
-                            <i class="fa-solid fa-wallet"></i>
-                            <a @click="changeMenu('showWallet')" class="mediumtxt ms-2">کیف پول نقدی</a>
-                        </div>
-                        <div class="col-sm-12  mt-3">
-                            <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('BuyLicence')" class="mediumtxt ms-1"> خرید اشتراک</a>
-                        </div>
-                        <div class="col-sm-12  mt-3">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <a @click="changeMenu('MyProduct')" class="mediumtxt ms-1"> خرید های من</a>
-                        </div>
-                        <div class="col-sm-12  mt-3">
-                            <i class="fa-solid fa-arrow-down-wide-short"></i>
-                            <a @click="changeMenu('MyOrder')" class="mediumtxt ms-1"> سفارش های من </a>
-                        </div>
-                        <div class="col-sm-12  mt-3">
-                            <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('MyLicence')" class="mediumtxt ms-1"> اشتراک های من</a>
-                        </div>
-                        <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
-                            <div class="col  mt-3">
-                                <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a  class="mediumtxt ms-2">قوانین مقررات</a>
-                            </div>
-                        </NuxtLink>
-
-                        <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
-                            <div class="col  mt-3">
-                                <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a  class="mediumtxt ms-2"> تماس با ما</a>
-                            </div>
-                        </NuxtLink>
+                                    <span class="ms-4">تماس با ما</span>
+                                </a>
+                            </li>
+                            <button v-if="!closeBox" type="button" class="close-navbarr mt-5" @click="closeBox = true">
+                                بیخیال
+                            </button>
+                        </ul>
 
                     </div>
 
@@ -103,8 +147,18 @@
                     </p>
                 </div>
             </div>
+            <div class="div col-sm-1">
+                <div v-if="closeBox" class="background-open">
+                    <a class="openIcon" @click="closeBox = false"><img src="assets/img/left.png" alt=""></a>
+                </div>
 
-            <div :style="(closeBox) ? `width:100% !important;` : `width:80% !important;`">
+                <div v-if="!closeBox" class="background">
+                    <a class="bcak" @click="closeBox = true"><img src="assets/img/right.png" alt=""></a>
+                </div>
+
+            </div>
+            <div :style="(closeBox) ? `width:80% !important;` : `width:80% !important;`">
+                <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
                 <dashboard @clicked="loadingStyle" :loading="loading" :user="user" v-if="showDashboard" />
                 <cash-wallet @clicked="loadingStyle" :loading="loading" v-if="showWallet" />
                 <buylicence @clicked="loadingStyle" :loading="loading" v-if="BuyLicence" />
@@ -113,186 +167,13 @@
                 <mylicence @clicked="loadingStyle" :loading="loading" v-if="MyLicence" />
                 <roll v-if="Rolls" />
                 <contact v-if="ContactUs" />
-                <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
             </div>
         </div>
     </div>
 
-
-
-
-
-    <!-- {{ pricing.items[0].title }} -->
-    <!-- {{ subScribe }} -->
-    <!-- {{ carts }} -->
-    <!-- {{ offices }} -->
-    <!-- {{ transactions }} -->
-    <!-- {{ transactionBankReceipts }} -->
-    <!-- <div class="container-fluid">
-        <div class="row ">
-            <div class="col-12">
-                <div class="border"></div>
-                <div class="TitleText">
-                    <div class="col mt-3">
-                        <i class="fa fa-home " aria-hidden="true"></i>
-                        <h class="myhomenger ms-2">هومنگر من</h>
-                        <a @click="modalOpen = true" style="cursor: pointer;" class="taghiratDaftar">
-                            <i class="fa fa-repeat taghiratDaftar" aria-hidden="true"></i>
-                            تغییر دفتر
-                        </a>
-                    </div>
-                    <div v-if="modalOpen" class="daftar-modal">
-                        <div class="daftarDetailes">
-                            <div class="col-sm-12">
-                                <div class="col">
-                                    <a @click="modalOpen = false">
-                                        <i id="khoroj" class="fa-solid fa-arrow-right"></i>
-                                    </a>
-                                    <a id="korojtxt" class="ms-2">انتخاب دفتر</a>
-                                </div>
-                                <div class="border-modal mt-2"></div>
-
-                                <div v-for="office in user.offices" class="col-sm row">
-                                    <a @click="useUser.setDefaultOffice(office.id), navigateTo('/')"
-                                        :class="(office.id == useUser.getdefaultOffice) ? `wallettxt active mt-3` : `wallettxt mt-3`">
-                                        {{ office.title }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="btnside col-sm-1">
-
-                    <button v-if="closeBox" type="button" id="" class="close mt-5" @click="closeBox = false">
-                        <img src="assets/img/sidebar.png" style="width: 35px;" alt="">
-
-                    </button>
-                    <button v-if="!closeBox" type="button" class="close mt-5" @click="closeBox = true">
-                        <img src="assets/img/closebox.png" style="width: 35px;" alt="">
-
-                    </button>
-                </div>
-
-                <div :class="(closeBox) ? `col-sm-2 liness dropdown-box` : `open-box col-sm-2 liness`">
-                    <div class="col-sm-12">
-                        <div class="col mt-4 hover">
-                            <i class="fa fa-address-book" aria-hidden="true"></i>
-                            <a @click="changeMenu('showDashboard')" class="mediumtxt ms-5 ">پیشخوان</a>
-                        </div>
-                        <div class="col hover mt-3">
-                            <i class="fa-solid fa-wallet"></i>
-                            <a @click="changeMenu('showWallet')" class="mediumtxt ms-5">کیف پول نقدی</a>
-                        </div>
-                        <div class="col hover mt-3">
-                            <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('BuyLicence')"  class="mediumtxt ms-5"> خرید اشتراک</a>
-
-                        </div>
-
-
-                        <div class="col hover mt-3">
-                            <i class="fa-solid fa-cart-shopping"></i>
-                            <a @click="changeMenu('MyProduct')"  class="mediumtxt ms-5"> خرید های من</a>
-                        </div>
-                        <div class="col hover mt-3">
-                            <i class="fa-solid fa-arrow-down-wide-short"></i>
-                            <a @click="changeMenu('MyOrder')"  class="mediumtxt ms-5"> سفارش های من </a>
-                        </div>
-                        <div class="col hover mt-3">
-                            <i class="fa-solid fa-money-bill"></i>
-                            <a @click="changeMenu('MyLicence')" class="mediumtxt ms-5"> اشتراک های من</a>
-                        </div>
-                        <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
-                            <div class="col hover mt-3">
-                                <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a @click="changeMenu('showDashboard')" href="#" class="mediumtxt ms-2">پیشخوان</a>
-                            </div>
-                            <div class="col-sm-12 hover mt-3">
-                                <i class="fa-solid fa-wallet"></i>
-                                <a @click="changeMenu('showWallet')" href="#" class="mediumtxt ms-2">کیف پول نقدی</a>
-                            </div>
-                            <div class="col-sm-12 hover mt-3">
-                                <i class="fa-solid fa-money-bill"></i>
-                                <a @click="changeMenu('BuyLicence')" href="#" class="mediumtxt ms-1"> خرید اشتراک</a>
-    
-                            </div>
-    
-    
-                            <div class="col-sm-12 hover mt-3">
-                                <i class="fa-solid fa-cart-shopping"></i>
-                                <a @click="changeMenu('MyProduct')" href="#" class="mediumtxt ms-1"> خرید های من</a>
-                            </div>
-                            <div class="col-sm-12 hover mt-3">
-                                <i class="fa-solid fa-arrow-down-wide-short"></i>
-                                <a @click="changeMenu('MyOrder')" href="#" class="mediumtxt ms-1"> سفارش های من </a>
-                            </div>
-                            <div class="col-sm-12 hover mt-3">
-                                <i class="fa-solid fa-money-bill"></i>
-                                <a @click="changeMenu('MyLicence')" href="#" class="mediumtxt ms-1"> اشتراک های من</a>
-                            </div>
-                            <NuxtLink class="linkss" to="https://homeenger.com/mag/privacypolicy/">
-                                <div class="col hover mt-3">
-                                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                                    <a  class="mediumtxt ms-2">قوانین مقررات</a>
-                                </div>
-                            </NuxtLink>
-    
-                            <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
-                                <div class="col hover mt-3">
-                                    <i class="fa fa-address-book" aria-hidden="true"></i>
-                                    <a  class="mediumtxt ms-2"> تماس با ما</a>
-                                </div>
-                            </NuxtLink>
-    
-                        </div>
-                    </div>
-                    <div v-if="useUser.error?.message" class="notif error text-center">
-                        <span @click="useUser.error.message = null" class="closeNotife">x</span>
-                        <p>
-                            {{ useUser.error.message }}
-                        </p>
-                    </div>
-    
-                    <div class="col-sm-10">
-                        <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
-                        <dashboard :user="user" v-if="showDashboard" />
-                        <cash-wallet v-if="showWallet" />
-                        <buylicence @clicked="loadingStyle" :loading="loading" v-if="BuyLicence" />
-                        <myproduct @clicked="loadingStyle" :loading="loading" v-if="MyProduct" />
-                        <myorder @clicked="loadingStyle" :loading="loading" v-if="MyOrder" />
-                        <mylicence @clicked="loadingStyle" :loading="loading" v-if="MyLicence" />
-                        <roll v-if="Rolls" />
-                        <contact v-if="ContactUs" />
-    
-                      
-                    </div>
-                </div>
-
-                <div class="col-sm-9">
-
-                    <dashboard :user="user" v-if="showDashboard" />
-                    <cash-wallet v-if="showWallet" />
-                    <buylicence v-if="BuyLicence" />
-                    <myproduct v-if="MyProduct" />
-                    <myorder v-if="MyOrder" />
-                    <mylicence v-if="MyLicence" />
-                    <roll v-if="Rolls" />
-                    <contact v-if="ContactUs" />
-
-                  <dashboard />
-                  <dashboard />
-                  <dashboard />
-                  <dashboard /> -->
-
-
 </template>
 
-<!-- script -->
+
 <script setup>
 
 import { useAuthStore } from '../store/auth';

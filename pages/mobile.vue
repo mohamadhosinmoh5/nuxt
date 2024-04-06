@@ -1,11 +1,49 @@
 <template>
 
   <div ref="Header_box" class="row ">
+
+
     <div class="row mob-nav mt-2">
       <div class="col-2 menuToggle">
-        <a @click="showCategory"><img src="assets/img/menuToggle.svg" /></a>
+        <a @click="openIt()"><img src="assets/img/menuToggle.svg" /></a>
       </div>
 
+      <div ref="openit" class="openit">
+        <div class="col-sm-12">
+          <div @click="closeCategory" class="closeFilterr">
+            <button ref="filterCanvas" class="btn-kkhorji" @click="closeIt()">
+              <p>
+                <i class="fas fa-window-close mt-2"></i>
+                بیخیال
+              </p>
+            </button>
+          </div>
+          <div class="row category-box">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-12">
+                  <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
+                  <h5 v-else class="category-title"> منو</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="categoryBox">
+            <li>
+              <img src="assets/img/home.png" style="width: 25px;position: relative; right: 3%" alt="">
+              <a class="link ms-4" href="">خانه</a>
+            </li>
+            <li>
+              <img src="assets/img/SinglePage_Image/settings.png" style="width: 25px;position: relative; right: 3%" alt="">
+              <a class="link" href="https://abzar.homeenger.com/">ابزار محاسبه رهن و اجاره</a>
+            </li>
+            <li>
+              <img src="assets/img/artificial-intelligence.png" style="width: 25px;position: relative; right: 3%" alt="">
+              <a class="link" href="https://panel.homeenger.com/ai">هوش مصنوعی</a>
+            </li>
+          </ul>
+        </div>
+      </div>
       <div class="col-8">
         <div class="row tab_box">
           <div class="activeItem"></div>
@@ -55,7 +93,7 @@
           </div>
 
           <div class="row">
-            <div class="col-sm-12 navMenu">
+            <div :class="(officeShow) ? `hidTabbar` : `col-sm-12 navMenu`">
               <ul>
                 <li>
                   <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
@@ -110,7 +148,7 @@
     <!-- show category box -->
     <div ref="categoryCanvas" class="categoryCanvas">
       <div @click="closeCategory" class="closeFilterr">
-        <button ref="filterCanvas" class="btn-kkhorji" @click="filterUptaded(query, true)">
+        <button ref="filterCanvas" class="btn-kkhorji" @click="closeCategory()">
           <p>
             <i class="fas fa-window-close mt-2"></i>
             بیخیال
@@ -169,7 +207,7 @@
     </div>
 
     <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
-      <div class="col-4 mobile-img-box">
+      <div class="col-4 mobile-img-box mt-2">
         <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
           <div class="img"
             :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
@@ -243,18 +281,21 @@
     <div v-for="(office, index) in allOffices" :key="index" class="row box-daftares">
       <div class="col-4 descktop-img-box mt-1">
         <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
-          <div v-if="office?.image_icon" class="img "
+          <div v-if="office?.image_icon" class="img"
             :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
           <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
+
         </a>
       </div>
       <div class="col-8">
         <a :href="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" class="ontapp">
           <div class="row">
             <div class="col-12">
-              <h4 class="descktop-office-title"><img v-if="office.blue_tick" src="assets/img/blue-tick.svg" alt="">
+              <h4 class="descktop-office-title">
+                <img v-if="office.blue_tick" src="assets/img/blue-tick.svg" class="bluTick" alt="">
                 &nbsp;
-                {{ office.title }} </h4>
+                {{ office.title }}
+              </h4>
               <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
             </div>
           </div>
@@ -312,7 +353,7 @@
     <div class="list-item">
       <button v-if="!login" @click="isShowModal = true" type="button" class="prson">
         <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
-        <a href="#" class="txtIcons">پروفایل</a>
+        <a href="/profile" class="txtIcons">پروفایل</a>
       </button>
       <button v-if="login" type="button" class="prson">
         <img :href="`${useRuntimeConfig().public.Home_URL}/../profile`" src="assets/img/profile-circle 3.svg"
@@ -342,6 +383,8 @@ import { useNoticeStore } from '../store/notice';
 import { useOfficeStore } from '../store/office';
 import { useSearchStore } from '../store/search';
 
+const opens = ref(false);
+console.log(opens);
 export default {
   data() {
     return {
@@ -351,6 +394,7 @@ export default {
       auth: null,
       allNotices: null,
       categories: null,
+      opened: false,
       pending: true,
       allOffices: null,
       infinity: null,
@@ -392,8 +436,14 @@ export default {
     },
     showCategory() {
       this.$refs["categoryCanvas"].style.left = '-2%';
-    }
-    , closeFilter() {
+    },
+    openIt() {
+      this.$refs["openit"].style.left = '-2%';
+    },
+    closeIt(){
+      this.$refs["openit"].style.left = '100%';
+    },
+    closeFilter() {
       this.$refs["filterCanvas"].style.bottom = '-100vh';
     },
     showFilter() {
@@ -609,14 +659,23 @@ export default {
 
 
       if (scrollTop > 50) {
+        this.$refs.Header_box.style.position = 'fixed';
+        // this.$refs.Header_box.style.top = '0px';
+        this.$refs.Header_box.style.color = 'white';
+        this.$refs.Header_box.style.background = 'white';
+
+
+
+
 
         if (scrollTop < this.top) {
-
+          
           this.$refs.Header_box.classList.remove('hiding-box');
           this.$refs.Header_box.classList.add('show-box');
         } else {
           this.$refs.Header_box.classList.remove('show-box');
           this.$refs.Header_box.classList.add('hiding-box');
+          // this.$refs.Header_box.style.top = 'auto';
         }
         // this.$refs.menuBox.classList.remove('relativeCat');
         // this.$refs.menuBox.classList.add('fixedCat');
@@ -627,6 +686,8 @@ export default {
         this.top = scrollTop;
         console.log(this.top);
 
+      } else {
+        this.$refs.Header_box.style.position = 'relative';
       }
 
       if (scrollTop < 200) {

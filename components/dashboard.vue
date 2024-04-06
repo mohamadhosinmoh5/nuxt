@@ -47,7 +47,7 @@
                     </div>
                 </div>
             </div> -->
-            <div id="roaunded" class="col-sm box-info mt-5 ms-5">
+            <div  class="col-sm-11 box-info mt-5 ms-5">
                 <div class=" row">
                     <div class="col-sm">
                         <a href="#" class="wallettxt">کیف پول اعتباری : 0تومان</a>
@@ -76,7 +76,7 @@
                     </span>
                 </div>
             </div>
-            <div id="roaunded" class="col-sm box-buttom mt-5 ms-5">
+            <div  class="col-sm-8 ms-2 mt-5 box-buttom">
                 <div class="col card-body">
                     <div class="col row">
                         <p href="#" class="wallettxt">
