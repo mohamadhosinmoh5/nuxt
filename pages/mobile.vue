@@ -659,7 +659,7 @@ export default {
 
 
       if (scrollTop > 50) {
-        this.$refs.Header_box.style.position = 'fixed';
+        this.$refs.Header_box.style.position = 'sticky';
         // this.$refs.Header_box.style.top = '0px';
         this.$refs.Header_box.style.color = 'white';
         this.$refs.Header_box.style.background = 'white';

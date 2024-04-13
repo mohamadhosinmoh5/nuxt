@@ -2,7 +2,8 @@
   <!-- <div v-if="useCart.pending">
               update basket
             </div> -->
-  <div class="container">
+  <div class="container-fluid p-4">
+    <NuxtLayout name="header"></NuxtLayout>
     <!-- <NeshanMap ref="mapRef" style="width: 100%; height:100vh;"
                 mapKey="web.d2d15b53cc3048db981d514eb6221e39"
                 serviceKey="service.22dda51fbcf6451c85bfd77e96f6face"
@@ -33,7 +34,66 @@
           <div v-for="(item, index) in cart?.items" :key="index" class="cart-item">
             <div v-if="item.count != 0" class="mb-3">
               <div>
-                <div class="d-flex justify-content-between">
+                <div class="row">
+                  <div class="col-4 mt-1">
+                    <div class="backImage">
+                      <div class="image-cart">
+                        <img :src="`${useRuntimeConfig().public.BaseUrl}/${item.notice?.gallery[0].image}`"
+                          class="img-fluid rounded-3" alt="Shopping item" style="width: 100%;">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    <a class="delet" @click="useCart.deleteCart(item.notice.id), item.count = 0" href="#"
+                      style="color: #cecece;margin-right:20px;float: left;"><i class="fas fa-trash-alt"></i></a>
+                    <div class="col">
+                      <div class="ms-3 mt-5">
+                        <h5 class="cartTitles">{{ item.notice.title }}</h5>
+                        <p class="small mb-0">{{ item.notice.category.title }}</p>
+                      </div>
+                      <div class="col">
+                        <div class="ms-4 mt-3 cartPrice" style="width: 200px;">
+                          <p class="row col-12">
+                            قیمت :
+                            {{ convertPrice(item.notice.pricing.price) }}
+                            تومان
+                          </p>
+                          <!-- {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان -->
+                        </div>
+                      </div>
+                      <div class="col ms-3">
+                        <div class="row">
+                          <div class="boxes col-sm-3">
+                            <div class="row">
+                              <div class="col ms-3 mt-1">
+                                <a @click="useCart.addToCart(item.notice.id, item.count), addCart = true, item.count++"
+                                  class="adding">
+                                  <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn"
+                                    role="status"></div>
+                                  <div v-else>+</div>
+                                </a>
+                              </div>
+                              <div class="col mt-2">
+                                <h5 class="count">
+                                  {{ item.count }}
+                                </h5>
+                              </div>
+                              <div class="col mt-1">
+                                <a @click="useCart.addToCart(item.notice.id, item.count), addCart = true, item.count--"
+                                  class="mining">
+                                  <div v-if="useCart.pending == true && !addCart" class="spinner-border spinner-btn"
+                                    role="status"></div>
+                                  <div v-else>-</div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="d-flex justify-content-between">
                   <div class="d-flex flex-row align-items-center">
                     <div class="image-cart">
                       <img :src="`${useRuntimeConfig().public.BaseUrl}/${item.notice?.gallery[0].image}`"
@@ -50,7 +110,7 @@
                         {{ convertPrice(item.notice.pricing.price) }}
                         تومان
                       </p>
-                      <!-- {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان -->
+                      {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان
                     </div>
 
                     <div class="row">
@@ -77,12 +137,12 @@
                           <div v-else>-</div>
                         </button>
                       </div>
-                    </div>
-                    <!--price-->
+                    </div> 
+                  
                     <a @click="useCart.deleteCart(item.notice.id), item.count = 0" href="#"
                       style="color: #cecece;margin-right:20px"><i class="fas fa-trash-alt"></i></a>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- <div class="liner-border"></div> -->
@@ -108,14 +168,14 @@
                   </div>
                 </div>
               </div>
-              <div class="ms-2 cartPrice" style="width: 80px;">
+              <div class="ms-2 mt-3 cartPrice" style="width: 80px;">
                 <p class="row">
                   {{ convertPrice(item.notice.pricing.price) }}
                   تومان
                 </p>
                 <!-- {{ (item.notice.pricing.discount_percent > 0) ? convertPrice(item?.pricing?.price - (item?.notice?.pricing?.price * item.notice?.pricing?.discount_percent / 100)) :  convertPrice(item?.notice?.pricing?.price) }}  تومان -->
               </div>
-              <div class="row">
+              <div class="row mt-4">
                 <div class="col-4">
                   <button id="btnsty"
                     @click="useCart.addToCart(item.notice.id, item.count), addCart = true, item.count++"
@@ -146,8 +206,8 @@
         </div>
 
       </div>
-      <div class="col-sm-4 box-address" dir="rtl">
-        <div v-if="cart?.items[0].post_price_tow_stage" class="all-address">
+      <div class="col-sm-4 " dir="rtl">
+        <div v-if="cart?.items[0].post_price_tow_stage" class="box-address">
           <div class="d-flex justify-content-between align-items-center mb-4">
             <h5 class="mb-0 chooseAddress"> انتخاب آدرس ارسال</h5>
             <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
@@ -158,7 +218,7 @@
             <div class="col-12 addresses">
               <div v-if="adress?.items.length >= 1" v-for="(item, index) in adress?.items" :key="index" class="adress">
                 <div @click="useCart.setDefaultAddress(item.id)"
-                  :class="useCart.activeAdress == item.id ? 'borderSuccess mt-2' : 'mt-2'">
+                  :class="useCart.activeAdress == item.id ? 'borderSuccess' : ''">
                   <!-- <div v-if="useCart.activeAdress" class="spinner-border text-secondary" role="status"></div>-->
                   <div class="card-body text-dark">
                     <h5 class="address-Titles">{{ item.address.province }}/{{ item.address.city }}</h5>
@@ -167,15 +227,16 @@
                 </div>
               </div>
             </div>
+            <hr class="mt-2">
             <div class="col-12">
               <div class="row">
                 <div class="col-5">
-                  <button @click="addressBoxModel = true" class="addAdress ms-4 mt-4">
+                  <button @click="addressBoxModel = true" class="addAdress ms-4 mt-2">
                     افزودن ادرس
                   </button>
                 </div>
                 <div class="col-7">
-                  <button @click="requestPrice(cart?.items[0].id)" class="Edame ms-5 mt-4">
+                  <button @click="requestPrice(cart?.items[0].id)" class="Edame ms-4 mt-2">
                     <div v-if="useCart.pending == true" class="spinner-border spinner-btn" role="status"></div>
                     درخواست قیمت گذاری
                   </button>
@@ -221,10 +282,8 @@
           </div>
 
         </div>
-
-        <div class="liner-border mt-4"></div>
-
-        <div class="d-flex justify-content-between mt-3">
+        <div class="box-addres mt-2">
+          <div class="d-flex justify-content-between mt-3">
           <p class="mb-2">مجموع قیمت با تخفیف</p>
           <p class="mb-2 text-success">تومان {{ totaldisPrice }}</p>
         </div>
@@ -238,7 +297,7 @@
           <p class="mb-2">میزان سود شما</p>
           <p class="mb-2 text-danger">تومان {{ profit }}</p>
         </div>
-        <div class="row mb-5 mt-5 p-5">
+        <div class="row mb-5 p-5">
           <div @click="useCart.changePay('wallet'), wallet = true"
             :class="wallet ? `col-5 pay-cart active` : `col-5 pay-cart`">کیف پول نقدی</div>
           <div class="col-2"></div>
@@ -247,12 +306,13 @@
         </div>
         <button type="button" class="btnPaying col-12">
           <div class="d-flex justify-content-between">
-            <!-- <span> {{totalPrice(cart?.items).discountPrice}} تومان </span> -->
+            <span> {{ totalPrice(cart?.items).discountPrice }} تومان </span>
             <span @click="pay(cart.id)">پرداخت</span>
           </div>
         </button>
+        </div>
+        <!-- <div class="liner-border mt-4"></div> -->
       </div>
-
 
     </div>
 

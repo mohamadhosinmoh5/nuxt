@@ -18,6 +18,8 @@ Bug Fix
 
 <template>
     <div class="container-fluild">
+        <!-- <NuxtLayout name="header"></NuxtLayout> -->
+
         <div class="container-box">
 
             <div class="btn-navbar">
@@ -72,39 +74,47 @@ Bug Fix
                                 <a href="#" @click="changeMenu('showDashboard')" class="link flex">
                                     <img src="assets/img/home.png" style="width: 25px;position: relative; right: 10%"
                                         alt="">
-                                    <span class="ms-4">پیشخوان</span>
+                                    <span class="text-spacing">پیشخوان</span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
                             <li class="item">
                                 <a href="#" @click="changeMenu('showWallet')" class="link flex">
                                     <img src="assets/img/wallet.png" style="width: 25px;position: relative; right: 10%"
                                         alt="">
-                                    <span class="ms-4">کیف پول نقدی </span>
+                                    <span class="text-spacing">کیف پول نقدی </span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
                         </ul>
                         <ul class="menu_item">
                             <li class="item">
                                 <a href="#" @click="changeMenu('BuyLicence')" class="link flex">
                                     <img src="assets/img/buy.png" style="width: 25px;position: relative; right: 10%"
                                         alt="">
-                                    <span class="ms-4">خرید اشتراک </span>
+                                    <span class="text-spacing">خرید اشتراک </span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
+
                             <li class="item">
                                 <a href="#" @click="changeMenu('MyProduct')" class="link flex">
                                     <img src="assets/img/shopping-bag.png"
                                         style="width: 25px;position: relative; right: 10%" alt="">
-                                    <span class="ms-4">خرید های من </span>
+                                    <span class="text-spacing">خرید های من </span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
+
                             <li class="item">
                                 <a href="#" @click="changeMenu('MyOrder')" class="link flex">
                                     <img src="assets/img/purchase-order.png"
                                         style="width: 25px;position: relative; right: 10%" alt="">
-                                    <span class="ms-4">سفارش های من</span>
+                                    <span class="text-spacing">سفارش های من</span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
+
                         </ul>
                         <ul class="menu_item">
                             <li class="item">
@@ -112,23 +122,27 @@ Bug Fix
                                     <img src="assets/img/lists.png" style="width: 25px;position: relative; right: 10%"
                                         alt="">
 
-                                    <span class="ms-4">اشتراک های من</span>
+                                    <span class="text-spacing">اشتراک های من</span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
+
                             <li class="item">
                                 <a href="https://homeenger.com/mag/privacypolicy/" class="link flex">
                                     <img src="assets/img/information.png"
                                         style="width: 25px;position: relative; right: 10%" alt="">
 
-                                    <span class="ms-4">قوانین مقررات</span>
+                                    <span class="text-spacing">قوانین مقررات</span>
                                 </a>
                             </li>
+                            <div class="borderProfile"></div>
+
                             <li class="item">
                                 <a href="https://homeenger.com/mag/contact-us/" class="link flex">
                                     <img src="assets/img/contact-mail.png"
                                         style="width: 25px;position: relative; right: 10%" alt="">
 
-                                    <span class="ms-4">تماس با ما</span>
+                                    <span class="text-spacing">تماس با ما</span>
                                 </a>
                             </li>
                             <button v-if="!closeBox" type="button" class="close-navbarr mt-5" @click="closeBox = true">

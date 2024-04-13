@@ -63,7 +63,7 @@
 
 
         <div class="row ">
-            <div class="col-sm-3 box-buttom mt-5 ms-5">
+            <div class="col-sm-3 box-buttom-one mt-5 ms-5">
                 <div class="col card-body">
                     <div class="col">
                         <a href="#" class="wallettxt">اشتراک های فعال</a>
