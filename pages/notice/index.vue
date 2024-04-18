@@ -1,6 +1,4 @@
-<template>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"> -->
-
+<template #fallback>
     <div dir="rtl" class="container-fluild p-4">
         <NuxtLayout name="header"></NuxtLayout>
         <title>
@@ -406,8 +404,8 @@
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
                             <img src="assets/img/SinglePage_Image/row.svg"
                                 style="float: left; top: 6px;position: relative;" alt="">
-                            <a :href="`../../office/${notice.office?.uuid}/${notice.office?.title}/?id=${notice.office?.id}`"
-                                class="daftar_textt ms-1 mt-2"> دفتر ها </a>
+                            <NuxtLink :to="`${useRuntimeConfig().public.HomeUrl}/office?uid=${notice.office?.uuid}&slug=${notice.office?.title}&id=${notice.office?.id}`"
+                                class="daftar_textt ms-1 mt-2"> دفتر ها </NuxtLink>
                         </div>
                         <div class="col-12 map_box">
                             <div v-if="notice.address != null" class="col mappingg">
@@ -438,7 +436,7 @@
                         <div class="box-similer row">
                             <div v-if="allNotices !== null" v-for="notice in allNotices?.items" :key="notice.id"
                                 class="col-sm-3 mt-5">
-                                <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
+                                <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`" class="link">
                                     <div class="row box-notice">
                                         <div class="col-sm-12 img-box">
                                             <div class="img"
@@ -478,10 +476,9 @@
                                                         </div>
 
                                                         <div class="col-2">
-                                                            <a
-                                                                :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                                            <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                                                                 <img src="~/assets/img/arrow-left.svg" alt="">
-                                                            </a>
+                                                            </NuxtLink>
                                                         </div>
 
                                                     </div>
@@ -489,7 +486,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </a>
+                                </NuxtLink>
                                 <!-- <div class="col-sm-12" v-if="notice?.section_data_collection[0].items.length < 1">
                                        <div class="row">
                                            <div class="col-sm-12 text-section mt-4">
@@ -543,7 +540,8 @@ definePageMeta({
 
 
 const route = useRoute()
-const params = route.params;
+
+const params = route.query;
 const useNotice = useNoticeStore();
 const useCart = useCartStore();
 const mainImage = ref(null);
@@ -583,7 +581,7 @@ onMounted(() => {
 })
 
 setTimeout(async () => {
-    useNotice.getNotice(params.noticeId).then((r) => {
+    useNotice.getNotice(params.id).then((r) => {
         notice.value = r;
         pending.value = false;
         getSimilar(r.category.id);
@@ -603,7 +601,7 @@ setTimeout(async () => {
 
 
 const getSimilar = (catId) => {
-    useNotice.getSimilar(params.noticeId, catId).then((r2) => {
+    useNotice.getSimilar(params.id, catId).then((r2) => {
         allNotices.value = r2.allNotices;
     });
 }

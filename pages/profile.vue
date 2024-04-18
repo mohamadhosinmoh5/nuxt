@@ -132,23 +132,12 @@ Bug Fix
                                     <img src="assets/img/information.png"
                                         style="width: 25px;position: relative; right: 10%" alt="">
 
-                                    <span class="text-spacing">قوانین مقررات</span>
-                                </a>
-                            </li>
-                            <div class="borderProfile"></div>
-
-                            <li class="item">
-                                <a href="https://homeenger.com/mag/contact-us/" class="link flex">
-                                    <img src="assets/img/contact-mail.png"
-                                        style="width: 25px;position: relative; right: 10%" alt="">
-
-                                    <span class="text-spacing">تماس با ما</span>
-                                </a>
-                            </li>
-                            <button v-if="!closeBox" type="button" class="close-navbarr mt-5" @click="closeBox = true">
-                                بیخیال
-                            </button>
-                        </ul>
+                        <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
+                            <div class="col mt-3">
+                                <i class="fa fa-address-book" aria-hidden="true"></i>
+                                <a  class="mediumtxt ms-2"> تماس با ما</a>
+                            </div>
+                        </NuxtLink>
 
                     </div>
 

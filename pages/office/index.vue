@@ -1,12 +1,12 @@
 
-<template>
+<template #fallback>
     <div dir="rtl" class="container-fluild p-4">
         <NuxtLayout name="header"></NuxtLayout>
         <title>
             {{ params.slug }}
         </title>
-        <div v-if="useOffice.error" class="alert alert-danger text-center mt-4">
-            {{ useOffice.error.message }}
+        <div v-if="useOffice.error?.message" class="alert alert-danger text-center mt-4">
+            {{ useOffice.error?.message }}
         </div>
         <div class="row mt-4">
             <div class="col-sm-3 ">
@@ -54,7 +54,7 @@
                 </li>
             </ul>
         </div>
-            <div v-if="allNotices !=null && allNotices[0] == null && showNotice" class="row">
+            <div v-if="allNotices == null && showNotice && !pending" class="row">
                 <div class="col-sm-12 alert alert-danger mt-3 text-center">
                     آگهی وجود ندارد
                 </div>
@@ -95,9 +95,9 @@
                                         </div>
 
                                         <div class="col-2">
-                                            <a :href="`notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                                            <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                                                 <img src="~/assets/img/arrow-left.svg" alt="">
-                                            </a>
+                                            </NuxtLink>
                                         </div>
 
                                     </div>
@@ -137,8 +137,7 @@ definePageMeta({
 })
 
 const route = useRoute()
-const params = route.params;
-const query = route.query;
+const params = route.query;
 const useCart = useCartStore();
 const useOffice = useOfficeStore();
 const mainImage = ref(null);
@@ -149,7 +148,7 @@ const showNotice = ref(true);
 const showOffice = ref(false);
 const loadingStyle = ref(true);
 const latLon = ref(null)
-
+const pending = ref(true)
 watch(useCart, async (newdata) => {
     if (cart?.value?.items != null)
         cart.value.items = newdata.cart.items;
@@ -157,18 +156,17 @@ watch(useCart, async (newdata) => {
 })
 
 setTimeout(async () => {
-
+    console.log(params);
     loadingStyle.value = false;
-    useOffice.getOffice(params.officeId).then((r) => {
-        console.log(r);
+    useOffice.getOffice(params.uid).then((r) => {
         office.value = r;
         latLon.value = r.address?.geom?.coordinates;
       
     })
 
-    useOffice.getNoticeOffice(query.id).then((r) => {
+    useOffice.getNoticeOffice(params.id).then((r) => {
+        pending.value = false;
         allNotices.value = r.allNotices;
-        console.log(allNotices);
     })
 
     cart.value = await useCart.getCart();

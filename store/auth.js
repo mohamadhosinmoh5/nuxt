@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('Auth', {
-    state: () => ({ user: null,pricing:null ,error:null,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
+    state: () => ({ user: null,pricing:null ,error:null,pending:null,carts:null,subScribe:null,getdefaultOffice:0, token: null,mobile: null ,sendingSms:false}),
     getters: {
       getError: (state)=>{
         return state.error;
@@ -10,7 +10,6 @@ export const useAuthStore = defineStore('Auth', {
     },
     actions: {
         async sendSms(mobile){
-          
             const { data, pending:pendings, error:errors, refresh } = await useFetch(`${useRuntimeConfig().public.BaseUrl}/api/login-send-verify-code`, {
                 method:'post',
                 body:{
@@ -18,7 +17,10 @@ export const useAuthStore = defineStore('Auth', {
                 }
               });
 
-              this.pending = pendings;
+              if(pendings){
+                this.pending = pendings.value;
+              }
+
             if(errors.value){
               this.error = errors.value.data;
             }
@@ -76,12 +78,12 @@ export const useAuthStore = defineStore('Auth', {
             }
 
             if(data.value){
-              console.log(data.value);
               if(this.getdefaultOffice == 0 && useCookie('defaultOffice') == null){
                 this.setDefaultOffice(data.value.offices[0].id);
               }else{
                 this.getdefaultOffice = useCookie('defaultOffice');
               }
+              console.log(this.getdefaultOffice);
               return this.user = data.value;
             }
           }else{
