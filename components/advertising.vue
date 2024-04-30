@@ -79,6 +79,11 @@
 import { ref } from "vue";
 import textInput from "./formInput/textInput.vue";
 import telInput from "./formInput/telInput.vue";
+import { useAuthStore } from "~/store/auth";
+
+definePageMeta({
+  middleware: "auth",
+});
 
 const title = ref("");
 const description = ref("");
@@ -105,12 +110,15 @@ const sendFilesToBackend = (event) => {
   uploadedFiles.value.forEach((file) => {
     formData.append("files", file);
   });
-
-  const backendEndpoint = "/upload";
+  const auth = useAuthStore();
+  const backendEndpoint = "https://panel.homeenger.com/api/uploadsTest";
 
   useFetch(backendEndpoint, {
     method: "POST",
     body: formData,
+    headers: {
+      Authorization: "Bearer " + auth.token,
+    },
   })
     .then((response) => {
       console.log("Files uploaded successfully:", response);
