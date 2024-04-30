@@ -47,11 +47,26 @@
           <p class="ms-2">
             اگهی های دارای عکس تا 3 برار بیشتر توسط کاربران دیده می شوند
           </p>
-          <div @dragover.prevent @drop.prevent="drop" class="form">
-            <div class="dropzone">
-              <span typeof="file">کشیدن و رها کردن فایل</span>
-              <span>OR</span>
-              <input multiple type="file" id="dropzoneFile" />
+          <div class="form">
+            <div
+              class="dropzone"
+              @dragover.prevent
+              @drop="sendFilesToBackend($event)"
+            >
+              <span typeof="file">+</span>
+              <input
+                multiple
+                type="file"
+                id="dropzoneFile"
+                @change="sendFilesToBackend($event)"
+              />
+            </div>
+            <div v-if="uploadedFiles.length > 0">
+              <ul>
+                <li v-for="(file, index) in uploadedFiles" :key="index">
+                  {{ file.name }}
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -69,18 +84,59 @@ const title = ref("");
 const description = ref("");
 const showTelInput = ref(true);
 const Number = ref("");
+const uploadedFiles = ref([]);
 
-const drag = (e) => {
-  console.log(e);
-};
-const drop = (e) => {
-  let formData = new FormData();
+const MAX_FILES = 10;
 
-  const files = e.dataTransfer.files;
-  for (let index = 0; index < files.length; index++) {
-    const file = files[index];
-    console.log(file);
-    // formData.append(file);
+const sendFilesToBackend = (event) => {
+  uploadedFiles.value = []; // reset the array
+  const files = event.target.files || event.dataTransfer.files;
+
+  for (let i = 0; i < files.length; i++) {
+    if (uploadedFiles.value.length < MAX_FILES) {
+      uploadedFiles.value.push(files[i]);
+    } else {
+      alert("حداکثر 10 فایل میتوانید آپلود کنید.");
+      break;
+    }
   }
+
+  const formData = new FormData();
+  uploadedFiles.value.forEach((file) => {
+    formData.append("files", file);
+  });
+
+  const backendEndpoint = "/upload";
+
+  useFetch(backendEndpoint, {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      console.log("Files uploaded successfully:", response);
+    })
+    .catch((error) => {
+      console.error("Error uploading files:", error);
+    });
 };
 </script>
+
+<style>
+.dropzone {
+  position: relative;
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.dropzone input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+</style>
