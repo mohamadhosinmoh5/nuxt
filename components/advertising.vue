@@ -7,6 +7,7 @@
           inputId="title"
           inputType="text"
           v-model="title"
+          :validations="titleValidations"
         />
       </div>
       <div class="col-md-6">
@@ -15,6 +16,7 @@
           inputId="description"
           inputType="text"
           v-model="description"
+          :validations="discriptionValidations"
         />
       </div>
       <div class="container mt-5">
@@ -35,8 +37,9 @@
             <telInput
               :label="'شماره تماس:'"
               inputId="Number"
-              placeholder=""
+              inputType="text"
               v-model="Number"
+              :validations="tellValidations"
             />
           </div>
         </div>
@@ -80,6 +83,10 @@ import { ref } from "vue";
 import textInput from "./formInput/textInput.vue";
 import telInput from "./formInput/telInput.vue";
 import { useAuthStore } from "~/store/auth";
+
+const titleValidations = ["required"];
+const discriptionValidations = ["required"];
+const tellValidations = ["phoneNumber"];
 
 definePageMeta({
   middleware: "auth",
