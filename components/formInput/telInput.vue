@@ -2,26 +2,34 @@
   <div class="form-group">
     <label :for="inputId">{{ label }}</label>
     <input
-      type="tel"
-      :class="['form-control', { 'is-invalid': error }]"
+      :type="inputType"
+      class="form-control"
       :id="inputId"
-      :placeholder="placeholder"
-      :v-model="modelValue"
+      :name="inputName"
+      @input="handleInput"
     />
-    <div v-if="error" class="invalid-feedback">
-      {{ error }}
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
+import { defineProps } from "vue";
+import validate from "~/utils/validation";
 
-const props = defineProps({
-  label: String,
-  inputId: String,
-  placeholder: String,
-  modelValue: String,
-  error: String,
-});
+const {
+  label,
+  inputId,
+  inputType = "text",
+  inputName = "",
+  validations = [],
+} = defineProps(["label", "inputId", "inputType", "inputName", "validations"]);
+
+const handleInput = (event) => {
+  const value = event.target.value;
+  const result = validate(value , validations);
+  if (result === true) {
+    console.log("Valid input");
+  } else {
+    console.log(result.join("\n"));
+  }
+};
 </script>
