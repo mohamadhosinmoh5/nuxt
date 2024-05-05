@@ -3,7 +3,12 @@
     <div class="row">
       <!-- Square Footage -->
       <div class="col-md-6">
-        <number label="متراژ" inputId="squareFootage" v-model="squareFootage" />
+        <number
+          label="متراژ"
+          inputId="squareFootage"
+          v-model="squareFootage"
+          :validations="squareFootageValidations"
+        />
       </div>
       <!-- Building Life -->
       <div class="col-md-6">
@@ -44,6 +49,7 @@
           label="تعداد واحدهای ساختمان"
           inputId="buildingUnits"
           v-model="buildingUnits"
+          :validations="numValidations"
         />
       </div>
       <!-- Number of Rooms -->
@@ -64,6 +70,7 @@
           label="سال ساخت"
           inputId="yearOfConstruction"
           v-model="yearOfConstruction"
+          :validations="numberValidations"
         />
       </div>
     </div>
@@ -82,6 +89,10 @@ const buildingLife = ref("0");
 const numberOfFloors = ref("1");
 const floorLocation = ref("Ground");
 const numberOfRooms = ref("1");
+
+const numValidations = ["required", "number"];
+const numberValidations = ["required", "number"];
+const squareFootageValidations = ["required", "number"];
 
 // Define options for the SelectInput components
 const buildingLifeOptions = [
