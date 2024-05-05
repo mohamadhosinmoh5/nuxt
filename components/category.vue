@@ -20,7 +20,7 @@
         <a @click="getCategory(item.id)" class="link">{{ item.title }}</a>
       </li>
     </ul>
-    <Wizard v-if="categories && categories.length === 0" />
+    <Wizard v-if="wizard != null" :wizard="wizard" />
   </div>
 </template>
 
@@ -29,6 +29,7 @@ import { useNoticeStore } from "../store/notice";
 
 const notice = useNoticeStore();
 const categories = ref(null);
+const wizard = ref(null);
 
 setTimeout(() => {
   notice.getCategory().then((r) => {
@@ -39,8 +40,17 @@ setTimeout(() => {
 
 const getCategory = (id) => {
   notice.getCategory(id).then((r) => {
+  if(r.length > 1){
     categories.value = r;
-    console.log(r);
+  }else{
+    categories.value.map((val)=>{
+      if(val.id == id){
+        wizard.value = val;
+      }
+    })
+
+  }
+
   });
 };
 </script>

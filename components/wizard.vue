@@ -4,40 +4,30 @@
     <!-- Three-step list wizard -->
     <div class="wizard">
       <ul class="wizard-steps">
-        <li :class="{ active: currentStep === 1 }" @click="changeStep(1)">1</li>
-        <li :class="{ active: currentStep === 2 }" @click="changeStep(2)">2</li>
-        <li :class="{ active: currentStep === 3 }" @click="changeStep(3)">3</li>
-        <li :class="{ active: currentStep === 4 }" @click="changeStep(4)">4</li>
+        <li v-for="(item, index) in wizard.section" :key="index" :class="{ active: currentStep === index }" @click="changeStep(index)">{{index}}</li>
 
       </ul>
     </div>
 
     <!-- Content based on currentStep -->
-    <div v-if="currentStep === 1">
-      <UnitSpecifications />
-    </div>
-    <div v-if="currentStep === 2">
-      <PriceInfoWidget />
-    </div>
-    <div v-if="currentStep === 3">
-      <MapAddress />
-    </div>
-    <div v-if="currentStep === 4">
-      <Advertising />
+    <div v-for="(item, index) in wizard.section" :key="index" v-if="currentStep === index">
+      <show_step_data :section="item" />
     </div>
 
     <!-- Buttons -->
     <div class="buttons">
       <button v-if="currentStep !== 1" @click="prevStep">قبلی</button>
-      <button v-if="currentStep !== 4" @click="nextStep">بعدی</button>
-      <button v-if="currentStep === 4" @click="register">ثبت</button>
+      <button v-if="currentStep !== 3" @click="nextStep">بعدی</button>
+      <button v-if="currentStep === 3" @click="register">ثبت</button>
     </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-
+let prop = defineProps(['wizard']);
+const wizard = toRefs(prop).wizard?.value;
+console.log(wizard);
 const currentStep = ref(1);
 
 // Function to change step based on clicked number
