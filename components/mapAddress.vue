@@ -14,6 +14,7 @@
           layer-type="base"
           name="OpenStreetMap"
         />
+        <LMarker :lat-lng="markerLatLng" v-if="markerLatLng" />
       </LMap>
     </div>
     <div class="box">
@@ -28,7 +29,8 @@ import { useMapStore } from "../store/map";
 
 const mapStore = useMapStore();
 
-const address = ref('');
+const address = ref("");
+const markerLatLng = ref(null);
 
 let center = [36.8394, 54.4344];
 const zoom = 16;
@@ -60,6 +62,7 @@ const handleMapClick = async (event) => {
     console.error("Error fetching address:", error);
   }
 
+  markerLatLng.value = [lat, lng];
   center = [lat, lng];
 };
 </script>
