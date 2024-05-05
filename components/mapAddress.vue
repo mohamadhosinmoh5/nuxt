@@ -4,9 +4,9 @@
       <LMap
         id="map"
         ref="mapRef"
-        :zoom="16"
-        :center="[36.8394, 54.4344]"
-        @click="handleMapClick(this)"
+        :zoom="zoom"
+        :center="center"
+        @click="handleMapClick"
       >
         <LTileLayer
           url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
@@ -14,13 +14,6 @@
           layer-type="base"
           name="OpenStreetMap"
         />
-
-        <l-circle-marker
-          :lat-lng="[36.8394, 54.4344]"
-          :radius="10"
-          color="red"
-        />
-        <l-marker :lat-lng="[36.8394, 54.4344]"> </l-marker>
       </LMap>
     </div>
     <div class="box">
@@ -35,19 +28,39 @@ import { useMapStore } from "../store/map";
 
 const mapStore = useMapStore();
 
-const address = ref(null);
+const address = ref('');
+
+let center = [36.8394, 54.4344];
+const zoom = 16;
 
 const handleMapClick = async (event) => {
-console.log(event);
-  const {} = await useFetch(
-    `https://api.neshan.org/v5/reverse?lat=${lat}&lng=${lng}`,
-    {
-      method: "get",
-      headers: {
-        "Api-Key": "service.22dda51fbcf6451c85bfd77e96f6face",
-      },
+  const lat = event.latlng.lat;
+  const lng = event.latlng.lng;
+
+  console.log(lat, lng);
+
+  try {
+    const response = await fetch(
+      `https://api.neshan.org/v5/reverse?lat=${lat}&lng=${lng}`,
+      {
+        method: "GET",
+        headers: {
+          "Api-Key": "service.22dda51fbcf6451c85bfd77e96f6face",
+        },
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      address.value = data.formatted_address;
+    } else {
+      console.error("Failed to fetch address:", response.statusText);
     }
-  );
+  } catch (error) {
+    console.error("Error fetching address:", error);
+  }
+
+  center = [lat, lng];
 };
 </script>
 
