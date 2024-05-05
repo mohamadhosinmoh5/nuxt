@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps } from "vue";
 
 const { label, inputId, modelValue, type, inputClass, labelClass } =
   defineProps([
