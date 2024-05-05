@@ -18,7 +18,8 @@
       </LMap>
     </div>
     <div class="box">
-      <p v-if="address">{{ address }}</p>
+      <p v-if="loading">در حال بارگذاری</p>
+      <p v-else-if="address">{{ address }}</p>
     </div>
   </div>
 </template>
@@ -31,6 +32,7 @@ const mapStore = useMapStore();
 
 const address = ref("");
 const markerLatLng = ref(null);
+const loading = ref(false);
 
 let center = [36.8394, 54.4344];
 const zoom = 16;
@@ -40,6 +42,8 @@ const handleMapClick = async (event) => {
   const lng = event.latlng.lng;
 
   console.log(lat, lng);
+
+  loading.value = true;
 
   try {
     const response = await fetch(
@@ -60,6 +64,8 @@ const handleMapClick = async (event) => {
     }
   } catch (error) {
     console.error("Error fetching address:", error);
+  } finally {
+    loading.value = false;
   }
 
   markerLatLng.value = [lat, lng];
