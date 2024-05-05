@@ -15,7 +15,12 @@
     <div class="row">
       <!-- Total Price -->
       <div class="col-md-6">
-        <number label="قیمت کل" inputId="totalPrice" v-model="totalPrice" />
+        <number
+          label="قیمت کل"
+          inputId="totalPrice"
+          v-model="totalPrice"
+          :validations="numberValidations"
+        />
       </div>
       <!-- Price per Meter -->
       <div class="col-md-6">
@@ -23,6 +28,7 @@
           label="قیمت هر متر"
           inputId="pricePerMeter"
           v-model="pricePerMeter"
+          :validations="numValidations"
         />
       </div>
     </div>
@@ -36,6 +42,7 @@
           inputId="ownerName"
           inputType="text"
           v-model="ownerName"
+          :validations="nameValidations"
         />
       </div>
 
@@ -46,6 +53,7 @@
           inputId="contactNumber"
           placeholder=""
           :modelValue="contactNumber"
+          :validations="tellValidations"
         />
       </div>
     </div>
@@ -58,6 +66,11 @@ import number from "./formInput/number.vue";
 import textInput from "./formInput/textInput.vue";
 import radioInput from "./formInput/radioInput.vue";
 import telInput from "./formInput/telInput.vue";
+
+const nameValidations = ["required"];
+const tellValidations = ["required", "phoneNumber"];
+const numberValidations = ["required", "number"];
+const numValidations = ["required", "number"];
 
 const features = ref({
   elevator: { label: "آسانسور", value: false },
