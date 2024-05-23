@@ -3,7 +3,7 @@
 
     <div class="container-fluid">
         <div class="row all-boxes">
-            <div class="col-sm-12 box-cart mt-5">
+            <div class="col box-cart mt-5">
                 <div class=" top-text">
                     <div v-if="!carts.items[0]" class="alert alert-danger"><p>سبد خرید شما خالیست</p></div>
                     <div class="row">
