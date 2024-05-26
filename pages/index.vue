@@ -320,14 +320,16 @@ export default {
                     emptyCat
                   }}</span>
                 </div>
-                <div :class="officeShow ? `disable` : ``">
+               
+                <div v-if="!officeShow" :class="officeShow ? `disable` : ``">
                   <Filter :status="pending" @clicked="filterUptaded" />
                 </div>
+              
               </div>
             </div>
-
+           
             <div
-              v-if="showMap && allNotices[0].address != null"
+              v-if="showNotice && showMap && allNotices[0].address != null"
               class="stickyStyle"
             >
               <LMap
@@ -380,6 +382,7 @@ export default {
                 </l-marker>
               </LMap>
             </div>
+        
           </div>
         </div>
       </div>
@@ -411,8 +414,8 @@ export default {
             </div>
           </div>
         </div>
-
-        <div class="row" :style="noticeShow ? `display:flex` : 'display:none;'">
+    
+        <div v-if="noticeShow" class="row" :style="noticeShow ? `display:flex;` : 'display:none;'">
           <!-- Card 1-->
           <div
             v-if="infinity != null && infinity.fetchingData"
@@ -427,21 +430,23 @@ export default {
           <div class="col-sm-12 text-center">
             <div v-if="pending" class="spinner-border" role="status"></div>
           </div>
-          <div
-            v-if="noticeShow"
-            v-for="notice in allNotices"
-            :key="notice.id"
-            class="col-sm-4"
-          >
+          <div class="row" v-if="noticeShow">
+            
             <div
-              v-if="noticeShow"
-              @mouseenter="showPop(`marker_${notice.id}`)"
-              href="#"
+              v-for="notice in allNotices"
+              :key="notice.id"
+              class="col-sm-4"
             >
-              <Notice :Notice="notice" />
+              <div
+                v-if="noticeShow"
+                @mouseenter="showPop(`marker_${notice.id}`)"
+                href="#"
+              >
+                <Notice :Notice="notice" />
+              </div>
             </div>
           </div>
-
+     
           <!-- Card 2-->
           <!-- End card-->
           <!--Loader-->
