@@ -2,8 +2,8 @@
   <div class="container mt-5">
     <div class="row">
       <!-- Square Footage -->
-      <div v-for="(item, index) in section" :key="index" class="col-md-6">
-        <div v-if="item." class="row">
+      <div class="col-md-6">
+        <div  class="row">
 
         </div>
         <number
