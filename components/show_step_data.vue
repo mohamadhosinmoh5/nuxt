@@ -10,6 +10,7 @@
           label="متراژ"
           inputId="squareFootage"
           v-model="squareFootage"
+          @change="setData($event,section)"
           :validations="squareFootageValidations"
         />
       </div>
@@ -143,4 +144,27 @@ const numberOfRoomsOptions = [
   { label: "4", value: "4" },
   { label: "بیشتر از 4", value: "5" },
 ];
+
+const FormData = ref({
+  "title": 'asasasa',
+  "description": "wefwefwefewf",
+  "attachments": [],
+  "pricing": {},
+  "post_pricing": {},
+  "gallery": [],
+  "address": {},
+  "data_sections": [],
+});
+// console.log(formDataArray)
+
+const setData = (event,section,id) => {
+  var data = event.target.value;
+  FormData.value.data_sections[id] = {
+    field : section,
+    data:[data],
+    field_id:id
+  } ;
+  
+  console.log(FormData.value.data_sections);
+}
 </script>
