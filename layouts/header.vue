@@ -86,7 +86,7 @@
             <a v-else disabled><img src="~/assets/img/basket.svg" alt=""></a>
         </div>
         <div class="col-4 mt-2">
-          <a href="/ads" class="addNotice">
+          <a href="/add-notice" class="addNotice">
             ثبت اگهی
             <!-- <span id="tooltiptext">به زودی</span> -->
           </a>

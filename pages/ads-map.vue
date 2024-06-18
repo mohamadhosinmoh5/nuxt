@@ -31,17 +31,17 @@
                                     {{ MapAddress?.address }}
                                 </div>
                                 <!-- Add other address fields as needed -->
-                                <p>{{ addressData.address }}</p>
+                                <!-- <p>{{ addressData.address }}</p>
                                 <p>{{ addressData.address_compact }}</p>
                                 <p>{{ addressData.city }}</p>
                                 <p>{{ addressData.country }}</p>
                                 <p>{{ addressData.county }}</p>
-                                <p>{{ addressData.geom.coordinates.join(', ') }}</p>
+                                <p>{{ addressData.geom.coordinates.join(', ') }}</p> -->
                                 <div class="col-sm-12">
                                     <button
                                         style="padding: 10px; position: relative; left: 50%; width: 200px; color: white;"
-                                        class="btn btn-success mt-5" @click="response">
-                                        ثبت
+                                        class="btn btn-success mt-5">
+                                       <a style="text-decoration: none; color: white;" href="/endads">بعدی</a>
                                     </button>
                                 </div>
                             </div>
@@ -61,27 +61,27 @@ const markerPosition = ref(null);
 const addressText = ref('');
 const MapAddress = ref(null);
 
-const addressData = ref({
-    address: "",
-    address_compact: "",
-    city: "",
-    country: "",
-    county: "",
-    district: "",
-    geom: { type: "", coordinates: [] },
-    last: "",
-    name: "",
-    neighbourhood: "",
-    plaque: "",
-    poi: "",
-    postal_address: "",
-    postal_code: "",
-    primary: "",
-    province: "",
-    region: "",
-    rural_district: "",
-    village: ""
-});
+// const addressData = ref({
+//     address: "",
+//     address_compact: "",
+//     city: "",
+//     country: "",
+//     county: "",
+//     district: "",
+//     geom: { type: "", coordinates: [] },
+//     last: "",
+//     name: "",
+//     neighbourhood: "",
+//     plaque: "",
+//     poi: "",
+//     postal_address: "",
+//     postal_code: "",
+//     primary: "",
+//     province: "",
+//     region: "",
+//     rural_district: "",
+//     village: ""
+// });
 
 
 const fetchAddressData = async (event) => {

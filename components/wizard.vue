@@ -68,7 +68,9 @@
     <div class="buttons">
       <button v-if="currentStep !== 1" @click="prevStep">قبلی</button>
       <button v-if="currentStep !== 3" @click="nextStep">بعدی</button>
-      <button v-if="currentStep === 3" @click="handleSubmit">ثبت</button>
+      <button v-if="currentStep === 3" @click="handleSubmit">
+        <a style="text-decoration: none; color: white;" href="/ads-map">بعدی</a>
+      </button>
     </div>
   </div>
 </template>
