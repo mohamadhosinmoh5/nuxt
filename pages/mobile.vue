@@ -34,11 +34,13 @@
               <a class="link ms-4" href="">خانه</a>
             </li>
             <li>
-              <img src="assets/img/SinglePage_Image/settings.png" style="width: 25px;position: relative; right: 3%" alt="">
+              <img src="assets/img/SinglePage_Image/settings.png" style="width: 25px;position: relative; right: 3%"
+                alt="">
               <a class="link" href="https://abzar.homeenger.com/">ابزار محاسبه رهن و اجاره</a>
             </li>
             <li>
-              <img src="assets/img/artificial-intelligence.png" style="width: 25px;position: relative; right: 3%" alt="">
+              <img src="assets/img/artificial-intelligence.png" style="width: 25px;position: relative; right: 3%"
+                alt="">
               <a class="link" href="https://panel.homeenger.com/ai">هوش مصنوعی</a>
             </li>
           </ul>
@@ -82,76 +84,19 @@
               <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
                 <div class="row">
                   <div class="col-8 text-start">
-                    <NuxtLink class="link" :to="`/notice?id=${item?.id}&slug=${filterUrl(item?.title)}`">{{ item.title }}</NuxtLink>
+                    <NuxtLink class="link" :to="`/notice?id=${item?.id}&slug=${filterUrl(item?.title)}`">{{ item.title
+                      }}</NuxtLink>
                   </div>
                   <div class="col-4 text-center search-cat">
                     {{ item.category.title }}
                   </div>
                 </div>
               </div>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-sm-12 navMenu">
-            <ul>
-              <li>
-                <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
-                  class="nav-item nav-link  filter-box" href="#">فیلتر ها {{ countQuery }} <img class=""
-                    src="~/assets/img/filter_search.svg" alt=""></a>
-              </li>
-  
-              <li>
-                <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showCategory"
-                  class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{ lastCat ? lastCat : 'همه آگهی ها' }} </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-12 mt-2">
-          <div class="col-12 mt-1">
-            
-            <div v-if="allNotices && allNotices[1]?.address != null" class="mob-map" ref="mapDiv" @click="showMap=true" >
-              
-              <LMap v-if="allNotices"
-                id="map"
-                ref="mapRef"
-                :zoom="12"
-                :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
-                @zoomend="changeZoom"
-
-                style="height:100vh;"
-              >
-        
-              <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
-                <LTileLayer
-                  url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
-                  attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-                  layer-type="base"
-                  name="OpenStreetMap"
-                />
-              
-                <l-circle-marker
-                :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]"
-                :radius="10"
-                color="red"
-              />
-                <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`"  :key="notice.id" :lat-lng="[notice.address?.lat,notice.address?.lng]">
-                  <l-popup @ready="ready" >
-                    <div class="title">
-                    <NuxtLink class="link" :href="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
-                      {{ notice.title }}
-                    </NuxtLink>
-                    </div>
-                  </l-popup>
-                </l-marker>
-              </LMap>
             </div>
           </div>
 
           <div class="row">
-            <div :class="(officeShow) ? `hidTabbar` : `col-sm-12 navMenu`">
+            <div class="col-sm-12 navMenu">
               <ul>
                 <li>
                   <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
@@ -179,7 +124,7 @@
                   style="height:100vh;">
 
                   <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
-                  <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  <LTileLayer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
                     attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
                     layer-type="base" name="OpenStreetMap" />
 
@@ -189,148 +134,200 @@
                     :lat-lng="[notice.address?.lat, notice.address?.lng]">
                     <l-popup @ready="ready">
                       <div class="title">
-                        {{ notice.title }}
+                        <NuxtLink class="link" :href="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
+                          {{ notice.title }}
+                        </NuxtLink>
                       </div>
                     </l-popup>
                   </l-marker>
                 </LMap>
               </div>
             </div>
-          </div>
-        </div>
-        <ul class="categoryBox">
-          <li v-for="(item, index) in categories" :key="index">
-            <img v-if="index == 0" src='/assets/img/catOne.svg'>
-            <img v-if="index == 1" src='/assets/img/catTow.svg'>
-            <img v-if="index == 2" src='/assets/img/catTree.svg'>
-            <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
-          </li>
-        </ul>
 
+            <div class="row">
+              <div :class="(officeShow) ? `hidTabbar` : `col-sm-12 navMenu`">
+                <ul>
+                  <li>
+                    <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showFilter"
+                      class="nav-item nav-link  filter-box" href="#">فیلتر ها {{ countQuery }} <img class=""
+                        src="~/assets/img/filter_search.svg" alt=""></a>
+                  </li>
 
-      </div>
-    </div>
-    <!-- show category box -->
-    <div ref="categoryCanvas" class="categoryCanvas">
-      <div @click="closeCategory" class="closeFilterr">
-        <button ref="filterCanvas" class="btn-kkhorji" @click="closeCategory()">
-          <p>
-            <i class="fas fa-window-close mt-2"></i>
-            بیخیال
-          </p>
-        </button>
-      </div>
-
-      <div class="row mt-4">
-        <div class="col-sm-12 ">
-          <div class="row category-box">
-            <div class="col-6">
-              <div class="row">
-                <div class="col-12">
-                  <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
-                  <h5 v-else class="category-title">دسته بندی ها</h5>
-                </div>
+                  <li>
+                    <a data-bs-toggle="offcanvas" data-bs-target="#navbarOffcanvasLg" @click="showCategory"
+                      class="nav-item nav-link  filter-box" href="#"> دسته بندی : {{ lastCat ? lastCat : 'همه آگهی ها'
+                      }}
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="col-6 text-end">
-              <span class="backCat" @click="lastCategory">
-                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
-              </span>
+
+            <div class="col-12 mt-2">
+              <div class="col-12 mt-1">
+
+                <div v-if="allNotices && allNotices[1]?.address != null" class="mob-map" ref="mapDiv"
+                  @click="showMap = true">
+
+                  <LMap v-if="allNotices" id="map" ref="mapRef" :zoom="12"
+                    :center="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]" @zoomend="changeZoom"
+                    style="height:100vh;">
+
+                    <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
+                    <LTileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                      layer-type="base" name="OpenStreetMap" />
+
+                    <l-circle-marker :lat-lng="[allNotices[1]?.address?.lat, allNotices[1]?.address?.lng]" :radius="10"
+                      color="red" />
+                    <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`" :key="notice.id"
+                      :lat-lng="[notice.address?.lat, notice.address?.lng]">
+                      <l-popup @ready="ready">
+                        <div class="title">
+                          {{ notice.title }}
+                        </div>
+                      </l-popup>
+                    </l-marker>
+                  </LMap>
+                </div>
+              </div>
             </div>
           </div>
           <ul class="categoryBox">
             <li v-for="(item, index) in categories" :key="index">
-              <img :src='`/_nuxt/assets/img/cat-${index + 1}.svg`'>
+              <img v-if="index == 0" src='/assets/img/catOne.svg'>
+              <img v-if="index == 1" src='/assets/img/catTow.svg'>
+              <img v-if="index == 2" src='/assets/img/catTree.svg'>
               <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
             </li>
           </ul>
 
-          <span v-if="emptyCat" class=" alert-danger">{{ emptyCat }}</span>
+
+        </div>
+      </div>
+      <!-- show category box -->
+      <div ref="categoryCanvas" class="categoryCanvas">
+        <div @click="closeCategory" class="closeFilterr">
+          <button ref="filterCanvas" class="btn-kkhorji" @click="closeCategory()">
+            <p>
+              <i class="fas fa-window-close mt-2"></i>
+              بیخیال
+            </p>
+          </button>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-sm-12 ">
+            <div class="row category-box">
+              <div class="col-6">
+                <div class="row">
+                  <div class="col-12">
+                    <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
+                    <h5 v-else class="category-title">دسته بندی ها</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 text-end">
+                <span class="backCat" @click="lastCategory">
+                  <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
+                </span>
+              </div>
+            </div>
+            <ul class="categoryBox">
+              <li v-for="(item, index) in categories" :key="index">
+                <img :src='`/_nuxt/assets/img/cat-${index + 1}.svg`'>
+                <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
+              </li>
+            </ul>
+
+            <span v-if="emptyCat" class=" alert-danger">{{ emptyCat }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div ref="filterCanvas" class="filterCanvas pb-5">
+        <div @click="closeFilter" class="closeFilterr">
+          <!-- <img width="20" src="assets/img/right.png"> -->
+        </div>
+        <div class="row mt-4">
+          <Filter :status="pending" @clicked="filterUptaded" @closed="closeFilter" />
         </div>
       </div>
     </div>
-
-    <div ref="filterCanvas" class="filterCanvas pb-5">
-      <div @click="closeFilter" class="closeFilterr">
-        <!-- <img width="20" src="assets/img/right.png"> -->
+    <div v-if="noticeShow" ref="content" class="row content">
+      <div class="col-sm-12 text-center">
+        <div v-if="pending" class="spinner-border" role="status"></div>
       </div>
-      <div class="row mt-4">
-        <Filter :status="pending" @clicked="filterUptaded" @closed="closeFilter" />
+
+      <div v-if="infinity != null && infinity.fetchingData" class="spinner-border-background">
+        <br>
+        <br>
+        در حال بارگیری <br>
+        <div class="spinner-border mt-5" role="status"></div>
       </div>
-    </div>
-  </div>
-  <div v-if="noticeShow" ref="content" class="row content">
-    <div class="col-sm-12 text-center">
-      <div v-if="pending" class="spinner-border" role="status"></div>
-    </div>
 
-    <div v-if="infinity != null && infinity.fetchingData" class="spinner-border-background">
-      <br>
-      <br>
-      در حال بارگیری <br>
-      <div class="spinner-border mt-5" role="status"></div>
-    </div>
-
-    <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
-      <div class="col-4 mobile-img-box">
-        <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
-          <div class="img"
-            :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
-        </NuxtLink>
-      </div>
-      <div class="col-8">
-        <div class="row">
-          <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`" class="ontap">
-            <div class="col-12">
-              <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
-            </div>
-
-            <div v-if="notice?.section_data.length >= 1" class="row">
-              <div v-if="notice?.section_data[0]" class="col-sm mobile-section ms-1">
-                {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} <span
-                  v-if="notice?.section_data[1]">متر</span>
-              </div>
-              <div v-if="notice?.section_data[1]" class="col-sm mobile-section ms-1">
-                {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
+      <div v-for="(notice, index) in allNotices" :key="index" class="row box-content">
+        <div class="col-4 mobile-img-box">
+          <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
+            <div class="img"
+              :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"></div>
+          </NuxtLink>
+        </div>
+        <div class="col-8">
+          <div class="row">
+            <NuxtLink :to="`/notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`" class="ontap">
+              <div class="col-12">
+                <h4 class="mobile-notice-title ms-1">{{ notice.title }}</h4>
               </div>
 
+              <div v-if="notice?.section_data.length >= 1" class="row">
+                <div v-if="notice?.section_data[0]" class="col-sm mobile-section ms-1">
+                  {{ notice?.section_data[0]?.field.title }} : {{ notice?.section_data[0].data[0] }} <span
+                    v-if="notice?.section_data[1]">متر</span>
+                </div>
+                <div v-if="notice?.section_data[1]" class="col-sm mobile-section ms-1">
+                  {{ notice?.section_data[1]?.field.title }} : {{ notice?.section_data[1].data[0] }}
+                </div>
 
-              <div class="col-sm margin-fix ">
-                <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
-                  <div class="row ms-1">
-                    <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
-                      {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }}
-                      تومان
+
+                <div class="col-sm margin-fix ">
+                  <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`" class="link">
+                    <div class="row ms-1">
+                      <div v-if="notice?.section_data[2]" class="col-10 mobile-section">
+                        {{ notice?.section_data[2].field.title }} : {{ convertPrice(notice?.section_data[2].data[0]) }}
+                        تومان
+                      </div>
+
+                      <div class="col-2 mobile-section ">
+                        <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                          <img src="~/assets/img/arrow-left.svg" alt="">
+                        </a>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </NuxtLink>
+
+
+            <div class="col-sm-12" v-if="notice?.section_data.length < 1">
+              <div class="row">
+                <div class="col-sm-12 text-section mt-4">
+                  <div class="row">
+                    <div class="col-10">
+                      قیمت : {{ (notice.pricing.discount_percent > 0) ? convertPrice(notice?.pricing.price -
+                        (notice?.pricing.price * notice.pricing.discount_percent / 100)) :
+                        convertPrice(notice?.pricing.price) }} تومان
+                      <br>
+                      <del style="font-size: 12px;">{{ convertPrice(notice?.pricing.price) }}</del> <span
+                        class="text-danger">{{ notice.pricing.discount_percent }} %</span>
                     </div>
 
-                    <div class="col-2 mobile-section ">
-                      <a :href="`/notice/${notice?.id}/${filterUrl(notice?.title)}`">
+                    <div class="col-2">
+                      <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                         <img src="~/assets/img/arrow-left.svg" alt="">
-                      </a>
+                      </NuxtLink>
                     </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </a>
-
-          <div class="col-sm-12" v-if="notice?.section_data.length < 1">
-            <div class="row">
-              <div class="col-sm-12 text-section mt-4">
-                <div class="row">
-                  <div class="col-10">
-                    قیمت : {{ (notice.pricing.discount_percent > 0) ? convertPrice(notice?.pricing.price -
-          (notice?.pricing.price * notice.pricing.discount_percent / 100)) :
-          convertPrice(notice?.pricing.price) }} تومان
-                    <br>
-                    <del style="font-size: 12px;">{{ convertPrice(notice?.pricing.price) }}</del> <span
-                      class="text-danger">{{ notice.pricing.discount_percent }} %</span>
-                  </div>
-
-                  <div class="col-2">
-                    <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
-                      <img src="~/assets/img/arrow-left.svg" alt="">
-                    </NuxtLink>
                   </div>
                 </div>
               </div>
@@ -338,46 +335,48 @@
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
-
-  <div v-if="officeShow" class="row content">
-    <div v-for="(office, index) in allOffices" :key="index" class="row box-content">
-      <div class="col-4 descktop-img-box">
-        <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`">
-          <div v-if="office?.image_banner" class="img"
-          :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
-        <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
-        </NuxtLink>
-      </div>
-      <div class="col-8">
-        <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`" class="ontapp">
-          <div class="row">
-            <div class="col-12">
-              <h4 class="descktop-office-title">
-                <img v-if="office.blue_tick" src="assets/img/blue-tick.svg" class="bluTick" alt="">
-                &nbsp;
-                {{ office.title }}
-              </h4>
-              <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
-            </div>
-          </div>
+    <div v-if="officeShow" class="row content">
+      <div v-for="(office, index) in allOffices" :key="index" class="row box-content">
+        <div class="col-4 descktop-img-box">
+          <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`">
+            <div v-if="office?.image_banner" class="img"
+              :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${office.image_icon});`"></div>
+            <img v-else width="100px" height="100px" src="assets/img/homeLogo.png" alt="">
+          </NuxtLink>
         </div>
-        </NuxtLink>
+        <div class="col-8">
+          <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`"
+            class="ontapp">
+            <div class="row">
+              <div class="col-12">
+                <h4 class="descktop-office-title">
+                  <img v-if="office.blue_tick" src="assets/img/blue-tick.svg" class="bluTick" alt="">
+                  &nbsp;
+                  {{ office.title }}
+                </h4>
+                <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
+              </div>
+            </div>
+          </NuxtLink>
+        </div>
+
+
         <div class="col-12 mt-3">
-         <NuxtLink class="ontap" :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" >
-          <div class="row">
-            <div class="col">
-              <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
+          <NuxtLink class="ontap" :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`">
+            <div class="row">
+              <div class="col">
+                <h4 class="descktop-office-txt ms-2">{{ office.matter.title }}</h4>
+              </div>
+              <div class="col">
+                <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`">
+                  <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
+                </NuxtLink>
+              </div>
             </div>
-            <div class="col">
-              <NuxtLink :to="`office?uid=${office?.uuid}&slug=${filterUrl(office?.title)}&=id=${office?.id}`">
-                <img class="img-daftar" src="~/assets/img/arrow-left.svg" alt="">
-              </NuxtLink>
-            </div>
-          </div>
-         </NuxtLink>
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -392,47 +391,47 @@
     </div>
     <!-- this is for bottomNavigationBar -->
     <div class="navbar">
-        <div class="list-item">
-            <button type="button" class="prson">
-                <img src="assets/img/home-1 2.svg" style="width: 20px;" />
-                <a href="#" class="homeIcon">خانه</a>
-            </button>
-        </div>
-        <div class="list-item">
-            <button type="button" class="prson disabled">
-                <img src="assets/img/note-21 1.svg"  style="width: 20px;"/>
-                <a href="#" class="txtIcons">خدمات</a>
-            </button>
-        </div>
-        <div  class="list-item">
-            <button v-if="!showMap" type="button" @click="showMap=true" class="circle">
-               <p  class="Maptext">
-                نقشه
-               </p>
-            </button>
-            <button v-if="showMap" type="button" @click="showMap=false" class="circle">
-              <p class="Maptext">
-                آگهی 
-               </p>
-              
-            </button>
-        </div>
-        <div class="list-item">
-            <button type="button" class="prson disabled" >
-                <img src="assets/img/notification-bing 2.svg"  style="width: 20px;"/>
-                <a href="#"  class="txtIcons">اعلانات</a>
-            </button>
-        </div>
-        <div class="list-item">
-            <button v-if="!login" @click="isShowModal=true" type="button" class="prson" >
-                <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-                <a href=""  class="txtIcons">پروفایل</a>
-            </button>
-            <button v-if="login" type="button" class="prson" >
-              <img src="assets/img/profile-circle 3.svg"  style="width: 20px;"/>
-              <NuxtLink :to="`${useRuntimeConfig().public.HomeUrl}/profile`"  class="txtIcons">پروفایل</NuxtLink>
-          </button>
-        </div>
+      <div class="list-item">
+        <button type="button" class="prson">
+          <img src="assets/img/home-1 2.svg" style="width: 20px;" />
+          <a href="#" class="homeIcon">خانه</a>
+        </button>
+      </div>
+      <div class="list-item">
+        <button type="button" class="prson disabled">
+          <img src="assets/img/note-21 1.svg" style="width: 20px;" />
+          <a href="#" class="txtIcons">خدمات</a>
+        </button>
+      </div>
+      <div class="list-item">
+        <button v-if="!showMap" type="button" @click="showMap = true" class="circle">
+          <p class="Maptext">
+            نقشه
+          </p>
+        </button>
+        <button v-if="showMap" type="button" @click="showMap = false" class="circle">
+          <p class="Maptext">
+            آگهی
+          </p>
+
+        </button>
+      </div>
+      <div class="list-item">
+        <button type="button" class="prson disabled">
+          <img src="assets/img/notification-bing 2.svg" style="width: 20px;" />
+          <a href="#" class="txtIcons">اعلانات</a>
+        </button>
+      </div>
+      <div class="list-item">
+        <button v-if="!login" @click="isShowModal = true" type="button" class="prson">
+          <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
+          <a href="" class="txtIcons">پروفایل</a>
+        </button>
+        <button v-if="login" type="button" class="prson">
+          <img src="assets/img/profile-circle 3.svg" style="width: 20px;" />
+          <NuxtLink :to="`${useRuntimeConfig().public.HomeUrl}/profile`" class="txtIcons">پروفایل</NuxtLink>
+        </button>
+      </div>
     </div>
     <div class="list-item">
       <button v-if="!showMap" type="button" @click="showMap = true" class="circle">
@@ -543,7 +542,7 @@ export default {
     openIt() {
       this.$refs["openit"].style.left = '-2%';
     },
-    closeIt(){
+    closeIt() {
       this.$refs["openit"].style.left = '100%';
     },
     closeFilter() {
@@ -772,7 +771,7 @@ export default {
 
 
         if (scrollTop < this.top) {
-          
+
           this.$refs.Header_box.classList.remove('hiding-box');
           this.$refs.Header_box.classList.add('show-box');
         } else {

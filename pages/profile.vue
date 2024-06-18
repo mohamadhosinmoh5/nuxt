@@ -131,13 +131,15 @@ Bug Fix
                                 <a href="https://homeenger.com/mag/privacypolicy/" class="link flex">
                                     <img src="assets/img/information.png"
                                         style="width: 25px;position: relative; right: 10%" alt="">
-
-                        <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
-                            <div class="col mt-3">
-                                <i class="fa fa-address-book" aria-hidden="true"></i>
-                                <a  class="mediumtxt ms-2"> تماس با ما</a>
-                            </div>
-                        </NuxtLink>
+                                </a>
+                            </li>
+                            <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
+                                <div class="col mt-3">
+                                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                                    <a class="mediumtxt ms-2"> تماس با ما</a>
+                                </div>
+                            </NuxtLink>
+                        </ul>
 
                     </div>
 
