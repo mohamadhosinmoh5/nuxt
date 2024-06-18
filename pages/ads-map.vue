@@ -11,7 +11,7 @@
                                 <div class="col-sm-12 adseMapBox text-center mt-5">
                                     <div class="adseMapBox">
                                         <l-map id="map" ref="mapRef" :zoom="16" :center="[36.841658, 54.432422]"
-                                            @click="onMapClick">
+                                            @click="fetchAddressData">
                                             <l-tile-layer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
                                                 attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors" />
                                             <l-circle-marker v-if="markerPosition" :lat-lng="markerPosition"
@@ -28,11 +28,19 @@
                             <div class="col-sm-6 mt-5">
                                 <div class="col-sm-12 text-right">گلستان گرگان</div>
                                 <div class="col-sm-12 adseMap text-start">
-                                    <p>{{ MapAddress?.address }}</p>
+                                    {{ MapAddress?.address }}
                                 </div>
+                                <!-- Add other address fields as needed -->
+                                <p>{{ addressData.address }}</p>
+                                <p>{{ addressData.address_compact }}</p>
+                                <p>{{ addressData.city }}</p>
+                                <p>{{ addressData.country }}</p>
+                                <p>{{ addressData.county }}</p>
+                                <p>{{ addressData.geom.coordinates.join(', ') }}</p>
                                 <div class="col-sm-12">
-                                    <button style="padding: 10px; position: relative; left: 50%; width: 200px; color: white;"
-                                        class="btn btn-success  mt-5" @click="response">
+                                    <button
+                                        style="padding: 10px; position: relative; left: 50%; width: 200px; color: white;"
+                                        class="btn btn-success mt-5" @click="response">
                                         ثبت
                                     </button>
                                 </div>
@@ -45,6 +53,7 @@
     </div>
 </template>
 
+
 <script setup>
 import { ref } from 'vue';
 
@@ -52,8 +61,30 @@ const markerPosition = ref(null);
 const addressText = ref('');
 const MapAddress = ref(null);
 
+const addressData = ref({
+    address: "",
+    address_compact: "",
+    city: "",
+    country: "",
+    county: "",
+    district: "",
+    geom: { type: "", coordinates: [] },
+    last: "",
+    name: "",
+    neighbourhood: "",
+    plaque: "",
+    poi: "",
+    postal_address: "",
+    postal_code: "",
+    primary: "",
+    province: "",
+    region: "",
+    rural_district: "",
+    village: ""
+});
 
-const onMapClick = async (event) => {
+
+const fetchAddressData = async (event) => {
     const { lat, lng } = event.latlng;
     markerPosition.value = [lat, lng];
 
@@ -73,6 +104,15 @@ const onMapClick = async (event) => {
         // alert('Failed to submit the form.');
     }
 
+};
+
+onMounted(() => {
+    fetchAddressData();
+});
+
+// const markerPosition = ref(null);
+const onMapClick = (event) => {
+    markerPosition.value = event.latlng;
 };
 
 const submit = () => {
