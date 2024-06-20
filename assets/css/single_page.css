@@ -2659,7 +2659,7 @@
 
 /* mapPage */
 .adseMap {
-    width: 400px;
+    width: 100%;
     padding: 10px;
     height: 100px;
     border: 1px solid black;
@@ -2667,11 +2667,19 @@
 }
 
 .adseMapBox {
-    width: 450px;
-    height: 250px;
+    width: 600px;
+    height: 400px;
     position: relative;
-    right: 20%;
+    border: 1px solid var(--cf-grey-icon-color);
+    /* right: 20%; */
     border-radius: 20px;
+}
+.adseMapBoxe{
+    position: absolute;
+    width: 500px;
+    height: 80%;
+    border-radius: 20px;
+
 }
 
 
@@ -2680,10 +2688,53 @@
         width: 450px;
         height: 250px;
         position: relative;
-    
         right: -1%;
         border-radius: 20px;
     }
+
+    .DetailesMap{
+        position: relative;
+        top: 300px;
+    }
+
+    .adseMap{
+        position: relative;
+        top: 300px;
+    }
+
+    .adseMapBoxe{
+        position: absolute;
+        width: 500px;
+        height: 300px;
+        /* margin: 10px; */
+        left: 1px;
+        border-radius: 20px;
+    
+    }
+    
 }
 
 /* end mappage */
+.form-checks{
+    border: 1px solid var(--cf-grey-icon-color);
+    padding: 5px;
+    min-width: 10px;
+    max-width: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    position: relative;
+    right: 42%;
+}
+
+@media screen and (max-width: 992px) {
+    .form-checks{
+        border: 1px solid var(--cf-grey-icon-color);
+        padding: 5px;
+        min-width: 10px;
+        max-width: 200px;
+        margin: 10px;
+        border-radius: 5px;
+        position: relative;
+        right: 20%;
+    }
+}

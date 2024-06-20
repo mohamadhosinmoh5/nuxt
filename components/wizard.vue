@@ -2,36 +2,31 @@
   <div class="container-fluid p-4">
 
     <!-- Three-step list wizard -->
-    <div class="wizard">
-      <ul class="wizard-steps">
-        <li v-for="(item, index) in wizard.section" :key="index" :class="{ active: currentStep === index }"
-          @click="changeStep(index)">{{ index }}</li>
 
 
-      </ul>
-    </div>
 
-      
 
     <div v-if="currentStep == 0">
-      <show_step_data  :section="wizard.section" />
-      
+      <show_step_data :section="wizard.section" />
+
     </div>
 
     <div v-if="currentStep == 1">
-      <h6>امکانات</h6>
-      <div v-for="Section in wizard.section[1].field" :key="Section.id" class="adsFilter">
-     
-        <div class="form-check">
-          <input  class="form-check-input"  type="checkbox" value=""
-            id="flexCheckDefault">
-          <label class="form-check-label" for="flexCheckDefault">
-            {{ Section.title }}
-          </label>
-        </div>
+      <h6 class="Emcan text-center">امکانات</h6>
+      <div v-for="Section in wizard.section[1].field" :key="Section.id" class="adsFilter justify-content-center">
+
+        <form @submit.prevent="submitForm">
+          <div class="form-checks ">
+            <input class="form-check-input" type="checkbox" :id="Section.id" :value="Section.id"
+              v-model="selectedOptions[Section.id]" />
+            <label class="form-check-label ms-1" :for="Section.id">
+              {{ Section.title }}
+            </label>
+          </div>
+        </form>
       </div>
     </div>
-   
+
     <div v-if="currentStep == 2">
       <h6>قیمت</h6>
       <h6>لطفا در این قسمت قیمت ملک خود را به صورت قیمت کل و قیمت هر متر جداگانه وارد نمایید </h6>
@@ -39,7 +34,7 @@
         <div class="form-group mt-2">
           <label for="exampleInputEmail1">{{ Price.title }}</label>
           <!-- {{ FormData.data_sections[Price.id] }} -->
-          <input type="text" @change="setData($event,Price,Price.id)" class="form-control" id="exampleInputEmail1"
+          <input type="text" @change="setData($event, Price, Price.id)" class="form-control" id="exampleInputEmail1"
             aria-describedby="emailHelp" placeholder="تومان">
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
@@ -48,22 +43,22 @@
     </div>
     <div v-if="currentStep == 3">
       <h6>مشخصات</h6>
-     
+
       <h6>در این قسمت می توانید اطلاعات مالک را وارد نمایید . این اطلاعات به کاربران دیگر نمایش داده نمی شود</h6>
       <div v-for="Price in wizard.section[3].field" :key="Price.id" class="price">
         <div class="form-group mt-3">
           <label for="exampleInputEmail1">{{ Price.title }}</label>
-          <input type="text" class="form-control"  @change="setData($event,Price,Price.id)" id="exampleInputEmail1"
+          <input type="text" class="form-control" @change="setData($event, Price, Price.id)" id="exampleInputEmail1"
             aria-describedby="emailHelp" placeholder="">
           <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
         </div>
         <span v-if="error" class="error-message">{{ error }}</span>
 
       </div>
-   
+
       <!-- <a href="/ads-map">next</a> -->
     </div>
-  
+
     <!-- Buttons -->
     <div class="buttons">
       <button v-if="currentStep !== 1" @click="prevStep">قبلی</button>
@@ -71,6 +66,14 @@
       <button v-if="currentStep === 3" @click="handleSubmit">
         <a style="text-decoration: none; color: white;" href="/ads-map">بعدی</a>
       </button>
+    </div>
+    <div class="wizard">
+      <ul class="wizard-steps">
+        <li v-for="(item, index) in wizard.section" :key="index" :class="{ active: currentStep === index }"
+          @click="changeStep(index)">{{ index }}</li>
+
+
+      </ul>
     </div>
   </div>
 </template>
@@ -85,6 +88,43 @@ const numberValidations = ["required", "number"];
 const wizard = toRefs(prop).wizard?.value;
 
 const formDataArray = ref([]);
+
+const options = ref({
+  section: [
+    {}, // Placeholder for other sections if needed
+    {
+      field: [
+        { id: 'option1', title: 'Option 1' },
+        { id: 'option2', title: 'Option 2' },
+        { id: 'option3', title: 'Option 3' },
+        // Add more sections as needed
+      ]
+    }
+  ]
+});
+
+const selectedOptions = ref({
+  option1: false,
+  option2: false,
+  option3: false,
+  // Add more options as needed
+});
+
+console.log(selectedOptions)
+
+
+const submitForm = () => {
+  const selectedData = {};
+  for (const [key, value] of Object.entries(selectedOptions.value)) {
+    if (value) {
+      selectedData[key] = value;
+    }
+  }
+  console.log('Selected Options:', selectedData);
+  // Handle the selected data as needed, e.g., send to a server
+};
+
+
 // save forme data element.
 const FormData = ref({
   "title": 'asasasa',
@@ -98,14 +138,14 @@ const FormData = ref({
 });
 // console.log(formDataArray)
 
-const setData = (event,section,id) => {
+const setData = (event, section, id) => {
   var data = event.target.value;
   FormData.value.data_sections[id] = {
-    field : section,
-    data:[data],
-    field_id:id
-  } ;
-  
+    field: section,
+    data: [data],
+    field_id: id
+  };
+
   console.log(FormData.value.data_sections);
 }
 

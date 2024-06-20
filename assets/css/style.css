@@ -151,7 +151,7 @@ p {
     border-radius: 10px;
 }
 
-.profLink a{
+.profLink a {
     background: #cfcfcf;
     border-radius: 10px;
     padding: 10px;
@@ -1547,7 +1547,7 @@ input.checkBox {
 
 .form-control {
     text-align: end;
-    border-radius: 10px !important;
+    border-radius: 5px !important;
     unicode-bidi: plaintext;
     font-family: Vazir !important;
 }
@@ -1638,6 +1638,7 @@ input.checkBox {
 
 label {
     margin-left: 10px;
+    padding: 5px;
 }
 
 .range-price label {
@@ -1655,6 +1656,32 @@ label {
 
 .data-box {
     font-size: 14px;
+}
+
+.addAdress {
+    text-align: center;
+    border: 1px solid var(--cf-grey-icon-color);
+    background: rgb(255, 255, 255);
+    /* font-family: 'anjomanReqular'; */
+    font-weight: 700;
+    position: relative;
+    /* bottom: 60px; */
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.Edame {
+    text-align: center;
+    border: 1px solid var(--cf-grey-icon-color);
+    background: rgb(255, 255, 255);
+    /* font-family: 'anjomanReqular'; */
+    font-weight: 700;
+    position: relative;
+    /* bottom: 60px; */
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .btn-default {

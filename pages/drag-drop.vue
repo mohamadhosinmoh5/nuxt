@@ -10,22 +10,28 @@
                     <div class="col-12 mt-3 adsForm">
                         <input type="text" placeholder="توضیحات آگهی" />
                     </div>
-                    <div class="form-check mt-5 ms-5">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                        <label class="form-check-label" for="flexCheckDefault">
-                            ثبت آگهی با شماره خودم
-                        </label>
-                    </div>
-                    <p class="mt-5 ms-2">عکس ها</p>
-                    <p class="ms-2">اگهی های دارای عکس تا 3 برار بیشتر توسط کاربران دیده می شوند</p>
-                    <div @dragover.prevent @drop="drop" class="form">
-                        <div class="dropzone">
-                            <span>drag or drop file</span>
-                            <span>OR</span>
-                            <input multiple type="file" id="dropzoneFile" @change="handleFileUpload" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-check mt-5 ms-5">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    ثبت آگهی با شماره خودم
+                                </label>
+                            </div>
                         </div>
-                        <img v-if="imageSrc" :src="imageSrc" alt="Selected Image" class="mt-3"
-                            style="max-width: 100%; height: auto;">
+                        <div class="col-sm-6">
+                            <p class="mt-5 ms-2">عکس ها</p>
+                            <p class="ms-2">اگهی های دارای عکس تا 3 برار بیشتر توسط کاربران دیده می شوند</p>
+                            <div @dragover.prevent @drop="drop" class="form">
+                                <div class="dropzone">
+                                    <span>drag or drop file</span>
+                                    <span>OR</span>
+                                    <input multiple type="file" id="dropzoneFile" @change="handleFileUpload" />
+                                </div>
+                                <img v-if="imageUrl" :src="imageUrl" alt="Selected Image" class="mt-3"
+                                    style="max-width: 30%; height: auto;">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <button type="button" class="col-2 next mt-5" @click="submitForm">
@@ -36,80 +42,102 @@
     </div>
 </template>
 
-
-
 <script setup>
-const filesData = ref([]);
+import { ref } from 'vue';
+import axios from 'axios';
+import { useAuthStore } from '../store/auth';
 
-const imageSrc = ref(null);
-const dataSending = ref({
-    'file': '',
-    'notice-gallery': '',
 
+definePageMeta({
+    middleware: 'auth'
 })
 
-// Handle file drop
-const drop = (e) => {
+const auth = useAuthStore();
+const filesData = ref([]);
+const imageUrl = ref(null);
+
+const drop = async (e) => {
     const files = e.dataTransfer.files;
     for (let index = 0; index < files.length; index++) {
         const file = files[index];
         filesData.value.push(file);
-        imageSrc.value = URL.createObjectURL(file);
+        imageUrl.value = URL.createObjectURL(file);
 
-        axios.post('https://panel.homeenger.com/api/uploads', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-            .then(response => {
-                console.log(response.data);
-                // Handle the response data as needed
-            })
-            .catch(error => {
-                console.error(error);
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('parent', 'notice-gallery');
+
+        try {
+            const response = await axios.post('https://panel.homeenger.com/api/uploads', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${auth.token}`
+                }
             });
+
+            const responseData = response.data;
+            // Assuming response contains the image URL in `src` and `prefix`
+            if (responseData.src && responseData.prefix) {
+                imageUrl.value = `${responseData.prefix}${responseData.src}`;
+                console.log(imageUrl)
+            }
+
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
     }
-    console.log(files)
 };
 
-// Handle file upload from input
 const handleFileUpload = async (e) => {
     const files = e.target.files;
     for (let index = 0; index < files.length; index++) {
         const file = files[index];
         filesData.value.push(file);
-        imageSrc.value = URL.createObjectURL(file);
-        const { data, pending, error: errors, refresh } = await useFetch('https://panel.homeenger.com/api/uploads', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
+        imageUrl.value = URL.createObjectURL(file);
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('parent', 'notice-gallery');
+
+        try {
+            const response = await axios.post('https://panel.homeenger.com/api/uploads', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    'Authorization': `Bearer ${auth.token}`
+
+                }
+            });
+
+            const responseData = response.data;
+            // Assuming response contains the image URL in `src` and `prefix`
+            if (responseData.src && responseData.prefix) {
+                imageUrl.value = `${responseData.prefix}${responseData.src}`;
             }
 
-
-        });
+        } catch (error) {
+            console.error('Error uploading file:', error);
+        }
     }
-    console.log(files)
 };
 
-// Submit form
 const submitForm = async () => {
     const formData = new FormData();
     formData.append('parent', 'notice-gallery');
     filesData.value.forEach((file, index) => {
         formData.append(`file${index + 1}`, file);
     });
-    console.log(formData)
-}
 
-const { data, pending, error: errors, refresh } = await useFetch('https://panel.homeenger.com/api/uploads', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
+    try {
+        const response = await axios.post('https://panel.homeenger.com/api/notices', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'Authorization': `Bearer ${auth.token}`
+            }
+        });
 
+        console.log('Files uploaded successfully:', response.data);
+    } catch (error) {
+        console.error('Error submitting form:', error);
     }
-
-});
-
-
-
+};
 </script>

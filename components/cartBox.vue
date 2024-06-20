@@ -254,15 +254,15 @@
                   <h5 class="chooseAddress">افزودن آدرس</h5>
                 </div>
                 <div class="modal-body">
-                  <input class="form-control" type="text" placeholder="آدرس کامل" v-model="address">
+                  <input class="form-control text-start"  type="text" placeholder="آدرس کامل" v-model="address">
                   <br>
-                  <input class="form-control" type="text" placeholder=" نام گیرنده" v-model="name">
+                  <input class="form-control  text-start" type="text" placeholder=" نام گیرنده" v-model="name">
                   <br>
-                  <input class="form-control" type="text" placeholder=" نام خانوادگی گیرنده" v-model="family">
+                  <input class="form-control  text-start" type="text" placeholder=" نام خانوادگی گیرنده" v-model="family">
                   <br>
-                  <input class="form-control" type="text" placeholder=" شماره موبایل گیرنده" v-model="mobile">
+                  <input class="form-control  text-start" type="text" placeholder=" شماره موبایل گیرنده" v-model="mobile">
                   <br>
-                  <input class="form-control" type="text" placeholder="کد پستی" v-model="postCode">
+                  <input class="form-control  text-start" type="text" placeholder="کد پستی" v-model="postCode">
 
                   <div v-if="useCart.error?.message" class="alert alert-danger m-2">
                     {{ useCart.error?.message }}
