@@ -238,10 +238,10 @@
     .count-cart {
         margin: 0 30px !important;
     }
-    
+
     .checking {
         margin: 15px 0px;
-        text-wrap: nowrap   ;
+        text-wrap: nowrap;
         list-style: none;
         position: relative;
     }
@@ -1421,10 +1421,17 @@
     animation-delay: 3s;
     /* z-index: 1111; */
 }
-@keyframes show-box  {
-    from {top: 0px;}
-    to {bottom: 200px;}
-  }
+
+@keyframes show-box {
+    from {
+        top: 0px;
+    }
+
+    to {
+        bottom: 200px;
+    }
+}
+
 .topboxes {
     position: absolute;
     right: 20%;
@@ -1798,9 +1805,11 @@
 .navbar-box {
     position: relative;
 }
-.ording a{
+
+.ording a {
     cursor: pointer;
 }
+
 .close-navbar {
     border: none;
     background-color: transparent;
@@ -2343,6 +2352,8 @@
         border: 1px solid var(--cf-grey-icon-color);
         width: 100% !important;
     }
+
+
 }
 
 .border-left {
@@ -2386,3 +2397,34 @@
     border-radius: 10px;
     border: 1px solid var(--cf-green-color);
 }
+
+/* mapPage */
+.adseMap {
+    width: 400px;
+    padding: 10px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.adseMapBox {
+    width: 450px;
+    height: 250px;
+    position: relative;
+    right: 20%;
+    border-radius: 20px;
+}
+
+
+@media screen and (max-width: 992px) {
+    .adseMapBox {
+        width: 450px;
+        height: 250px;
+        position: relative;
+    
+        right: -1%;
+        border-radius: 20px;
+    }
+}
+
+/* end mappage */
