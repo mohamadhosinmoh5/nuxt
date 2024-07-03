@@ -60,13 +60,13 @@ export default {
     },
     showOffice(){
       setTimeout(() => {
-         
          this.noticeShow = false;
          this.officeShow = true;
          if(this.allOffices == null){
            this.pending = true;
            this.offices.fetchData().then((r)=> {
              this.allOffices =  r.allOffices;
+             console.log(this.allOffices);
              this.pending = false;
            });
          }

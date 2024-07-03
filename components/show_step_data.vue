@@ -2,6 +2,7 @@
   <div class="container mt-5">
     <div class="row">
       <!-- Square Footage -->
+<<<<<<< Updated upstream
       <div class="col-md-6">
         <div  class="row">
 
@@ -13,81 +14,44 @@
           @change="setData($event,section)"
           :validations="squareFootageValidations"
         />
+=======
+      <div v-if="section?.active == 1" v-for="(item, index) in section" :key="index" class="row">
+      <!-- {{ item }} -->
+        <div v-for="(field, index2) in item" :key="index2" class="col-sm-6">
+        
+          <div v-if="field?.active == 1 && field.category =='single' && field?.type =='numeric'" class="row">
+                <formInputNumber
+                :label="field.title"
+                :inputId="field.section_id"
+                v-model="squareFootage"
+                :validations="field.numeric"
+              />
+          </div>
+
+           <div v-if="field?.active == 1 && field?.category =='select' " class="row">
+              <formInputSelect
+                :label="field.title"
+                :selectId="field.section_id"
+                :options="field?.data"
+                v-model="field?.data"
+              />
+            </div> 
+
+        </div>
+
+>>>>>>> Stashed changes
       </div>
+    </div>
       <!-- Building Life -->
-      <div class="col-md-6">
-        <SelectInput
-          label="عمر ساختمان"
-          selectId="buildingLife"
-          :options="buildingLifeOptions"
-          v-model="buildingLife"
-        />
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <!-- Number of Floors -->
-      <div class="col-md-6">
-        <SelectInput
-          label="تعداد طبقات"
-          selectId="numberOfFloors"
-          :options="numberOfFloorsOptions"
-          v-model="numberOfFloors"
-        />
-      </div>
-      <!-- Floor Location -->
-      <div class="col-md-6">
-        <SelectInput
-          label="موقعیت طبقه"
-          selectId="floorLocation"
-          :options="floorLocationOptions"
-          v-model="floorLocation"
-        />
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <!-- Number of Building Units -->
-      <div class="col-md-6">
-        <number
-          label="تعداد واحدهای ساختمان"
-          inputId="buildingUnits"
-          v-model="buildingUnits"
-          :validations="numValidations"
-        />
-      </div>
-      <!-- Number of Rooms -->
-      <div class="col-md-6">
-        <SelectInput
-          label="تعداد اتاق"
-          selectId="numberOfRooms"
-          :options="numberOfRoomsOptions"
-          v-model="numberOfRooms"
-        />
-      </div>
-    </div>
-
-    <div class="row mt-3">
-      <!-- Year of Construction -->
-      <div class="col-md-6">
-        <number
-          label="سال ساخت"
-          inputId="yearOfConstruction"
-          v-model="yearOfConstruction"
-          :validations="numberValidations"
-        />
-      </div>
-    </div>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import number from "./formInput/number.vue";
-import SelectInput from "./formInput/select.vue";
+
 let prop = defineProps(['section']);
 const section = toRefs(prop).section?.value;
-console.log(section);
+
 const squareFootage = ref(null);
 const buildingUnits = ref(null);
 const yearOfConstruction = ref(null);

@@ -4,18 +4,31 @@
     <!-- Three-step list wizard -->
     <div class="wizard">
       <ul class="wizard-steps">
+<<<<<<< Updated upstream
         <li v-for="(item, index) in wizard.section" :key="index" :class="{ active: currentStep === index }"
           @click="changeStep(index)">{{ index }}</li>
 
+=======
+        <li v-for="(item, index) in wizard.section" :key="index" :class="currentStep === index ? 'active' : '' " @click="changeStep(index)">{{index}}</li>
+>>>>>>> Stashed changes
 
       </ul>
     </div>
 
+<<<<<<< Updated upstream
       
 
     <div v-if="currentStep == 0">
       <show_step_data  :section="wizard.section" />
       
+=======
+    <!-- Content based on currentStep -->
+    <div> 
+      <show_step_data v-for="(item, index2) in wizard.section" :key="index2" v-if="currentStep == index2"  :section="item" />
+    <!-- <div v-if="wizard.section[currentStep]"> -->
+      <!-- {{wizard.section[currentStep]}} -->
+     
+>>>>>>> Stashed changes
     </div>
 
     <div v-if="currentStep == 1">
@@ -66,7 +79,7 @@
   
     <!-- Buttons -->
     <div class="buttons">
-      <button v-if="currentStep !== 1" @click="prevStep">قبلی</button>
+      <button v-if="currentStep !== 0" @click="prevStep">قبلی</button>
       <button v-if="currentStep !== 3" @click="nextStep">بعدی</button>
       <button v-if="currentStep === 3" @click="handleSubmit">ثبت</button>
     </div>
@@ -78,7 +91,13 @@ import { ref } from "vue";
 import axios from 'axios';
 // console.log(wizard.section);
 let prop = defineProps(['wizard']);
+<<<<<<< Updated upstream
 const numberValidations = ["required", "number"];
+=======
+const wizard = toRefs(prop).wizard?.value;
+console.log(wizard);
+const currentStep = ref(0);
+>>>>>>> Stashed changes
 
 const wizard = toRefs(prop).wizard?.value;
 
