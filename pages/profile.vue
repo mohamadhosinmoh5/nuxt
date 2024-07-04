@@ -30,7 +30,16 @@ Bug Fix
             </div>
 
             <div :class="(closeBox) ? `sidebar dropdown-box` : `sidebar border-left`">
+                <div class="div col-sm-1">
+                    <div v-if="closeBox" class="background-open">
+                        <a class="openIcon" @click="closeBox = false"><img src="assets/img/left.png" alt=""></a>
+                    </div>
 
+                    <div v-if="!closeBox" class="background">
+                        <a class="bcak" @click="closeBox = true"><img src="assets/img/right.png" alt=""></a>
+                    </div>
+
+                </div>
                 <div class="logo_items col-sm-12">
                     <div class="TitleText">
                         <div class="col mt-3 ms-2">
@@ -133,12 +142,12 @@ Bug Fix
                                         style="width: 25px;position: relative; right: 10%" alt="">
                                 </a>
                             </li>
-                            <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
+                            <!-- <NuxtLink class="linkss" to="https://homeenger.com/mag/contact-us/">
                                 <div class="col mt-3">
                                     <i class="fa fa-address-book" aria-hidden="true"></i>
                                     <a class="mediumtxt ms-2"> تماس با ما</a>
                                 </div>
-                            </NuxtLink>
+                            </NuxtLink> -->
                         </ul>
 
                     </div>
@@ -152,7 +161,7 @@ Bug Fix
                     </p>
                 </div>
             </div>
-            <div class="div col-sm-1">
+            <!-- <div class="div col-sm-1">
                 <div v-if="closeBox" class="background-open">
                     <a class="openIcon" @click="closeBox = false"><img src="assets/img/left.png" alt=""></a>
                 </div>
@@ -161,8 +170,8 @@ Bug Fix
                     <a class="bcak" @click="closeBox = true"><img src="assets/img/right.png" alt=""></a>
                 </div>
 
-            </div>
-            <div :style="(closeBox) ? `width:80% !important;` : `width:80% !important;`">
+            </div> -->
+            <!-- <div :style="(closeBox) ? `width:80% !important;` : `width:80% !important;`">
                 <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
                 <dashboard @clicked="loadingStyle" :loading="loading" :user="user" v-if="showDashboard" />
                 <cash-wallet @clicked="loadingStyle" :loading="loading" v-if="showWallet" />
@@ -172,7 +181,7 @@ Bug Fix
                 <mylicence @clicked="loadingStyle" :loading="loading" v-if="MyLicence" />
                 <roll v-if="Rolls" />
                 <contact v-if="ContactUs" />
-            </div>
+            </div> -->
         </div>
     </div>
 
