@@ -253,10 +253,10 @@
     .count-cart {
         margin: 0 30px !important;
     }
-    
+
     .checking {
         margin: 15px 0px;
-        text-wrap: nowrap   ;
+        text-wrap: nowrap;
         list-style: none;
         position: relative;
     }
@@ -1569,6 +1569,27 @@
     /* z-index: 1111; */
 }
 
+.show-box {
+    position: sticky;
+    height: auto;
+    border-radius: 20px;
+    transition: all 0.4s ease-out;
+    /* transform: rotateY(-170deg) translateZ(1px); */
+    /* animation:  show-box  5s infinite; */
+    animation-delay: 3s;
+    /* z-index: 1111; */
+}
+
+@keyframes show-box {
+    from {
+        top: 0px;
+    }
+
+    to {
+        bottom: 200px;
+    }
+}
+
 .topboxes {
     position: absolute;
     right: 20%;
@@ -1956,15 +1977,6 @@
 
 .ording a {
     cursor: pointer;
-}
-
-.close-navbarr {
-    padding: 8px;
-    color: var(--cf-title-color);
-    border: 1px solid var(--cf-grey-icon-color);
-    background-color: #eeeeee5c;
-    border-radius: 10px;
-    float: left;
 }
 
 .close-navbar {
@@ -2588,6 +2600,8 @@
         border: 1px solid var(--cf-grey-icon-color);
         width: 100% !important;
     }
+
+
 }
 
 .border-left {
@@ -2634,452 +2648,33 @@
     border: 1px solid var(--cf-green-color);
 }
 
-
-/* my Sidebar menue */
-/* Import Google font - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-
-/* Pre css */
-.flex {
-    display: flex;
-    align-items: center;
-}
-
-.nav_image {
-    display: flex;
-    min-width: 55px;
-    justify-content: center;
-}
-
-.nav_image img {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.background img {
-    height: 15px;
-    width: 15px;
-    z-index: 99999999999;
-    position: absolute;
-    color: var(--cf-dark-color);
-    right: 5px;
-    top: 5px;
-}
-
-.background {
-    width: 25px;
-    height: 25px;
-    background: var(--cf-grey-icon-color);
-    /* opacity: 0.08; */
-    right: 260px;
-    top: 65px;
-    border-radius: 20px;
-    position: absolute;
-}
-
-.background-open img {
-    height: 15px;
-    width: 15px;
-    z-index: 99999999999;
-    position: absolute;
-    color: var(--cf-dark-color);
-    right: 5px;
-    top: 5px;
-}
-
-.background-open {
-    width: 25px;
-    height: 25px;
-    background: var(--cf-grey-icon-color);
-    /* opacity: 0.08; */
-    right: 47px;
-    top: 65px;
-    border-radius: 20px;
-    position: absolute;
-}
-
-@media screen and (max-width: 992px) {
-    .background-open {
-        display: none;
-    }
-
-    .background {
-        display: none;
-    }
-}
-
-/* Sidebar */
-.sidebar {
-    position: relative;
-    float: right;
-    top: 5px;
-    border-radius: 20px;
-    height: 660px;
-    width: 270px;
-    overflow: hidden;
-    background: #fff;
-    z-index: 111111111;
-    padding: 15px 10px;
-    box-shadow: 2px 2px 2px 1px rgba(20, 19, 19, 0.2);
-}
-
-@media screen and (max-width: 992px) {
-    .sidebar {
-        position: relative;
-        float: right;
-        /* top: 0; */
-        height: 100vh;
-        width: 270px;
-        background: #fff;
-        z-index: 111111111;
-        padding: 15px 10px;
-        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
-
-    }
-}
-
-
-
-.menu_container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-top: 40px;
-    overflow-y: auto;
-    height: calc(100% - 82px);
-}
-
-.menu_container::-webkit-scrollbar {
-    display: none;
-}
-
-.menu_title {
-    position: relative;
-    height: 50px;
-    width: 55px;
-}
-
-.menu_title .title {
-    margin-left: 15px;
-    transition: all 0.3s ease;
-}
-
-.sidebar.close .title {
-    opacity: 0;
-}
-
-.menu_title .line {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 3px;
-    width: 20px;
-    border-radius: 25px;
-    background: #aaa;
-    transition: all 0.3s ease;
-}
-
-.menu_title .line {
-    opacity: 0;
-}
-
-.sidebar.close .line {
-    opacity: 1;
-}
-
-.item {
-    list-style: none;
-}
-
-.link {
-    text-decoration: none;
-    font-family: 'anjomanReqular';
-    font-size: 16px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    color: #707070;
-}
-
-.link img {
-    color: #707070;
-}
-
-.link:hover {
-    color: var(--cf-title-color);
-    /* padding: 5px; */
-    /* height: 30px; */
-    /* background-color: #eeeeee5c; */
-}
-
-.borderProfile {
-    border: 1px solid var(--cf-grey-icon-color);
-    position: relative;
-    top: 5px;
-    right: 15%;
-    width: 100%;
-}
-
-.link span {
-    white-space: nowrap;
-}
-
-.link i {
-    height: 50px;
-    min-width: 55px;
-    display: flex;
-    font-size: 22px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-}
-
-.addAdress {
-    padding: 8px;
-    border: 1px solid var(--cf-grey-icon-color);
-    background-color: transparent;
-    border-radius: 10px;
-}
-
-.Edame {
-    padding: 8px;
-    position: relative;
-    right: 10px;
-    color: var(--cf-title-color);
-    border: 1px solid var(--cf-grey-icon-color);
-    background-color: #eeeeee5c;
-    border-radius: 10px;
-}
-
-.chooseAddress {
-    font-family: 'anjoman';
-    font-weight: 100;
-    margin: 10px;
-}
-
-.address-Titles {
-    font-family: 'anjoman';
-    font-size: 18px;
-}
-
-.form-control {
-    /* position: relative; */
-    right: 18%;
-    text-align: right;
-}
-
-@media screen and (max-width: 992px) {
-    .form-control {
-        position: relative;
-        right: 0%;
-        text-align: right;
-    }
-
-}
-
-
-
-.menu_items {
-    position: relative;
-    /* left: 25%; */
-    right: -50px;
-}
-
-.NewIcon {
-    color: var(--cf-title-color);
-    font-size: 18px;
-    min-width: 55px;
-}
-
-.stylingIcon {
-    color: var(--cf-title-color);
-    font-size: 18px;
-    min-width: 22px;
-}
-
-.card-text {
-    font-size: 16px;
-}
-
-.sidebar_profile {
-    padding-top: 15px;
-    margin-top: 15px;
-    gap: 15px;
-    border-top: 2px solid rgba(0, 0, 0, 0.1);
-}
-
-.sidebar_profile .name {
-    font-size: 18px;
-    color: #333;
-}
-
-.sidebar_profile .email {
-    font-size: 15px;
-    color: #333;
-}
-
-/* Navbar */
-
-#sidebar-open {
-    font-size: 30px;
-    color: #333;
-    cursor: pointer;
-    margin-right: 20px;
-    display: none;
-}
-
-.navbar img {
-    height: 40px;
-    width: 40px;
-    margin-left: 20px;
-}
-
-/* Responsive */
-@media screen and (max-width: 1100px) {
-    .navbar {
-        left: 65%;
-    }
-
-}
-
-
-
-@media screen and (max-width: 800px) {
-    .sidebar {
-        left: 0;
-        z-index: 1000;
-    }
-
-    .sidebar.close {
-        left: -100%;
-    }
-
-    #sidebar-close {
-        display: block;
-    }
-
-    #lock-icon {
-        display: none;
-    }
-
-    .navbar {
-        left: 0;
-        max-width: 100%;
-        transform: translateX(0%);
-    }
-
-    #sidebar-open {
-        display: block;
-    }
-}
-
-/* End sidebar menue */
-
-.cartDetails {
-    position: relative;
-    /* right: 1%; */
-    /* width: 89%; */
-    padding: 20px;
-    width: 100%;
-    top: 20px;
-    min-height: 300px;
-    border-radius: 10px;
-    border-style: solid;
-    border-width: 0.5px;
-    border-color: var(--cf-grey-icon-color);
-    box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
-}
-
-.imageBackground {
-    position: relative;
-    background-color: var(--cf-light-color);
-    width: 100px;
-    height: 100px;
-}
-
-.mapSub {
-    font-size: 16px;
-    color: var(--cf-title-color);
-    font-weight: 700;
-    font-family: 'anjomanReqular';
-}
-
-.adsTitle {
-    color: var(--cf-title-color);
-    font-size: 18px;
-    font-family: 'anjomanReqular';
-    font-weight: 700;
-}
-
-.mapTxt {
-    color: var(--cf-title-color);
-    font-size: 18px;
-    font-family: 'anjomanReqular';
-    font-weight: 700;
-
-}
-
-.next {
+/* mapPage */
+.adseMap {
+    width: 400px;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    float: left;
-    bottom: 20px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.adseMapBox {
+    width: 450px;
+    height: 250px;
     position: relative;
-    color: var(--cf-light-color);
-    background-color: var(--cf-green-color);
-
+    right: 20%;
+    border-radius: 20px;
 }
 
-.nextPage {
-    text-decoration: none;
-    color: var(--cf-light-color);
+
+@media screen and (max-width: 992px) {
+    .adseMapBox {
+        width: 450px;
+        height: 250px;
+        position: relative;
+    
+        right: -1%;
+        border-radius: 20px;
+    }
 }
 
-.nextPage {
-    color: var(--cf-light-color);
-}
-
-.etelaat {
-    font-weight: 700;
-    font-family: 'anjomanWebBold';
-    color: var(--cf-title-color);
-    font-size: 20px;
-}
-
-.etelaSub {
-    font-weight: 700;
-    color: var(--cf-title-color);
-    font-family: 'anjomanWebBold';
-    font-size: 14px;
-}
-
-.checkTxt {
-    color: var(--cf-title-color);
-    font-size: 16px;
-    font-weight: 700;
-    font-family: 'anjomanReqular';
-    width: 100%;
-}
-
-.shopMapAdrres {
-    width: 100%;
-    height: 100vh;
-    padding: 20px;
-    /* background-color: var(--cf-grey-icon-color); */
-    /* Center horizontally*/
-    margin: 0 auto;
-}
-
-.mapStyle {
-    display: block;
-    text-align: center;
-}
-
-.addressBox {
-    width: 50%;
-    border-radius: 5px;
-    height: 20%;
-    border: 1px solid var(--cf-dark-color);
-}
+/* end mappage */

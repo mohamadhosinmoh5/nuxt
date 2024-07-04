@@ -23,6 +23,7 @@
     "@pinia/nuxt": "^0.5.1",
     "@vueuse/nuxt": "^10.7.0",
     "alertifyjs": "^1.13.1",
+    "axios": "^1.7.2",
     "babel-core": "^6.26.3",
     "mapbox-gl": "^3.1.0",
     "num2persian": "^3.2.2",
