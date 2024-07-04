@@ -383,12 +383,12 @@
   </div>
   <!-- this is for bottomNavigationBar -->
   <div class="navbar">
-    <div class="list-item">
+    <!-- <div class="list-item">
       <button type="button" class="prson">
         <img src="assets/img/home-1 2.svg" style="width: 20px;" />
         <a href="#" class="homeIcon">خانه</a>
       </button>
-    </div>
+    </div> -->
     <!-- this is for bottomNavigationBar -->
     <div class="navbar">
       <div class="list-item">

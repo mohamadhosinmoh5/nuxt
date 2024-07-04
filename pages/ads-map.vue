@@ -4,7 +4,7 @@
         <p class="text-center">موقعیت دقیق مکان در لیست آگهی ها نمایش داده نخواهد شد</p>
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 mt-3">
                 <div class="adseMapBoxe">
                     <l-map id="map" ref="mapRef" :zoom="16" :center="[36.841658, 54.432422]" @click="fetchAddressData">
                         <l-tile-layer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"

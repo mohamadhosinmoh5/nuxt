@@ -28,10 +28,10 @@
     </div>
 
     <div v-if="currentStep == 2">
-      <h6>قیمت</h6>
-      <h6>لطفا در این قسمت قیمت ملک خود را به صورت قیمت کل و قیمت هر متر جداگانه وارد نمایید </h6>
+      <h6 class="text-center">قیمت</h6>
+      <h6 class="text-center">لطفا در این قسمت قیمت ملک خود را به صورت قیمت کل و قیمت هر متر جداگانه وارد نمایید </h6>
       <div v-for="Price in wizard.section[2].field" :key="Price.id" class="price">
-        <div class="form-group mt-2">
+        <div class="form-group adsform mt-2">
           <label for="exampleInputEmail1">{{ Price.title }}</label>
           <!-- {{ FormData.data_sections[Price.id] }} -->
           <input type="text" @change="setData($event, Price, Price.id)" class="form-control" id="exampleInputEmail1"
@@ -42,11 +42,10 @@
       </div>
     </div>
     <div v-if="currentStep == 3">
-      <h6>مشخصات</h6>
-
-      <h6>در این قسمت می توانید اطلاعات مالک را وارد نمایید . این اطلاعات به کاربران دیگر نمایش داده نمی شود</h6>
+      <h6 class="text-center">مشخصات</h6>
+      <h6 class="text-center">در این قسمت می توانید اطلاعات مالک را وارد نمایید , این اطلاعات به کاربران دیگر نمایش داده نمی شود</h6>
       <div v-for="Price in wizard.section[3].field" :key="Price.id" class="price">
-        <div class="form-group mt-3">
+        <div class="form-group adsform mt-3">
           <label for="exampleInputEmail1">{{ Price.title }}</label>
           <input type="text" class="form-control" @change="setData($event, Price, Price.id)" id="exampleInputEmail1"
             aria-describedby="emailHelp" placeholder="">

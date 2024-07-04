@@ -89,7 +89,7 @@
 .Titleontop {
     margin: 10px;
     text-decoration: none;
-    font-size: 22px;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--cf-title-color);
     font-family: 'anjomanReqular';
@@ -102,8 +102,8 @@
 .Price {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'anjoman';
-    font-weight: 400;
+    font-family: 'anjomanReqular';
+    font-weight: 700;
     font-size: 14px;
 }
 
@@ -117,21 +117,22 @@
 
 .subtitle {
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 14px;
     /* font-size: medium; */
     color: var(--cf-subtitle-color);
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 
 }
 
 .figmafont {
     text-decoration: none;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    /* font-size: 16px; */
     /* font-size: medium; */
     color: var(--cf-subtitle-color);
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 }
 
 .figmafont:hover {
@@ -1281,9 +1282,10 @@
 .mediumtxt {
     cursor: pointer;
     font-size: 14px;
+    font-weight: 700;
     color: var(--cf-title-color);
     text-decoration: none;
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 }
 
 .mediumtxt:hover {
@@ -2172,7 +2174,7 @@
 
     }
 
-    input{
+    input {
         padding: 8px 12px;
         color: #fff;
         background-color: #41b883;
@@ -2603,16 +2605,20 @@
 
 
 }
-.next{
+
+.next {
     padding: 12px;
     border-radius: 10px;
     background-color: #197C82;
+    color: #FFF;
     border: none;
 }
-.next a{
+
+.next a {
     color: white;
     text-decoration: none;
 }
+
 .border-left {
     border-left: 1px solid var(--cf-grey-icon-color);
     height: 100vi;
@@ -2663,6 +2669,7 @@
     padding: 10px;
     height: 100px;
     border: 1px solid black;
+    /* z-index: 99999999999; */
     border-radius: 10px;
 }
 
@@ -2674,11 +2681,14 @@
     /* right: 20%; */
     border-radius: 20px;
 }
-.adseMapBoxe{
+
+.adseMapBoxe {
     position: absolute;
     width: 500px;
+    /* top: 10px; */
+    border: 3px solid var(--cf-grey-icon-color);
     height: 80%;
-    border-radius: 20px;
+    border-radius: 2px;
 
 }
 
@@ -2692,30 +2702,31 @@
         border-radius: 20px;
     }
 
-    .DetailesMap{
+    .DetailesMap {
         position: relative;
         top: 300px;
     }
 
-    .adseMap{
+    .adseMap {
         position: relative;
         top: 300px;
     }
 
-    .adseMapBoxe{
+    .adseMapBoxe {
         position: absolute;
         width: 500px;
         height: 300px;
         /* margin: 10px; */
+        border: none;
         left: 1px;
         border-radius: 20px;
-    
+
     }
-    
+
 }
 
 /* end mappage */
-.form-checks{
+.form-checks {
     border: 1px solid var(--cf-grey-icon-color);
     padding: 5px;
     min-width: 10px;
@@ -2727,7 +2738,7 @@
 }
 
 @media screen and (max-width: 992px) {
-    .form-checks{
+    .form-checks {
         border: 1px solid var(--cf-grey-icon-color);
         padding: 5px;
         min-width: 10px;
@@ -2737,4 +2748,16 @@
         position: relative;
         right: 20%;
     }
+
+    .adsform {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+
+.adsform {
+    /* width: 50%; */
+    margin-right: 20%;
+    margin-left: 20%;
 }
