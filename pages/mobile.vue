@@ -312,7 +312,8 @@
                 </a>
               </div>
             </div>
-          </a>
+          
+          </NuxtLink>
 
           <div class="col-sm-12" v-if="notice?.section_data.length < 1">
             <div class="row">
@@ -363,8 +364,9 @@
               <h4 class="mobile-notice-title ms-2">{{ office.title }}</h4>
             </div>
           </div>
+          </NuxtLink>
         </div>
-        </NuxtLink>
+     
         <div class="col-12 mt-3">
          <NuxtLink class="ontap" :to="`office/${office?.uuid}/${filterUrl(office?.title)}/?id=${office?.id}`" >
           <div class="row">
