@@ -289,7 +289,7 @@
                   <dashboard />
                   <dashboard /> -->
 
-
+                  <loader :start="loading" />
 </template>
 
 <!-- script -->

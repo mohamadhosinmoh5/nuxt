@@ -1,10 +1,9 @@
 <template>
   <div class="container-fluid p-4">
     <NuxtLayout name="header"></NuxtLayout>
-
-    <Category :cat="categories" />
+  
+      <Category :cat="categories" />
+    </div>
     <!-- <Wizard /> -->
-  </div>
-</template>
 
-<script setup></script>
+</template>

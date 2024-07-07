@@ -128,6 +128,7 @@
 
     </div>
     </div> -->
+    <loader :start="loading" />
 </template>
 
 

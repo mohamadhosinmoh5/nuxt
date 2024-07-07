@@ -45,9 +45,7 @@
 <script setup>
 import { ref } from 'vue';
 
-const markerPosition = ref(null);
-const addressText = ref('');
-const MapAddress = ref(null);
+
 
 // const addressData = ref({
 //     address: "",
@@ -71,6 +69,9 @@ const MapAddress = ref(null);
 //     village: ""
 // });
 
+const markerPosition = ref(null);
+const addressText = ref('');
+const MapAddress = ref(null);
 
 const fetchAddressData = async (event) => {
     const { lat, lng } = event.latlng;
@@ -85,7 +86,6 @@ const fetchAddressData = async (event) => {
     });
 
     if (data) {
-        console.log(data.value)
         MapAddress.value = data.value;
 
     } else {
