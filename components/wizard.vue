@@ -12,7 +12,7 @@
       <div class="alert alert-success text-center">
         مشخصات ملک خود را وارد کنید
       </div>
-      <show_step_data :section="wizard.section" />
+      <show_step_data :section="wizard.section[0]" />
     </div>
 
     <div v-if="currentStep == 1">
