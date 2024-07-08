@@ -20,15 +20,14 @@
         وضعیت آپشن های ملک رو مشخص کنید :)
       </div>
       <div v-for="Section in wizard.section[currentStep].field" :key="Section.id" class="adsFilter justify-content-center">
-        <form @submit.prevent="submitForm">
           <div class="form-checks ">
-            <input class="form-check-input" type="checkbox" :id="Section.id" :value="Section.id"
+
+            <input class="form-check-input" type="checkbox"  :id="Section.id" :value="Section.id"
               v-model="selectedOptions[Section.id]" />
             <label class="form-check-label ms-1" :for="Section.id">
               {{ Section.title }}
             </label>
           </div>
-        </form>
       </div>
     </div>
 
@@ -159,7 +158,6 @@
 import { ref } from "vue";
 // console.log(wizard.section);
 let prop = defineProps(['wizard']);
-const numberValidations = ["required", "number"];
 
 const wizard = toRefs(prop).wizard?.value;
 const sectionCount = ref(wizard.section.length);

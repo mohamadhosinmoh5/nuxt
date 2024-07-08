@@ -1,14 +1,15 @@
-function validate(data, validations) {
+function validate(data, validations,field) {
+  console.log(data, validations,field);
   const errors = [];
   validations.forEach((type) => {
     switch (type) {
       case "required":
         if (data == "") {
-          errors.push(`فیلد نمیتواند خالی باشد`);
+          errors.push(`${field} نمیتواند خالی باشد`);
         }
 
         break;
-      case "phoneNumber":
+      case "phone":
         const phoneNumber = data;
         if (
           !phoneNumber ||
@@ -19,10 +20,15 @@ function validate(data, validations) {
         }
         break;
       case "number":
-        if (isNaN(data)) {
+        if (typeof data === "number") {
           errors.push(`لطفا عدد وارد کنید.`);
         }
         break;
+      case "string":
+          if (typeof data === "string") {
+            errors.push(`${field} باید از نوع رشضته باشد`);
+          }
+          break;
     }
   });
   return errors.length == 0 ? true : errors;

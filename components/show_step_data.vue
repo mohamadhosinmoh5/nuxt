@@ -4,7 +4,7 @@
       <!-- Square Footage -->
       <div class="col-md-6">
         <div  class="row">
-
+        
         </div>
         <number
           label="متراژ"
@@ -87,6 +87,7 @@ import number from "./formInput/number.vue";
 import SelectInput from "./formInput/select.vue";
 let prop = defineProps(['section']);
 const section = toRefs(prop).section?.value;
+
 console.log(section);
 const squareFootage = ref(null);
 const buildingUnits = ref(null);
