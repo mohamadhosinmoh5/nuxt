@@ -1387,7 +1387,7 @@
 
 .text-spacing {
     position: relative;
-    right: 20%;
+    right: 10%;
 }
 
 @media screen and (max-width: 992px) {
@@ -1543,23 +1543,25 @@
 }
 
 .hiding-box {
-    /* height: 0px  !important; */
-    /* overflow: hidden; */
-    /* transform: rotatey(10deg); */
-    animation: spin 5s;
-    /* animation-delay: 3s;  */
-    /* z-index: 1111; */
-    position: fixed;
-    height: auto;
+    position: sticky;
+    height: 0px;
+    overflow: hidden;
     border-radius: 20px;
-    top: -100%;
     background: white;
+    /* transform: rotatey(10deg); */
+    visibility: initial;
+    animation: spin 5s;
+    animation-delay: 3s;
+    /* transition: all 0.4s ease-out; */
+    top: 0;
+    /* z-index: 1111; */
 }
 
 
 
+
 .show-box {
-    position: fixed;
+    position: sticky;
     height: auto;
     border-radius: 20px;
     top: 0;

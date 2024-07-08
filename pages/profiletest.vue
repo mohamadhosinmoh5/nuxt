@@ -30,7 +30,7 @@
                             </a>
                         </div>
                     </div>
-                    <div v-if="modalOpen" class="daftar-modal">
+                    <!-- <div v-if="modalOpen" class="daftar-modal">
                         <div class="daftarDetailes">
                             <div class="col-sm-12">
                                 <div class="col">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
                 <div class="liner-border col-12 mt-5" v-if="!closeBox"></div>
