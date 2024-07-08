@@ -96,7 +96,7 @@
           </div>
           <div class="col-sm-6 ">
               <div class="col-sm-12  text-start">
-                <textarea style="width:100%;height:min-height:250px;" name="" id="" > {{ MapAddress?.address }}</textarea>
+                <textarea style="width:100%;min-height:250px;" name="" id="" > {{ MapAddress?.address }}</textarea>
                  
               </div>
               <!-- Add other address fields as needed -->

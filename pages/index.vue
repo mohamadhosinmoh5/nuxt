@@ -275,79 +275,82 @@ export default {
           <div class="row">
             <div ref="menuAndMapBox" class="col-sm-3 menu">
               <div ref="menuAndMap" class="row">
-                <div class="tab_box">
+                <div class="tab_box col-12">
                   <div class="activeItem"></div>
-                  <a @click="showMap = false" class="col-6 tabItem active"> فیلتر ها </a>
-                  <a @click="showMap = true" class="col-6 tabItem"> نقشه</a>
+                  <a @click="showMap = false" class="col-6 tabItem" :class="{ active: !showMap }"> فیلتر ها </a>
+                  <a @click="showMap = true" class="col-6 tabItem" :class="{ active: showMap }"> نقشه</a>
                 </div>
                 <div class="row">
-                  <div v-if="showCat">
-                    <div class="row mt-5 " ref="menuBox">
-                      <div class="col-sm-12 ">
-                        <div class="row category-box">
-                          <div class="col-7">
-                            <div class="row">
-                              <div class="col-12 margin-fix">
-                                <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
-                                <h5 v-else class="category-title">دسته بندی ها</h5>
-                              </div>
-                              <div class="col-12">
-                                <div v-if="pending" class="spinner-border" role="status"></div>
+                  <transition name="fade" mode="out-in">
+                    <!-- Filter Section -->
+                    <div v-if="!showMap" key="filter" class="filter-section">
+                      <div class="row mt-5" ref="menuBox">
+                        <div class="col-sm-12">
+                          <div class="row category-box">
+                            <div class="col-7">
+                              <div class="row">
+                                <div class="col-12 margin-fix">
+                                  <h5 v-if="lastCat !== null" class="category-title">{{ lastCat }}</h5>
+                                  <h5 v-else class="category-title">دسته بندی ها</h5>
+                                </div>
+                                <div class="col-12">
+                                  <div v-if="pending" class="spinner-border" role="status"></div>
+                                </div>
                               </div>
                             </div>
+                            <div class="col-5 text-end">
+                              <span class="backCat" @click="lastCategory">
+                                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
+                              </span>
+                            </div>
                           </div>
-                          <div class="col-5 text-end">
-                            <span class="backCat" @click="lastCategory">
-                              <i class="fa fa-chevron-circle-left" aria-hidden="true"></i> بازگشت
-                            </span>
-                          </div>
+                          <ul class="categoryBox">
+                            <li v-for="(item, index) in categories" :key="index">
+                              <img v-if="index == 0" src='/assets/img/catOne.svg'>
+                              <img v-if="index == 1" src='/assets/img/catTow.svg'>
+                              <img v-if="index == 2" src='/assets/img/catTree.svg'>
+                              <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
+                            </li>
+                          </ul>
+                          <span v-if="emptyCat" class="alert-danger">{{ emptyCat }}</span>
                         </div>
-                        <ul class="categoryBox">
-                          <li v-for="(item, index) in categories" :key="index">
-                            <img v-if="index == 0" src='/assets/img/catOne.svg'>
-                            <img v-if="index == 1" src='/assets/img/catTow.svg'>
-                            <img v-if="index == 2" src='/assets/img/catTree.svg'>
-                            <a @click="getCategory(item.id), setCat(item)" class="link">{{ item.title }}</a>
-                          </li>
-                        </ul>
-                        <span v-if="emptyCat" class=" alert-danger">{{ emptyCat }}</span>
-                      </div>
-                      <div :class="(officeShow) ? `disable` : ``">
-                        <Filter :status="pending" @clicked="filterUptaded" />
+                        <div :class="(officeShow) ? 'disable' : ''">
+                          <Filter :status="pending" @clicked="filterUpdated" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-
-                  <div v-if="showMap && allNotices[0].address != null" class="stickyStyle">
-                    <LMap v-if="allNotices" id="map" ref="mapRef" :zoom="16"
-                      :center="[allNotices[1].address.lat, allNotices[1].address.lng]" @zoomend="changeZoom"
-                      @click="markersIconCallback">
-                      <!-- url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"  -->
-                      <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
-                      <LTileLayer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
-                        attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
-                        layer-type="base" name="OpenStreetMap" />
-
-                      <l-circle-marker :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]" :radius="10"
-                        color="red" />
-                      <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`" :key="notice.id"
-                        :lat-lng="[notice.address.lat, notice.address.lng]">
-                        <l-popup @ready="ready">
-                          <div class="title">
-                            <NuxtLink class="link" :href="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
-                              {{ notice.title }}
-                            </NuxtLink>
-                          </div>
-                        </l-popup>
-                      </l-marker>
-
-                    </LMap>
-                  </div>
-
+                  </transition>
+                  <transition name="fade" mode="out-in">
+                    <!-- Map Section -->
+                    <div v-if="showMap && allNotices[0]?.address" key="map" class="map-section stickyStyle">
+                      <LMap v-if="allNotices" id="map" ref="mapRef" :zoom="16"
+                        :center="[allNotices[1].address.lat, allNotices[1].address.lng]" @zoomend="changeZoom"
+                        @click="markersIconCallback">
+                        <!-- url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"  -->
+                        <l-polygon :lat-lngs="polygonGrg" color="transparent"></l-polygon>
+                        <LTileLayer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
+                          attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                          layer-type="base" name="OpenStreetMap" />
+                        <l-circle-marker :lat-lng="[allNotices[1].address.lat, allNotices[1].address.lng]" :radius="10"
+                          color="red" />
+                        <l-marker v-for="notice in allNotices" :ref="`marker_${notice.id}`" :key="notice.id"
+                          :lat-lng="[notice.address.lat, notice.address.lng]">
+                          <l-popup @ready="ready">
+                            <div class="title">
+                              <NuxtLink class="link" :href="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
+                                {{ notice.title }}
+                              </NuxtLink>
+                            </div>
+                          </l-popup>
+                        </l-marker>
+                      </LMap>
+                    </div>
+                  </transition>
                 </div>
               </div>
             </div>
-
+            <!-- Main Content -->
+            
             <!-- start Card-->
             <div ref="noticeBox" class="col-sm-9">
               <div class="row category-box-sort">

@@ -61,7 +61,7 @@ body {
     display: none;
 }
 
-p{
+p {
     font-family: anjomanLight, sans-serif !important;
 }
 
@@ -125,7 +125,7 @@ p{
     border-radius: 10px;
 }
 
-.profLink a{
+.profLink a {
     background: #cfcfcf;
     border-radius: 10px;
     padding: 10px;
@@ -1561,7 +1561,8 @@ label {
     /* right: 100%; */
     color: white;
 }
-.btn-default-two{
+
+.btn-default-two {
     background: var(--cf-grey-icon-color);
     border: 0;
     padding: 6px 12px;
@@ -1574,10 +1575,11 @@ label {
     /* right: 100%; */
     color: var(--cf-title-color);
 }
+
 @media screen and (min-width: 576px) {
-  
-    .btn-default-two{
-        display: none; 
+
+    .btn-default-two {
+        display: none;
     }
 }
 
@@ -1693,15 +1695,17 @@ label {
     overflow: hidden;
 }
 
-.tab-txts{
+.tab-txts {
     text-decoration: none;
     color: var(--cf-dark-color);
     font-family: 'anjoman';
     font-size: 16px;
 }
-.tab-txts:hover{
+
+.tab-txts:hover {
     color: var(--cf-dark-color);
 }
+
 .closeBox {
     overflow: hidden;
     height: 0px !important;
@@ -2109,7 +2113,7 @@ input:checked+.slider:before {
 }
 
 
-.loaderBox{
+.loaderBox {
     direction: ltr;
     position: fixed;
     text-align: center;
@@ -2118,7 +2122,7 @@ input:checked+.slider:before {
     z-index: 1111111;
 }
 
-.progress{
+.progress {
     height: 5px;
     width: 0%;
 }
@@ -2221,7 +2225,7 @@ input:checked+.slider:before {
 }
 
 .mob-map {
-    height: 70px ;
+    height: 70px;
     overflow: hidden;
 }
 
@@ -2265,7 +2269,7 @@ input:checked+.slider:before {
 }
 
 
-.box-similer { 
+.box-similer {
     /* height:500px;
     overflow: scroll; */
 
@@ -2276,6 +2280,17 @@ input:checked+.slider:before {
     width: 30px;
     height: 30px;
     border: none;
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
 }
 
 /*  shoping cart */
