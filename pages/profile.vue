@@ -1,8 +1,9 @@
 <template>
     <div class="container-fluid">
+        <loader :start="start"/>
         <div class="d-flex justify-content-between">
             <div :class="['main-content', { 'main-content-expanded': closeBox }]">
-                <div v-if="loading" class="spinner-border text-secondary" role="status"></div>
+                <!-- <div v-if="loading" class="spinner-border text-secondary" role="status"></div> -->
                 <dashboard @clicked="loadingStyle" :loading="loading" :user="user" v-if="showDashboard" />
                 <cash-wallet @clicked="loadingStyle" :loading="loading" v-if="showWallet" />
                 <buylicence @clicked="loadingStyle" :loading="loading" v-if="BuyLicence" />
@@ -151,9 +152,11 @@ const Rolls = ref(false)
 const ContactUs = ref(false)
 const modalOpen = ref(false)
 const loading = ref(true)
+const start = ref(true)
 
 const loadingStyle = (query) => {
-    loading.value = false
+    // loading.value = false
+    start.value = false
 }
 
 const changeMenu = (name) => {
@@ -202,8 +205,10 @@ const toggleSidebar = () => {
 }
 
 setTimeout(() => {
+    start.value = true
     useUser.getCarts().then((r) => {
         carts.value = r
+        // this.start = false
         loadingStyle(false)
     })
 

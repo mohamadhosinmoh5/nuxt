@@ -2878,4 +2878,17 @@
     transform: rotate(180deg);
 }
 
+.addingcount{
+    text-decoration: none;
+    color: var(--cf-dark-color);
+    cursor: pointer;
+    margin: 10px
+}
+
+.forback{
+    background-color: var(--cf-grey-icon-color);
+    text-decoration: none;
+    border-radius: 10px;
+}
+
 /* End Navbar */

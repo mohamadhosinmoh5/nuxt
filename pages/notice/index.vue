@@ -6,7 +6,9 @@
         </title>
         <!-- addin html code -->
 
-        <div v-if="loadingStyle" class="spinner-border text-secondary" role="status"></div>
+        <!-- <div v-if="loadingStyle" class="spinner-border text-secondary" role="status"></div> -->
+        <loader :start="start" />
+
 
         <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
             {{ useNotice.error?.message }}
@@ -46,7 +48,7 @@
                                 <div v-if="notice.address != null" class="col-md-4">
                                     <a href="#" class="figmafont">محله : </a>
                                     <a href="#" class="texts">{{
-                notice.address.address.neighbourhood }}</a>
+                                        notice.address.address.neighbourhood }}</a>
                                 </div>
                                 <div class="col-4">
                                     <a href="#" class="figmafont">
@@ -63,10 +65,10 @@
                                 </div>
                                 <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">
                                     قیمت : {{ (useNotice?.notice?.pricing?.discount_percent > 0) ?
-                convertPrice(notice?.pricing.price - (notice?.pricing.price
-                    *
-                    notice.pricing.discount_percent / 100)) :
-                convertPrice(notice?.pricing.price) }} تومان
+                                        convertPrice(notice?.pricing.price - (notice?.pricing.price
+                                            *
+                                            notice.pricing.discount_percent / 100)) :
+                                    convertPrice(notice?.pricing.price) }} تومان
                                 </div>
                             </div>
                             <div class="lineee mt-3"></div>
@@ -74,19 +76,19 @@
                                 class="boxdetailes col-xs-12 row mt-3">
                                 <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                notice.section_data_collection[2].items[0].field.title }}:</a>
+                                        notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
+                                        convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
                                     </a>
                                 </div>
 
 
                                 <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                notice.section_data_collection[2].items[1].field.title }}:</a>
+                                        notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">
                                         {{
-                convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
+                                            convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
                                     </a>
 
 
@@ -229,10 +231,10 @@
 
                                         <div v-else-if="notice?.pricing != null">
                                             قیمت : {{ (notice?.pricing?.discount_percent > 0) ?
-                convertPrice(notice?.pricing?.price - (notice?.pricing?.price
-                    *
-                    notice.pricing?.discount_percent / 100)) :
-                convertPrice(notice?.pricing?.price) }} تومان
+                                                convertPrice(notice?.pricing?.price - (notice?.pricing?.price
+                                                    *
+                                                    notice.pricing?.discount_percent / 100)) :
+                                            convertPrice(notice?.pricing?.price) }} تومان
                                         </div>
 
                                     </div>
@@ -272,7 +274,7 @@
                                 <div v-if="notice.address != null" class="col-md-4">
                                     <a href="#" class="figmafont">محله : </a>
                                     <a href="#" class="texts">{{
-                notice.address.address.neighbourhood }}</a>
+                                        notice.address.address.neighbourhood }}</a>
                                 </div>
                                 <div class="col-4">
                                     <a href="#" class="figmafont">
@@ -289,10 +291,10 @@
                                 </div>
                                 <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">
                                     قیمت : {{ (useNotice?.notice?.pricing?.discount_percent > 0) ?
-                convertPrice(notice?.pricing.price - (notice?.pricing.price
-                    *
-                    notice.pricing.discount_percent / 100)) :
-                convertPrice(notice?.pricing.price) }} تومان
+                                        convertPrice(notice?.pricing.price - (notice?.pricing.price
+                                            *
+                                            notice.pricing.discount_percent / 100)) :
+                                    convertPrice(notice?.pricing.price) }} تومان
                                 </div>
                             </div>
                             <div class="lineee mt-3"></div>
@@ -300,19 +302,19 @@
                                 class="boxdetailes col-xs-12 row mt-3">
                                 <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                notice.section_data_collection[2].items[0].field.title }}:</a>
+                                        notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
+                                        convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
                                     </a>
                                 </div>
 
 
                                 <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                notice.section_data_collection[2].items[1].field.title }}:</a>
+                                        notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">
                                         {{
-                convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
+                                            convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
                                     </a>
 
 
@@ -404,7 +406,8 @@
                             <a href="#" class="daftar_text ms-2">هومنگر</a>
                             <img src="assets/img/SinglePage_Image/row.svg"
                                 style="float: left; top: 6px;position: relative;" alt="">
-                            <NuxtLink :to="`${useRuntimeConfig().public.HomeUrl}/office?uid=${notice.office?.uuid}&slug=${notice.office?.title}&id=${notice.office?.id}`"
+                            <NuxtLink
+                                :to="`${useRuntimeConfig().public.HomeUrl}/office?uid=${notice.office?.uuid}&slug=${notice.office?.title}&id=${notice.office?.id}`"
                                 class="daftar_textt ms-1 mt-2"> دفتر ها </NuxtLink>
                         </div>
                         <div class="col-12 map_box">
@@ -455,13 +458,13 @@
                                             <div class="row">
                                                 <div class="col-6 text-section">
                                                     {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
-                notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                                                        notice?.section_data_collection[0].items[0]?.data[0] }} متر
                                                 </div>
 
                                                 <div v-if="notice?.section_data_collection[0].items[5]"
                                                     class="col-6 text-section">
                                                     {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
-                notice?.section_data_collection[0].items[5]?.data[0] }}
+                                                        notice?.section_data_collection[0].items[5]?.data[0] }}
                                                 </div>
 
                                                 <div class="col-sm-12 text-section mt-4">
@@ -471,12 +474,13 @@
                                                             {{ notice?.section_data_collection[2].items[0]?.field?.title
                                                             }}
                                                             : {{
-                                                            convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
+                                                                convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
                                                             }} تومان
                                                         </div>
 
                                                         <div class="col-2">
-                                                            <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
+                                                            <NuxtLink
+                                                                :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                                                                 <img src="~/assets/img/arrow-left.svg" alt="">
                                                             </NuxtLink>
                                                         </div>
@@ -555,12 +559,15 @@ const allNotices = ref(null)
 const notice = ref(null)
 const oneRequest = ref(0)
 const desktop = ref(true);
+const start = ref(true);
 
 watch(useCart, async (newdata) => {
     // loadingStyle.value = false;
+    this.start = true;
 
     if (cart.value?.items.length >= 1) {
         cart.value.items = newdata.cart.items;
+        // this.start = false;
         console.log(notice.value);
         if (newdata.cart.items[0].notice.id == notice.value.id) {
             count.value = newdata.cart.items[0].count;
@@ -568,6 +575,7 @@ watch(useCart, async (newdata) => {
             count.value = 0;
         }
     }
+    this.start = false;
 })
 
 onMounted(() => {
@@ -581,20 +589,24 @@ onMounted(() => {
 })
 
 setTimeout(async () => {
+    // this.start = true;
     useNotice.getNotice(params.id).then((r) => {
+        // this.start = false;
         notice.value = r;
-        pending.value = false;
         getSimilar(r.category.id);
     });
-    loadingStyle.value = false;
+    // this.start = false;
 
     await useCart.getCart().then((r) => {
+        // this.start = true;
         cart.value = r;
+        start.value = false;
         if (r.items[0].notice.id == notice.value.id) {
             count.value = r.items[0].count;
         } else {
             count.value = 0;
         }
+        // this.start = false;
     });
 
 })
@@ -603,6 +615,7 @@ setTimeout(async () => {
 const getSimilar = (catId) => {
     useNotice.getSimilar(params.id, catId).then((r2) => {
         allNotices.value = r2.allNotices;
+        start.value = false;
     });
 }
 

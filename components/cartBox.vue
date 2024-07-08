@@ -5,18 +5,19 @@
   <div class="container-fluid p-4">
     <NuxtLayout name="header"></NuxtLayout>
     <!-- <NeshanMap ref="mapRef" style="width: 100%; height:100vh;"
-                mapKey="web.d2d15b53cc3048db981d514eb6221e39"
-                serviceKey="service.22dda51fbcf6451c85bfd77e96f6face"
-                :center="center"
-                :zoom="15"
-                :poi="true"
-                hide-layers
-                :markers-icon-callback="markersIconCallback"
-                @on-zoom="changeZoom"
-                @on-init="onInit"
-              >
-            </NeshanMap> -->
+    mapKey="web.d2d15b53cc3048db981d514eb6221e39"
+    serviceKey="service.22dda51fbcf6451c85bfd77e96f6face"
+    :center="center"
+    :zoom="15"
+    :poi="true"
+    hide-layers
+    :markers-icon-callback="markersIconCallback"
+    @on-zoom="changeZoom"
+    @on-init="onInit"
+    >
+  </NeshanMap> -->
 
+    <loader :start="start" />
     <div v-if="cart?.items.length >= 1" class="row" dir="rtl">
       <!-- <div class="border-cart"></div> -->
       <div v-if="desktop" class="col-sm-8">
@@ -65,12 +66,12 @@
                         <div class="row">
                           <div class="boxes col-sm-3">
                             <div class="row">
-                              <div class="col ms-3 mt-1">
+                              <div class="col ms-3 forback mt-1">
                                 <a @click="useCart.addToCart(item.notice.id, item.count), addCart = true, item.count++"
                                   class="adding">
                                   <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn"
                                     role="status"></div>
-                                  <div v-else>+</div>
+                                  <div v-else class="addingcount">+</div>
                                 </a>
                               </div>
                               <div class="col mt-2">
@@ -78,12 +79,12 @@
                                   {{ item.count }}
                                 </h5>
                               </div>
-                              <div class="col mt-1">
+                              <div class="col forback mt-1">
                                 <a @click="useCart.addToCart(item.notice.id, item.count), addCart = true, item.count--"
                                   class="mining">
                                   <div v-if="useCart.pending == true && !addCart" class="spinner-border spinner-btn"
                                     role="status"></div>
-                                  <div v-else>-</div>
+                                  <div v-else class="addingcount">-</div>
                                 </a>
                               </div>
                             </div>
@@ -254,13 +255,15 @@
                   <h5 class="chooseAddress">افزودن آدرس</h5>
                 </div>
                 <div class="modal-body">
-                  <input class="form-control text-start"  type="text" placeholder="آدرس کامل" v-model="address">
+                  <input class="form-control text-start" type="text" placeholder="آدرس کامل" v-model="address">
                   <br>
                   <input class="form-control  text-start" type="text" placeholder=" نام گیرنده" v-model="name">
                   <br>
-                  <input class="form-control  text-start" type="text" placeholder=" نام خانوادگی گیرنده" v-model="family">
+                  <input class="form-control  text-start" type="text" placeholder=" نام خانوادگی گیرنده"
+                    v-model="family">
                   <br>
-                  <input class="form-control  text-start" type="text" placeholder=" شماره موبایل گیرنده" v-model="mobile">
+                  <input class="form-control  text-start" type="text" placeholder=" شماره موبایل گیرنده"
+                    v-model="mobile">
                   <br>
                   <input class="form-control  text-start" type="text" placeholder="کد پستی" v-model="postCode">
 
@@ -284,32 +287,32 @@
         </div>
         <div class="box-addres mt-2">
           <div class="d-flex justify-content-between mt-3">
-          <p class="mb-2">مجموع قیمت با تخفیف</p>
-          <p class="mb-2 text-success">تومان {{ totaldisPrice }}</p>
-        </div>
-
-        <div class="d-flex justify-content-between">
-          <p class="mb-2">مجموع قیمت اصلی</p>
-          <p class="mb-2 text-black">تومان {{ totalPriceNotice }}</p>
-        </div>
-
-        <div class="d-flex justify-content-between mb-4">
-          <p class="mb-2">میزان سود شما</p>
-          <p class="mb-2 text-danger">تومان {{ profit }}</p>
-        </div>
-        <div class="row mb-5 p-5">
-          <div @click="useCart.changePay('wallet'), wallet = true"
-            :class="wallet ? `col-5 pay-cart active` : `col-5 pay-cart`">کیف پول نقدی</div>
-          <div class="col-2"></div>
-          <div @click="useCart.changePay('cash'), wallet = false"
-            :class="!wallet ? `col-5 pay-cart active` : `col-5 pay-cart`">پرداخت مستقیم</div>
-        </div>
-        <button type="button" class="btnPaying col-12">
-          <div class="d-flex justify-content-between">
-            <span> {{ totalPrice(cart?.items).discountPrice }} تومان </span>
-            <span @click="pay(cart.id)">پرداخت</span>
+            <p class="mb-2">مجموع قیمت با تخفیف</p>
+            <p class="mb-2 text-success">تومان {{ totaldisPrice }}</p>
           </div>
-        </button>
+
+          <div class="d-flex justify-content-between">
+            <p class="mb-2">مجموع قیمت اصلی</p>
+            <p class="mb-2 text-black">تومان {{ totalPriceNotice }}</p>
+          </div>
+
+          <div class="d-flex justify-content-between mb-4">
+            <p class="mb-2">میزان سود شما</p>
+            <p class="mb-2 text-danger">تومان {{ profit }}</p>
+          </div>
+          <div class="row mb-5 p-5">
+            <div @click="useCart.changePay('wallet'), wallet = true"
+              :class="wallet ? `col-5 pay-cart active` : `col-5 pay-cart`">کیف پول نقدی</div>
+            <div class="col-2"></div>
+            <div @click="useCart.changePay('cash'), wallet = false"
+              :class="!wallet ? `col-5 pay-cart active` : `col-5 pay-cart`">پرداخت مستقیم</div>
+          </div>
+          <button type="button" class="btnPaying col-12">
+            <div class="d-flex justify-content-between">
+              <span> {{ totalPrice(cart?.items).discountPrice }} تومان </span>
+              <span @click="pay(cart.id)">پرداخت</span>
+            </div>
+          </button>
         </div>
         <!-- <div class="liner-border mt-4"></div> -->
       </div>
@@ -382,9 +385,11 @@ const profit = ref(0)
 const message = ref('')
 const loader = ref(true);
 const desktop = ref(true);
+const start = ref(true);
 
 
 onMounted(() => {
+  this.start = true;
   if (typeof window !== 'undefined') {
     if (window?.innerWidth < 527) {
       desktop.value = false;
@@ -392,14 +397,17 @@ onMounted(() => {
       desktop.value = true;
     }
   }
+  this.start = false;
 })
 
 
 const requestPrice = (item) => {
   pending.value = true
+  // this.start = true;
   useCart.requestPrice(item).then(() => {
     message.value = 'درخواست قیمت گذاری شما ارسال شد پس از دریافت اس ام اس تایید مجدد جهت پرداخت اقدام کنید'
     pending.value = false
+    // this.start = false;
   })
 }
 

@@ -40,10 +40,10 @@
               </div>
               <div ref="searchBox" class="searchResult">
               <div class="row">
-                <div @click="closeSearch" class="closeFilter">
-                  <img width="20" src="assets/img/SinglePage_Image/aroow-right.svg" >
-                </div>
-                <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2">
+                <!-- <div @click="closeSearch" class="closeFilter">
+                  <img width="10" src="assets/img/SinglePage_Image/aroow-right.svg" >
+                </div> -->
+                <div v-for="(item, index) in searchResult" :key="index" class="col-12 mb-2 result">
                   <div class="row">
                     <div class="col-8 text-start">
                      <a class="link" :href="`${item?.id}/${filterUrl(item?.title)}`">{{item.title}}</a>

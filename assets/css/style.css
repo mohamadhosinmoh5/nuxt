@@ -313,13 +313,10 @@ p {
 }
 
 .titleNotice h4 {
-    font-size: 20px;
-    font-family: 'anjomanReqular';
-    font-weight: 700;
+    font-size: 18px;
+    font-family:'anjoman';
     color: #25282b !important;
-    font-style: 'anjomanReqular';
-    font-family: 'anjomanReqular';
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .box-notice {
@@ -719,7 +716,7 @@ p {
 
 .category-box-sort {
     margin: 5px;
-    width: 100%;
+    width: 103%;
     box-shadow: 0px 1px 2px 0.5px #10182806;
     border: 1px solid #fbfbfb;
     border-radius: 10px;
@@ -1550,6 +1547,9 @@ input.checkBox {
 .form-control {
     text-align: end;
     border-radius: 5px !important;
+    font-size: 12px;
+    font-family: 'anjomanReqular';
+    font-weight: 700;
     unicode-bidi: plaintext;
     font-family: Vazir !important;
 }
@@ -1640,6 +1640,9 @@ input.checkBox {
 
 label {
     margin-left: 10px;
+    font-size: 16px;
+    font-family: 'anjomanReqular';
+    font-weight: 700;
     padding: 5px;
 }
 
@@ -2319,7 +2322,8 @@ input:checked+.slider:before {
 
 .search-cat {
     background: var(--cf-grey-icon-color);
-    border-radius: 10px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .link {
@@ -2336,13 +2340,20 @@ input:checked+.slider:before {
     min-height: 150px;
     max-height: 250px;
     top: 40px;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 15px;
     color: #434343;
-    box-shadow: 0px 0px 10px 2px #faf7f7;
+    border: 1px solid var(--cf-grey-icon-color);
+    /* box-shadow: 0px 0px 20px 2px #faf7f7; */
     overflow-y: scroll;
     display: none;
     z-index: 111111111;
+}
+
+.result {
+    font-family: 'anjomanReqular';
+    font-weight: 700;
+    font-size: 12px;
 }
 
 .searchLoader {
