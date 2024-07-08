@@ -15,8 +15,8 @@
 
             <div :class="['sidebar', { 'sidebar-open': closeBox }]">
                 <button type="button" class="toggle-navbar mt-5" @click="toggleSidebar">
-                    <img v-if="closeBox" src="assets/img/left.png" style="width: 20px;">
-                    <img v-else src="assets/img/right.png" style="width: 20px;">
+                    <img v-if="closeBox" src="assets/img/right.png" style="width: 20px;">
+                    <img v-else src="assets/img/left.png" style="width: 20px;">
                 </button>
                 <div class="logo_items col-sm-12">
                     <div class="TitleText">
@@ -212,3 +212,5 @@ setTimeout(() => {
     })
 }, 0)
 </script>
+
+

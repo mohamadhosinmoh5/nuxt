@@ -9,13 +9,13 @@
         <div v-if="loadingStyle" class="spinner-border text-secondary" role="status"></div>
 
         <div v-if="useNotice.error" class="alert alert-danger text-center mt-4">
-            {{ useNotice.error.message }}
+            {{ useNotice.error?.message }}
         </div>
         <div v-if="notice" class="row">
             <div class="row">
                 <div class="col-sm-7 col-md-7">
                     <div class="row myimages">
-                        <div class="col-3">
+                        <div class="col-4">
                             <div class="scrollBar">
                                 <div class="smalimage">
                                     <img @click="setBaseImage(image)" v-for="{ image, index } in notice.gallery"
@@ -24,8 +24,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-9">
-                            <div class="col-md">
+                        <div class="col-8">
+                            <div class="col-md imag-boxes">
                                 <img ref="mainImage" id="mainimage"
                                     :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`"
                                     class="mainimages mt-5" alt="">
@@ -33,7 +33,7 @@
                         </div>
                     </div>
 
-                     <!-- start mobile desc -->
+                    <!-- start mobile desc -->
                     <div v-if="!desktop" class="col row mt-5">
                         <div class="row col-11 box-title">
                             <div class="col-12">
@@ -92,11 +92,12 @@
 
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر با ما تماس بگیرید</a>
+                                    <a class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر با ما تماس بگیرید</a>
 
                                     <div class="col-4 tamas_btn mt-2">
                                         <button @click="showPhone = true" type="button"
                                             class="btn btn-success btnmodal">اطلاعات تماس</button>
+
                                     </div>
                                     <!-- <button type="button" class="col-4 tamas_btn" data-container="body"
                                         data-toggle="popover" data-placement="top"
@@ -110,7 +111,7 @@
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
 
                                         <div v-if="useCart.error">
-                                            {{ useCart.error.message }}
+                                            {{ useCart.error?.message }}
                                         </div>
                                         <div v-if="useCart.message">
                                             {{ useCart.message }}
@@ -121,7 +122,7 @@
                                     </div> -->
 
                                     <div v-if="showPhone" id="myModal" class="modal-phone">
-                                        <div >
+                                        <div>
                                             <span @click="showPhone = false" class="hiding">&times;</span>
                                             <p href="#" class="Title">شماره تماس : {{ notice.mobile }}</p>
                                         </div>
@@ -160,8 +161,8 @@
                                     </div>
                                 </div>
 
-                                <div v-if="useCart.error.message" class="alert alert-danger">
-                                    {{ useCart.error.message }}
+                                <div v-if="useCart.error?.message" class="alert alert-danger">
+                                    {{ useCart.error?.message }}
                                 </div>
                                 <div v-if="useCart.message" class="alert alert-success">
                                     {{ useCart.message }}
@@ -179,8 +180,7 @@
                             <div class="col-sm-12 mt-3">
                                 <div class="row Tozihat">
                                     <div class="col-sm col-md">
-                                        <img src="assets/img/SinglePage_Image/money.svg" alt=""
-                                            style="width: 30px;">
+                                        <img src="assets/img/SinglePage_Image/money.svg" alt="" style="width: 30px;">
                                         <a href="#"> توضیحات</a>
                                     </div>
                                 </div>
@@ -191,39 +191,50 @@
                                 </div>
                             </div>
 
-                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing !=null" class=" col row Tozihat mt-3">
+                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing != null"
+                                class=" col row Tozihat mt-3">
                                 <div class="col">
-                                    <img src="assets/img/SinglePage_Image/money.svg" alt=""
-                                        style="width: 30px;">
+                                    <img src="assets/img/SinglePage_Image/money.svg" alt="" style="width: 30px;">
                                     <a href="#"> کارشناسی قیت</a>
                                 </div>
                             </div>
-                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing !=null" class="row">
+                            <div v-if="useNotice?.notice?.price_expert_rating != null || notice?.pricing != null"
+                                class="row">
                                 <div class="col-11 ms-4 mt-2 reng_box">
                                     <div class="range ">
-                                        <div v-if="useNotice?.notice?.price_expert_rating != null" class="col-10  field">
+                                        <div v-if="useNotice?.notice?.price_expert_rating != null"
+                                            class="col-10  field">
                                             <input disabled type="range" min="0" max="100"
                                                 :value="notice.price_expert_rating">
                                             <img src="assets/img/SinglePage_Image/gheymat.svg" alt="">
                                             <div class="row">
                                                 <ul class="col-12 checking">
-                                                    <li class="range-txt">شکار</li>
+                                                    <!-- <li class="range-txt">شکار</li>
                                                     <li class="range-txt">اکازیون</li>
                                                     <li class="range-txt">منصفانه</li>
                                                     <li class="range-txt">خیلی بالا</li>
-                                                    <li class="col-2 range-txt">غیر منصفانه</li>
+                                                    <li class="range-txt">غیر منصفانه</li> -->
+                                                    <div class="row mt-4">
+                                                        <div class="range-txt col-2">شکار</div>
+                                                        <div class="range-txt col-2">اکازیون</div>
+                                                        <div class="range-txt col-2">منصفانه</div>
+                                                        <div class="range-txt col-2">خیلی بالا</div>
+                                                        <div class="range-txt col-2">غیر منصفانه</div>
+
+
+                                                    </div>
                                                 </ul>
                                             </div>
                                         </div>
-                                       
-                                        <div v-else-if="notice?.pricing !=null">
+
+                                        <div v-else-if="notice?.pricing != null">
                                             قیمت : {{ (notice?.pricing?.discount_percent > 0) ?
-                                                convertPrice(notice?.pricing?.price - (notice?.pricing?.price
-                                                    *
-                                                    notice.pricing?.discount_percent / 100)) :
-                                                convertPrice(notice?.pricing?.price) }} تومان
+                convertPrice(notice?.pricing?.price - (notice?.pricing?.price
+                    *
+                    notice.pricing?.discount_percent / 100)) :
+                convertPrice(notice?.pricing?.price) }} تومان
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -261,7 +272,7 @@
                                 <div v-if="notice.address != null" class="col-md-4">
                                     <a href="#" class="figmafont">محله : </a>
                                     <a href="#" class="texts">{{
-                                        notice.address.address.neighbourhood }}</a>
+                notice.address.address.neighbourhood }}</a>
                                 </div>
                                 <div class="col-4">
                                     <a href="#" class="figmafont">
@@ -278,10 +289,10 @@
                                 </div>
                                 <div v-if="useNotice?.notice?.pricing?.price" class="col-12 mt-3">
                                     قیمت : {{ (useNotice?.notice?.pricing?.discount_percent > 0) ?
-                                        convertPrice(notice?.pricing.price - (notice?.pricing.price
-                                            *
-                                            notice.pricing.discount_percent / 100)) :
-                                        convertPrice(notice?.pricing.price) }} تومان
+                convertPrice(notice?.pricing.price - (notice?.pricing.price
+                    *
+                    notice.pricing.discount_percent / 100)) :
+                convertPrice(notice?.pricing.price) }} تومان
                                 </div>
                             </div>
                             <div class="lineee mt-3"></div>
@@ -289,29 +300,34 @@
                                 class="boxdetailes col-xs-12 row mt-3">
                                 <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                                        notice.section_data_collection[2].items[0].field.title }}:</a>
+                notice.section_data_collection[2].items[0].field.title }}:</a>
                                     <a href="#" class="Price ms-1">{{
-                                        convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
+                convertPrice(notice.section_data_collection[2].items[0].data[0]) }} تومان
                                     </a>
                                 </div>
 
 
                                 <div v-if="notice.section_data_collection[2]" class="col-6">
                                     <a href="#" class="subtitle">{{
-                                        notice.section_data_collection[2].items[1].field.title }}:</a>
+                notice.section_data_collection[2].items[1].field.title }}:</a>
                                     <a href="#" class="Price ms-1">
                                         {{
-                                            convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
+                convertPrice(notice.section_data_collection[2].items[1].data[0]) }} تومان
                                     </a>
-                                
+
 
                                 </div>
                                 <div class="col-sm-12 row">
-                                    <a href="#" class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر با ما تماس بگیرید</a>
+                                    <a class="mediumtxt col-8 mt-3"> جهت اطلاعات بیشتر با ما تماس بگیرید</a>
 
                                     <div class="col-4 tamas_btn mt-2">
                                         <button @click="showPhone = true" type="button"
                                             class="btn btn-success btnmodal">اطلاعات تماس</button>
+
+                                        <!-- <button type="button" class="btn btn-lg" data-toggle="popover"
+                                            title="Popover title"
+                                            data-content="And here's some amazing content. It's very engaging. Right?">Click
+                                        </button> -->
                                     </div>
 
                                 </div>
@@ -321,7 +337,7 @@
                                     <div v-if="useNotice?.notice?.category?.properties?.is_product" class="addProduct">
 
                                         <div v-if="useCart.error">
-                                            {{ useCart.error.message }}
+                                            {{ useCart.error?.message }}
                                         </div>
                                         <div v-if="useCart.message">
                                             {{ useCart.message }}
@@ -332,9 +348,10 @@
                                     </div> -->
 
                                     <div v-if="showPhone" id="myModal" class="modal-phone">
-                                        <div >
-                                            <span @click="showPhone = false" class="hiding">&times;</span>
-                                            <p href="#" class="Title">شماره تماس : {{ notice.mobile }}</p>
+                                        <div>
+                                            <span @click="showPhone = false" class="hiding ms-3"><i
+                                                    class="fas fa-window-close"></i></span>
+                                            <p href="#" class="Title ms-5">شماره تماس : {{ notice.mobile }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -348,14 +365,15 @@
                                             <button
                                                 @click="useCart.addToCart(useNotice?.notice?.id, count), addCart = true, count++"
                                                 class="btn btn-success">
-                                                <div v-if="useCart.pending && addCart" class="spinner-border spinner-btn"
-                                                    role="status"></div>
+                                                <div v-if="useCart.pending && addCart"
+                                                    class="spinner-border spinner-btn" role="status"></div>
                                                 <div v-else>+</div>
                                             </button>
                                         </div>
                                         <div class="col-4">
                                             <div class="form-number">
-                                                <input disabled type="number" class="form-text numberCount" v-model="count">
+                                                <input disabled type="number" class="form-text numberCount"
+                                                    v-model="count">
                                             </div>
                                         </div>
                                         <div class="col-4 btn-left">
@@ -370,8 +388,8 @@
                                     </div>
                                 </div>
 
-                                <div v-if="useCart.error.message" class="alert alert-danger">
-                                    {{ useCart.error.message }}
+                                <div v-if="useCart.error?.message" class="alert alert-danger">
+                                    {{ useCart.error?.message }}
                                 </div>
                                 <div v-if="useCart.message" class="alert alert-success">
                                     {{ useCart.message }}
@@ -425,42 +443,44 @@
                                                 :style="`background-image: url(${useRuntimeConfig().public.BaseUrl}/${notice.gallery[0].image});`">
                                             </div>
                                         </div>
-    
+
                                         <div class="col-sm-12 mt-3">
                                             <div class="titleNotice">
                                                 <h4 class>{{ notice.title }}</h4>
                                             </div>
                                         </div>
-    
-                                        <div class="col-sm-12" v-if="notice?.section_data_collection[0]?.items.length >= 1">
+
+                                        <div class="col-sm-12"
+                                            v-if="notice?.section_data_collection[0]?.items.length >= 1">
                                             <div class="row">
                                                 <div class="col-6 text-section">
                                                     {{ notice?.section_data_collection[0].items[0]?.field.title }} : {{
-                    notice?.section_data_collection[0].items[0]?.data[0] }} متر
+                notice?.section_data_collection[0].items[0]?.data[0] }} متر
                                                 </div>
-    
+
                                                 <div v-if="notice?.section_data_collection[0].items[5]"
                                                     class="col-6 text-section">
                                                     {{ notice?.section_data_collection[0].items[5]?.field?.title }} : {{
-                    notice?.section_data_collection[0].items[5]?.data[0] }}
+                notice?.section_data_collection[0].items[5]?.data[0] }}
                                                 </div>
-    
+
                                                 <div class="col-sm-12 text-section mt-4">
                                                     <div class="row">
                                                         <div v-if="notice?.section_data_collection[2].items[0]"
                                                             class="col-10">
-                                                            {{ notice?.section_data_collection[2].items[0]?.field?.title }}
+                                                            {{ notice?.section_data_collection[2].items[0]?.field?.title
+                                                            }}
                                                             : {{
-                    convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
-                }} تومان
+                                                            convertPrice(notice?.section_data_collection[2].items[0]?.data[0])
+                                                            }} تومان
                                                         </div>
-    
+
                                                         <div class="col-2">
                                                             <NuxtLink :to="`notice?id=${notice?.id}&slug=${filterUrl(notice?.title)}`">
                                                                 <img src="~/assets/img/arrow-left.svg" alt="">
                                                             </NuxtLink>
                                                         </div>
-    
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -552,12 +572,12 @@ watch(useCart, async (newdata) => {
 
 onMounted(() => {
     if (typeof window !== 'undefined') {
-    if(window?.innerWidth < 527 ){
-      desktop.value = false;
-    }else{
-        desktop.value = true;
+        if (window?.innerWidth < 527) {
+            desktop.value = false;
+        } else {
+            desktop.value = true;
+        }
     }
-  }
 })
 
 setTimeout(async () => {

@@ -8,7 +8,7 @@
           <div class="col-sm-12">
             <p class="filter-Title">قیمت</p>
           </div>
-          <div class="row">
+          <div class="row form-number">
             <div class="col-6">
 
               <div class="form-group">
@@ -34,7 +34,7 @@
               </div>
             </section>
 
-            <div class="row">
+            <div class="row form-number">
               <div class="col-sm-6 mt-3">
                 <div class="data-box">{{ persionNumber(minPrice) }}</div>
               </div>
@@ -52,7 +52,7 @@
           <div class="col-sm-12">
             <p class="filter-Title">متراژ</p>
           </div>
-          <div class="row">
+          <div class="row form-number">
             <div class="col-6">
 
               <div class="form-group">
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="col-sm-12 mt-2">
-            <section class="range-slider">
+            <section class="range-slider ">
               <div class="range-input">
                 <input type="range" class="min" min="0" max="500" v-model="minMetr"
                   @input="sectionQuery({ field_id: 3, type: 'numeric', inputName: 'Metr' })" step="10">
@@ -93,7 +93,7 @@
           <div class="col-sm-12">
             <p class="filter-Title">تعداد واحد ساختمان</p>
           </div>
-          <div class="row">
+          <div class="row form-number">
             <div class="col-6">
 
               <div class="form-group">
@@ -129,7 +129,7 @@
       </div>
 
       <div class="col-sm-12 mt-4">
-        <div class="form-group">
+        <div class="form-group ">
           <label class="filter-Title" for="my-select">عمر ساختمان</label>
           <select v-model="ageText" @change="sectionQuery({ field_id: 5, category: 'select', value: ageText })"
             id="my-select" class="custom-select mt-3" name="">
@@ -182,9 +182,11 @@
       <div class="row">
         <div class="col-12 mb-4">
           <button class="btn-default w-50" @click="filterUptaded(query, true)">اعمال فیلتر</button>
-          <button ref="filterCanvas" class="btn-default-two w-30" @click="filterUptaded(query, true)">
-            <i class="fas fa-window-close mt-2"></i>
-            بیخیال
+          <button ref="filterCanvas" class="btn-default-two" @click="filterUptaded(query, true)">
+            <p>
+              <i class="fas fa-window-close mt-2"></i>
+              بیخیال
+            </p>
           </button>
 
         </div>

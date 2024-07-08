@@ -24,14 +24,18 @@
 @media screen and (max-width: 992px) {
     .smalimage img {
         margin-right: 10%;
+
+    }
+
+    .smalimage {
+        height: 300px;
     }
 }
 
 .scrollBar {
-    width: 120%;
-    height: 500px;
-    overflow-y: auto;
-    /* width: 70px; */
+    margin-top: 0px;
+    height: 350px;
+    overflow: scroll;
 }
 
 
@@ -49,6 +53,8 @@
 }
 
 .smalimage {
+    position: relative;
+    right: 12%;
     margin-top: 50px;
 }
 
@@ -83,10 +89,10 @@
 .Titleontop {
     margin: 10px;
     text-decoration: none;
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--cf-title-color);
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 }
 
 .Titleontop:hover {
@@ -96,8 +102,8 @@
 .Price {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'anjoman';
-    font-weight: 400;
+    font-family: 'anjomanReqular';
+    font-weight: 700;
     font-size: 14px;
 }
 
@@ -111,21 +117,22 @@
 
 .subtitle {
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 700;
     font-size: 14px;
     /* font-size: medium; */
     color: var(--cf-subtitle-color);
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 
 }
 
 .figmafont {
     text-decoration: none;
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    /* font-size: 16px; */
     /* font-size: medium; */
     color: var(--cf-subtitle-color);
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 }
 
 .figmafont:hover {
@@ -219,15 +226,24 @@
     margin: 5px 20px;
     list-style: none;
     position: relative;
+
 }
 
-.checking li {
+.karshenas {
     transform: rotate(90deg);
     color: var(--cf-title-color);
     font-size: 14px;
+    justify-content: space-between;
     font-family: 'anjomanLight';
     display: inline-block;
-    margin: 15px 35px 15px 10px;
+    /* margin: 15px 35px 15px 10px; */
+}
+
+.range-txt {
+    color: var(--cf-title-color);
+    font-size: 16px;
+    font-family: 'anjomanLight';
+    transform: rotate(90deg);
 }
 
 @media screen and (max-width: 576px) {
@@ -254,8 +270,9 @@
 
     .range-txt {
         color: var(--cf-title-color);
-        font-size: 12px;
+        font-size: 16px;
         font-family: 'anjomanLight';
+        transform: rotate(90deg);
     }
 
     .text-secondary {
@@ -315,8 +332,8 @@
 .texts {
     text-decoration: none;
     color: var(--cf-dark-color);
-    font-family: 'anjoman';
-    font-weight: 400;
+    font-family: 'anjomanReqular';
+    font-weight: 600;
     font-size: 16px;
 }
 
@@ -390,11 +407,25 @@
     background-color: var(--cf-light-color);
     opacity: 1;
     border-radius: 15px;
-    top: 42px;
+    top: 34px;
     right: 10px;
     padding: 5px;
     border: 1px solid #dadada;
     width: 100% !important;
+}
+
+@media screen and (max-width: 576px) {
+    .modal-phone {
+        position: absolute;
+        background-color: var(--cf-light-color);
+        opacity: 1;
+        border-radius: 15px;
+        top: 90px;
+        right: 10px;
+        padding: 5px;
+        border: 1px solid #dadada;
+        width: 100% !important;
+    }
 }
 
 .modal {
@@ -467,6 +498,21 @@
     border: none;
 }
 
+.headerMen {
+    position: relative;
+    background: rgb(255, 255, 255);
+    /* width: 100%; */
+    bottom: 100px;
+    overflow: scroll;
+    height: 100vh;
+    margin: 5px;
+    /* right: 0%; */
+    top: -10px;
+    padding: 10px;
+    z-index: 222222222;
+    border-radius: 15px;
+    left: 2%;
+}
 
 .range .field img {
     position: relative;
@@ -474,7 +520,13 @@
     width: 75%;
 }
 
-
+@media screen and (max-width: 576px) {
+    .range .field img {
+        position: relative;
+        right: -5%;
+        width: 100%;
+    }
+}
 
 .range .field input::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -538,7 +590,7 @@
     .box_daftar {
         position: relative;
         top: 10px;
-        width: 93%;
+        width: 91%;
         right: 6%;
         height: 74px;
         border-radius: 10px;
@@ -668,11 +720,11 @@
     position: absolute;
     cursor: pointer;
     color: #aaaaaa;
+    /* position: relative; */
     background: white;
     border: none;
     /* float: right; */
-    font-size: 28px;
-    font-weight: bold;
+
 }
 
 .spacing {
@@ -695,7 +747,13 @@
     text-decoration: none;
     font-size: small;
     color: var(--cf-subtitle-color);
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
+    font-weight: 600;
+}
+
+.spanning {
+    font-family: 'anjomanReqular';
+    font-weight: 600;
 }
 
 .daftar_textt:hover {
@@ -742,15 +800,23 @@
     background-color: var(--cf-green-color);
 }
 
+.btnmodal {
+    font-family: 'anjomanReqular';
+}
+
 .mainimages {
     position: relative;
-    width: 100%;
+    width: 95%;
     background-position: center;
-    height: 450px;
+    height: 320px;
     border-radius: 10px;
     left: 20px;
     /* background-attachment: fixed; */
-    /* background-size: cover; */
+    background-size: cover;
+}
+
+.imag-boxes {
+    height: 300px;
 }
 
 .imageBoxe {
@@ -784,10 +850,10 @@
 @media screen and (max-width: 992px) {
     .mainimages {
         position: relative;
-        width: 100%;
-        height: 450px;
+        width: 120%;
+        height: 300px;
         border-radius: 10px;
-        left: 0px;
+        /* left: 0px; */
     }
 }
 
@@ -796,12 +862,12 @@
     left: 7%;
 }
 
-@media screen and (max-width: 992px) {
+/* @media screen and (max-width: 992px) {
     .myimages {
         position: relative;
         left: 0%;
     }
-}
+} */
 
 .LogInModal {
     /* display: none; */
@@ -1013,14 +1079,46 @@
     transition: all ease-in-out 0 5s;
 }
 
+.dropdown-box .TitleText {
+    overflow: hidden;
+}
+
 .dropdown-box {
     /* position: relative;
     background-color: var(--cf-light-color);
     z-index: 1111; */
     /* left: 10%; */
+    overflow-y: hidden;
+    width: 52px !important;
+    transition: all ease-in-out 0.3s;
+}
+
+.logo_items {
     overflow: hidden;
-    width: 0px !important;
-    transition: all ease-in-out 0.0s;
+}
+
+@media screen and (max-width: 992px) {
+    .dropdown-box {
+        /* position: relative;
+        background-color: var(--cf-light-color);
+        z-index: 1111; */
+        /* left: 10%; */
+        overflow: hidden;
+        /* width: -100px !important; */
+        right: -300px;
+        transition: all ease-in-out 0.0s;
+    }
+}
+
+.hidNav {
+    overflow: hidden;
+    width: calc(30px + 20px);
+    transition: all ease-in-out 2ms;
+    border-left: 1px solid var(--cf-grey-icon-color);
+}
+
+.hidTabbar {
+    display: none;
 }
 
 .navbar-profile {
@@ -1039,10 +1137,18 @@
         right: 0;
     }
 
+    .hidNav {
+        overflow: hidden;
+        width: 0px !important;
+        transition: all ease-in-out 0.0s;
+        border-left: 1px solid var(--cf-grey-icon-color);
+    }
+
     .modal-content {
-        width: 100% !important;
+        width: 95% !important;
         top: 0;
-        right: 0;
+        right: 10px;
+        border-radius: 10px;
     }
 
     .navbar-profile {
@@ -1135,8 +1241,10 @@
 
 
 .TitleText a {
-    position: relative;
-    right: 25px;
+    position: absolute;
+    /* visibility: collapse; */
+    top: 37px;
+    right: 160px;
     text-decoration: none;
     /* color: var(--cf-green-color); */
 }
@@ -1174,9 +1282,10 @@
 .mediumtxt {
     cursor: pointer;
     font-size: 14px;
+    font-weight: 700;
     color: var(--cf-title-color);
     text-decoration: none;
-    font-family: 'anjoman';
+    font-family: 'anjomanReqular';
 }
 
 .mediumtxt:hover {
@@ -1217,6 +1326,7 @@
 @media screen and (max-width: 576px) {
     .all-boxes {
         position: absolute;
+        /* left: 30%; */
         margin: 10px;
 
     }
@@ -1265,15 +1375,19 @@
 .box-info {
     position: relative;
     /* right: 1%; */
+    /* width: 89%; */
     padding: 20px;
-    /* right: 0%; */
-    /* margin: 20px; */
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;
     border-color: var(--cf-grey-icon-color);
     box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
-    /* background-color: var(--cf-light-grey); */
+
+}
+
+.text-spacing {
+    position: relative;
+    right: 10%;
 }
 
 @media screen and (max-width: 992px) {
@@ -1281,7 +1395,8 @@
         position: relative;
         /* right: 1%; */
         padding: 20px;
-        left: 11%;
+        width: 100%;
+        left: 19%;
         border-radius: 10px;
         border-style: solid;
         border-width: 0.5px;
@@ -1312,6 +1427,8 @@
 
 .maincart-Title {
     color: var(--cf-title-color);
+    position: relative;
+    top: 5px;
     font-size: 16px;
     font-family: 'anjoman';
 }
@@ -1325,8 +1442,8 @@
 .box-cart {
     position: relative;
     width: 100%;
-    min-height: 600px;
-    margin: 30px;
+    min-height: 50px;
+    margin: 60px;
     max-height: 2000px;
     /* right: 10%; */
     border-radius: 10px;
@@ -1369,10 +1486,25 @@
 
 .box-buttom {
     position: relative;
-    /* left: 7%; */
+    /* left: 9%; */
     /* right: 15%; */
     padding: 10px;
     min-height: 200px;
+    /* width: 20%; */
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 0.5px;
+    border-color: var(--cf-grey-icon-color);
+    box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+}
+
+.box-buttom-one {
+    position: relative;
+    /* left: 9%; */
+    /* right: 15%; */
+    padding: 10px;
+    min-height: 200px;
+    /* width: 20%; */
     border-radius: 10px;
     border-style: solid;
     border-width: 0.5px;
@@ -1383,11 +1515,25 @@
 @media screen and (max-width: 992px) {
     .box-buttom {
         position: relative;
-        left: 11%;
+        left: 9%;
         /* right: 15%; */
         padding: 10px;
         /* margin: 20px; */
         min-height: 200px;
+        border-radius: 10px;
+        border-style: solid;
+        border-width: 0.5px;
+        border-color: var(--cf-grey-icon-color);
+        box-shadow: 1px 2px 3px 4px rgba(252, 246, 246, 0.4);
+    }
+
+    .box-buttom-one {
+        position: relative;
+        left: 20%;
+        /* right: 10%; */
+        padding: 10px;
+        min-height: 200px;
+        /* width: 20%; */
         border-radius: 10px;
         border-style: solid;
         border-width: 0.5px;
@@ -1408,6 +1554,22 @@
     animation-delay: 3s;
     /* transition: all 0.4s ease-out; */
     top: 0;
+    /* z-index: 1111; */
+}
+
+
+
+
+.show-box {
+    position: sticky;
+    height: auto;
+    border-radius: 20px;
+    top: 0;
+    background: white;
+    /* transform: rotateY(-170deg) translateZ(1px); */
+    /* animation:  show-box  5s infinite; */
+
+
     /* z-index: 1111; */
 }
 
@@ -1474,11 +1636,14 @@
 }
 
 #roaunded {
-    margin-right: 10px;
+    position: relative;
+    left: 20px;
+    /* width: 20px; */
 }
 
 @media screen and (max-width: 992px) {
     #roaunded {
+        left: 45px;
         margin-right: 0px;
         margin-top: 10px;
     }
@@ -1501,7 +1666,7 @@
     text-decoration: none;
     color: var(--cf-green-color);
     position: relative;
-    top: 20px;
+    top: 35px;
     font-size: 14px;
     display: block;
     text-align: start;
@@ -1522,6 +1687,8 @@
     text-align: start;
 }
 
+.choosingDaftar {}
+
 .mabalegh {
     text-decoration: none;
     color: var(--cf-title-color);
@@ -1534,6 +1701,8 @@
     text-decoration: none;
     color: var(--cf-title-color);
     /* font-family: 'Vazir'; */
+    font-family: 'anjomanReqular';
+    font-weight: 700;
     font-size: 25px;
     position: relative;
     display: block;
@@ -1543,8 +1712,8 @@
 .wallettxts-describtion {
     text-decoration: none;
     color: var(--cf-title-color);
-    font-family: 'anjoman';
-    font-weight: 400;
+    font-family: 'anjomanReqular';
+    font-weight: 600;
     font-size: 16px;
     position: relative;
     display: block;
@@ -1658,7 +1827,11 @@
 
 .myhomenger {
     font-family: 'anjoman';
+    position: absolute;
+    right: 49px;
     font-size: 20px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .close {
@@ -1813,10 +1986,6 @@
 .close-navbar {
     border: none;
     background-color: transparent;
-    position: relative;
-    /* bottom: 60px; */
-    /* float: left; */
-    border-radius: 15px;
 }
 
 #right-side {
@@ -1827,11 +1996,17 @@
 
 @media screen and (min-width: 576px) {
 
-    .close-navbar {
+    .close-navbarr {
         display: none;
         border: none;
         border-radius: 15px;
 
+    }
+
+    .close-navbar {
+        display: none;
+        border: none;
+        border-radius: 15px;
     }
 }
 
@@ -1900,7 +2075,7 @@
 
 @media screen and (max-width: 992px) {
     .myOrder {
-        position: relative;
+        position: absolute;
         top: 50px;
         right: 10%;
 
@@ -1945,6 +2120,83 @@
     display: block;
     margin-right: auto;
     margin-left: auto;
+}
+
+.adsForm input {
+    direction: rtl;
+    position: relative;
+    /* top: 10px; */
+    /* left: 11%; */
+    width: 100%;
+    height: 100px;
+    font-size: 14px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 0.5px solid var(--cf-grey-icon-color);
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.addPicture {
+    width: 10%;
+    border-radius: 15px;
+    height: 100px;
+    border: 1px solid var(--cf-dark-color);
+}
+
+@media screen and (max-width: 992px) {
+    .addPicture {
+        width: 30%;
+        border-radius: 15px;
+        height: 100px;
+        border: 1px solid var(--cf-dark-color);
+    }
+}
+
+.dropzone {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 16px;
+    border: 2px dashed #41b883;
+    background-color: #fff;
+    transition: .3s ease all;
+
+    label {
+        padding: 8px 12px;
+        color: #fff;
+        background-color: #41b883;
+        border-radius: 5px;
+        transition: .3s ease all;
+        display: none;
+
+    }
+
+    input {
+        padding: 8px 12px;
+        color: #fff;
+        background-color: #41b883;
+        border: none;
+        border-radius: 5px;
+        transition: .3s ease all;
+    }
+}
+
+.picture {
+    text-decoration: none;
+    color: var(--cf-title-color);
+    position: relative;
+    top: 60px;
+    right: 20%;
+    font-weight: '';
+}
+
+.picture:hover {
+    color: var(--cf-title-color);
 }
 
 .moving {
@@ -1996,7 +2248,7 @@
 
 /* myLicence */
 .myLicence {
-    position: relative;
+    position: absolute;
     top: 30px;
     right: 50%;
 }
@@ -2356,6 +2608,19 @@
 
 }
 
+.next {
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #197C82;
+    color: #FFF;
+    border: none;
+}
+
+.next a {
+    color: white;
+    text-decoration: none;
+}
+
 .border-left {
     border-left: 1px solid var(--cf-grey-icon-color);
     height: 100vi;
@@ -2373,11 +2638,13 @@
 
 #khoroj {
     color: var(--cf-dark-color);
+    cursor: pointer;
 }
 
 #korojtxt {
     color: var(--cf-dark-color);
     font-family: 'anjoman';
+    text-decoration: none;
 }
 
 .fa-home {
@@ -2400,19 +2667,31 @@
 
 /* mapPage */
 .adseMap {
-    width: 400px;
+    width: 100%;
     padding: 10px;
     height: 100px;
     border: 1px solid black;
+    /* z-index: 99999999999; */
     border-radius: 10px;
 }
 
 .adseMapBox {
-    width: 450px;
-    height: 250px;
+    width: 600px;
+    height: 400px;
     position: relative;
-    right: 20%;
+    border: 1px solid var(--cf-grey-icon-color);
+    /* right: 20%; */
     border-radius: 20px;
+}
+
+.adseMapBoxe {
+    position: absolute;
+    width: 500px;
+    /* top: 10px; */
+    border: 3px solid var(--cf-grey-icon-color);
+    height: 80%;
+    border-radius: 2px;
+
 }
 
 
@@ -2421,15 +2700,72 @@
         width: 450px;
         height: 250px;
         position: relative;
-
         right: -1%;
         border-radius: 20px;
+    }
+
+    .DetailesMap {
+        position: relative;
+        top: 300px;
+    }
+
+    .adseMap {
+        position: relative;
+        top: 300px;
+    }
+
+    .adseMapBoxe {
+        position: absolute;
+        width: 500px;
+        height: 300px;
+        /* margin: 10px; */
+        border: none;
+        left: 1px;
+        border-radius: 20px;
+
+    }
+
+}
+
+/* end mappage */
+.form-checks {
+    border: 1px solid var(--cf-grey-icon-color);
+    padding: 5px;
+    min-width: 10px;
+    max-width: 200px;
+    margin: 10px;
+    border-radius: 5px;
+    position: relative;
+    right: 42%;
+}
+
+@media screen and (max-width: 992px) {
+    .form-checks {
+        border: 1px solid var(--cf-grey-icon-color);
+        padding: 5px;
+        min-width: 10px;
+        max-width: 200px;
+        margin: 10px;
+        border-radius: 5px;
+        position: relative;
+        right: 20%;
+    }
+
+    .adsform {
+        margin-right: 0;
+        margin-left: 0;
     }
 }
 
 
+.adsform {
+    /* width: 50%; */
+    margin-right: 20%;
+    margin-left: 20%;
+}
 
-/* end mappage */
+
+
 
 
 /* for nav sidebar */
@@ -2483,7 +2819,7 @@
     /* margin-right: -34px; */
 }
 
-.links:hover {
+.links:hover{
     color: var(--cf-dark-color);
 }
 
