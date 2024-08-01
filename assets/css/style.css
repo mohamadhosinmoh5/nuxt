@@ -2345,6 +2345,21 @@ input:checked+.slider:before {
     top: 5px;
 }
 
+
+.loaderBox{
+    direction: ltr;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1111111;
+}
+
+.progress{
+    height: 5px;
+    width: 0%;
+}
+
 /* .loaderrr {
     width: 28px;
     height: 28px;

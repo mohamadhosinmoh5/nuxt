@@ -8,58 +8,105 @@ import { useOfficeStore } from "../store/office";
 export default {
   data() {
     return {
-      mobile: null,
-      code: null,
-      auth: null,
-      allNotices: null,
-      categories: null,
-      pending: true,
-      allOffices: null,
-      infinity: null,
-      error: null,
-      noticeShow: true,
-      defaultNotices: null,
-      officeShow: false,
-      showMap: false,
-      showCat: true,
-      scrolled: false,
-      lastCat: null,
-      emptyCat: null,
-      polygonGrg: [
-        [36.873978, 54.346216],
-        [36.880184, 54.500138],
-        [36.794162, 54.50615],
-        [36.786775, 54.357092],
-        [36.873978, 54.346216],
-      ],
-      center: ref({
-        latitude: 36.830367834795,
-        longitude: 54.455885428711,
+      mobile:null,
+      code:null,
+      auth:null,
+      allNotices:null,
+      categories:null,
+      pending:false,
+      allOffices:null,
+      infinity:null,
+      error:null,
+      noticeShow:true,
+      defaultNotices:null,
+      officeShow:false,
+      showMap:false,
+      showCat:true,
+      scrolled:false,
+      lastCat:null,
+      emptyCat:null,
+      start:true,
+      polygonGrg : [[36.873978, 54.346216],[36.880184, 54.500138],[36.794162, 54.506150],[36.786775, 54.357092],[36.873978, 54.346216]],
+      center :ref({
+        "latitude": 36.830367834795,
+        "longitude": 54.455885428711
       }),
     };
   },
   methods: {
     setCat(item) {
       this.lastCat = item.title;
-    },
-    filterUptaded(query, section) {
-      this.pending = true;
-      if (query) {
+    }
+    ,filterUptaded(query,section){
+      this.start = true;
+      if(query){
         setTimeout(() => {
-          if (section) {
-            this.notices.setQuery(null, query, true);
-          } else {
-            this.notices.setQuery(key, query, false);
+        if(section){
+          this.notices.setQuery(null,query,true);
+        }else{
+          this.notices.setQuery(key,query,false);
+        }
+        this.notices.fetchQuery().then((r)=>{
+          if(r.allNotices == null){
+            this.error = 'دیتایی با این فیلتر وجود ندارد :('
+            return;
           }
-          this.notices.fetchQuery().then((r) => {
-            if (r.allNotices == null) {
-              this.error = "دیتایی با این فیلتر وجود ندارد :(";
-              return;
+          this.allNotices = r.allNotices;
+          this.start = false;
+        });
+      }, 0);
+      }
+    },
+    showOffice(){
+      setTimeout(() => {
+         this.noticeShow = false;
+         this.officeShow = true;
+         if(this.allOffices == null){
+           this.start = true;
+           this.offices.fetchData().then((r)=> {
+             this.allOffices =  r.allOffices;
+             console.log(this.allOffices);
+             this.start = false;
+           });
+         }
+       }, 0);
+      },
+      showNotice(){
+          this.noticeShow = true;
+          this.officeShow = false;
+      },
+      changeZoom(zoom) {
+        console.log(zoom);
+        if(zoom.target._zoom > 16){
+          console.log(zoom);
+        }
+      },
+      showPop(id){
+        this.$refs[id][0].leafletObject.openPopup();
+        this.$refs.mapRef.leafletObject.panTo(this.$refs[id][0].latLng)
+      },
+      markersIconCallback(point){
+              console.log(point);
+        },
+        getCategory(noticeId){
+          this.start = true;
+          this.notices.getCategory(noticeId).then((r)=> {
+            this.categories =  r;
+            if(r.length == 0){
+              this.emptyCat = `دسته بندی ${this.lastCat} اخرین دسته بندی می باشد می توانید از دکمه بازگشت استفاده کنید`;
+              this.notices.fetchData().then((r)=>{
+              if(r.allNotices.length >= 1){
+                this.allNotices = r.allNotices;
+              }
+              this.start=false;
+            });
+
+            }else{
+              this.emptyCat = null;
             }
-            this.allNotices = r.allNotices;
-            this.pending = false;
+
+            this.start = false;
           });
-        }, 0);
       }
     },
     showOffice() {
@@ -128,7 +175,6 @@ export default {
         this.notices.lastCategory.pop();
         this.notices.removeClickCat();
       }
-    },
   },
   watch: {
     allNotices(value) {
@@ -250,9 +296,10 @@ export default {
   <div class="p-4" v-if="!isMobile()">
     <NuxtLayout name="header"></NuxtLayout>
     <div class="row" ref="contentBox">
-      <div class="row mt-4">
-        <div class="col-sm-3">
-          <!-- <div class="switchBox">
+        <loader :start="start" />
+        <div class="row mt-4">
+          <div class="col-sm-3">
+            <!-- <div class="switchBox">
               <p class="switchItem">نقشه</p>
                 <label class="switch switchItem">
                   <input v-model="showMap" class="checkBox"  type="checkbox">

@@ -1,5 +1,5 @@
 <template>
-
+  <loader :start="start" />
   <div ref="Header_box" class="row ">
 
 
@@ -515,7 +515,8 @@ export default {
       searchTimeOut: null,
       searchResult: null,
       searchPending: false,
-      emptyCat: null,
+      start: true,
+      emptyCat:null,
       polygonGrg: [[36.873978, 54.346216], [36.880184, 54.500138], [36.794162, 54.506150], [36.786775, 54.357092], [36.873978, 54.346216]],
       center: ref({
         "latitude": 36.830367834795,
@@ -555,7 +556,7 @@ export default {
       this.$refs["filterCanvas"].style.bottom = '0px';
       this.$refs["filterCanvas"].style.display = 'block';
     }, filterUptaded(query, section) {
-      this.pending = true;
+      this.start = true;
       if (query) {
 
         this.countQuery = Object.keys(query).length;
@@ -571,7 +572,7 @@ export default {
               return;
             }
             this.allNotices = r.allNotices;
-            this.pending = false;
+            this.start = false;
           });
         }, 0);
       }
@@ -583,12 +584,12 @@ export default {
         this.noticeShow = false;
         this.officeShow = true;
         if (this.allOffices == null) {
-          this.pending = true;
+          this.start = true;
           this.offices.fetchData().then((r) => {
             this.allOffices = r.allOffices;
-            this.pending = false;
+            this.start = false;
           });
-          this.pending = false;
+          this.start = false;
         }
       }, 0);
     },
@@ -609,7 +610,7 @@ export default {
 
     },
     getCategory(noticeId) {
-      this.pending = true;
+      this.start = true;
       this.lastCat = null;
       this.notices.getCategory(noticeId).then((r) => {
         this.categories = r;
@@ -623,7 +624,7 @@ export default {
         } else {
           this.emptyCat = null;
         }
-        this.pending = false;
+        this.start = false;
       });
     },
     lastCategory() {
@@ -720,12 +721,12 @@ export default {
       this.notices.fetchData().then((r) => {
         this.defaultNotices = r.allNotices;
         this.allNotices = r.allNotices;
-        this.pending = false;
+        this.start = false;
       });
 
       this.notices.getCategory().then((r) => {
         this.categories = r;
-        this.pending = false;
+        this.start = false;
       });
 
       this.token = (useCookie('token')) ? useCookie('token') : null;

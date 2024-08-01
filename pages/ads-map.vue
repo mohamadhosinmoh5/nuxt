@@ -1,52 +1,40 @@
 <template>
-    <div class="container-fluid">
+    <div style="padding: 3%;" class="container-fluid">
+        <p class="text-center">انتخاب محدوده آگهی روی نقشه</p>
+        <p class="text-center">موقعیت دقیق مکان در لیست آگهی ها نمایش داده نخواهد شد</p>
+
         <div class="row">
-            <div class="col-sm-12">
-                <div class="col-sm-12 text-center mt-5">انتخواب محدوده آگهی روی نقشه</div>
-                <div class="col-sm-12 text-center">موقعیت دقیق مکان در لیست آگهی های نمایش داده شده نخواهد شد</div>
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="col-sm-12 adseMapBox text-center mt-5">
-                                    <div class="adseMapBox">
-                                        <l-map id="map" ref="mapRef" :zoom="16" :center="[36.841658, 54.432422]"
-                                            @click="fetchAddressData">
-                                            <l-tile-layer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
-                                                attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors" />
-                                            <l-circle-marker v-if="markerPosition" :lat-lng="markerPosition"
-                                                :radius="10" color="red" />
-                                            <l-marker v-if="markerPosition" :lat-lng="markerPosition">
-                                                <l-popup>
-                                                    {{ markerPosition }}
-                                                </l-popup>
-                                            </l-marker>
-                                        </l-map>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 mt-5">
-                                <div class="col-sm-12 text-right">گلستان گرگان</div>
-                                <div class="col-sm-12 adseMap text-start">
-                                    {{ MapAddress?.address }}
-                                </div>
-                                <!-- Add other address fields as needed -->
-                                <p>{{ addressData.address }}</p>
+            <div class="col-sm-6 mt-3">
+                <div class="adseMapBoxe">
+                    <l-map id="map" ref="mapRef" :zoom="16" :center="[36.841658, 54.432422]" @click="fetchAddressData">
+                        <l-tile-layer url="http://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png"
+                            attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors" />
+                        <l-circle-marker v-if="markerPosition" :lat-lng="markerPosition" :radius="10" color="red" />
+                        <l-marker v-if="markerPosition" :lat-lng="markerPosition">
+                            <l-popup>
+                                {{ markerPosition }}
+                            </l-popup>
+                        </l-marker>
+                    </l-map>
+                </div>
+            </div>
+            <div class="col-sm-6 ">
+                <div class="col-sm-12 DetailesMap text-right p-2">گلستان گرگان</div>
+                <div class="col-sm-12 adseMap text-start">
+                    {{ MapAddress?.address }}
+                </div>
+                <!-- Add other address fields as needed -->
+                <!-- <p>{{ addressData.address }}</p>
                                 <p>{{ addressData.address_compact }}</p>
                                 <p>{{ addressData.city }}</p>
                                 <p>{{ addressData.country }}</p>
                                 <p>{{ addressData.county }}</p>
-                                <p>{{ addressData.geom.coordinates.join(', ') }}</p>
-                                <div class="col-sm-12">
-                                    <button
-                                        style="padding: 10px; position: relative; left: 50%; width: 200px; color: white;"
-                                        class="btn btn-success mt-5" @click="response">
-                                        ثبت
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                <p>{{ addressData.geom.coordinates.join(', ') }}</p> -->
+                <div class="col-sm-12 DetailesMap">
+                    <button style="padding: 10px; position: relative; width: 200px; color: white;"
+                        class="btn btn-success mt-5">
+                        <a style="text-decoration: none; color: white;" href="/drag-drop">بعدی</a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -57,32 +45,33 @@
 <script setup>
 import { ref } from 'vue';
 
+
+
+// const addressData = ref({
+//     address: "",
+//     address_compact: "",
+//     city: "",
+//     country: "",
+//     county: "",
+//     district: "",
+//     geom: { type: "", coordinates: [] },
+//     last: "",
+//     name: "",
+//     neighbourhood: "",
+//     plaque: "",
+//     poi: "",
+//     postal_address: "",
+//     postal_code: "",
+//     primary: "",
+//     province: "",
+//     region: "",
+//     rural_district: "",
+//     village: ""
+// });
+
 const markerPosition = ref(null);
 const addressText = ref('');
 const MapAddress = ref(null);
-
-const addressData = ref({
-    address: "",
-    address_compact: "",
-    city: "",
-    country: "",
-    county: "",
-    district: "",
-    geom: { type: "", coordinates: [] },
-    last: "",
-    name: "",
-    neighbourhood: "",
-    plaque: "",
-    poi: "",
-    postal_address: "",
-    postal_code: "",
-    primary: "",
-    province: "",
-    region: "",
-    rural_district: "",
-    village: ""
-});
-
 
 const fetchAddressData = async (event) => {
     const { lat, lng } = event.latlng;
@@ -97,7 +86,6 @@ const fetchAddressData = async (event) => {
     });
 
     if (data) {
-        console.log(data.value)
         MapAddress.value = data.value;
 
     } else {

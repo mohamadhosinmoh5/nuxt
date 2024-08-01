@@ -1,21 +1,37 @@
 <template>
   <div class="container mt-5">
     <div class="row">
-      <!-- Square Footage -->
-      <div class="col-md-6">
-        <div  class="row">
+      
+      <div v-for="(item, index) in section?.field" :key="item.id" class="col-md-6">
+        <div class="row">
 
+          <div v-if="item.category == 'single' && item.type == 'numeric' && item.active == 1" class="col-md-12">
+            <div class="form-group">
+              <label for="my-input">{{item.title}}</label>
+              <input id="my-input" class="form-control" 
+              @change="setData($event.target.value,item,item.id)" 
+              @keyup="validation($event.target.value,checkValidate(item),item.title)" type="text" name="">
+            </div>
+          </div>
+
+          <div v-if="item.category == 'select' && item.active == 1" class="col-md-12">
+            <div class="form-group">
+              <div class="form-group">
+                <label for="my-select">{{item.title}}</label>
+                <select id="my-select" class="form-control" 
+                @change="setData($event.target.value,item,item.id)" 
+                @keyup="validation($event.target.value,checkValidate(item),item.title)">
+                  <option v-for="(data, index) in item.data" :key="index">{{data}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
-        <number
-          label="متراژ"
-          inputId="squareFootage"
-          v-model="squareFootage"
-          @change="setData($event,section)"
-          :validations="squareFootageValidations"
-        />
+      
       </div>
-      <!-- Building Life -->
-      <div class="col-md-6">
+
+      
+      <!-- <div class="col-md-6">
         <SelectInput
           label="عمر ساختمان"
           selectId="buildingLife"
@@ -26,7 +42,6 @@
     </div>
 
     <div class="row mt-3">
-      <!-- Number of Floors -->
       <div class="col-md-6">
         <SelectInput
           label="تعداد طبقات"
@@ -35,7 +50,6 @@
           v-model="numberOfFloors"
         />
       </div>
-      <!-- Floor Location -->
       <div class="col-md-6">
         <SelectInput
           label="موقعیت طبقه"
@@ -47,7 +61,6 @@
     </div>
 
     <div class="row mt-3">
-      <!-- Number of Building Units -->
       <div class="col-md-6">
         <number
           label="تعداد واحدهای ساختمان"
@@ -56,7 +69,6 @@
           :validations="numValidations"
         />
       </div>
-      <!-- Number of Rooms -->
       <div class="col-md-6">
         <SelectInput
           label="تعداد اتاق"
@@ -68,7 +80,6 @@
     </div>
 
     <div class="row mt-3">
-      <!-- Year of Construction -->
       <div class="col-md-6">
         <number
           label="سال ساخت"
@@ -76,74 +87,16 @@
           v-model="yearOfConstruction"
           :validations="numberValidations"
         />
-      </div>
-    </div>
+      </div>-->
+    </div> 
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import number from "./formInput/number.vue";
-import SelectInput from "./formInput/select.vue";
 let prop = defineProps(['section']);
 const section = toRefs(prop).section?.value;
 console.log(section);
-const squareFootage = ref(null);
-const buildingUnits = ref(null);
-const yearOfConstruction = ref(null);
-const buildingLife = ref("0");
-const numberOfFloors = ref("1");
-const floorLocation = ref("Ground");
-const numberOfRooms = ref("1");
-
-const numValidations = ["required", "number"];
-const numberValidations = ["required", "number"];
-const squareFootageValidations = ["required", "number"];
-
-// Define options for the SelectInput components
-const buildingLifeOptions = [
-  { label: "نوساز", value: "0" },
-  { label: "کمتر از 5 سال", value: "5" },
-  { label: "بین 5 تا 10 سال", value: "10" },
-  { label: "بیشتر از 10 سال", value: "20" },
-];
-
-const numberOfFloorsOptions = [
-  { label: "1", value: "1" },
-  { label: "2", value: "2" },
-  { label: "3", value: "3" },
-  { label: "4", value: "4" },
-  { label: "5", value: "5" },
-  { label: "6", value: "6" },
-  { label: "7", value: "7" },
-  { label: "8", value: "8" },
-  { label: "9", value: "9" },
-  { label: "10", value: "10" },
-  { label: "بیشتر از 10", value: "11" },
-];
-
-const floorLocationOptions = [
-  { label: "همکف", value: "Ground" },
-  { label: "اول", value: "First" },
-  { label: "دوم", value: "Second" },
-  { label: "سوم", value: "Third" },
-  { label: "چهارم", value: "Fourth" },
-  { label: "پنجم", value: "Fifth" },
-  { label: "ششم", value: "Sixth" },
-  { label: "هفتم", value: "Seventh" },
-  { label: "هشتم", value: "Eighth" },
-  { label: "نهم", value: "Ninth" },
-  { label: "دهم", value: "Tenth" },
-  { label: "بیشتر از دهم", value: "Top" },
-];
-
-const numberOfRoomsOptions = [
-  { label: "1", value: "1" },
-  { label: "2", value: "2" },
-  { label: "3", value: "3" },
-  { label: "4", value: "4" },
-  { label: "بیشتر از 4", value: "5" },
-];
 
 const FormData = ref({
   "title": 'asasasa',
@@ -155,16 +108,31 @@ const FormData = ref({
   "address": {},
   "data_sections": [],
 });
-// console.log(formDataArray)
 
-const setData = (event,section,id) => {
-  var data = event.target.value;
+const setData = (data,section,id) => {
+  
   FormData.value.data_sections[id] = {
     field : section,
     data:[data],
     field_id:id
   } ;
   
-  console.log(FormData.value.data_sections);
+  console.log(FormData.value);
+}
+
+const checkValidate = (item) => {
+  $arrayValidate = [];
+    if(item.required){
+      $arrayValidate.push('required');
+    }
+    if(item.min){
+      $arrayValidate.push({min:item.min});
+    }
+    if(item.max){
+      $arrayValidate.push({max:item.max});
+    }
+    if(item.type){
+      $arrayValidate.push(item.type);
+    }
 }
 </script>
